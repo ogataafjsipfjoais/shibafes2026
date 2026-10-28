@@ -17,6 +17,7 @@ function tbt_ranking_from_csv($csv, $now) {
             if(count($row)!==4) throw new RuntimeException('Invalid row');
             [$key,$name,$distance,$visible]=array_map('trim',$row);
             if($visible!== '公開') continue;
+            if($name==='') $name='名もなき挑戦者';
             if(!preg_match('/^[A-Za-z0-9_-]{1,80}$/D',$key) || isset($keys[$key]) || $name==='' || preg_match_all('/./us',$name)>40
                 || !preg_match('/^(0|[1-9][0-9]{0,6})(\.[0-9]{1,30})?$/D',$distance) || tbt_ranking_compare($distance,'1000000')>0) throw new RuntimeException('Invalid public record');
             $keys[$key]=true; $entries[]=['entryKey'=>$key,'nickname'=>$name,'distanceM'=>$distance];
