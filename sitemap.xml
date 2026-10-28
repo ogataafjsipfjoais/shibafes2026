@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://teambirdmantrial.jp/shibafes2026/</loc>
-  </url>
-  <url>
-    <loc>https://teambirdmantrial.jp/shibafes2026/access/</loc>
-  </url>
+  <url><loc>https://teambirdmantrial.jp/shibafes2026/</loc></url>
+  <url><loc>https://teambirdmantrial.jp/shibafes2026/access/</loc></url>
+  <url><loc>https://teambirdmantrial.jp/shibafes2026/ranking/</loc></url>
+  <url><loc>https://teambirdmantrial.jp/shibafes2026/goodss/</loc></url>
+  <url><loc>https://teambirdmantrial.jp/shibafes2026/goodss/aircraft-cards/</loc></url>
+  <url><loc>https://teambirdmantrial.jp/shibafes2026/goodss/propeller-sticker/</loc></url>
+  <url><loc>https://teambirdmantrial.jp/shibafes2026/goodss/sticker-03/</loc></url>
+  <url><loc>https://teambirdmantrial.jp/shibafes2026/goodss/sticker-02/</loc></url>
+  <url><loc>https://teambirdmantrial.jp/shibafes2026/goodss/tote-main/</loc></url>
+  <url><loc>https://teambirdmantrial.jp/shibafes2026/goodss/tote-gift/</loc></url>
+  <url><loc>https://teambirdmantrial.jp/shibafes2026/goodss/sticker-01/</loc></url>
+  <url><loc>https://teambirdmantrial.jp/shibafes2026/goodss/clear-file/</loc></url>
 </urlset>
