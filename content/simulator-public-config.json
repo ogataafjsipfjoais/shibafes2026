@@ -1,5 +1,6 @@
 {
   "schemaVersion": 1,
   "statusUrl": "/shibafes2026/content/simulator-status.php",
-  "rankingUrl": "/shibafes2026/content/simulator-ranking.php"
+  "rankingUrl": "/shibafes2026/content/simulator-ranking.php",
+  "rankingSheetUrl": "https://docs.google.com/spreadsheets/d/1xU1jsvE-eoHNVBP5skd7vYcG-69_YBTqnCfSSMsMxcU/export?format=csv&gid=20261028&range=A1%3AD501"
 }

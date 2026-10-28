@@ -3,8 +3,6 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-  schedule:
-    - cron: "*/5 * * * *"
 permissions:
   contents: read
 concurrency:
@@ -21,8 +19,7 @@ jobs:
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
       - name: Build static Pages release
         run: |
-          php content/simulator-status.php > /dev/null
-          php content/simulator-ranking.php > /dev/null
+          node tools/test-live-ranking.mjs
           python3 tools/build-goods-hangar.py
           python3 tools/build-release.py --target pages --output dist --live-data
           python3 tools/verify-release.py dist

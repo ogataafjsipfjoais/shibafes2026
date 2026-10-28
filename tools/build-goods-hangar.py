@@ -12,10 +12,10 @@ def fingerprint(source_name, prefix, replacements=()):
 SHARED_ASSET=fingerprint('site-chrome-20261027.js','site-chrome-goods')
 shared_pattern=r"site-chrome-20261027\.js(?:\?[^'\"`]+)?"
 BOOTSTRAP_ASSET=fingerprint('site-chrome-bootstrap-20261027.js','site-bootstrap-goods',[(shared_pattern,SHARED_ASSET)])
-MAIN_ASSET='index-goods-20261027.js'
+MAIN_ASSET='index-live-20261028.js'
 # Preserve the bundler's circular module graph: Scene/AccessWalk import the entry's exports.
 # A renamed entry must never let a scene import (and mount) the legacy entry a second time.
-scene_names={'Scene-browserfix-20261026.js':'Scene-goods-20261027.js','AccessWalkScene-browserfix-20261026.js':'AccessWalkScene-goods-20261027.js'}
+scene_names={'Scene-browserfix-20261026.js':'Scene-live-20261028.js','AccessWalkScene-browserfix-20261026.js':'AccessWalkScene-live-20261028.js'}
 for source,destination in scene_names.items():
  text=(ROOT/'assets'/source).read_text().replace('index-browserfix-20261026.js',MAIN_ASSET)
  for old_name,new_name in scene_names.items():text=text.replace(old_name,new_name)
@@ -27,7 +27,7 @@ GOODS_JS=fingerprint('goods-hangar.js','goods-hangar')
 GOODS_CSS=fingerprint('goods-hangar.css','goods-hangar')
 for page in ROOT.rglob('index.html'):
  text=page.read_text()
- text=re.sub(r'assets/(?:index-browserfix-20261026|index-goods-[a-f0-9]{12}|index-goods-20261027)\.js(?:\?[^\"\s]+)?',lambda m:'assets/'+MAIN_ASSET,text)
+ text=re.sub(r'assets/(?:index-browserfix-20261026|index-goods-[a-f0-9]{12}|index-goods-20261027|index-live-20261028)\.js(?:\?[^\"\s]+)?',lambda m:'assets/'+MAIN_ASSET,text)
  text=re.sub(r'assets/(?:site-chrome-bootstrap-20261027|site-bootstrap-goods-[a-f0-9]{12})\.js(?:\?[^\"\s]+)?',lambda m:'assets/'+BOOTSTRAP_ASSET,text)
  page.write_text(text)
 

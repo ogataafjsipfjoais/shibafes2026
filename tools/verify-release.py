@@ -36,9 +36,10 @@ for name in ('assets/s320-desktop.glb','assets/s320-mobile.glb','models/toyosu-c
 config=json.loads((root/'content/simulator-public-config.json').read_text())
 if not list(root.rglob('*.php')):
  for key in ('statusUrl','rankingUrl'):
-  if not config[key].endswith('.json'):errors.append('Static endpoint '+key)
+  if config.get(key) is not None and not config[key].endswith('.json'):errors.append('Static endpoint '+key)
+ if config.get('liveData') and not(config.get('rankingSheetUrl') and config.get('statusSheetUrl')):errors.append('Missing live sheet sources')
  for name in ('simulator-status.json','simulator-ranking.json'):
   data=json.loads((root/'content'/name).read_text())
-  if isinstance(data,dict) and data.get('sourceAvailable') is not bool(config.get('liveData')):errors.append('Source state '+name)
+  if isinstance(data,dict) and data.get('sourceAvailable') is not False:errors.append('Source state '+name)
 assert not errors,'\n'.join(errors)
 print('PASS:',len(pages),'pages, local links/assets, SEO metadata, JSON, security policy, model preservation')

@@ -35,11 +35,14 @@ for name in sorted(selected):
 if args.target=='pages':
  config=json.loads((out/'content/simulator-public-config.json').read_text());config.update(statusUrl='/shibafes2026/content/simulator-status.json',rankingUrl='/shibafes2026/content/simulator-ranking.json',liveData=args.live_data);(out/'content/simulator-public-config.json').write_text(json.dumps(config,ensure_ascii=False,indent=2)+'\n')
  if args.live_data:
-  config['statusSheetUrl']='https://docs.google.com/spreadsheets/d/1xU1jsvE-eoHNVBP5skd7vYcG-69_YBTqnCfSSMsMxcU/export?format=csv&gid=0&range=A1%3AB4';config['staleAfterMs']=900000
+  config['statusSheetUrl']='https://docs.google.com/spreadsheets/d/1xU1jsvE-eoHNVBP5skd7vYcG-69_YBTqnCfSSMsMxcU/export?format=csv&gid=0&range=A1%3AB4';config['staleAfterMs']=120000;config['rankingUrl']=None;config['statusUrl']=None
   (out/'content/simulator-public-config.json').write_text(json.dumps(config,ensure_ascii=False,indent=2)+'\n')
  for name in ('simulator-status.json','simulator-ranking.json'):
   p=out/'content'/name;data=json.loads(p.read_text());
-  if isinstance(data,dict):data['sourceAvailable']=args.live_data
+  if isinstance(data,dict):
+   data['sourceAvailable']=False
+   if name=='simulator-ranking.json':
+    for group in data.get('groups',[]):group['entries']=[]
   p.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
  (out/'.nojekyll').touch()
 original=sum(p.stat().st_size for p in allfiles.values());deployed=sum(p.stat().st_size for p in out.rglob('*') if p.is_file())
