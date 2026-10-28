@@ -23,3 +23,20 @@ context.submitRecord({...input,token:'b'.repeat(64),nickname:'',distance:'12.340
 const anonymous=inbox.rows.at(-1);assert.equal(anonymous[1],'名もなき挑戦者');assert.equal(anonymous[2],'12.3400');anonymous[4]='承認';context.publishApproved_();
 assert.equal(target.rows.at(-1)[1],'名もなき挑戦者');assert.equal(target.rows.at(-1)[2],'12.3400');
 console.log('PASS optional nickname, anonymous submission and approved publication without rounding');
+// Real installable edit events are scoped to the private sheet and edited status rows.
+inbox.rows.push(['flight-33333333-3333-4333-a333-333333333333','試験A','20.0001','同意あり','承認','2026-10-28','c'.repeat(64)]);
+inbox.rows.push(['flight-44444444-4444-4444-a444-444444444444','試験B','30.0002','同意あり','承認','2026-10-28','d'.repeat(64)]);
+const event=(row,col=5,source='private',sheetName='記録確認',numRows=1,numColumns=1)=>({source:{getId:()=>source},range:{getSheet:()=>({getName:()=>sheetName}),getColumn:()=>col,getNumColumns:()=>numColumns,getRow:()=>row,getNumRows:()=>numRows}});
+const beforeCount=target.rows.length;
+for(const e of [undefined,event(4,4),event(4,5,'other'),event(4,5,'private','other')])context.onStaffApproval_(e);
+assert.equal(target.rows.length,beforeCount);
+context.onStaffApproval_(event(4));
+assert.equal(inbox.rows[3][4],'反映済');assert.equal(inbox.rows[4][4],'承認');
+assert.equal(target.rows.at(-1)[1],'試験A');assert.equal(target.rows.at(-1)[2],'20.0001');
+context.onStaffApproval_(event(4));assert.equal(target.rows.length,beforeCount+1);
+inbox.rows[3][4]='却下';context.onStaffApproval_(event(4));assert.equal(target.rows.at(-1)[3],'非公開');
+context.onStaffApproval_(event(5));assert.equal(inbox.rows[4][4],'反映済');assert.equal(target.rows.at(-1)[1],'試験B');
+let triggers=[];context.ScriptApp={EventType:{ON_EDIT:'edit'},getProjectTriggers:()=>triggers,newTrigger:handler=>({forSpreadsheet:id=>({onEdit:()=>({create:()=>triggers.push({getHandlerFunction:()=>handler,getEventType:()=> 'edit',getTriggerSourceId:()=>id})})})})};
+context.adminEnableAutoPublish();context.adminEnableAutoPublish();assert.equal(triggers.length,1);
+context.Session.getActiveUser=()=>({getEmail:()=>''});assert.throws(()=>context.adminEnableAutoPublish());
+console.log('PASS edit trigger: scoped rows, non-status edits, approval, withdrawal, idempotent setup, owner-only setup');
