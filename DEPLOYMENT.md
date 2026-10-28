@@ -23,3 +23,8 @@ python3 tools/build-release.py --target production --output dist
 ## 整理
 
 編集用JS/CSS、ビルドツール、現在の生成ファイルをリポジトリで管理します。公開用には依存関係をたどって必要なファイルだけ出力します。3Dモデルの動的な選択も維持します。更新後は先に `python3 tools/build-goods-hangar.py` を実行してください。
+
+## 品質チェック
+
+mainへの更新時には物販ページの再生成、公開ファイルの抽出、リンク・検索情報・JSON・セキュリティ設定・3Dモデルの検証を行い、成功時だけPagesに公開します。
+スクラッチはrequestAnimationFrameで描画回数を制限します。Pagesではレスポンスヘッダーの任意設定ができないため、埋め込み防止等のHTTPヘッダーは本番Apache側で適用します。

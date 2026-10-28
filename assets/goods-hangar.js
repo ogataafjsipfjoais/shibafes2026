@@ -67,7 +67,7 @@ if(fortuneButton){
  const scratch=node('canvas','hg-scratch');scratch.width=480;scratch.height=360;scratch.hidden=true;scratch.setAttribute('aria-hidden','true');
  const revealButton=node('button','hg-scratch-reveal','削らずに結果を見る');revealButton.type='button';revealButton.hidden=true;
  const fortunePanel=node('div','hg-fortune-panel');paperElement.before(fortunePanel);fortunePanel.append(paperElement,revealButton);paperElement.append(scratch);
- let context=null,activePointer=null,previousPoint=null,pendingResult=null;
+ let context=null,activePointer=null,previousPoint=null,pendingResult=null,scratchFrame=0,queuedPoint=null;
  // Reuse a small pool; no continuous animation loop or growing particle list.
  const chips=Array.from({length:10},()=>{const chip=node('i','hg-scratch-chip');chip.hidden=true;chip.setAttribute('aria-hidden','true');paperElement.append(chip);return chip;});
  let chipIndex=0,lastChipTime=0;const chipAnimations=new WeakMap();
@@ -85,7 +85,7 @@ if(fortuneButton){
  }
 
  try{context=scratch.getContext('2d',{willReadFrequently:true});}catch{}
- function uncover(){stopChips();scratch.hidden=true;revealButton.hidden=true;activePointer=null;previousPoint=null;if(pendingResult){pendingResult();pendingResult=null;}paperElement.setAttribute('aria-busy','false');}
+ function uncover(){if(scratchFrame)cancelAnimationFrame(scratchFrame);scratchFrame=0;queuedPoint=null;stopChips();scratch.hidden=true;revealButton.hidden=true;activePointer=null;previousPoint=null;if(pendingResult){pendingResult();pendingResult=null;}paperElement.setAttribute('aria-busy','false');}
  revealButton.addEventListener('click',uncover);
  function cover(result){
   pendingResult=result;result();
@@ -101,11 +101,13 @@ if(fortuneButton){
   }catch{uncover();}
  }
  function point(x,y){const b=scratch.getBoundingClientRect();return{x:(x-b.left)*480/b.width,y:(y-b.top)*scratch.height/b.height};}
- function erase(x,y){if(scratch.hidden||!context)return;const p=point(x,y);context.beginPath();context.moveTo(previousPoint?.x??p.x,previousPoint?.y??p.y);context.lineTo(p.x,p.y);context.stroke();context.beginPath();context.arc(p.x,p.y,28,0,Math.PI*2);context.fill();
+ function eraseNow(x,y){if(scratch.hidden||!context)return;const p=point(x,y);context.beginPath();context.moveTo(previousPoint?.x??p.x,previousPoint?.y??p.y);context.lineTo(p.x,p.y);context.stroke();context.beginPath();context.arc(p.x,p.y,28,0,Math.PI*2);context.fill();
   // Tiny irregular erasures soften the perfectly round brush edge.
   for(let i=0;i<4;i++){const angle=Math.random()*Math.PI*2;context.beginPath();context.arc(p.x+Math.cos(angle)*29,p.y+Math.sin(angle)*29,1+Math.random()*3,0,Math.PI*2);context.fill();}
   scatter(p);previousPoint=p;}
- function endScratch(){activePointer=null;previousPoint=null;if(scratch.hidden)return;try{const pixels=context.getImageData(0,0,480,scratch.height).data;let clear=0,total=0;for(let i=3;i<pixels.length;i+=64){total++;if(pixels[i]<80)clear++;}if(clear/total>.38)uncover();}catch{uncover();}}
+ function flushScratch(){if(scratchFrame)cancelAnimationFrame(scratchFrame);scratchFrame=0;const p=queuedPoint;queuedPoint=null;if(p)eraseNow(p.x,p.y);}
+ function erase(x,y){queuedPoint={x,y};if(!scratchFrame)scratchFrame=requestAnimationFrame(flushScratch);}
+ function endScratch(){flushScratch();activePointer=null;previousPoint=null;if(scratch.hidden)return;try{const pixels=context.getImageData(0,0,480,scratch.height).data;let clear=0,total=0;for(let i=3;i<pixels.length;i+=64){total++;if(pixels[i]<80)clear++;}if(clear/total>.38)uncover();}catch{uncover();}}
  if('PointerEvent' in window){
   scratch.addEventListener('pointerdown',e=>{if(activePointer!==null||e.button!==0)return;activePointer=e.pointerId;try{scratch.setPointerCapture(e.pointerId);}catch{}erase(e.clientX,e.clientY);});
   scratch.addEventListener('pointermove',e=>{if(e.pointerId===activePointer)erase(e.clientX,e.clientY);});

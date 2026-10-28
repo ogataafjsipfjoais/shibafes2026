@@ -10,7 +10,7 @@ out.mkdir(parents=True,exist_ok=True)
 # Restrict matching to real paths. Walk referenced HTML, JS imports, CSS urls and JSON assets.
 allfiles={p.relative_to(ROOT).as_posix():p for p in ROOT.rglob('*') if p.is_file() and '.git' not in p.parts and 'dist' not in p.parts}
 assets={p:src for p,src in allfiles.items() if p.startswith(('assets/','models/'))}
-selected={p for p in allfiles if p.endswith('/index.html') or p in ('index.html','sitemap.xml','favicon-aircraft-20261028.svg','content/simulator-public-config.json','content/simulator-status.json','content/simulator-ranking.json','content/shop-source.json','content/goods-catalog.json')}
+selected={p for p in allfiles if p.endswith('/index.html') or p in ('index.html','sitemap.xml','favicon-aircraft-20261028.svg','content/simulator-public-config.json','content/simulator-status.json','content/simulator-ranking.json','content/shop-source.json')}
 if args.target=='production':selected.update(p for p in allfiles if p.endswith('.php') or p=='.htaccess')
 # Scene selects the S320 model with a runtime template string.
 selected.update(('assets/s320-desktop.glb','assets/s320-mobile.glb'))
