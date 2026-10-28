@@ -2,7 +2,7 @@
 
 ## GitHub Pages
 
-GitHub Pagesは静的な確認用です。PHPは公開せず、受付・ランキングはコミット時点のJSONを表示します。`sourceAvailable: false` とし、最新の受付状況と誤認させません。ライブ連携はPHP対応の本番環境で行います。
+GitHub Pagesは静的配信です。PHP自体は公開せず、GitHub Actions内で公開シートの受付・ランキングを読み取り、検証・公開可否のフィルター後にJSONを生成します。main更新、手動実行、約5分間隔のスケジュールで公開します。GitHub混雑時は遅延します。取得失敗時は公開を中止し、古い表示の更新日時を進めません。サイトの「情報を更新」は現在の配信JSONを再取得する操作で、Actions実行を要求するものではありません。
 
 検索除外の指定は使用しません。canonical・OGP・サイトマップは本番の `https://teambirdmantrial.jp/shibafes2026/` を指します。Pagesおよび公開リポジトリが検索に出る可能性があります。
 

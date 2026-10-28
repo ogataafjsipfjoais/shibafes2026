@@ -38,6 +38,7 @@ if not list(root.rglob('*.php')):
  for key in ('statusUrl','rankingUrl'):
   if not config[key].endswith('.json'):errors.append('Static endpoint '+key)
  for name in ('simulator-status.json','simulator-ranking.json'):
-  if json.loads((root/'content'/name).read_text()).get('sourceAvailable') is not False:errors.append('Snapshot state '+name)
+  data=json.loads((root/'content'/name).read_text())
+  if isinstance(data,dict) and data.get('sourceAvailable') is not bool(config.get('liveData')):errors.append('Source state '+name)
 assert not errors,'\n'.join(errors)
 print('PASS:',len(pages),'pages, local links/assets, SEO metadata, JSON, security policy, model preservation')

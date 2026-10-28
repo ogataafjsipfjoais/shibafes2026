@@ -2,7 +2,7 @@
 import argparse,json,re,shutil
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-parser=argparse.ArgumentParser();parser.add_argument('--target',choices=['pages','production'],required=True);parser.add_argument('--output',required=True);args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('--target',choices=['pages','production'],required=True);parser.add_argument('--output',required=True);parser.add_argument('--live-data',action='store_true');args=parser.parse_args()
 out=Path(args.output).resolve()
 if out==ROOT or ROOT in out.parents and out.name!='dist':raise SystemExit('Use a separate output folder or ignored dist/')
 if out.exists() and any(out.iterdir()):raise SystemExit('Output must be empty')
@@ -33,9 +33,11 @@ for name in sorted(selected):
   text=dest.read_text();assert 'noindex' not in text
   dest.write_text(text)
 if args.target=='pages':
- config=json.loads((out/'content/simulator-public-config.json').read_text());config.update(statusUrl='/shibafes2026/content/simulator-status.json',rankingUrl='/shibafes2026/content/simulator-ranking.json');(out/'content/simulator-public-config.json').write_text(json.dumps(config,ensure_ascii=False,indent=2)+'\n')
+ config=json.loads((out/'content/simulator-public-config.json').read_text());config.update(statusUrl='/shibafes2026/content/simulator-status.json',rankingUrl='/shibafes2026/content/simulator-ranking.json',liveData=args.live_data);(out/'content/simulator-public-config.json').write_text(json.dumps(config,ensure_ascii=False,indent=2)+'\n')
  for name in ('simulator-status.json','simulator-ranking.json'):
-  p=out/'content'/name;data=json.loads(p.read_text());data['sourceAvailable']=False;p.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+  p=out/'content'/name;data=json.loads(p.read_text());
+  if isinstance(data,dict):data['sourceAvailable']=args.live_data
+  p.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
  (out/'.nojekyll').touch()
 original=sum(p.stat().st_size for p in allfiles.values());deployed=sum(p.stat().st_size for p in out.rglob('*') if p.is_file())
 print(json.dumps({'target':args.target,'files':len(selected),'sourceBytes':original,'deployBytes':deployed,'savedBytes':original-deployed},ensure_ascii=False))

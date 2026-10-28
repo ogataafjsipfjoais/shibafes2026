@@ -2,8 +2,8 @@
     "schemaVersion": 1,
     "reception": "open",
     "waitMinutes": {
-        "min": 10,
-        "max": 20
+        "min": 50,
+        "max": 60
     },
-    "updatedAt": "2026-10-28T00:08:10Z"
+    "updatedAt": "2026-10-28T01:49:02Z"
 }
