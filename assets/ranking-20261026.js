@@ -1,4 +1,4 @@
-import {loadPublic,isStale,updatedLabel} from './simulator-public-api-20261026.js';
+import {loadPublic,isStale,updatedLabel} from './simulator-public-api-20261028.js';
 const byId=id=>document.getElementById(id);
 const status=byId('ranking-status'),select=byId('ranking-group'),body=byId('ranking-body'),updated=byId('ranking-updated'),retry=byId('ranking-retry'),podium=byId('ranking-podium'),content=byId('ranking-content'),empty=byId('ranking-empty'),emptyTitle=byId('ranking-empty-title'),emptyCopy=byId('ranking-empty-copy'),connection=byId('ranking-connection'),heading=byId('ranking-group-title'),results=byId('ranking-results');
 let data=null,active=null,unavailable=false;

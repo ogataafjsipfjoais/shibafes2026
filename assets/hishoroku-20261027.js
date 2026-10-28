@@ -1,4 +1,4 @@
-import {loadPublic,isStale,updatedLabel} from './simulator-public-api-20261026.js';
+import {loadPublic,isStale,updatedLabel} from './simulator-public-api-20261028.js';
 import {rankRecords,recordSignature,didLeaderChange,leaderLabel} from './hishoroku-data-20261027.js';
 import {distanceGap} from './distance-decimal-20261027.js';
 import {createMotion} from './hishoroku-motion-20261027.js';
