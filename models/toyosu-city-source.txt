@@ -1,0 +1,11 @@
+出典：東京都3Dデジタルマップ／PLATEAU 江東区 2023年度
+https://www.geospatial.jp/ckan/dataset/plateau-13108-koto-ku-2023
+利用条件：https://www.mlit.go.jp/plateau/site-policy/
+
+上記CityGMLを加工し、対象112棟・道路をローカル座標系のGLBへ変換。
+大学8棟について、元データの外壁・屋根・付属物のJPEG画像25枚とUV座標、
+BuildingInstallationの925面を保持。地理配置の手動移動や拡縮はしていません。
+これはTBTサイト制作時の加工物であり、原データ提供者の公式案内ではありません。
+元データの撮影時期・解像度・LOD2の省略を含みます。
+校門、地上ピロティ、舗装、植栽、駅構内・館内の実測モデルではありません。
+Google Street Viewの画像をGLBのテクスチャに使用していません。

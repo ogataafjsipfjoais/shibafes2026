@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-27T10:59:52.412Z",
+  "notice": "商品名・参考価格は既存の公開商品データをもとに掲載しています。在庫・仕様・販売条件は会場でご確認ください。",
+  "products": [
+    {
+      "id": "aircraft-cards",
+      "sourceId": "CARD-?",
+      "name": "歴代機体トレカ",
+      "description": "歴代の機体を、手のひらのコレクションに。TBTの歩みを持ち帰るトレーディングカード。",
+      "price": 300,
+      "images": [
+        {
+          "src": "/shibafes2026/assets/goods/product-1.webp",
+          "width": 429,
+          "height": 600,
+          "alt": "歴代機体トレカの掲載デザイン画像"
+        }
+      ],
+      "category": "カード",
+      "variants": [],
+      "status": "unconfirmed",
+      "featured": false,
+      "specs": [
+        [
+          "サイズ",
+          "確認中"
+        ],
+        [
+          "素材",
+          "確認中"
+        ],
+        [
+          "販売単位・仕様",
+          "会場でご確認ください"
+        ]
+      ],
+      "imageNote": "掲載データのデザイン画像です。実物の形状・色味・仕様は会場でご確認ください。"
+    },
+    {
+      "id": "sticker-01",
+      "sourceId": "ST-01",
+      "name": "TBT オリジナルステッカー",
+      "description": "機体の個性やチームのモチーフを、いつもの持ち物に。",
+      "price": 100,
+      "images": [
+        {
+          "src": "/shibafes2026/assets/goods/product-2.webp",
+          "width": 1000,
+          "height": 758,
+          "alt": "TBT オリジナルステッカーの掲載デザイン画像",
+          "smallSrc": "/shibafes2026/assets/goods/product-2.small.webp",
+          "smallWidth": 480
+        }
+      ],
+      "category": "ステッカー",
+      "variants": [],
+      "status": "unconfirmed",
+      "featured": false,
+      "specs": [
+        [
+          "サイズ",
+          "確認中"
+        ],
+        [
+          "素材",
+          "確認中"
+        ],
+        [
+          "販売単位・仕様",
+          "会場でご確認ください"
+        ]
+      ],
+      "imageNote": "掲載データのデザイン画像です。実物の形状・色味・仕様は会場でご確認ください。"
+    },
+    {
+      "id": "sticker-02",
+      "sourceId": "ST-02",
+      "name": "TBT オリジナルステッカー",
+      "description": "色と形に刻まれた、空への挑戦。TBTのオリジナルステッカー。",
+      "price": 100,
+      "images": [
+        {
+          "src": "/shibafes2026/assets/goods/product-3.webp",
+          "width": 1000,
+          "height": 758,
+          "alt": "TBT オリジナルステッカーの掲載デザイン画像",
+          "smallSrc": "/shibafes2026/assets/goods/product-3.small.webp",
+          "smallWidth": 480
+        }
+      ],
+      "category": "ステッカー",
+      "variants": [],
+      "status": "unconfirmed",
+      "featured": false,
+      "specs": [
+        [
+          "サイズ",
+          "確認中"
+        ],
+        [
+          "素材",
+          "確認中"
+        ],
+        [
+          "販売単位・仕様",
+          "会場でご確認ください"
+        ]
+      ],
+      "imageNote": "掲載データのデザイン画像です。実物の形状・色味・仕様は会場でご確認ください。"
+    },
+    {
+      "id": "sticker-03",
+      "sourceId": "ST-03",
+      "name": "TBT オリジナルステッカー",
+      "description": "手帳にも、ノートにも。TBTの世界を身近に楽しむステッカー。",
+      "price": 100,
+      "images": [
+        {
+          "src": "/shibafes2026/assets/goods/product-4.webp",
+          "width": 1000,
+          "height": 758,
+          "alt": "TBT オリジナルステッカーの掲載デザイン画像",
+          "smallSrc": "/shibafes2026/assets/goods/product-4.small.webp",
+          "smallWidth": 480
+        }
+      ],
+      "category": "ステッカー",
+      "variants": [],
+      "status": "unconfirmed",
+      "featured": false,
+      "specs": [
+        [
+          "サイズ",
+          "確認中"
+        ],
+        [
+          "素材",
+          "確認中"
+        ],
+        [
+          "販売単位・仕様",
+          "会場でご確認ください"
+        ]
+      ],
+      "imageNote": "掲載データのデザイン画像です。実物の形状・色味・仕様は会場でご確認ください。"
+    },
+    {
+      "id": "propeller-sticker",
+      "sourceId": "ST-PROP",
+      "name": "TBT オリジナルステッカー",
+      "description": "翼を前へ進めるプロペラ。そのかたちを楽しむステッカー。",
+      "price": 100,
+      "images": [
+        {
+          "src": "/shibafes2026/assets/goods/product-5.webp",
+          "width": 713,
+          "height": 1000,
+          "alt": "TBT オリジナルステッカーの掲載デザイン画像",
+          "smallSrc": "/shibafes2026/assets/goods/product-5.small.webp",
+          "smallWidth": 480
+        }
+      ],
+      "category": "ステッカー",
+      "variants": [],
+      "status": "unconfirmed",
+      "featured": false,
+      "specs": [
+        [
+          "サイズ",
+          "確認中"
+        ],
+        [
+          "素材",
+          "確認中"
+        ],
+        [
+          "販売単位・仕様",
+          "会場でご確認ください"
+        ]
+      ],
+      "imageNote": "掲載データのデザイン画像です。実物の形状・色味・仕様は会場でご確認ください。"
+    },
+    {
+      "id": "tote-main",
+      "sourceId": "TB-MAIN",
+      "name": "TBT オリジナルトートバッグ（完成版）",
+      "description": "大胆なタイポグラフィと機体のモチーフ。空への想いを、いつもの装いに。",
+      "price": 1000,
+      "images": [
+        {
+          "src": "/shibafes2026/assets/goods/product-6.webp",
+          "width": 747,
+          "height": 1000,
+          "alt": "TBT オリジナルトートバッグ（完成版）の掲載デザイン画像",
+          "smallSrc": "/shibafes2026/assets/goods/product-6.small.webp",
+          "smallWidth": 480
+        }
+      ],
+      "category": "バッグ",
+      "variants": [],
+      "status": "unconfirmed",
+      "featured": true,
+      "specs": [
+        [
+          "サイズ",
+          "確認中"
+        ],
+        [
+          "素材",
+          "確認中"
+        ],
+        [
+          "販売単位・仕様",
+          "会場でご確認ください"
+        ]
+      ],
+      "imageNote": "掲載データのデザイン画像です。実物の形状・色味・仕様は会場でご確認ください。",
+      "headingLines": [
+        "TBT オリジナル",
+        "トートバッグ",
+        "（完成版）"
+      ]
+    },
+    {
+      "id": "tote-gift",
+      "sourceId": "TB-GIFT",
+      "name": "トートバッグ（返礼品仕様）",
+      "description": "機体の線と水面の表情をあしらった、返礼品仕様のデザイン。",
+      "price": 1000,
+      "images": [
+        {
+          "src": "/shibafes2026/assets/goods/product-7.webp",
+          "width": 728,
+          "height": 1000,
+          "alt": "トートバッグ（返礼品仕様）の掲載デザイン画像",
+          "smallSrc": "/shibafes2026/assets/goods/product-7.small.webp",
+          "smallWidth": 480
+        }
+      ],
+      "category": "バッグ",
+      "variants": [],
+      "status": "unconfirmed",
+      "featured": false,
+      "specs": [
+        [
+          "サイズ",
+          "確認中"
+        ],
+        [
+          "素材",
+          "確認中"
+        ],
+        [
+          "販売単位・仕様",
+          "会場でご確認ください"
+        ]
+      ],
+      "imageNote": "掲載データのデザイン画像です。実物の形状・色味・仕様は会場でご確認ください。",
+      "headingLines": [
+        "トートバッグ",
+        "（返礼品仕様）"
+      ]
+    },
+    {
+      "id": "clear-file",
+      "sourceId": "POSTER-01",
+      "name": "クリアファイル",
+      "description": "翼、胴体、プロペラ。設計図のように機体を眺められるデザイン。",
+      "price": 300,
+      "images": [
+        {
+          "src": "/shibafes2026/assets/goods/product-8.webp",
+          "width": 597,
+          "height": 800,
+          "alt": "クリアファイルの掲載デザイン画像",
+          "smallSrc": "/shibafes2026/assets/goods/product-8.small.webp",
+          "smallWidth": 480
+        }
+      ],
+      "category": "ステーショナリー",
+      "variants": [],
+      "status": "unconfirmed",
+      "featured": false,
+      "specs": [
+        [
+          "サイズ",
+          "確認中"
+        ],
+        [
+          "素材",
+          "確認中"
+        ],
+        [
+          "販売単位・仕様",
+          "会場でご確認ください"
+        ]
+      ],
+      "imageNote": "掲載データのデザイン画像です。実物の形状・色味・仕様は会場でご確認ください。"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+    "schemaVersion": 1,
+    "reception": "open",
+    "waitMinutes": {
+        "min": 10,
+        "max": 20
+    },
+    "updatedAt": "2026-10-28T00:08:10Z"
+}
