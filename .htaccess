@@ -6,7 +6,7 @@ AddType font/woff2 .woff2
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /shibafes2026/
-RewriteRule ^(shop|access)/?$ $1/index.html [L]
+RewriteRule ^access/?$ access/index.html [L]
 </IfModule>
 <IfModule mod_deflate.c>
 AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript text/javascript application/json application/ld+json application/xml text/xml image/svg+xml model/gltf-binary
