@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="description" content="芝浦工業大学 Team Birdman Trialのクラウドファンディング特設サイト。二人乗り人力飛行機S-320の設計と製作、40mの主翼、CAMPFIREでの支援について紹介します。">
-<meta property="og:title" content="二人で飛ぶ。その挑戦を支える。｜trambirdmantrial クラウドファンディング">
+<meta property="og:title" content="人の力で、二人を空へ。｜TeamBirdmanTrial クラウドファンディング">
 <meta property="og:description" content="芝浦工業大学 Team Birdman Trialの二人乗り人力飛行機。機体製作・試験飛行を支えるクラウドファンディング特設サイト。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://ogataafjsipfjoais.github.io/shibafes2026/assets/s320-render.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/">
-<title>二人で飛ぶ。その挑戦を支える。｜クラウドファンディング｜trambirdmantrial</title>
+<title>人の力で、二人を空へ。｜クラウドファンディング｜TeamBirdmanTrial</title>
 <style>
 :root{--paper:#f3f0e9;--ink:#202820;--rust:#d55430;--muted:#69716b;--line:#b7bbb2;--light:#fffdf8;--blueprint:#cad0c7;--max:1440px}
 *,*::before,*::after{box-sizing:border-box}
@@ -153,62 +153,94 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
 .model-shell.is-error .model-status{bottom:16px;right:16px;padding:12px 16px;background:rgba(32,40,32,.94);pointer-events:auto}
 .model-status a{color:#fff;text-decoration:underline;text-underline-offset:3px;pointer-events:auto}
 @media(max-width:760px){.model-cta{align-items:flex-start;flex-direction:column}.model-cta p{font-size:18px}.model-cta button{font-size:13px}.model-shell{height:clamp(340px,110vw,510px)}.model-controls span{font-size:10px}.model-shell.is-viewing canvas{touch-action:pan-y}}
+
+/* Crowdfunding: concrete purpose, human documentary photography, editorial typography */
+.new-cover{padding:40px 0 0}
+.new-cover .campaign-label{font-size:clamp(19px,2vw,28px);font-weight:900;letter-spacing:-.035em;margin-bottom:26px}
+.new-cover-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.17fr);gap:clamp(25px,3vw,48px);min-height:635px}
+.new-cover-content{display:flex;flex-direction:column;justify-content:center;padding:30px 0 58px}
+.new-cover-overline{font-size:13px;color:var(--muted);font-weight:750;margin:0 0 28px}
+.new-cover h1{font-size:clamp(50px,5.4vw,88px);font-weight:900;line-height:1.3;letter-spacing:-.105em;margin:0 0 28px;white-space:nowrap}
+.new-cover h1 .red,.story h2 .red{color:var(--rust)}
+.new-cover-emotion{font-size:clamp(20px,1.9vw,27px);font-weight:850;letter-spacing:-.06em;line-height:1.8;margin:0 0 14px}
+.new-cover-body{font-size:14px;line-height:2;color:#4a544b;margin:0 0 28px;font-weight:550}
+.new-cover-cta{display:flex;align-items:center;justify-content:space-between;gap:40px;align-self:flex-start;background:var(--rust);color:white;padding:19px 25px;font-size:17px;font-weight:900}
+.new-cover-cta:hover{background:#ae4426}.new-cover-cta span{font-size:24px}
+.new-cover-scroll{align-self:flex-start;font-weight:750;font-size:12px;margin-top:20px;border-bottom:1px solid #a0a99d;padding-bottom:5px}
+.new-cover-photo{position:relative;margin:0;min-height:635px;background:#2f4033;overflow:hidden}
+.new-cover-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% center;filter:saturate(.75) contrast(1.05)}
+.new-cover-photo:after{content:"";position:absolute;inset:48% 0 0;background:linear-gradient(0deg,rgba(19,35,24,.8),transparent)}
+.new-cover-photo figcaption{position:absolute;z-index:2;bottom:23px;left:25px;right:25px;display:flex;align-items:end;justify-content:space-between;gap:12px;color:white;font-size:17px;font-weight:800;text-shadow:0 1px 5px rgba(0,0,0,.5)}
+.new-cover-photo figcaption small{font-size:11px;font-weight:500;white-space:nowrap}
+.story h2{font-size:clamp(45px,5.6vw,90px);line-height:1.45}
+.story-right p{margin-bottom:23px}
+.why-support{background:#e3e7dd;border-block:1px solid var(--ink);padding:clamp(75px,10vw,140px) 0}
+.why-columns,.reward-columns{display:grid;grid-template-columns:1fr 1fr;gap:10vw}
+.why-kicker,.reward-kicker{font-size:14px;font-weight:900;color:var(--rust);margin:0 0 29px}
+.why-intro h2{font-size:clamp(44px,5.6vw,80px);letter-spacing:-.09em;line-height:1.35;margin:0}
+.why-number{font-family:Arial,sans-serif;font-weight:700;letter-spacing:-.06em;font-size:clamp(50px,7.8vw,106px);margin:36px 0 6px;line-height:1}
+.why-number small{font-family:inherit;display:block;color:var(--muted);font-size:13px;letter-spacing:0;margin-bottom:10px}
+.why-number span{font-size:.25em;letter-spacing:0}
+.why-disclaimer{font-size:11px;line-height:1.9;color:#626e63}
+.why-list{padding-top:31px}
+.why-row{display:grid;grid-template-columns:35px 1fr;gap:16px;border-top:1px solid #aab6a6;padding:28px 0}
+.why-row:first-child{border-top:2px solid var(--ink)}
+.why-row>span{font-family:Arial,sans-serif;color:#778779;font-size:12px;font-weight:700;padding-top:10px}
+.why-row h3{font-size:clamp(25px,2.5vw,35px);letter-spacing:-.075em;margin:0 0 12px}
+.why-row p{font-size:14px;line-height:2;color:#455247;margin:0}
+.why-cite{font-size:12px;color:#536253}.why-cite a{text-decoration:underline;text-underline-offset:3px}
+.reward-next{border-top:1px solid var(--ink);padding:clamp(75px,10vw,138px) 0}
+.reward-columns h2{font-size:clamp(49px,5.9vw,88px);line-height:1.35;letter-spacing:-.09em;margin:0}
+.reward-columns>div:last-child{padding-top:56px}
+.reward-columns p{font-size:17px;line-height:2.1;font-weight:600}
+.reward-columns small{display:block;border-top:1px solid var(--line);padding-top:22px;margin-top:28px;color:#666f68;line-height:1.9;font-size:12px}
+@media(max-width:1100px){.new-cover h1{font-size:clamp(46px,5.5vw,70px)}.new-cover-grid{grid-template-columns:1fr 1fr}.new-cover-photo{min-height:570px}}
+@media(max-width:760px){
+ .new-cover{padding-top:32px}.new-cover .campaign-label{font-size:21px;margin-bottom:23px}
+ .new-cover-grid{display:grid;grid-template-columns:1fr;gap:0;min-height:0}
+ .new-cover-content{padding:8px 0 38px}.new-cover-overline{font-size:11px;margin-bottom:21px}
+ .new-cover h1{font-size:clamp(45px,10.8vw,74px);line-height:1.27;margin-bottom:22px}
+ .new-cover-emotion{font-size:18px;margin-bottom:12px}.new-cover-body{font-size:13px;margin-bottom:25px}
+ .new-cover-cta{align-self:stretch;font-size:16px;padding:16px 19px}
+ .new-cover-photo{margin-inline:-19px;min-height:390px;height:75vw;max-height:550px}
+ .new-cover-photo figcaption{font-size:14px;bottom:17px;left:20px;right:20px}
+ .why-columns,.reward-columns{grid-template-columns:1fr;gap:35px}
+ .why-intro h2{font-size:clamp(47px,11vw,72px)}
+ .why-number{font-size:70px}.why-list{padding-top:0}
+ .reward-columns h2{font-size:clamp(53px,12vw,85px)}
+ .reward-columns>div:last-child{padding-top:0}.reward-columns p{font-size:15px}
+}
+@media(max-width:360px){.new-cover h1{font-size:42px}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"二人で飛ぶ。その挑戦を支える。｜trambirdmantrial クラウドファンディング","url":"https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/","inLanguage":"ja","description":"芝浦工業大学の人力飛行機製作チームによる二人乗り人力飛行機の挑戦と支援案内","about":{"@type":"Organization","name":"Team Birdman Trial","url":"https://teambirdmantrial.jp/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"人の力で、二人を空へ。｜TeamBirdmanTrial クラウドファンディング","url":"https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/","inLanguage":"ja","description":"芝浦工業大学の人力飛行機製作チームによる二人乗り人力飛行機の挑戦と支援案内","about":{"@type":"Organization","name":"Team Birdman Trial","url":"https://teambirdmantrial.jp/"}}</script>
 </head>
 <body>
 <header class="site-header">
  <div class="wrap inner">
-  <a class="brand" href="https://teambirdmantrial.jp/" aria-label="公式ホームページへ"><img class="brand-icon" src="../assets/tbt-official-emblem.svg" width="28" height="28" alt="">trambirdmantrial</a>
+  <a class="brand" href="https://teambirdmantrial.jp/" aria-label="公式ホームページへ"><img class="brand-icon" src="../assets/tbt-official-emblem.svg" width="28" height="28" alt="">TeamBirdmanTrial</a>
   <button class="menu" type="button" aria-controls="main-nav" aria-expanded="false">メニュー</button>
   <nav class="nav" id="main-nav" aria-label="メインナビゲーション">
-   <a href="#story">挑戦</a><a href="#aircraft">機体</a><a href="#making">製作</a><a href="#support">クラファンについて</a><a class="nav-support" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援する ↗</a>
+   <a href="#story">挑戦</a><a href="#aircraft">機体</a><a href="#making">製作</a><a href="#rewards">返礼品</a><a href="#support">クラファンについて</a><a class="nav-support" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援する ↗</a>
   </nav>
  </div>
 </header>
 <main>
-<section class="cover" aria-labelledby="cover-title">
-  <div class="wrap"><p class="campaign-label">クラウドファンディング</p></div>
-  <div class="wrap cover-heading">
-   <h1 id="cover-title">二人で飛ぶ。<br><span class="red">支援で、次へ。</span></h1>
-   <div class="cover-intro">
-     <p class="cover-note"><small>芝浦工業大学 人力飛行機製作チーム</small>二人乗り人力飛行機を、次の空へ。<br>機体の製作と飛行への挑戦に、力を貸してください。</p>
-     <a class="cover-support" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援ページを見る <span aria-hidden="true">↗</span></a>
-   </div>
+<section class="cover new-cover" aria-labelledby="cover-title">
+ <div class="wrap"><p class="campaign-label">クラウドファンディング</p></div>
+ <div class="wrap new-cover-grid">
+  <div class="new-cover-content">
+   <p class="new-cover-overline">芝浦工業大学 人力飛行機製作チーム</p>
+   <h1 id="cover-title">人の力で、<br><span class="red">二人を空へ。</span></h1>
+   <p class="new-cover-emotion">一度の飛行のために、<br>何度も設計して、つくって、試す。</p>
+   <p class="new-cover-body">次の一機も、妥協せずにつくりたい。<br>私たちの挑戦を、一緒に支えてください。</p>
+   <a class="new-cover-cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この挑戦を支える <span aria-hidden="true">↗</span></a>
+   <a class="new-cover-scroll" href="#why">支援が必要な理由を見る ↓</a>
   </div>
-  <div class="hero-art">
-   <div class="artwing">
-    <svg viewBox="0 0 1200 680" role="img" aria-label="二人乗り人力飛行機の翼をモチーフにしたオリジナルの概念図。実機の図面ではありません。" xmlns="http://www.w3.org/2000/svg">
-      <g stroke="#44594c" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M42 318 C250 286 435 266 604 264 C780 267 955 288 1157 319 L1149 346 C949 332 775 328 605 328 C430 327 242 333 50 346Z" fill="#eef0e9" stroke-width="4"/>
-        <path d="M58 327 Q600 290 1142 328" stroke-width="2" opacity=".58"/>
-        <path d="M603 211V533M583 245L580 536M623 245L628 536" stroke-width="3.5"/>
-        <path d="M603 504L530 560L677 560Z" fill="#eef0e9" stroke-width="3"/>
-        <path d="M540 238H662M604 238V179" stroke-width="2.7"/>
-        <circle cx="604" cy="238" r="16" stroke-width="2"/>
-        <path d="M603 219L603 251M587 238H620" stroke-width="2"/>
-        <ellipse cx="604" cy="383" rx="28" ry="33" fill="#eef0e9" stroke-width="2.7"/>
-        <ellipse cx="604" cy="457" rx="28" ry="33" fill="#eef0e9" stroke-width="2.7"/>
-        <path d="M53 403H1151M53 394V411M1151 394V411" stroke-width="1.6" stroke-dasharray="4 6"/>
-        <path d="M55 403L75 396M55 403L75 410M1149 403L1129 396M1149 403L1129 410" stroke-width="1.5"/>
-      </g>
-      <g fill="#d55430"><circle cx="604" cy="383" r="6"/><circle cx="604" cy="457" r="6"/><path d="M602 168h4v22h-4z"/></g>
-      <g fill="#35463b" font-family="Arial,sans-serif" font-weight="bold" font-size="20"><text x="57" y="387">40,000 mm</text><text x="782" y="477" font-size="14" letter-spacing="3">S-320 ELEMENT</text></g>
-    </svg>
-    <div class="hero-caption"><span>翼幅40mの機体、S-320</span><span>※機体をモチーフにした概念図</span></div>
-   </div>
-   <div class="photo-panel">
-    <svg class="fallback-visual" viewBox="0 0 420 560" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-      <g stroke="#d6e4d5" fill="none" opacity=".5"><path d="M-30 120L450 460M-40 172L450 512M-30 224L420 558" stroke-width="1"/><circle cx="198" cy="294" r="154" stroke-width="2"/><circle cx="198" cy="294" r="119" stroke-dasharray="4 9"/></g>
-      <g fill="none" stroke="#eef0e9" stroke-width="8" stroke-linecap="round"><path d="M210 292C145 159 192 75 257 32C266 154 270 250 210 292Z"/><path d="M210 292C275 420 237 495 157 538C153 433 151 350 210 292Z"/></g>
-      <circle cx="210" cy="292" r="31" fill="#d55430" stroke="#f3f0e9" stroke-width="5"/>
-      <circle cx="210" cy="292" r="8" fill="#f3f0e9"/>
-    </svg>
-    <img src="https://www.shibaura-it.ac.jp/assets/2023%E6%B4%BB%E5%8B%95%E5%A0%B1%E5%91%8A%E6%9B%B8_%E3%83%9A%E3%83%BC%E3%82%B8_01_%E7%94%BB%E5%83%8F_0002.jpg" alt="人力飛行機を移動させる学生たちの活動風景" loading="eager" onerror="this.hidden=true">
-    <span class="hero-side">SHIBAURA INSTITUTE OF TECHNOLOGY</span>
-    <div class="photo-overlay"><span>空を目指す、ものづくり。</span><span>活動風景</span></div>
-   </div>
-  </div>
+  <figure class="new-cover-photo">
+    <img src="https://www.shibaura-it.ac.jp/assets/2023%E6%B4%BB%E5%8B%95%E5%A0%B1%E5%91%8A%E6%9B%B8_%E3%83%9A%E3%83%BC%E3%82%B8_01_%E7%94%BB%E5%83%8F_0002.jpg" alt="人力飛行機を押して走る学生メンバーと機体" fetchpriority="high">
+    <figcaption>一機を飛ばすために、みんなで走る。<small>人力飛行機 / 2026</small></figcaption>
+  </figure>
+ </div>
 </section>
 <div class="spec" aria-label="機体の実績">
  <div class="wrap spec-inner">
@@ -219,10 +251,27 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
 </div>
 <section class="story" id="story">
  <div class="wrap story-inner">
-  <h2>二人で飛ぶ。<br>だから、<br>難しい。</h2>
+  <h2>二人で飛ぶ。<br>簡単じゃない。<br><span class="red">でも、飛びたい。</span></h2>
   <div class="story-right">
-   <p>人の力だけで空を飛ぶ。<br>二人分の力を、一機の推進力に変える。<br>重量も、強度も、設計も。簡単なことは何もない。</p>
-   <a class="editorial-link" href="https://teambirdmantrial.jp/diary/s-320-element-%E8%A8%AD%E8%A8%88%E6%96%B9%E9%87%9D/" target="_blank" rel="noopener noreferrer">設計の考え方を見る <span class="arrow" aria-hidden="true">↗</span></a>
+   <p>エンジンを使わず、人の力だけで空へ。二人分の力を一つの推進力に変えるため、軽さも、強度も、設計も、全部考える。</p>
+   <p>設計して終わりじゃない。つくって、試して、うまくいかなければ直す。その積み重ねを、次の一機につなぎたい。</p>
+   <a class="editorial-link" href="https://teambirdmantrial.jp/gallery/" target="_blank" rel="noopener noreferrer">学生たちの活動を見る <span class="arrow" aria-hidden="true">↗</span></a>
+  </div>
+ </div>
+</section>
+<section class="why-support" id="why" aria-labelledby="why-title">
+ <div class="wrap why-columns">
+  <div class="why-intro">
+   <p class="why-kicker">なぜ支援が必要なのか</p>
+   <h2 id="why-title">飛ぶためには、<br>つくるだけじゃ<br>足りない。</h2>
+   <p class="why-number"><small>年間の活動費の目安</small>約1,000<span>万円</span></p>
+   <p class="why-disclaimer">※年度により異なる参考額です。今回のクラファンの目標額ではありません。</p>
+  </div>
+  <div class="why-list">
+   <div class="why-row"><span>01</span><div><h3>翼をつくる。</h3><p>CFRPなどの材料と製作設備、設計を確かめるための試作。</p></div></div>
+   <div class="why-row"><span>02</span><div><h3>何度も試す。</h3><p>機体の安全性と性能を確かめるための試験飛行。その準備と移動。</p></div></div>
+   <div class="why-row"><span>03</span><div><h3>琵琶湖に届ける。</h3><p>全長のある機体を運び、大会へ出場するための輸送費や活動費。</p></div></div>
+   <p class="why-cite">費用について：<a href="https://teambirdmantrial.jp/donate/" target="_blank" rel="noopener noreferrer">公式サイトの寄付案内 ↗</a></p>
   </div>
  </div>
 </section>
@@ -269,6 +318,13 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
   </div>
  </div>
 </section>
+<section class="reward-next" id="rewards" aria-labelledby="reward-title">
+ <div class="wrap reward-columns">
+  <div><p class="reward-kicker">応援のかたち</p><h2 id="reward-title">返礼品も、<br>準備しています。</h2></div>
+  <div><p>返礼品を、単なるグッズ紹介で終わらせない。機体や製作の物語と一緒に紹介できる専用ページを、今後公開する予定です。</p>
+      <small>内容・金額・発送時期などは未確定です。確定後に公開し、CAMPFIREでの正式な情報をご案内します。</small></div>
+ </div>
+</section>
 <section class="action" id="support">
  <div class="wrap">
   <div class="action-top"><span>この挑戦を支援する</span><span>支援先：CAMPFIRE</span></div>
@@ -284,7 +340,7 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
 </section>
 </main>
 <footer class="foot">
- <div class="wrap inner"><a class="brand" href="https://teambirdmantrial.jp/"><img class="brand-icon" src="../assets/tbt-official-emblem.svg" width="28" height="28" alt="">trambirdmantrial</a><div class="foot-links"><a href="https://teambirdmantrial.jp/" target="_blank" rel="noopener noreferrer">公式HP</a><a href="https://teambirdmantrial.jp/gallery/" target="_blank" rel="noopener noreferrer">ギャラリー</a><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIRE ↗</a></div><small>© Team Birdman Trial</small></div>
+ <div class="wrap inner"><a class="brand" href="https://teambirdmantrial.jp/"><img class="brand-icon" src="../assets/tbt-official-emblem.svg" width="28" height="28" alt="">TeamBirdmanTrial</a><div class="foot-links"><a href="https://teambirdmantrial.jp/" target="_blank" rel="noopener noreferrer">公式HP</a><a href="https://teambirdmantrial.jp/gallery/" target="_blank" rel="noopener noreferrer">ギャラリー</a><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIRE ↗</a></div><small>© Team Birdman Trial</small></div>
 </footer>
 <div class="mobile-support"><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この挑戦を支援する <span aria-hidden="true">↗</span></a></div>
 <script>
