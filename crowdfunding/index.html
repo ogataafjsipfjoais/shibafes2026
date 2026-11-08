@@ -256,65 +256,48 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
 .photo-small img{object-position:50% 43%}
 @media(max-width:760px){.wing-documentary{height:clamp(300px,76vw,515px)}.wing-documentary img{object-position:49% 51%}.wing-documentary figcaption{font-size:clamp(28px,6.3vw,44px);align-items:flex-start;flex-direction:column;gap:8px}.new-cover-photo img{object-position:52% 40%}}
 
-/* Scroll narrative: pin the measured span, not the entire page. */
-.wing-documentary{position:relative;height:168vh;height:168svh;overflow:visible;border:0;background:#13212b}
+/* Motion with purpose: show the actual 40m wing and draw one measured line. */
+.new-cover .campaign-label{font-size:clamp(23px,3.4vw,49px);color:var(--ink);font-weight:900;letter-spacing:-.07em;margin-bottom:clamp(23px,3vw,42px);gap:15px}
+.new-cover .campaign-label:before{content:"";display:block;width:6px;height:.85em;background:var(--rust);flex:none}
+.wing-documentary{position:relative;height:auto;min-height:0;aspect-ratio:16/8.3;overflow:hidden;margin:0;border:0;background:#162d38}
 .wing-documentary:after{display:none}
-.wing-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;isolation:isolate}
-.wing-stage:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(8,17,25,.36) 0%,transparent 44%,rgba(5,18,26,.65) 100%)}
-.wing-stage .wing-motion-photo{position:absolute;top:-12%;left:0;width:100%;height:124%;object-fit:cover;object-position:50% 50%;transform:translate3d(0,var(--wing-parallax,0%),0);will-change:transform}
-.wing-stage .wing-number{position:absolute;z-index:2;top:clamp(40px,11vh,130px);left:clamp(24px,6vw,105px);line-height:.85;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:clamp(112px,20vw,320px);font-weight:800;letter-spacing:-.095em;text-shadow:0 2px 36px rgba(0,0,0,.4);font-variant-numeric:tabular-nums}
-.wing-number small{font-size:.27em;letter-spacing:-.045em;margin-left:.08em}
-.wing-measure{z-index:3;position:absolute;left:7%;right:7%;top:64%;height:32px;display:flex;align-items:center;justify-content:space-between;opacity:var(--wing-line-opacity,1)}
-.wing-measure-line{height:2px;background:#fff;flex:1;transform:scaleX(var(--wing-line-scale,0));transform-origin:left center;box-shadow:0 1px 10px rgba(0,0,0,.4)}
-.wing-tick{flex:none;height:29px;width:2px;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.55)}
-.wing-documentary .wing-stage figcaption{z-index:3}
-.wing-documentary .wing-stage figcaption span{line-height:1.12}
-@media(min-width:761px){.wing-stage .wing-motion-photo{object-position:50% 56%}}
-/* Manufacturing photography: staggered reveal with a directional mask. */
-.work-photography{gap:clamp(28px,4vw,65px)}
-.work-photography .make-step:nth-child(2){margin-left:10%}
-.work-photography .make-step:nth-child(3){margin-left:3%;width:92%}
+.wing-documentary .wing-stage{position:absolute;inset:0;height:100%;overflow:hidden;isolation:isolate}
+.wing-documentary .wing-stage:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(4,16,25,.24),transparent 49%,rgba(5,19,27,.63))}
+.wing-documentary .wing-motion-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 53%;transform:none;will-change:auto}
+.wing-documentary .wing-number{position:absolute;z-index:2;top:clamp(22px,4vw,65px);left:clamp(25px,6vw,100px);font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:clamp(105px,17vw,280px);line-height:1;letter-spacing:-.09em;color:white;text-shadow:0 2px 24px rgba(0,0,0,.3)}
+.wing-documentary .wing-number small{font-size:.26em;letter-spacing:0;margin-left:.08em}
+.wing-documentary .wing-measure{position:absolute;z-index:3;top:61%;left:7%;right:7%;height:29px;display:flex;align-items:center}
+.wing-documentary .wing-tick{display:block;width:2px;height:26px;flex:none;background:white;box-shadow:0 1px 6px #2336}
+.wing-documentary .wing-measure-line{display:block;flex:1;height:2px;background:white;transform:scaleX(0);transform-origin:left center;transition:transform 1.05s cubic-bezier(.2,.8,.2,1);box-shadow:0 1px 6px #2336}
+.wing-documentary.is-measured .wing-measure-line{transform:scaleX(1)}
+.wing-documentary .wing-stage figcaption{z-index:4}
+.work-photography{gap:clamp(26px,4vw,65px)}
+.work-photography .make-step:nth-child(2){margin-left:9%}
+.work-photography .make-step:nth-child(3){margin-left:2%;width:94%}
 .work-photography .make-step:nth-child(3) .photo-wide{aspect-ratio:1.6}
-.make-step figcaption{display:flex;justify-content:space-between;align-items:center;gap:14px;padding-top:12px;font-family:Arial,"Noto Sans JP",sans-serif;font-size:12px;font-weight:800}
-.make-step figcaption small{font-weight:500;color:#7b857d}
-.motion-enabled .make-step{opacity:0;transform:translate3d(0,36px,0);transition:opacity .7s ease,transform .85s cubic-bezier(.17,.67,.25,1)}
-.motion-enabled .make-step .step-photo{clip-path:inset(0 100% 0 0);transition:clip-path 1s cubic-bezier(.19,1,.22,1)}
-.motion-enabled .make-step.is-revealed{opacity:1;transform:translate3d(0,0,0)}
-.motion-enabled .make-step.is-revealed .step-photo{clip-path:inset(0 0 0 0)}
-/* Final CTA: a deep palette change and one measured pulse while visible. */
-.action{position:relative;isolation:isolate;transition:background-color .85s cubic-bezier(.25,.8,.25,1)}
-.action:before{content:"";position:absolute;z-index:0;inset:0;background:radial-gradient(ellipse at 75% 75%,rgba(213,84,48,.27),transparent 61%);opacity:0;transition:opacity .9s ease;pointer-events:none}
-.action>.wrap{position:relative;z-index:1}
-.action.is-engaged{background:#172923}
-.action.is-engaged:before{opacity:1}
-.action.is-engaged .action-link{box-shadow:0 12px 32px rgba(0,0,0,.13)}
-@keyframes support-breathe{0%,100%{transform:translate3d(0,0,0);box-shadow:0 9px 25px rgba(0,0,0,.12)}50%{transform:translate3d(0,-3px,0);box-shadow:0 16px 34px rgba(0,0,0,.21)}}
-.motion-enabled .action.is-engaged .action-link{animation:support-breathe 4.2s ease-in-out infinite}
-.motion-enabled .action.is-engaged .action-link:hover{animation-play-state:paused;transform:translate3d(3px,-2px,0)}
-/* Rewards are already public at CAMPFIRE. The separate gallery is in production. */
+.make-step{opacity:1;transform:none}
+.make-step .step-photo{clip-path:none}
+.make-step figcaption{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:12px;font-size:12px;font-weight:800}
+.make-step figcaption small{font-weight:500;color:#647066}
+.action,.action.is-engaged{background:var(--rust);transition:none}
+.action:before{display:none}
+.action .action-link,.action.is-engaged .action-link{animation:none;box-shadow:none;transform:none}
+.action .action-link:hover{transform:none;background:white}
 .reward-link{display:inline-flex;align-items:center;justify-content:space-between;gap:40px;margin-top:9px;padding:16px 21px;background:var(--ink);color:var(--paper);font-size:15px;font-weight:800}
 .reward-link:hover{background:var(--rust)}
 .reward-link span{font-size:22px}
-.reward-columns small{display:block}
 @media(max-width:760px){
- .wing-documentary{height:150vh;height:150svh}
- .wing-stage{height:100vh;height:100svh}
- .wing-stage .wing-number{top:19%;font-size:clamp(116px,34vw,220px);left:6%}
- .wing-measure{top:65%;left:6%;right:6%}
- .wing-stage .wing-motion-photo{object-position:45% 50%}
+ .new-cover .campaign-label{font-size:clamp(22px,6.7vw,33px);margin-bottom:23px}
+ .new-cover .campaign-label:before{width:5px}
+ .wing-documentary{aspect-ratio:1/1.2}
+ .wing-documentary .wing-motion-photo{object-position:42% 50%}
+ .wing-documentary .wing-number{top:8%;left:6%;font-size:clamp(99px,33vw,178px)}
+ .wing-documentary .wing-measure{top:65%;left:6%;right:6%}
+ .wing-documentary .wing-stage figcaption{align-items:flex-start;flex-direction:column;gap:7px;font-size:clamp(26px,7vw,44px)}
  .work-photography .make-step:nth-child(2){margin-left:4%}
- .work-photography .make-step:nth-child(3){margin-left:0;width:100%}
- .make-step figcaption{font-size:11px}
- .action{transition-duration:.7s}
+ .work-photography .make-step:nth-child(3){width:100%;margin-left:0}
 }
-@media(prefers-reduced-motion:reduce){
- .wing-documentary{height:70vh;height:70svh}
- .wing-stage{position:relative;height:100%}
- .wing-stage .wing-motion-photo{transform:none!important;will-change:auto}
- .wing-measure-line{transform:none}
- .make-step,.step-photo,.action,.action:before,.action-link{transition:none!important;animation:none!important}
-}
-
+@media(prefers-reduced-motion:reduce){.wing-documentary .wing-measure-line{transform:scaleX(1)!important;transition:none}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"二人を、空へ。｜TeamBirdmanTrial クラウドファンディング","url":"https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/","inLanguage":"ja","description":"芝浦工業大学の人力飛行機製作チームによる二人乗り人力飛行機の挑戦と支援案内","about":{"@type":"Organization","name":"Team Birdman Trial","url":"https://teambirdmantrial.jp/"}}</script>
 </head>
@@ -336,7 +319,7 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
    <p class="new-cover-overline">芝浦工業大学 TeamBirdmanTrial</p>
    <h1 id="cover-title">二人を、<br><span class="red">空へ。</span></h1>
    <p class="new-cover-emotion">次の一機をつくるために。</p>
-   <a class="new-cover-cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この挑戦を支援する <span aria-hidden="true">↗</span></a>
+   <a class="new-cover-cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援する <span aria-hidden="true">↗</span></a>
    <a class="new-cover-scroll" href="#why">支援の使い道を見る ↓</a>
   </div>
   <figure class="new-cover-photo">
@@ -465,40 +448,15 @@ nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classL
 
 
 <script>
-/* One passive scroll listener + one animation frame at a time. No motion when the OS asks for less. */
+/* A single, one-time dimension reveal; no scroll hijacking or background loop. */
 (()=>{
- const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
- if(prefersReduced.matches||!('IntersectionObserver' in window))return;
- document.documentElement.classList.add('motion-enabled');
- const figures=[...document.querySelectorAll('.work-photography .make-step')];
- const reveal=new IntersectionObserver((entries)=>{
-   for(const entry of entries)if(entry.isIntersecting){entry.target.classList.add('is-revealed');reveal.unobserve(entry.target)}
- },{threshold:0.1,rootMargin:'0px 0px -10% 0px'});
- figures.forEach(el=>reveal.observe(el));
- const cta=document.querySelector('#support');
- if(cta){
-  const observer=new IntersectionObserver(entries=>{
-   cta.classList.toggle('is-engaged',entries[0].isIntersecting);
-  },{threshold:0.18});
-  observer.observe(cta);
- }
  const wing=document.querySelector('.wing-documentary');
  if(!wing)return;
- let scheduled=false;
- const update=()=>{
-   scheduled=false;
-   const rect=wing.getBoundingClientRect();
-   const vh=window.innerHeight||document.documentElement.clientHeight;
-   if(rect.bottom<0||rect.top>vh)return;
-   const distance=Math.max(1,rect.height-vh);
-   const progress=Math.max(0,Math.min(1,-rect.top/distance));
-   wing.style.setProperty('--wing-parallax',((progress-.5)*8).toFixed(2)+'%');
-   wing.style.setProperty('--wing-line-scale',Math.max(0,Math.min(1,(progress-.05)/.66)).toFixed(3));
- };
- const request=()=>{if(scheduled)return;scheduled=true;requestAnimationFrame(update)};
- window.addEventListener('scroll',request,{passive:true});
- window.addEventListener('resize',request,{passive:true});
- request();
+ if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){wing.classList.add('is-measured');return}
+ const observer=new IntersectionObserver(entries=>{
+  if(entries.some(entry=>entry.isIntersecting)){wing.classList.add('is-measured');observer.disconnect()}
+ },{threshold:0.17});
+ observer.observe(wing);
 })();
 </script>
 
