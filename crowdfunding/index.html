@@ -255,6 +255,66 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
 .photo-wide img{object-position:49% 43%}
 .photo-small img{object-position:50% 43%}
 @media(max-width:760px){.wing-documentary{height:clamp(300px,76vw,515px)}.wing-documentary img{object-position:49% 51%}.wing-documentary figcaption{font-size:clamp(28px,6.3vw,44px);align-items:flex-start;flex-direction:column;gap:8px}.new-cover-photo img{object-position:52% 40%}}
+
+/* Scroll narrative: pin the measured span, not the entire page. */
+.wing-documentary{position:relative;height:168vh;height:168svh;overflow:visible;border:0;background:#13212b}
+.wing-documentary:after{display:none}
+.wing-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;isolation:isolate}
+.wing-stage:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(8,17,25,.36) 0%,transparent 44%,rgba(5,18,26,.65) 100%)}
+.wing-stage .wing-motion-photo{position:absolute;top:-12%;left:0;width:100%;height:124%;object-fit:cover;object-position:50% 50%;transform:translate3d(0,var(--wing-parallax,0%),0);will-change:transform}
+.wing-stage .wing-number{position:absolute;z-index:2;top:clamp(40px,11vh,130px);left:clamp(24px,6vw,105px);line-height:.85;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:clamp(112px,20vw,320px);font-weight:800;letter-spacing:-.095em;text-shadow:0 2px 36px rgba(0,0,0,.4);font-variant-numeric:tabular-nums}
+.wing-number small{font-size:.27em;letter-spacing:-.045em;margin-left:.08em}
+.wing-measure{z-index:3;position:absolute;left:7%;right:7%;top:64%;height:32px;display:flex;align-items:center;justify-content:space-between;opacity:var(--wing-line-opacity,1)}
+.wing-measure-line{height:2px;background:#fff;flex:1;transform:scaleX(var(--wing-line-scale,0));transform-origin:left center;box-shadow:0 1px 10px rgba(0,0,0,.4)}
+.wing-tick{flex:none;height:29px;width:2px;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.55)}
+.wing-documentary .wing-stage figcaption{z-index:3}
+.wing-documentary .wing-stage figcaption span{line-height:1.12}
+@media(min-width:761px){.wing-stage .wing-motion-photo{object-position:50% 56%}}
+/* Manufacturing photography: staggered reveal with a directional mask. */
+.work-photography{gap:clamp(28px,4vw,65px)}
+.work-photography .make-step:nth-child(2){margin-left:10%}
+.work-photography .make-step:nth-child(3){margin-left:3%;width:92%}
+.work-photography .make-step:nth-child(3) .photo-wide{aspect-ratio:1.6}
+.make-step figcaption{display:flex;justify-content:space-between;align-items:center;gap:14px;padding-top:12px;font-family:Arial,"Noto Sans JP",sans-serif;font-size:12px;font-weight:800}
+.make-step figcaption small{font-weight:500;color:#7b857d}
+.motion-enabled .make-step{opacity:0;transform:translate3d(0,36px,0);transition:opacity .7s ease,transform .85s cubic-bezier(.17,.67,.25,1)}
+.motion-enabled .make-step .step-photo{clip-path:inset(0 100% 0 0);transition:clip-path 1s cubic-bezier(.19,1,.22,1)}
+.motion-enabled .make-step.is-revealed{opacity:1;transform:translate3d(0,0,0)}
+.motion-enabled .make-step.is-revealed .step-photo{clip-path:inset(0 0 0 0)}
+/* Final CTA: a deep palette change and one measured pulse while visible. */
+.action{position:relative;isolation:isolate;transition:background-color .85s cubic-bezier(.25,.8,.25,1)}
+.action:before{content:"";position:absolute;z-index:0;inset:0;background:radial-gradient(ellipse at 75% 75%,rgba(213,84,48,.27),transparent 61%);opacity:0;transition:opacity .9s ease;pointer-events:none}
+.action>.wrap{position:relative;z-index:1}
+.action.is-engaged{background:#172923}
+.action.is-engaged:before{opacity:1}
+.action.is-engaged .action-link{box-shadow:0 12px 32px rgba(0,0,0,.13)}
+@keyframes support-breathe{0%,100%{transform:translate3d(0,0,0);box-shadow:0 9px 25px rgba(0,0,0,.12)}50%{transform:translate3d(0,-3px,0);box-shadow:0 16px 34px rgba(0,0,0,.21)}}
+.motion-enabled .action.is-engaged .action-link{animation:support-breathe 4.2s ease-in-out infinite}
+.motion-enabled .action.is-engaged .action-link:hover{animation-play-state:paused;transform:translate3d(3px,-2px,0)}
+/* Rewards are already public at CAMPFIRE. The separate gallery is in production. */
+.reward-link{display:inline-flex;align-items:center;justify-content:space-between;gap:40px;margin-top:9px;padding:16px 21px;background:var(--ink);color:var(--paper);font-size:15px;font-weight:800}
+.reward-link:hover{background:var(--rust)}
+.reward-link span{font-size:22px}
+.reward-columns small{display:block}
+@media(max-width:760px){
+ .wing-documentary{height:150vh;height:150svh}
+ .wing-stage{height:100vh;height:100svh}
+ .wing-stage .wing-number{top:19%;font-size:clamp(116px,34vw,220px);left:6%}
+ .wing-measure{top:65%;left:6%;right:6%}
+ .wing-stage .wing-motion-photo{object-position:45% 50%}
+ .work-photography .make-step:nth-child(2){margin-left:4%}
+ .work-photography .make-step:nth-child(3){margin-left:0;width:100%}
+ .make-step figcaption{font-size:11px}
+ .action{transition-duration:.7s}
+}
+@media(prefers-reduced-motion:reduce){
+ .wing-documentary{height:70vh;height:70svh}
+ .wing-stage{position:relative;height:100%}
+ .wing-stage .wing-motion-photo{transform:none!important;will-change:auto}
+ .wing-measure-line{transform:none}
+ .make-step,.step-photo,.action,.action:before,.action-link{transition:none!important;animation:none!important}
+}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"二人を、空へ。｜TeamBirdmanTrial クラウドファンディング","url":"https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/","inLanguage":"ja","description":"芝浦工業大学の人力飛行機製作チームによる二人乗り人力飛行機の挑戦と支援案内","about":{"@type":"Organization","name":"Team Birdman Trial","url":"https://teambirdmantrial.jp/"}}</script>
 </head>
@@ -292,9 +352,13 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
   <div class="spec-item"><strong>180.67<em>m</em></strong><span>2026年大会の飛行記録</span></div>
  </div>
 </div>
-<figure class="wing-documentary">
- <img src="../assets/crowdfunding/2026-wing-transport.jpg" alt="琵琶湖の桟橋で、40mの主翼を学生たちが協力して運んでいる" width="2560" height="1706" loading="lazy" decoding="async">
- <figcaption><span>40mの翼を、みんなで。</span><small>2026 / 琵琶湖</small></figcaption>
+<figure class="wing-documentary" aria-label="翼幅40メートルのスケールを体験するスクロール演出">
+ <div class="wing-stage">
+  <img class="wing-motion-photo" src="../assets/crowdfunding/2026-wing-transport.jpg" alt="琵琶湖の桟橋で、40mの主翼を学生たちが協力して運んでいる" width="2560" height="1706" loading="lazy" decoding="async">
+  <div class="wing-number" aria-hidden="true">40<small>m</small></div>
+  <div class="wing-measure" aria-hidden="true"><span class="wing-tick"></span><span class="wing-measure-line"></span><span class="wing-tick"></span></div>
+  <figcaption><span>40mの翼を、みんなで。</span><small>2026 / 琵琶湖</small></figcaption>
+ </div>
 </figure>
 <section class="story" id="story">
  <div class="wrap story-inner">
@@ -352,21 +416,28 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
    <a class="editorial-link" href="https://teambirdmantrial.jp/gallery/" target="_blank" rel="noopener noreferrer">活動写真を見る <span class="arrow" aria-hidden="true">↗</span></a>
   </div>
   <div class="work-photography">
-   <figure><div class="photo-wide"><svg class="fallback-visual" viewBox="0 0 700 450" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+   <figure class="make-step" data-step="01"><div class="photo-wide step-photo"><svg class="fallback-visual" viewBox="0 0 700 450" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" stroke="#46564b" stroke-width="2" opacity=".66"><path d="M0 298L700 78M0 347L700 127M0 396L700 176" stroke-width="4"/>
       <path d="M44 270Q180 210 180 346M160 235Q290 178 290 306M280 195Q414 140 414 270M400 155Q530 103 530 230M520 116Q641 68 650 190"/>
       <path d="M0 282L700 63M0 411L700 191" stroke-dasharray="4 9"/>
-      </g><circle cx="350" cy="224" r="12" fill="#d55430"/></svg><img src="../assets/crowdfunding/2026-assembly.jpg" alt="S-320の機体審査で接合部を組み付ける学生たち" width="2560" height="1706" loading="lazy" decoding="async" onerror="this.hidden=true"></div><figcaption>接合部の組み付け / 2026</figcaption></figure>
-   <figure><div class="photo-small"><svg class="fallback-visual" viewBox="0 0 700 450" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-      <g fill="none" stroke="#43554a" opacity=".7"><circle cx="365" cy="221" r="175" stroke-width="2"/><circle cx="365" cy="221" r="114" stroke-width="2"/><path d="M365 38V403M182 221H548M237 92L494 348M493 92L238 348" stroke-width="5"/></g><circle cx="365" cy="221" r="20" fill="#d55430"/></svg><img src="../assets/crowdfunding/2026-tail-lake.jpg" alt="琵琶湖の水辺でS-320の水色の尾翼を支える学生" width="1706" height="2560" loading="lazy" decoding="async" onerror="this.hidden=true"></div><figcaption style="text-align:right">尾翼の調整 / 2026</figcaption></figure>
+      </g><circle cx="350" cy="224" r="12" fill="#d55430"/></svg><img src="../assets/crowdfunding/2026-assembly.jpg" alt="S-320の機体審査で接合部を組み付ける学生たち" width="2560" height="1706" loading="lazy" decoding="async" onerror="this.hidden=true"></div><figcaption><span>01 / 組み付け</span><small>2026</small></figcaption></figure>
+   <figure class="make-step" data-step="02"><div class="photo-small step-photo"><svg class="fallback-visual" viewBox="0 0 700 450" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#43554a" opacity=".7"><circle cx="365" cy="221" r="175" stroke-width="2"/><circle cx="365" cy="221" r="114" stroke-width="2"/><path d="M365 38V403M182 221H548M237 92L494 348M493 92L238 348" stroke-width="5"/></g><circle cx="365" cy="221" r="20" fill="#d55430"/></svg><img src="../assets/crowdfunding/2026-tail-lake.jpg" alt="琵琶湖の水辺でS-320の水色の尾翼を支える学生" width="1706" height="2560" loading="lazy" decoding="async" onerror="this.hidden=true"></div><figcaption><span>02 / 尾翼</span><small>2026</small></figcaption></figure>
+   <figure class="make-step" data-step="03">
+    <div class="photo-wide step-photo"><img src="../assets/crowdfunding/2026-maintenance.jpg" alt="機体審査で整備作業を行う学生たちの様子" width="2560" height="1706" loading="lazy" decoding="async"></div>
+    <figcaption><span>03 / 整備</span><small>2026</small></figcaption>
+   </figure>
   </div>
  </div>
 </section>
 <section class="reward-next" id="rewards" aria-labelledby="reward-title">
  <div class="wrap reward-columns">
-  <div><p class="reward-kicker">返礼品</p><h2 id="reward-title">準備中。</h2></div>
-  <div><p>詳細は確定次第公開。</p>
-   <small>内容・金額・発送時期は未確定です。</small></div>
+  <div><p class="reward-kicker">返礼品</p><h2 id="reward-title">公開中。</h2></div>
+  <div>
+   <p>CAMPFIREでご覧いただけます。</p>
+   <a class="reward-link" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">返礼品を見る <span aria-hidden="true">↗</span></a>
+   <small>専用の紹介ページは制作中。</small>
+  </div>
  </div>
 </section>
 <section class="action" id="support">
@@ -390,6 +461,45 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
 const menu=document.querySelector('.menu');const nav=document.querySelector('.nav');
 menu?.addEventListener('click',()=>{let open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'閉じる':'メニュー';});
 nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='メニュー';}));
+</script>
+
+
+<script>
+/* One passive scroll listener + one animation frame at a time. No motion when the OS asks for less. */
+(()=>{
+ const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+ if(prefersReduced.matches||!('IntersectionObserver' in window))return;
+ document.documentElement.classList.add('motion-enabled');
+ const figures=[...document.querySelectorAll('.work-photography .make-step')];
+ const reveal=new IntersectionObserver((entries)=>{
+   for(const entry of entries)if(entry.isIntersecting){entry.target.classList.add('is-revealed');reveal.unobserve(entry.target)}
+ },{threshold:0.1,rootMargin:'0px 0px -10% 0px'});
+ figures.forEach(el=>reveal.observe(el));
+ const cta=document.querySelector('#support');
+ if(cta){
+  const observer=new IntersectionObserver(entries=>{
+   cta.classList.toggle('is-engaged',entries[0].isIntersecting);
+  },{threshold:0.18});
+  observer.observe(cta);
+ }
+ const wing=document.querySelector('.wing-documentary');
+ if(!wing)return;
+ let scheduled=false;
+ const update=()=>{
+   scheduled=false;
+   const rect=wing.getBoundingClientRect();
+   const vh=window.innerHeight||document.documentElement.clientHeight;
+   if(rect.bottom<0||rect.top>vh)return;
+   const distance=Math.max(1,rect.height-vh);
+   const progress=Math.max(0,Math.min(1,-rect.top/distance));
+   wing.style.setProperty('--wing-parallax',((progress-.5)*8).toFixed(2)+'%');
+   wing.style.setProperty('--wing-line-scale',Math.max(0,Math.min(1,(progress-.05)/.66)).toFixed(3));
+ };
+ const request=()=>{if(scheduled)return;scheduled=true;requestAnimationFrame(update)};
+ window.addEventListener('scroll',request,{passive:true});
+ window.addEventListener('resize',request,{passive:true});
+ request();
+})();
 </script>
 
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
