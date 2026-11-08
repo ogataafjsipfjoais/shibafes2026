@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f3f0e9">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="description" content="芝浦工業大学 Team Birdman Trialのクラウドファンディング特設サイト。二人乗り人力飛行機S-320の設計と製作、40mの主翼、CAMPFIREでの支援について紹介します。">
+<meta property="og:title" content="翼を、次へ。｜trambirdmantrial">
+<meta property="og:description" content="二人で飛ぶ。40mの翼とともに、次の挑戦へ。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/">
+<meta property="og:image" content="https://ogataafjsipfjoais.github.io/shibafes2026/assets/s320-render.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/">
+<title>翼を、次へ。｜trambirdmantrial</title>
+<style>
+:root{--paper:#f3f0e9;--ink:#202820;--rust:#d55430;--muted:#69716b;--line:#b7bbb2;--light:#fffdf8;--blueprint:#cad0c7;--max:1440px}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;-webkit-font-smoothing:antialiased}
+button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--rust);outline-offset:5px}
+::selection{background:#f0ab92;color:var(--ink)}
+.wrap{width:min(calc(100% - 92px),var(--max));margin-inline:auto}
+.site-header{position:relative;z-index:30;border-bottom:1px solid var(--ink);background:var(--paper)}
+.site-header .inner{min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:26px}
+.brand{font-size:clamp(17px,1.8vw,22px);font-weight:900;letter-spacing:-.055em;white-space:nowrap;line-height:1}
+.brand:after{content:"";display:inline-block;width:7px;height:7px;background:var(--rust);margin-left:4px;vertical-align:top}
+.nav{display:flex;gap:39px;align-items:center;font-size:13px;font-weight:750;white-space:nowrap}
+.nav a:not(.nav-support):hover{color:var(--rust)}
+.nav-support{border:1.5px solid var(--ink);padding:12px 22px;transition:background .2s,color .2s}
+.nav-support:hover{background:var(--ink);color:white}
+.menu{display:none;border:0;border-bottom:1px solid var(--ink);background:transparent;cursor:pointer;padding:10px 0;font-weight:800}
+/* The main headline is deliberate typography, not an ordinary LP hero. */
+.cover{padding-top:clamp(56px,6vw,106px)}
+.cover-heading{display:grid;grid-template-columns:1.75fr .65fr;align-items:end;gap:4vw;padding-bottom:clamp(28px,4.2vw,67px)}
+.cover h1{font-size:clamp(80px,12.5vw,208px);font-weight:900;letter-spacing:-.12em;line-height:.99;margin:0;white-space:nowrap}
+.cover h1 .red{color:var(--rust)}
+.cover-note{max-width:230px;margin:0 0 8px auto;padding-left:19px;border-left:2px solid var(--rust);font-size:clamp(14px,1.1vw,17px);font-weight:700;line-height:1.9}
+.cover-note small{font-size:11px;display:block;color:var(--muted);font-weight:600;letter-spacing:.07em;margin-bottom:10px}
+.hero-art{position:relative;background:#dce0d8;display:grid;grid-template-columns:minmax(0,1.75fr) minmax(245px,.7fr);min-height:clamp(390px,38vw,600px);overflow:hidden;border-block:1px solid var(--ink)}
+.artwing{position:relative;min-height:100%;overflow:hidden;background:#d7dbd1}
+.artwing::before{content:"";position:absolute;inset:0;background-image:linear-gradient(to right,rgba(55,71,63,.14) 1px,transparent 1px),linear-gradient(to bottom,rgba(55,71,63,.13) 1px,transparent 1px);background-size:42px 42px;opacity:.48}
+.artwing svg{position:absolute;width:126%;max-width:none;height:130%;left:-13%;top:-13%;transform:rotate(-8deg)}
+.hero-caption{position:absolute;bottom:29px;left:clamp(25px,4vw,68px);right:22px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-size:12px;font-weight:600;z-index:1}
+.hero-caption span:last-child{font-size:10px;color:#66736b}
+.photo-panel{position:relative;background:#33473d;overflow:hidden;min-height:390px}
+.photo-panel::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent 0,transparent 12px,rgba(255,255,255,.04) 12px,rgba(255,255,255,.04) 13px)}
+.fallback-visual{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9}.photo-panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:54% center;filter:grayscale(.85) contrast(1.05)}
+.photo-panel:after{content:"";position:absolute;inset:0;border:18px solid rgba(0,0,0,.0);pointer-events:none}
+.photo-overlay{position:absolute;z-index:1;left:25px;bottom:25px;right:25px;color:white;border-top:1px solid rgba(255,255,255,.85);padding-top:13px;display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:700;mix-blend-mode:normal;text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.hero-side{position:absolute;top:26px;right:26px;writing-mode:vertical-rl;font-size:11px;color:rgba(255,255,255,.75);font-weight:600;letter-spacing:.09em}
+.spec{border-bottom:1px solid var(--ink)}
+.spec-inner{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:0}
+.spec-item{display:flex;align-items:center;gap:22px;padding:29px 20px 30px 0;border-right:1px solid var(--ink)}
+.spec-item:not(:first-child){padding-left:36px}.spec-item:last-child{border:0}
+.spec-item strong{font-family:Arial,Helvetica,sans-serif;font-size:clamp(41px,4.2vw,70px);line-height:1;font-weight:700;letter-spacing:-.07em;white-space:nowrap}
+.spec-item strong em{font-size:.3em;font-weight:600;letter-spacing:0;font-style:normal;margin-left:4px}
+.spec-item span{color:#4e5850;font-size:11px;line-height:1.75;font-weight:650}
+.spec-item:first-child strong{font-size:clamp(23px,2.2vw,38px);letter-spacing:-.035em}
+/* No section counters or decorative English captions. */
+.story{padding:clamp(105px,12vw,190px) 0}
+.story-inner{display:grid;grid-template-columns:1fr 1fr;gap:10vw;align-items:start}
+.story h2,.work h2{font-size:clamp(49px,6.4vw,101px);font-weight:900;line-height:1.33;letter-spacing:-.095em;margin:-.24em 0 0}
+.story-right{padding-top:12px;max-width:445px}
+.story-right:before{content:"";display:block;width:100px;height:5px;background:var(--rust);margin:0 0 38px}
+.story-right p{font-size:clamp(16px,1.3vw,19px);line-height:2.15;font-weight:600;margin:0 0 37px}
+.editorial-link{display:inline-flex;align-items:center;gap:26px;border-bottom:1px solid var(--ink);padding:0 0 9px;font-size:13px;font-weight:800}
+.editorial-link .arrow{font-size:21px;font-family:Arial,sans-serif;font-weight:400}
+.editorial-link:hover{color:var(--rust);border-color:var(--rust)}
+/* Wide study: uses measured facts but is not passed off as authentic CAD. */
+.measure{background:var(--ink);color:var(--paper);padding:clamp(55px,6.6vw,94px) 0 0;overflow:hidden}
+.measure-top{display:flex;align-items:end;justify-content:space-between;gap:18px;padding-bottom:17px;border-bottom:1px solid rgba(255,255,255,.35)}
+.measure h2{font-size:clamp(38px,4.6vw,72px);font-weight:900;margin:0;letter-spacing:-.075em;line-height:1.35}
+.measure-top p{margin:0 0 10px;color:#b9c3b9;font-size:13px;line-height:1.75}
+.measure-diagram{position:relative;min-height:clamp(275px,29vw,430px);margin-top:24px}
+.measure-diagram svg{width:100%;height:auto;display:block;max-height:480px}
+.measure-foot{display:flex;justify-content:space-between;gap:24px;color:#aab5aa;font-size:11px;padding:12px 0 27px;border-top:1px solid rgba(255,255,255,.28)}
+.work{padding:clamp(105px,11vw,165px) 0}
+.work-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:7vw;align-items:start}
+.work-copy{position:sticky;top:32px}
+.work h2{margin-bottom:28px}
+.work p{max-width:340px;font-size:16px;line-height:2;color:#4d5b4f;font-weight:550;margin-bottom:26px}
+.work-photography{display:grid;gap:11px}
+.photo-wide,.photo-small{position:relative;overflow:hidden;background:#babeb8}
+.photo-wide{aspect-ratio:1.56}.photo-small{aspect-ratio:1.76;width:73%;margin-left:auto}
+.photo-wide:before,.photo-small:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent,transparent 16px,#aeb2ac 16px,#aeb2ac 17px)}
+.work-photography .fallback-visual{opacity:.72}.work-photography img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.25)}
+.work-photography figure{margin:0}
+.work-photography figcaption{font-size:11px;color:#58655b;padding:9px 0 3px}
+.photo-small img{object-position:center 37%}
+/* The campaign section has one clear action rather than a grid of donation cards. */
+.action{background:var(--rust);color:#fff;padding:clamp(85px,9vw,150px) 0}
+.action-top{display:flex;align-items:start;justify-content:space-between;gap:24px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.65);font-size:12px;font-weight:700}
+.action-head{display:grid;grid-template-columns:1.5fr .5fr;gap:5vw;align-items:end;padding:clamp(55px,6vw,95px) 0 0}
+.action h2{font-size:clamp(64px,9vw,142px);font-weight:900;line-height:1.16;letter-spacing:-.095em;margin:0}
+.action-right{padding-bottom:10px}
+.action-right p{max-width:310px;font-size:15px;font-weight:550;line-height:2;margin:0 0 30px}
+.action-link{display:flex;align-items:center;justify-content:space-between;gap:22px;width:100%;max-width:330px;background:var(--paper);color:var(--ink);padding:20px 22px;font-weight:900;font-size:16px;transition:background .2s,transform .2s}
+.action-link:hover{background:#fff;transform:translateX(3px)}
+.action-link .arrow{font-family:Arial,sans-serif;font-size:27px;line-height:1}
+.action-foot{margin:58px 0 0;font-size:12px;opacity:.86;line-height:2}
+.foot{padding:28px 0 34px}
+.foot .inner{display:flex;justify-content:space-between;align-items:center;gap:28px;font-size:12px}
+.foot-links{display:flex;gap:27px;flex-wrap:wrap}
+.foot-links a{border-bottom:1px solid transparent}.foot-links a:hover{border-color:currentColor}
+.foot small{color:#566158}
+.mobile-support{display:none}
+@media(max-width:1050px){.wrap{width:calc(100% - 56px)}.cover-heading{grid-template-columns:1fr .55fr}.spec-item{gap:12px}.spec-item:not(:first-child){padding-left:24px}.story-inner{gap:6vw}}
+@media(max-width:760px){
+ html{scroll-padding-top:62px}
+ .wrap{width:calc(100% - 38px)}.site-header .inner{min-height:62px}.brand{font-size:19px}
+ .menu{display:block}.nav{display:none;position:absolute;top:62px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--ink);padding:12px 20px 22px;flex-direction:column;align-items:stretch;gap:0}.nav.open{display:flex}.nav a{padding:15px 3px}.nav .nav-support{text-align:center;padding:13px;margin-top:8px}
+ .cover{padding-top:57px}.cover-heading{display:block;padding-bottom:40px}.cover h1{font-size:clamp(65px,17vw,126px);line-height:1.16}.cover-note{margin:27px 0 0 8px;max-width:310px;font-size:13px;padding-left:13px}.cover-note small{margin-bottom:1px}
+ .hero-art{grid-template-columns:1fr;min-height:0}.artwing{min-height:360px}.artwing svg{width:140%;height:140%;left:-20%;top:-20%}.photo-panel{min-height:230px}.photo-panel img{object-position:50% 60%}.hero-caption{left:23px;bottom:22px}.hero-side{display:none}
+ .spec-inner{grid-template-columns:1fr 1fr}.spec-item{display:block;border-right:0;padding:21px 4px!important}.spec-item:nth-child(1){grid-column:1 / -1;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:16px}.spec-item:nth-child(2){border-right:1px solid var(--line)}.spec-item:nth-child(3){padding-left:18px!important}.spec-item strong{font-size:clamp(37px,9vw,65px)}.spec-item span{display:block;margin-top:7px}.spec-item:nth-child(1) span{margin:0}
+ .story{padding:89px 0 100px}.story-inner{display:block}.story h2,.work h2{font-size:clamp(49px,12vw,74px)}.story-right{margin-top:48px;max-width:450px}.story-right:before{margin-bottom:25px}.story-right p{font-size:15px;line-height:2.1}
+ .measure{padding-top:65px}.measure-top{display:block}.measure h2{font-size:clamp(37px,10vw,66px)}.measure-top p{margin:17px 0 0}.measure-diagram{min-height:200px;display:flex;align-items:center;justify-content:center;margin-top:12px}.measure-diagram svg{width:160%;max-width:none;flex-shrink:0}.measure-foot{font-size:10px}
+ .work{padding:95px 0}.work-grid{display:block}.work-copy{position:static}.work p{max-width:500px}.work-photography{margin-top:48px}.photo-small{width:85%}
+ .action{padding:80px 0 96px}.action-head{display:block;padding-top:57px}.action h2{font-size:clamp(60px,15vw,100px)}.action-right{margin-top:46px}.action-right p{max-width:500px}.action-link{max-width:none}.action-foot{margin-top:42px}
+ .foot{padding-bottom:104px}.foot .inner{align-items:start;flex-direction:column;gap:19px}
+ .mobile-support{display:block;position:fixed;z-index:20;bottom:0;left:0;right:0;background:var(--paper);padding:9px 19px max(9px,env(safe-area-inset-bottom));border-top:1px solid var(--ink)}.mobile-support a{display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:900;background:var(--ink);color:white;padding:12px 17px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.action-link{transition:none}.action-link:hover{transform:none}}
+
+/* S-320 actual source model viewer, reused from the 2026 festival site. */
+.model-shell{position:relative;width:100%;height:clamp(310px,44vw,610px);min-width:0;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,#35443b 0%,#202820 63%);border:1px solid rgba(255,255,255,.25)}
+.model-shell::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
+.model-visual,.model-visual canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.model-poster{width:100%;height:100%;object-fit:contain;opacity:.83;filter:grayscale(.7) brightness(1.12);padding:0 8% 38px}
+.model-gradient{position:absolute;inset:0;background:linear-gradient(0deg,rgba(24,34,29,.85),transparent 55%);pointer-events:none}
+.model-cta{position:absolute;left:clamp(18px,5vw,60px);bottom:clamp(18px,4vw,52px);right:18px;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.model-cta p{font-size:clamp(16px,2.4vw,34px);font-weight:800;letter-spacing:-.05em;margin:0}
+.model-cta button,.model-controls button{cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,.9);padding:13px 20px;background:#f3f0e9;color:#202820;font-size:13px;font-weight:800;transition:background .2s}
+.model-cta button:hover{background:white}.model-cta button span{margin-left:12px}
+.model-status{position:absolute;z-index:2;left:clamp(18px,5vw,60px);bottom:clamp(18px,4vw,52px);max-width:480px;font-size:12px;line-height:1.6;color:#e5eee4;pointer-events:none}
+.model-controls{position:absolute;z-index:2;right:16px;bottom:16px;left:16px;display:flex;align-items:center;justify-content:space-between;gap:14px;pointer-events:none}
+.model-controls[hidden]{display:none}
+.model-controls span{color:#e6eee6;font-size:11px;text-shadow:0 1px 5px #17241b}
+.model-controls button{pointer-events:auto;padding:10px 15px;background:rgba(243,240,233,.94)}
+.model-shell.is-viewing .model-cta,.model-shell.is-viewing .model-poster,.model-shell.is-viewing .model-gradient{display:none}
+.model-shell.is-viewing canvas{touch-action:pan-y}
+.model-shell.is-error .model-status{bottom:16px;right:16px;padding:12px 16px;background:rgba(32,40,32,.94);pointer-events:auto}
+.model-status a{color:#fff;text-decoration:underline;text-underline-offset:3px;pointer-events:auto}
+@media(max-width:760px){.model-cta{align-items:flex-start;flex-direction:column}.model-cta p{font-size:18px}.model-cta button{font-size:13px}.model-shell{height:clamp(340px,110vw,510px)}.model-controls span{font-size:10px}.model-shell.is-viewing canvas{touch-action:pan-y}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"翼を、次へ。｜trambirdmantrial クラウドファンディング","url":"https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/","inLanguage":"ja","description":"芝浦工業大学の人力飛行機製作チームによる二人乗り人力飛行機の挑戦と支援案内","about":{"@type":"Organization","name":"Team Birdman Trial","url":"https://teambirdmantrial.jp/"}}</script>
+</head>
+<body>
+<header class="site-header">
+ <div class="wrap inner">
+  <a class="brand" href="https://teambirdmantrial.jp/" aria-label="公式ホームページへ">trambirdmantrial</a>
+  <button class="menu" type="button" aria-controls="main-nav" aria-expanded="false">メニュー</button>
+  <nav class="nav" id="main-nav" aria-label="メインナビゲーション">
+   <a href="#story">挑戦</a><a href="#aircraft">機体</a><a href="#making">製作</a><a class="nav-support" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援する ↗</a>
+  </nav>
+ </div>
+</header>
+<main>
+<section class="cover" aria-labelledby="cover-title">
+  <div class="wrap cover-heading">
+   <h1 id="cover-title">翼を、<br>次<span class="red">へ。</span></h1>
+   <p class="cover-note"><small>芝浦工業大学 人力飛行機製作チーム</small>二人乗りの人力飛行機で、<br>次の空に挑む。</p>
+  </div>
+  <div class="hero-art">
+   <div class="artwing">
+    <svg viewBox="0 0 1200 680" role="img" aria-label="二人乗り人力飛行機の翼をモチーフにしたオリジナルの概念図。実機の図面ではありません。" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#44594c" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M42 318 C250 286 435 266 604 264 C780 267 955 288 1157 319 L1149 346 C949 332 775 328 605 328 C430 327 242 333 50 346Z" fill="#eef0e9" stroke-width="4"/>
+        <path d="M58 327 Q600 290 1142 328" stroke-width="2" opacity=".58"/>
+        <path d="M603 211V533M583 245L580 536M623 245L628 536" stroke-width="3.5"/>
+        <path d="M603 504L530 560L677 560Z" fill="#eef0e9" stroke-width="3"/>
+        <path d="M540 238H662M604 238V179" stroke-width="2.7"/>
+        <circle cx="604" cy="238" r="16" stroke-width="2"/>
+        <path d="M603 219L603 251M587 238H620" stroke-width="2"/>
+        <ellipse cx="604" cy="383" rx="28" ry="33" fill="#eef0e9" stroke-width="2.7"/>
+        <ellipse cx="604" cy="457" rx="28" ry="33" fill="#eef0e9" stroke-width="2.7"/>
+        <path d="M53 403H1151M53 394V411M1151 394V411" stroke-width="1.6" stroke-dasharray="4 6"/>
+        <path d="M55 403L75 396M55 403L75 410M1149 403L1129 396M1149 403L1129 410" stroke-width="1.5"/>
+      </g>
+      <g fill="#d55430"><circle cx="604" cy="383" r="6"/><circle cx="604" cy="457" r="6"/><path d="M602 168h4v22h-4z"/></g>
+      <g fill="#35463b" font-family="Arial,sans-serif" font-weight="bold" font-size="20"><text x="57" y="387">40,000 mm</text><text x="782" y="477" font-size="14" letter-spacing="3">S-320 ELEMENT</text></g>
+    </svg>
+    <div class="hero-caption"><span>翼幅40mの機体、S-320</span><span>※機体をモチーフにした概念図</span></div>
+   </div>
+   <div class="photo-panel">
+    <svg class="fallback-visual" viewBox="0 0 420 560" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#d6e4d5" fill="none" opacity=".5"><path d="M-30 120L450 460M-40 172L450 512M-30 224L420 558" stroke-width="1"/><circle cx="198" cy="294" r="154" stroke-width="2"/><circle cx="198" cy="294" r="119" stroke-dasharray="4 9"/></g>
+      <g fill="none" stroke="#eef0e9" stroke-width="8" stroke-linecap="round"><path d="M210 292C145 159 192 75 257 32C266 154 270 250 210 292Z"/><path d="M210 292C275 420 237 495 157 538C153 433 151 350 210 292Z"/></g>
+      <circle cx="210" cy="292" r="31" fill="#d55430" stroke="#f3f0e9" stroke-width="5"/>
+      <circle cx="210" cy="292" r="8" fill="#f3f0e9"/>
+    </svg>
+    <img src="https://www.shibaura-it.ac.jp/assets/2023%E6%B4%BB%E5%8B%95%E5%A0%B1%E5%91%8A%E6%9B%B8_%E3%83%9A%E3%83%BC%E3%82%B8_01_%E7%94%BB%E5%83%8F_0002.jpg" alt="人力飛行機を移動させる学生たちの活動風景" loading="eager" onerror="this.hidden=true">
+    <span class="hero-side">SHIBAURA INSTITUTE OF TECHNOLOGY</span>
+    <div class="photo-overlay"><span>空を目指す、ものづくり。</span><span>活動風景</span></div>
+   </div>
+  </div>
+</section>
+<div class="spec" aria-label="機体の実績">
+ <div class="wrap spec-inner">
+  <div class="spec-item"><strong>S-320</strong><span>2026年大会出場機体</span></div>
+  <div class="spec-item"><strong>40<em>m</em></strong><span>主翼の翼幅</span></div>
+  <div class="spec-item"><strong>180.67<em>m</em></strong><span>2026年大会の飛行記録</span></div>
+ </div>
+</div>
+<section class="story" id="story">
+ <div class="wrap story-inner">
+  <h2>二人で飛ぶ。<br>だから、<br>難しい。</h2>
+  <div class="story-right">
+   <p>人の力だけで空を飛ぶ。<br>二人分の力を、一機の推進力に変える。<br>重量も、強度も、設計も。簡単なことは何もない。</p>
+   <a class="editorial-link" href="https://teambirdmantrial.jp/diary/s-320-element-%E8%A8%AD%E8%A8%88%E6%96%B9%E9%87%9D/" target="_blank" rel="noopener noreferrer">設計の考え方を見る <span class="arrow" aria-hidden="true">↗</span></a>
+  </div>
+ </div>
+</section>
+<section class="measure" id="aircraft">
+ <div class="wrap">
+  <div class="measure-top"><h2>翼幅、40メートル。</h2><p>11に分かれた翼をつなぎ、<br>ひとつの機体にする。</p></div>
+  <div class="measure-diagram" id="s320-preview">
+   <div class="model-shell" id="s320-model" aria-label="S-320の機体3Dビュー">
+     <div class="model-visual" id="s320-visual">
+       <img class="model-poster" src="../assets/s320-render.webp" alt="芝浦祭特設サイトで公開されているS-320設計モデルのレンダリング" loading="lazy" onerror="this.style.display='none'">
+       <div class="model-gradient" aria-hidden="true"></div>
+     </div>
+     <div class="model-cta" id="s320-cta">
+       <p>実際の機体設計データを見る。</p>
+       <button type="button" id="s320-start" aria-controls="s320-visual">3Dモデルを表示 <span aria-hidden="true">↗</span></button>
+     </div>
+     <div class="model-status" id="s320-status" role="status" aria-live="polite"></div>
+     <div class="model-controls" id="s320-controls" hidden>
+       <span>ドラッグで回転 ／ スクロールで拡大</span>
+       <button type="button" id="s320-reset">視点を戻す</button>
+     </div>
+   </div>
+   <noscript><a href="https://teambirdmantrial.jp/shibafes2026/" target="_blank" rel="noopener noreferrer">元の芝浦祭特設サイトでモデルを見る ↗</a></noscript>
+
+  </div>
+  <div class="measure-foot"><span>S-320 Element</span><span>芝浦祭特設サイトのS-320モデルを使用。<a href="https://teambirdmantrial.jp/shibafes2026/" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">元のサイト ↗</a></span></div>
+ </div>
+</section>
+<section class="work" id="making">
+ <div class="wrap work-grid">
+  <div class="work-copy">
+   <h2>飛ぶ前に、<br>つくる。</h2>
+   <p>設計して、削って、組み立てる。試して、直して、また試す。飛行の裏側には、地道な作業がある。</p>
+   <a class="editorial-link" href="https://teambirdmantrial.jp/gallery/" target="_blank" rel="noopener noreferrer">活動写真を見る <span class="arrow" aria-hidden="true">↗</span></a>
+  </div>
+  <div class="work-photography">
+   <figure><div class="photo-wide"><svg class="fallback-visual" viewBox="0 0 700 450" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#46564b" stroke-width="2" opacity=".66"><path d="M0 298L700 78M0 347L700 127M0 396L700 176" stroke-width="4"/>
+      <path d="M44 270Q180 210 180 346M160 235Q290 178 290 306M280 195Q414 140 414 270M400 155Q530 103 530 230M520 116Q641 68 650 190"/>
+      <path d="M0 282L700 63M0 411L700 191" stroke-dasharray="4 9"/>
+      </g><circle cx="350" cy="224" r="12" fill="#d55430"/></svg><img src="https://blog-imgs-51.fc2.com/t/e/a/teambirdmantrial/DSC_0057.jpg" alt="部員たちが翼を組み立てる作業風景" loading="lazy" onerror="this.hidden=true"></div><figcaption>翼の組み立て作業（過去の活動写真）</figcaption></figure>
+   <figure><div class="photo-small"><svg class="fallback-visual" viewBox="0 0 700 450" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#43554a" opacity=".7"><circle cx="365" cy="221" r="175" stroke-width="2"/><circle cx="365" cy="221" r="114" stroke-width="2"/><path d="M365 38V403M182 221H548M237 92L494 348M493 92L238 348" stroke-width="5"/></g><circle cx="365" cy="221" r="20" fill="#d55430"/></svg><img src="https://blog-imgs-47.fc2.com/t/e/a/teambirdmantrial/RIMG0259_convert_20120329215727.jpg" alt="翼内部の構造を確認する作業風景" loading="lazy" onerror="this.hidden=true"></div><figcaption style="text-align:right">翼の骨組み（過去の活動写真）</figcaption></figure>
+  </div>
+ </div>
+</section>
+<section class="action" id="support">
+ <div class="wrap">
+  <div class="action-top"><span>クラウドファンディング</span><span>支援先：CAMPFIRE</span></div>
+  <div class="action-head">
+   <h2>この翼を、<br>次へ。</h2>
+   <div class="action-right">
+    <p>機体の材料、製作、試験。<br>次の一機に必要な挑戦を、<br>支えてください。</p>
+    <a class="action-link" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援する <span class="arrow" aria-hidden="true">↗</span></a>
+   </div>
+  </div>
+  <p class="action-foot">募集期間・返礼品・決済方法などの最新情報は、CAMPFIREの正式なプロジェクトページをご確認ください。海外からの支援可否はプロジェクト側の対応条件によります。</p>
+ </div>
+</section>
+</main>
+<footer class="foot">
+ <div class="wrap inner"><a class="brand" href="https://teambirdmantrial.jp/">trambirdmantrial</a><div class="foot-links"><a href="https://teambirdmantrial.jp/" target="_blank" rel="noopener noreferrer">公式HP</a><a href="https://teambirdmantrial.jp/gallery/" target="_blank" rel="noopener noreferrer">ギャラリー</a><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIRE ↗</a></div><small>© Team Birdman Trial</small></div>
+</footer>
+<div class="mobile-support"><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この挑戦を支援する <span aria-hidden="true">↗</span></a></div>
+<script>
+const menu=document.querySelector('.menu');const nav=document.querySelector('.nav');
+menu?.addEventListener('click',()=>{let open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'閉じる':'メニュー';});
+nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='メニュー';}));
+</script>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
+<script type="module">
+// Exact source assets confirmed in the public ShibaFes2026 repository:
+// https://github.com/ogataafjsipfjoais/shibafes2026/tree/main/assets
+const ASSET_BASE = new URL('../assets/', document.baseURI).href;
+const shell=document.querySelector('#s320-model');
+const start=document.querySelector('#s320-start');
+const visual=document.querySelector('#s320-visual');
+const status=document.querySelector('#s320-status');
+const cta=document.querySelector('#s320-cta');
+const controls=document.querySelector('#s320-controls');
+let initialized=false;
+function onError(message){
+  shell.classList.add('is-error');shell.classList.remove('is-viewing');
+  cta.hidden=false;start.disabled=false;start.textContent='もう一度試す';
+  controls.hidden=true;
+  status.innerHTML=`${message} <a href="https://teambirdmantrial.jp/shibafes2026/" target="_blank" rel="noopener noreferrer">芝浦祭サイトで見る ↗</a>`;
+}
+start.addEventListener('click',async()=>{
+  if(initialized)return;
+  start.disabled=true;status.textContent='3Dモデルを読み込んでいます…';
+  try{
+    const [THREE,{GLTFLoader},{OrbitControls},{MeshoptDecoder}] = await Promise.all([
+      import('three'),
+      import('three/addons/loaders/GLTFLoader.js'),
+      import('three/addons/controls/OrbitControls.js'),
+      import('three/addons/libs/meshopt_decoder.module.js')
+    ]);
+    await MeshoptDecoder.ready;
+    const mobile=window.matchMedia('(max-width:760px)').matches;
+    const modelURL=ASSET_BASE+`s320-${mobile?'mobile':'desktop'}.glb`;
+    const renderer=new THREE.WebGLRenderer({alpha:true,antialias:!mobile,powerPreference:'low-power'});
+    renderer.outputColorSpace=THREE.SRGBColorSpace;
+    renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.25:1.75));
+    visual.appendChild(renderer.domElement);
+    const scene=new THREE.Scene();
+    scene.add(new THREE.HemisphereLight(0xffffff,0x536557,2.1));
+    const lamp=new THREE.DirectionalLight(0xffffff,2.6);lamp.position.set(8,15,10);scene.add(lamp);
+    const rim=new THREE.DirectionalLight(0xc1e1ed,1);rim.position.set(-12,5,-11);scene.add(rim);
+    const camera=new THREE.PerspectiveCamera(34,1,0.02,1000);
+    const orbit=new OrbitControls(camera,renderer.domElement);
+    orbit.enableDamping=true;orbit.enablePan=false;orbit.maxPolarAngle=Math.PI*.92;
+    orbit.target.set(0,0,0);
+    const loader=new GLTFLoader();loader.setMeshoptDecoder(MeshoptDecoder);
+    const gltf=await loader.loadAsync(modelURL,evt=>{
+      if(evt.total)status.textContent=`読み込み中… ${Math.round(evt.loaded/evt.total*100)}%`;
+    });
+    const model=gltf.scene;
+    let bounds=new THREE.Box3().setFromObject(model);
+    if(bounds.isEmpty())throw new Error('model is empty');
+    const center=bounds.getCenter(new THREE.Vector3());
+    const size=bounds.getSize(new THREE.Vector3());
+    const scale=14/Math.max(size.x,size.y,size.z);
+    model.position.copy(center).multiplyScalar(-scale);
+    model.scale.setScalar(scale);
+    scene.add(model);
+    bounds=new THREE.Box3().setFromObject(model);
+    const radius=Math.max(bounds.getBoundingSphere(new THREE.Sphere()).radius,3);
+    const initialDistance=Math.max(radius/Math.sin(THREE.MathUtils.degToRad(camera.fov)/2)*1.15,13);
+    const initialPos=new THREE.Vector3(initialDistance*.16,initialDistance*.44,initialDistance);
+    camera.position.copy(initialPos);orbit.minDistance=radius*1.2;orbit.maxDistance=initialDistance*3;
+    document.querySelector('#s320-reset').addEventListener('click',()=>{camera.position.copy(initialPos);orbit.target.set(0,0,0);orbit.update();});
+    const resize=()=>{const w=Math.max(1,visual.clientWidth),h=Math.max(1,visual.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();};
+    resize();new ResizeObserver(resize).observe(visual);
+    shell.classList.add('is-viewing');shell.classList.remove('is-error');status.textContent='';controls.hidden=false;initialized=true;
+    let visible=true;
+    new IntersectionObserver(entries=>{visible=entries[0].isIntersecting},{threshold:0}).observe(shell);
+    const animate=()=>{requestAnimationFrame(animate);if(!visible||document.hidden)return;orbit.update();renderer.render(scene,camera);};
+    animate();
+  }catch(e){console.error('S320 viewer load error',e);onError('3Dモデルを読み込めませんでした。');}
+});
+</script>
+</body>
+</html>
