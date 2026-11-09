@@ -22,8 +22,7 @@ try:
    response=page.goto(url,wait_until='domcontentloaded',timeout=40000)
    assert response and response.status==200,f'Page response failed: {width}x{height}'
    page.locator('#main-title').wait_for(state='visible')
-   try: page.evaluate('document.fonts.ready',timeout=12000)
-   except Exception: pass
+   page.wait_for_function("document.fonts.status === 'loaded'",timeout=25000)
    cta=page.locator('.flight-beat[data-flight-beat="0"] a[href*="camp-fire.jp"]').first
    assert cta.is_visible(),f'First-screen CTA missing {width}x{height}'
    box=cta.bounding_box()
