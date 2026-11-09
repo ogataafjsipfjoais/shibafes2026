@@ -1,0 +1,161 @@
+@import url("./experience-v4.css");
+/* V5: NO generic fundraising cards. The real S-320 becomes the visual protagonist. */
+:root{--navy:#061e2e;--ink:#082e43;--accent:#128cb1;--accent2:#f78157;--sky:#99d5e9;--white:#f6fdff;--mist:#e2f4f9;--stroke:#8bbed2;--margin:clamp(22px,5vw,88px)}
+body{background:#061e2e;color:#102f42}
+.topbar{background:rgba(5,28,41,.93);border-bottom:1px solid #b7ebf631;color:white;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.top-links a:not(.primary-mini){color:white}
+.top-links a:not(.primary-mini):hover{border-color:white}
+.primary-mini{border-radius:0;background:#e8f9fc;color:#092b39}
+.nav-toggle{border-radius:0;background:#11394b;color:white;border-color:#98d4e3}
+.btn{border-radius:0;box-shadow:none}
+.btn-primary{background:#092d44}
+.btn-primary:hover{background:#f78558;color:#042a38}
+.eyebrow:before{background:#4cbbe1}
+/* Full-screen scroll flight: three phases, real 3D, real action. */
+.flight-experience{position:relative;height:290svh;min-height:2150px;color:#fff;background:#6ac0da;isolation:isolate}
+.flight-viewport{position:sticky;top:76px;height:calc(100svh - 76px);min-height:615px;overflow:hidden;isolation:isolate;background:#86cfe5}
+.flight-viewport:before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 78% 8%,#e3f9ff 0%,#addff0 32%,#6cbcd8 74%,#318ea9)}
+.flight-poster{position:absolute;z-index:1;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;opacity:.35;mix-blend-mode:multiply;filter:saturate(.7);transition:opacity 1s}
+.flight-ready .flight-poster{opacity:.08}
+.flight-canvas{position:absolute;inset:0;z-index:2;pointer-events:none}
+.flight-canvas canvas{display:block;width:100%;height:100%}
+.flight-shade{position:absolute;z-index:3;inset:0;background:linear-gradient(90deg,#072f4970,transparent 72%),linear-gradient(0deg,#052d4bc9,transparent 65%);pointer-events:none}
+.flight-grid{position:absolute;inset:0;z-index:3;pointer-events:none;background-image:linear-gradient(90deg,#d6f6ff24 1px,transparent 1px),linear-gradient(0deg,#d6f6ff24 1px,transparent 1px);background-size:12.5% 12.5%;mask-image:linear-gradient(to right,transparent,#000 12%,#000 88%,transparent)}
+.flight-hud{position:absolute;z-index:15;top:23px;left:var(--margin);right:var(--margin);display:flex;justify-content:space-between;align-items:center;gap:20px;font:800 11px Arial,sans-serif;letter-spacing:.12em}
+.flight-hud .hud-live{display:flex;align-items:center;gap:9px}
+.hud-live:before{content:"";height:8px;width:8px;border:1px solid #fff;border-radius:50%;background:#fff;box-shadow:0 0 0 4px #ffffff25}
+.flight-hud-right{display:flex;align-items:center;gap:24px}
+.flight-axis{position:absolute;left:var(--margin);top:40%;z-index:4;width:1px;height:150px;background:#eaffff91;pointer-events:none}
+.flight-axis:before,.flight-axis:after{content:"";position:absolute;width:18px;height:1px;background:#eaffff9c;left:-8px}
+.flight-axis:before{top:0}.flight-axis:after{bottom:0}
+.flight-flightline{position:absolute;top:35%;left:8%;right:8%;height:1px;background:#f5ffff68;transform:rotate(-6deg);z-index:4;pointer-events:none}
+.flight-flightline:after{content:"";position:absolute;inset:0 100% 0 0;background:#fff;box-shadow:0 0 20px white;transition:inset 2.6s linear}
+.is-launching .flight-flightline:after{inset:0}
+.flight-beat{position:absolute;z-index:10;left:var(--margin);right:var(--margin);bottom:clamp(96px,12vh,165px);display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.55fr);gap:clamp(20px,4vw,90px);align-items:end;opacity:0;pointer-events:none;transform:translateY(23px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.flight-beat.is-current{opacity:1;transform:none;pointer-events:auto}
+.flight-beat h1,.flight-beat h2{font-size:clamp(43px,6.2vw,103px);letter-spacing:-.075em;line-height:1.33;color:#fff;font-weight:400;margin:13px 0 0;text-shadow:0 5px 20px #07344a89}
+.flight-beat h1 span,.flight-beat h2 span{color:#fff;white-space:nowrap}
+.flight-overline{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:clamp(13px,1.4vw,19px);margin:0}
+.flight-overline:before{content:"";width:5px;height:22px;background:#fff}
+.flight-beat-side{max-width:435px;justify-self:end;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.flight-beat-side p{font-size:clamp(14px,1.32vw,19px);line-height:1.9;font-weight:900;margin:0;text-shadow:0 2px 12px #062c4899}
+.flight-beat-side .btn,.flight-beat-side .flight-launch{display:inline-flex;align-items:center;justify-content:space-between;gap:18px;background:#f4fbff;color:#062b3b;border:0;padding:18px 22px;min-height:59px;font-size:clamp(14px,1.25vw,17px);font-weight:900;cursor:pointer}
+.flight-beat-side .btn:hover,.flight-beat-side .flight-launch:hover{background:#fd916b}
+.flight-beat-side .btn.flight-outline{border:1px solid #fff;background:#ffffff06;color:#fff}
+.flight-beat-side .btn.flight-outline:hover{background:#fff;color:#072f48}
+.flight-beat-side .flight-launch:disabled{opacity:.7;cursor:progress}
+.flight-beat-side .flight-launch.is-done{background:#fff}
+.flight-progress{position:absolute;z-index:12;left:var(--margin);right:var(--margin);bottom:25px;display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.flight-progress>span{height:3px;background:#ffffff70;overflow:hidden}
+.flight-progress-segment{height:100%;display:block;background:#fff;transform:scaleX(0);transform-origin:left}
+.flight-footnote{position:absolute;z-index:12;left:var(--margin);bottom:43px;font:700 10px Arial,sans-serif;color:#eafcff}
+.flight-status{position:absolute;z-index:12;top:63px;left:var(--margin);font-size:11px;color:#eaffffb7;line-height:1.5;max-width:340px}
+.flight-launch-message{position:absolute;z-index:13;right:var(--margin);top:18%;font-size:clamp(24px,3vw,50px);letter-spacing:-.08em;line-height:1.5;font-weight:900;margin:0;opacity:0;transform:translateY(25px);transition:opacity .7s,transform .7s;text-shadow:0 2px 12px #16436a}
+.flight-launch-message.is-shown{opacity:1;transform:none}
+.flight-fallback .flight-poster{opacity:.75;mix-blend-mode:normal;filter:none}
+.flight-fallback .flight-canvas{display:none}
+/* The true human story, not a fabricated testimonial. */
+.chapter{padding:clamp(110px,12vw,190px) 0}
+.chapter-one{background:#071f2f;color:#f2fcff}
+.chapter-one .chapter-title{font-size:clamp(39px,5.5vw,79px)}
+.chapter-one .chapter-label{color:#94e0f7}
+.chapter-one .lead-grid{grid-template-columns:1.2fr .8fr}
+.lead-image{border-radius:0}
+.lead-image img{aspect-ratio:1.3}
+.lead-image figcaption{left:0;bottom:0;border-radius:0;background:#e9fbff;color:#06314a}
+.record-card{border:0;border-radius:0;background:none;color:white;border-top:2px solid #c5eeff;padding:30px 0 0}
+.record-card strong{color:#92e2ff}
+.record-card p{font-size:clamp(18px,2vw,26px);line-height:1.75}
+.real-voice{border-left:3px solid #ff9875;padding-left:19px;margin:30px 0;font-size:clamp(16px,1.5vw,23px);line-height:2;font-weight:800}
+.real-voice small{display:block;font-size:11px;color:#b9dfeb;line-height:1.7;margin-top:12px;font-weight:600}
+.next-name{display:flex;align-items:flex-start;justify-content:space-between;gap:25px;border-top:1px solid #9acfe075;margin-top:55px;padding-top:34px}
+.next-name strong{font-size:clamp(32px,4.7vw,71px);line-height:1.4;letter-spacing:-.08em}
+.next-name p{max-width:365px;font-size:13px;line-height:2;color:#d1ecf4}
+.next-name a{text-decoration:underline;text-underline-offset:4px}
+.problem{background:#f1fafb}
+.problem-gallery{gap:0}
+.problem-photo,.problem-photo.large{border-radius:0}
+.problem-photo figcaption{left:0;bottom:0;border-radius:0;background:#0a354d;color:#fff}
+.problem-photo.large{min-height:610px}
+.problem-photo:not(.large){min-height:305px}
+.problem-breakdown{margin-top:clamp(80px,10vw,140px)}
+.problem-breakdown h3{font-size:clamp(34px,4.7vw,73px)}
+.budget-row{padding:28px 0}
+.problem-intro .chapter-title{font-size:clamp(38px,5.4vw,79px)}
+.progress-chapter{background:#addfee}
+.progress-chapter:after{display:none}
+.progress-info{border:0;border-radius:0;box-shadow:none;background:#f8fdff}
+.progress-big strong{color:#0b3448;font-size:clamp(65px,10vw,155px)}
+.progress-track{height:18px;border-radius:0}
+.progress-fill{border-radius:0}
+.progress-marker{color:#15536e}
+.progress-context{display:flex;align-items:flex-start;justify-content:space-between;gap:25px;margin:38px 0 0}
+.progress-context p{font-size:14px;line-height:1.9;font-weight:800;max-width:540px;margin:0}
+.progress-context a{font-size:13px;display:inline-flex;border-bottom:1px solid;padding-bottom:8px;font-weight:800}
+.model-chapter{background:#051f2e;color:white}
+.model-chapter .chapter-label{color:#96daf0}
+.model-chapter .model-shell{border:1px solid #a0cfdd7f;border-radius:0;background:#1b4857}
+.rewards-chapter{background:#f1fafc}
+.rewards-grid{gap:0;border-block:2px solid #0c3448}
+.reward-card,.reward-card:nth-child(2),.reward-card:nth-child(3){border-radius:0;border:0;border-right:1px solid #14506b;color:#0b3346;background:#f3fcfd;min-height:355px}
+.reward-card:nth-child(2){background:#d8eff7}
+.reward-card:nth-child(3){background:#07344c;color:#fff}
+.reward-card:last-child{border:0}
+.reward-card h3{font-size:clamp(24px,2.5vw,39px)}
+.reward-card .price{font-size:clamp(26px,2.9vw,42px)}
+.ending{min-height:760px;position:relative}
+.ending h2{font-size:clamp(48px,7.5vw,109px)}
+.ending .btn-primary{background:white;color:#08354a}
+.ending .btn-primary:hover{background:#aff1fc;color:#08354a}
+.footer{background:#041b2a}
+/* Meaningful movement: camera, layer depth, progress, material */
+@media(prefers-reduced-motion:no-preference){
+ .hero.is-ready .hero-content{animation:enterFlight 1.15s cubic-bezier(.16,1,.3,1) both}
+ @keyframes enterFlight{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:none}}
+ .chapter [data-enter].is-inview{animation:enterFlight .8s cubic-bezier(.16,1,.3,1) both}
+ .flight-beat h1,.flight-beat h2{will-change:opacity,transform}
+ .flight-ready .flight-canvas{animation:enterFlight .85s both}
+ .progress-info:has(.progress-fill) .progress-track{box-shadow:0 0 0 1px #cae6ed}
+}
+@media(max-width:1000px){
+ .flight-beat{grid-template-columns:minmax(0,1.2fr) minmax(210px,.8fr)}
+ .flight-beat h1,.flight-beat h2{font-size:clamp(45px,6.2vw,77px)}
+}
+@media(max-width:760px){
+ .topbar{background:#071e2f}
+ .top-links{background:#062338}
+ .flight-experience{height:265svh;min-height:1750px}
+ .flight-viewport{top:66px;height:calc(100svh - 66px);min-height:535px}
+ .flight-poster{object-position:50% 30%}
+ .flight-shade{background:linear-gradient(0deg,#04263cd9,transparent 85%),linear-gradient(90deg,#072b3c65,transparent)}
+ .flight-hud{top:18px;font-size:9px}
+ .flight-hud-right{gap:9px}
+ .flight-axis,.flight-flightline{display:none}
+ .flight-status{top:46px;font-size:10px}
+ .flight-beat{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-end;bottom:clamp(80px,11vh,118px);gap:20px}
+ .flight-beat h1,.flight-beat h2{font-size:clamp(35px,9.1vw,65px);line-height:1.45}
+ .flight-overline{font-size:13px}
+ .flight-beat-side{max-width:none;justify-self:auto;align-self:stretch;width:100%;padding:0;gap:12px}
+ .flight-beat-side p{font-size:clamp(13px,3.6vw,16px);line-height:1.65}
+ .flight-beat-side .btn,.flight-beat-side .flight-launch{width:100%;min-height:50px;font-size:14px;padding:13px 17px;align-items:center}
+ .flight-hud-right .hud-seq{display:none}
+ .flight-footnote{font-size:9px;bottom:43px;right:var(--margin);line-height:1.3}
+ .flight-launch-message{top:18%;font-size:clamp(20px,5.7vw,30px);max-width:75%}
+ .chapter-one .lead-grid{display:block}
+ .chapter-one .record-card{margin-top:42px}
+ .next-name{display:block}
+ .next-name p{margin-top:14px}
+ .problem-photo.large{min-height:0}
+ .progress-context{display:block}
+ .progress-context a{margin-top:17px}
+ .reward-card,.reward-card:nth-child(2),.reward-card:nth-child(3){min-height:290px;border:1px solid #1b5369}
+ .ending{min-height:690px}
+ .ending h2{font-size:clamp(41px,10.7vw,72px)}
+}
+@media(prefers-reduced-motion:reduce){
+ .flight-beat{transition:none}
+ .flight-progress-segment{transition:none}
+ .flight-ready .flight-canvas{display:none}
+ .flight-poster{opacity:.85!important;mix-blend-mode:normal;filter:none}
+ .flight-launch-message{opacity:1!important;transform:none!important}
+}
