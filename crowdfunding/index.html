@@ -298,6 +298,41 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
  .work-photography .make-step:nth-child(3){width:100%;margin-left:0}
 }
 @media(prefers-reduced-motion:reduce){.wing-documentary .wing-measure-line{transform:scaleX(1)!important;transition:none}}
+
+.chapter-opening{padding:0;background:var(--paper)}
+.opening-intro{padding:clamp(34px,4vw,60px) 0 clamp(35px,5vw,70px)}
+.chapter-opening .campaign-label{font-size:clamp(23px,3.2vw,47px);font-weight:900;letter-spacing:-.08em;color:var(--ink);margin:0 0 30px;display:flex;align-items:center;gap:16px}
+.chapter-opening .campaign-label:before{content:"";width:7px;height:1em;background:var(--rust);flex:none}
+.opening-row{display:grid;grid-template-columns:1.8fr .7fr;gap:4vw;align-items:end}
+.chapter-opening h1{font-size:clamp(65px,8vw,132px);font-weight:900;line-height:1.15;letter-spacing:-.11em;margin:0;white-space:nowrap}
+.chapter-opening h1 .red{color:var(--rust)}
+.opening-ask{display:flex;flex-direction:column;gap:18px;align-items:stretch;padding-bottom:8px}
+.opening-ask>span{font-size:12px;color:var(--muted);font-weight:700}
+.opening-ask .new-cover-cta{align-self:stretch;font-size:clamp(13px,1.3vw,17px);padding:20px 24px}
+.opening-portrait{position:relative;margin:0;height:clamp(440px,53vw,760px);overflow:hidden;background:#7298b4}
+.opening-portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 52%}
+.opening-portrait figcaption{position:absolute;left:5%;bottom:25px;color:white;text-shadow:0 2px 8px #000;font-size:12px;font-weight:800}
+.work-grid{grid-template-columns:.7fr 1.3fr}
+.work h2{font-size:clamp(50px,7vw,100px)}
+.reward-columns h2{font-size:clamp(70px,9vw,138px)}
+.action h2{font-size:clamp(70px,10vw,160px)}
+@media(max-width:1050px){.opening-row{grid-template-columns:1.1fr 1fr}.chapter-opening h1{font-size:clamp(62px,8vw,95px)}}
+@media(max-width:760px){
+ .opening-intro{padding:31px 0 34px}
+ .chapter-opening .campaign-label{font-size:clamp(23px,6vw,34px);gap:11px}
+ .chapter-opening .campaign-label:before{width:5px}
+ .opening-row{display:block}
+ .chapter-opening h1{font-size:clamp(57px,12.8vw,91px);white-space:normal}
+ .opening-ask{margin-top:27px;gap:16px;padding:0}
+ .opening-ask>span{font-size:11px}
+ .opening-ask .new-cover-cta{font-size:15px;padding:17px 20px}
+ .opening-portrait{height:auto;aspect-ratio:3/2}
+ .opening-portrait img{object-fit:contain}
+ .opening-portrait figcaption{bottom:13px;left:15px;font-size:10px}
+ .work-grid{display:block}.work h2{font-size:clamp(56px,12vw,80px)}
+ .reward-columns h2{font-size:clamp(70px,16vw,110px)}
+ .action h2{font-size:clamp(72px,15vw,110px)}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"次の一機を、空へ。｜TeamBirdmanTrial クラウドファンディング","url":"https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/","inLanguage":"ja","description":"芝浦工業大学の人力飛行機製作チームによる二人乗り人力飛行機の挑戦と支援案内","about":{"@type":"Organization","name":"Team Birdman Trial","url":"https://teambirdmantrial.jp/"}}</script>
 </head>
