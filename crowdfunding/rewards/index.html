@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#19362f">
-  <meta name="description" content="芝浦工業大学 TBT クラウドファンディング返礼品10種類を、カテゴリやご支援金額から検索・比較できます。">
+  <meta name="description" content="芝浦工業大学 TBT クラウドファンディング返礼品10種類を格納庫から選ぶように検索・比較。TBTの挑戦を支える、あなたに合った応援のかたちを見つけよう。">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/rewards/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
-  <meta property="og:title" content="返礼品を探す | TBT Supporters Store">
-  <meta property="og:description" content="TBTの挑戦を支える返礼品10種類。検索して、比較して、あなたに合った応援を見つけよう。">
+  <meta property="og:title" content="返礼品の格納庫 | TBT RETURN HANGAR">
+  <meta property="og:description" content="TBTの返礼品10種類を検索・比較できる、飛行機の格納庫をテーマにした特設ページ。">
   <meta property="og:url" content="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/rewards/">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests">
-  <title>返礼品を探す | TBT Supporters Store</title>
+  <title>返礼品の格納庫 | TBT RETURN HANGAR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -85,6 +85,178 @@ dialog{border:none;box-shadow:0 18px 85px #0f221f68;padding:0;max-height:min(90v
 /* Keep the catalog in the first desktop viewport, like a browse-first store. */
 @media(min-width:651px){.hero-container{min-height:268px}.hero-copy{padding:34px 0}.hero-copy h1{font-size:clamp(33px,3.6vw,49px);margin-bottom:10px}.hero-copy>p:not(.hero-eyebrow){margin-bottom:15px}.hero-image{min-height:268px}.service-items p{min-height:64px}.catalog-heading{padding:29px 0 20px}.catalog-layout{padding-top:18px}.breadcrumbs{margin-top:19px}.toolbar{margin-bottom:16px}}
 
+/* ============================================================
+   TBT RETURN HANGAR / visual system v2
+   A functional catalog styled as a human-powered-aircraft hangar.
+   All motion has an interaction or navigational purpose.
+   ============================================================ */
+:root{--hangar:#142925;--hangar-mid:#24443a;--signal:#eb794c;--paper:#f5f3eb;--rule:#c8d0c6;--blueprint:#91afa3;--mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace}
+body{background:var(--paper)}
+::selection{background:#e0a778;color:#172b25}
+.utility-strip{background:#111e1c;border-bottom:1px solid #39443e;color:#dde2dc}
+.utility-inner{letter-spacing:.1em}
+.utility-inner>span{font-family:var(--mono);font-size:9px!important;letter-spacing:.12em}
+.site-header{background:var(--hangar);box-shadow:none;border-bottom:1px solid #355249}
+.header-main{gap:23px}
+.logo{gap:13px}
+.logo-symbol{position:relative;font-size:33px;letter-spacing:-.1em}
+.logo-symbol:after{content:'↗';position:absolute;font:800 13px var(--mono);color:var(--signal);top:-6px;right:-10px}
+.logo-sub{font:600 9px/1.55 var(--mono);letter-spacing:.15em!important;color:#cbd7cc}
+.header-search{border-radius:0!important;border:1px solid #648177!important;box-shadow:0 0 0 1px #243b32 inset}
+.header-search input{background:#f9faf4!important}
+.header-search button{background:var(--signal)!important;color:#17241e!important;border-radius:0!important;font-weight:900!important}
+.header-search button:hover{background:#ffa071!important}
+.header-support{background:#e7eee6!important;color:#193329!important;border-radius:0!important;font-weight:900;transition:background .2s}
+.header-support:hover{background:#ffb18d!important}
+.category-nav{background:#1d3a32;border-color:#315347}
+.category-links{gap:0!important}
+.category-links button,.category-links a{border-right:1px solid #416254!important;position:relative}
+.category-links button[aria-pressed=true]{color:#ffd1bc!important;background:#29463c!important}
+.category-links button[aria-pressed=true]:after{content:'';height:3px;position:absolute;bottom:0;left:14px;right:14px;background:var(--signal)}
+.mobile-line-break{display:none}
+/* The masthead is an aircraft drawing-board, not a generic ecommerce hero. */
+.hero-band{background:#192e28;color:#f5f5ec;border-bottom:0;position:relative}
+.hero-band:before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.35;background-image:linear-gradient(90deg,#8eaca020 1px,transparent 1px),linear-gradient(#8eaca020 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(90deg,#000 0 65%,transparent)}
+.hero-container{min-height:415px!important;grid-template-columns:minmax(0,1.16fr) minmax(0,.84fr)!important;gap:0!important;position:relative}
+.hero-copy{position:relative;z-index:2;padding:39px 52px 40px 0!important;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.hero-rail{display:flex;align-items:center;gap:14px;color:#d7e6d9;font:600 10px var(--mono);letter-spacing:.17em;width:100%;margin:0 0 28px}
+.hero-rail:before{content:'';width:33px;height:1px;background:var(--signal)}
+.hero-rail span:last-child{color:#86a49a;font-size:9px;margin-left:auto}
+.hero-eyebrow{color:#ff9b76!important;font:600 11px var(--mono)!important;letter-spacing:.19em!important;margin:0 0 14px!important}
+.hero-eyebrow span{color:#97b3a6}
+.hero-copy h1{font-size:clamp(39px,4.9vw,72px)!important;line-height:1.22!important;letter-spacing:-.065em!important;color:#fbf8f0;margin:0 0 21px!important;font-weight:900;position:relative}
+.hero-copy h1 em{color:#f3ae8a!important;font-style:normal}
+.hero-copy>p:not(.hero-eyebrow){font-size:14px!important;font-weight:500;color:#d9e5dc!important;line-height:2.1!important;margin:0 0 23px!important;max-width:500px}
+.hero-bottom{display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+.hero-cta{background:var(--signal)!important;color:#15271f!important;border:1px solid #e99672;padding:14px 18px!important;min-width:198px!important;font-size:13px!important;justify-content:space-between;gap:34px}
+.hero-cta:hover{background:#ffae88!important}
+.hero-footnote{font:500 10px/1.5 var(--mono);letter-spacing:.08em;color:#91a99c}
+.hero-coordinate{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:33px;padding-top:12px;width:100%;border-top:1px solid #456157;color:#a2b8ac;font:500 10px var(--mono);letter-spacing:.08em}
+.hero-coordinate b{color:#f5b18e;font-weight:700}
+.hero-image{margin:0 -38px 0 0!important;min-height:415px!important;max-height:none!important;clip-path:none!important;background-position:58% 50%!important;border-left:1px solid #5c8472;isolation:isolate}
+.hero-image:before{background:linear-gradient(90deg,#112b28a8,#112b2870 35%,#0d1d1c40 100%)!important;z-index:0}
+.hero-image:after{content:'';position:absolute;inset:16px;z-index:0;border:1px solid #d4e4d04f;pointer-events:none}
+.hero-image .flight-schematic{position:absolute;z-index:1;top:11%;left:6%;width:88%;height:63%;color:#f7fcf4;opacity:.92;filter:drop-shadow(0 1px 2px #08221c)}
+.flight-schematic .measure{stroke:#f8f6e7;stroke-width:1;stroke-dasharray:5 7;opacity:.76}
+.flight-schematic .wing{stroke:#fffdf0;stroke-width:2.8;fill:#edf7f01d;stroke-linejoin:round}
+.flight-schematic .construction{stroke:#f5f9ee;stroke-width:1;fill:none;opacity:.6}
+.flight-schematic .ticks{stroke:#f8f5dc;stroke-width:1;opacity:.8}
+.flight-schematic text{font:600 14px var(--mono);fill:#fff7e5;letter-spacing:2px}
+.hero-image .hero-stat{position:absolute;z-index:2;top:26px;left:28px;display:flex;flex-direction:column;gap:3px;padding:9px 13px;border-left:3px solid var(--signal);background:#0c2423b8;backdrop-filter:blur(2px)}
+.hero-stat span{font:600 9px var(--mono);letter-spacing:.2em;color:#e2ecdf}
+.hero-stat strong{font:800 clamp(39px,5vw,70px)/.95 var(--mono);letter-spacing:-.07em;color:#fff}
+.hero-stat strong small{font-size:.36em;letter-spacing:0;margin-left:3px}
+.hero-stat em{font:500 9px var(--mono);font-style:normal;color:#ceddd4}
+.hero-photo-caption{z-index:2;left:29px!important;right:30px;bottom:24px!important;font:600 10px var(--mono)!important;letter-spacing:.12em!important}
+.hero-marker{z-index:2;top:auto!important;right:34px!important;bottom:69px!important;transform:rotate(-90deg) translateX(100%);transform-origin:right bottom;font:600 9px var(--mono)!important}
+.hero-outline-index{position:absolute;z-index:2;bottom:18px;left:-35px;transform:rotate(-90deg);font:600 9px var(--mono);color:#9db1a3;letter-spacing:.18em}
+/* The three steps have a purpose: guide visitors toward one formal source. */
+.service-bar{background:#e8e8df;border-color:#cdd3c9}
+.service-items{gap:0}
+.service-items p{border-right:1px solid #ccd4c9;margin:0;position:relative}
+.service-items p:first-child{border-left:1px solid #ccd4c9}
+.service-icon{border:1px solid #506e62!important;border-radius:0!important;background:transparent!important;color:#345848!important;font:600 11px var(--mono)!important}
+.service-items strong{color:#263e34;font-weight:900}
+.service-items p>span:last-child{color:#728578}
+.catalog{position:relative}
+.breadcrumbs{font:600 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#687f71}
+.catalog-heading{border-bottom:2px solid #2d4a3d;align-items:center;padding-top:50px!important}
+.catalog-heading .section-label{font:600 11px var(--mono);letter-spacing:.22em;color:#ad623d}
+.catalog-heading h2{font-size:clamp(37px,4.7vw,64px)!important;letter-spacing:-.065em;color:#172f27}
+.catalog-heading-dot{color:var(--signal)}
+.catalog-heading p:not(.section-label){font-size:13px!important;color:#536959}
+.catalog-counter{align-self:end;padding-bottom:7px;gap:13px}
+.catalog-counter strong{font:700 62px/.9 var(--mono);color:#224438}
+.catalog-counter span{font:700 11px var(--mono);letter-spacing:.14em}
+.catalog-layout{padding-top:32px!important;gap:36px}
+.sidebar{border-right:1px solid #aebdaf;padding-right:26px}
+.sidebar-top{border-bottom:2px solid #284b3d;padding-bottom:16px}
+.sidebar-top:before{content:'FLIGHT MANIFEST';position:absolute;transform:translateY(-22px);font:600 9px var(--mono);letter-spacing:.18em;color:#bc714d}
+.sidebar-top h3{font-size:16px;color:#203a2f}
+.filter-block legend,.special-filters h4{font:700 11px var(--mono);letter-spacing:.06em;color:#466253}
+.radio-row{border-radius:0!important}
+.sidebar-annotation{background:#1d3931;color:#eff4ec;padding:23px 17px;border-top:4px solid var(--signal)}
+.sidebar-annotation strong{color:#ffc2a6;font-family:var(--mono)}
+.sidebar-annotation p{color:#d5e0d5}
+.sidebar-annotation a{color:#ffe4c9}
+.toolbar{border-bottom:1px solid #cad3c7;padding-bottom:11px}
+.toolbar-top p{font-family:var(--mono);font-weight:600;color:#3d5f4b}
+.toolbar-controls select{background-color:#f8f8f2;border-radius:0}
+.product-grid{gap:15px!important}
+.product-card{border:1px solid #bfc9bf;background:#fcfcf8;box-shadow:none;transition:border-color .18s,transform .18s;overflow:hidden}
+.product-card:before{content:'';height:4px;width:100%;position:absolute;top:0;left:0;z-index:4;background:#d2dcd1;transition:background .15s}
+.product-card:hover:before,.product-card:focus-within:before{background:var(--signal)}
+.product-card:hover{transform:translateY(-2px);border-color:#7f9c8a;box-shadow:0 8px 20px #0e2d2112}
+.product-media{border-bottom:1px solid #d5ddd1;overflow:hidden;isolation:isolate}
+.product-media:before{content:'TBT / INVENTORY';position:absolute;z-index:3;top:14px;left:13px;font:700 8px var(--mono);letter-spacing:.14em;color:#1f4438;background:#f9fbf0c9;padding:4px 6px;pointer-events:none}
+.product-media:after{content:'';position:absolute;z-index:2;inset:10px;pointer-events:none;border:1px solid #42574c28}
+.reward-visual{transition:transform .28s ease}
+.product-card:hover .reward-visual{transform:scale(1.035)}
+.product-flags{top:38px!important;left:13px!important}
+.product-body{padding:18px 16px 16px!important}
+.product-category{display:flex;align-items:center;gap:9px;color:#47685b;font-size:10px!important;letter-spacing:.03em}
+.index-no{font-family:var(--mono);background:#e7ece4;color:#244638;padding:4px 7px;letter-spacing:0;font-weight:700;margin-left:auto}
+.product-name{font-weight:900!important;line-height:1.45!important;letter-spacing:-.045em;color:#1b3429}
+.product-name:hover{color:#b35735}
+.product-description{color:#5e7163}
+.product-price{border-top:1px solid #d7e0d5;padding-top:13px;margin-top:auto}
+.product-price strong{font-family:var(--mono);letter-spacing:-.06em!important;color:#142c25!important}
+.product-price>span{color:#778678}
+.product-delivery{border-top:0;padding-top:0}
+.primary-action{background:#214b3d!important;border:1px solid #214b3d!important;border-radius:0!important;color:#fff!important;transition:background .15s}
+.primary-action:hover{background:#d86c42!important;border-color:#d86c42!important}
+.secondary-action{border-radius:0!important;border:1px solid #b6c3b8!important;background:transparent!important}
+.secondary-action:hover{border-color:#355847!important;background:#e4e9e0!important}
+.compare-select{border-top:1px dashed #cad6c9;padding-top:11px}
+.product-card[data-id="return-visit"]{background:#f6f3e9;border-color:#d19d83}
+.product-card[data-id="return-visit"]:before{background:#ed784d}
+.product-card[data-id="return-visit"] .product-category{color:#a25031}
+.product-card[data-id="return-visit"] .product-media:before{content:'SPECIAL FLIGHT / EXPERIENCE';background:#fff2e8;color:#944329}
+/* A considered, aircraft-specific ending instead of another generic CTA box. */
+.about-section{background:#17342c!important;position:relative;overflow:hidden}
+.about-section:before{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 119px,#b8d3be17 120px,transparent 121px),repeating-linear-gradient(0deg,transparent 0 119px,#b8d3be12 120px,transparent 121px)}
+.about-layout{position:relative;z-index:1;padding-block:100px}
+.about-layout .section-label{font:600 11px var(--mono);color:#ffae83;letter-spacing:.22em}
+.about-layout h2{font-size:clamp(39px,4.3vw,62px);color:#f4f5ea}
+.about-layout p:not(.section-label){font-size:14px;color:#cedfd2}
+.about-panel{border:1px solid #799989!important;background:#203d35!important;border-radius:0!important;position:relative;overflow:hidden}
+.about-panel:before{content:'SPECIMEN 01  /  S-320';position:absolute;top:14px;left:15px;font:600 10px var(--mono);letter-spacing:.1em;color:#b5c8b9}
+.about-panel:after{content:'';position:absolute;inset:26px;background:repeating-linear-gradient(0deg,transparent 0 22px,#b7c9af1f 23px,transparent 24px);pointer-events:none}
+.about-panel-num{font-size:clamp(70px,10vw,155px)!important;color:#b4d2bd!important;position:relative;z-index:1}
+.about-panel p,.about-panel b{position:relative;z-index:1}
+.notice-section{border-top:4px solid #ed7e50}
+.notice-section .section-label{font-family:var(--mono);letter-spacing:.17em;color:#a2583e}
+.footer{background:#0d2520;border-top:1px solid #345b49}
+.footer-brand span{font-family:var(--mono)}
+.mobile-bottom-bar a{background:var(--signal);color:#1b2e27}
+/* Accessible focus & motion. */
+:where(a,button,input,select):focus-visible{outline:3px solid #ed895a;outline-offset:3px}
+@media (min-width:1100px){.hero-image{margin-right:-38px!important}.hero-copy{padding-right:66px!important}}
+@media (max-width:1020px){.hero-container{min-height:380px!important}.hero-copy{padding-right:26px!important}.hero-copy h1{font-size:clamp(34px,4.8vw,53px)!important}.hero-rail span:last-child{display:none}.hero-coordinate{font-size:9px}.hero-image{min-height:380px!important;margin-right:-28px!important}}
+@media (max-width:840px){.hero-container{grid-template-columns:1.05fr .95fr!important}.hero-rail{margin-bottom:17px}.hero-copy h1{font-size:36px!important}.hero-image{margin-right:-28px!important}.hero-copy{padding-block:30px!important}.hero-coordinate{margin-top:22px}.hero-photo-caption{letter-spacing:.06em!important}.product-grid{gap:12px!important}}
+@media (max-width:650px){
+ .header-main{gap:9px}.logo-symbol{font-size:27px}.logo-sub{font-size:7px}.category-links button,.category-links a{font-size:10px}.category-links button[aria-pressed=true]:after{left:10px;right:10px}
+ .hero-container{display:flex!important;flex-direction:column!important;min-height:auto!important}
+ .mobile-line-break{display:block}
+ .hero-copy{order:0;padding:31px 0 27px!important;width:100%}.hero-rail{margin-bottom:17px;font-size:9px}.hero-rail:before{width:20px}.hero-eyebrow{font-size:9px!important}
+ .hero-copy h1{font-size:clamp(34px,9.6vw,50px)!important;line-height:1.29!important;margin-bottom:15px!important}
+ .hero-copy>p:not(.hero-eyebrow){font-size:12px!important;line-height:1.9!important;margin-bottom:18px!important}
+ .hero-cta{font-size:12px!important;min-width:172px!important;padding:11px 14px!important}.hero-footnote{font-size:8px}
+ .hero-coordinate{font-size:8px;margin-top:22px;gap:10px}
+ .hero-image{order:1;margin:0 -18px!important;height:242px;min-height:242px!important;max-height:242px!important;background-position:center 50%!important}
+ .hero-image .flight-schematic{width:82%;left:9%;top:20%;height:55%}.hero-image .hero-stat{left:15px;top:15px;padding:6px 8px}.hero-stat strong{font-size:35px}.hero-stat span{font-size:8px}.hero-stat em{font-size:7px}.hero-photo-caption{bottom:12px!important;left:16px!important;right:16px;font-size:8px!important}
+ .hero-marker{display:none}.hero-outline-index{display:none}
+ .service-items p{min-height:80px}.service-items p:first-child{border-left:0}.service-items p:nth-child(2){border-right:0}
+ .catalog-heading{padding-top:31px!important;gap:8px}.catalog-heading h2{font-size:clamp(31px,8vw,45px)!important}.catalog-heading .section-label{font-size:9px}.catalog-heading p:not(.section-label){font-size:10px!important}.catalog-counter strong{font-size:40px}.catalog-counter{gap:4px}.catalog-counter span{font-size:9px}
+ .catalog-layout{padding-top:16px!important}.sidebar{border:1px solid #aebdad}.sidebar-top:before{display:none}
+ .product-media:before{font-size:7px;top:10px;left:9px}.product-flags{top:32px!important;left:9px!important}.product-media:after{inset:7px}
+ .product-body{padding:13px 10px 14px!important}.product-category{font-size:8px!important;gap:3px}.index-no{font-size:7px;padding:3px 4px}.product-name{font-size:clamp(15px,3.6vw,19px)!important}.product-price{padding-top:10px}.product-price strong{font-size:clamp(18px,5vw,27px)}
+ .primary-action{font-size:10px!important}.sidebar-annotation p{font-size:11px}.about-layout{padding-block:65px}.about-layout h2{font-size:35px}
+ .mobile-bottom-bar a{background:var(--signal);color:#1d2a23}
+}
+@media(max-width:370px){.hero-footnote{display:none}.hero-copy h1{font-size:32px!important}.product-grid{grid-template-columns:1fr}.product-price strong{font-size:29px}}
+@media(prefers-reduced-motion:reduce){.reward-visual,.product-card{transition:none!important}.product-card:hover,.product-card:hover .reward-visual{transform:none!important}}
+
 </style>
   
 </head>
@@ -93,7 +265,7 @@ dialog{border:none;box-shadow:0 18px 85px #0f221f68;padding:0;max-height:min(90v
 <div class="utility-strip"><div class="shell utility-inner"><span>SHIBAURA INSTITUTE OF TECHNOLOGY <span class="utility-separator">/</span> TEAM BIRDMAN TRIAL</span><a href="https://teambirdmantrial.jp/" target="_blank" rel="noopener noreferrer">TBT公式サイト ↗</a></div></div>
 <header class="site-header">
   <div class="shell header-main">
-    <a class="logo" href="#top" aria-label="TBT 返礼品紹介トップへ"><span class="logo-symbol">TBT<span class="logo-line"></span></span><span class="logo-sub">SUPPORTERS<br>STORE</span></a>
+    <a class="logo" href="#top" aria-label="TBT 返礼品紹介トップへ"><span class="logo-symbol">TBT<span class="logo-line"></span></span><span class="logo-sub">RETURN<br>HANGAR</span></a>
     <form class="header-search" role="search" id="search-form"><label class="sr-only" for="search-input">返礼品を検索</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-input" type="search" placeholder="返礼品を検索（例：定規、バッグ、体験）" autocomplete="off"><button type="submit">検索</button></form>
     <button class="header-fav" id="header-favorites" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.7a5.4 5.4 0 0 0-7.6 0L12 5.9l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 21l8.8-8.7a5.4 5.4 0 0 0 0-7.6Z"/></svg><span>お気に入り</span><span class="fav-count" id="favorite-count">0</span></button>
     <a class="header-support" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援 <span aria-hidden="true">↗</span></a>
@@ -109,15 +281,38 @@ dialog{border:none;box-shadow:0 18px 85px #0f221f68;padding:0;max-height:min(90v
 <main id="top">
   <section class="hero-band" aria-labelledby="hero-title">
     <div class="shell hero-container">
-      <div class="hero-copy"><p class="hero-eyebrow">TBT CROWDFUNDING 2026 <span>／</span> RETURN COLLECTION</p><h1 id="hero-title">挑戦を、<br><em>あなたの手元へ。</em></h1><p>ふたりで空へ挑む、TBT。<br>あなたに合った応援のかたちを見つけてください。</p><a href="#results" class="hero-cta">返礼品を見る <span aria-hidden="true">↓</span></a></div>
-      <div class="hero-image" role="img" aria-label="人力飛行機の製作・飛行風景"><div class="hero-photo-caption">TEAM BIRDMAN TRIAL <span>2026</span></div></div>
-      <div class="hero-marker" aria-hidden="true">TWO PEOPLE. ONE SKY.</div>
+      <div class="hero-copy">
+        <div class="hero-rail"><span>TBT / RETURN HANGAR</span><span>COLLECTION 2026 — 27</span></div>
+        <p class="hero-eyebrow">二人で飛ぶための、10通りの応援。</p>
+        <h1 id="hero-title">空をつくる、<br class="mobile-line-break">その先を。<br><em>あなたの手元へ。</em></h1>
+        <p>翼をつくり、機体を組み上げ、二人で空を目指す。<br>その挑戦に、あなたらしい形で参加してください。</p>
+        <div class="hero-bottom"><a href="#results" class="hero-cta">返礼品を探す <span aria-hidden="true">↘</span></a><span class="hero-footnote">全10コース / 検索・比較できます</span></div>
+        <div class="hero-coordinate"><span><b>01</b> SELECT A RETURN</span><span><b>02</b> EXPLORE</span><span><b>03</b> SUPPORT THE FLIGHT</span></div>
+      </div>
+      <div class="hero-image" role="img" aria-label="TBTの人力飛行機と翼の模式図を重ねたイメージ。翼の図形は装飾であり実寸設計図ではありません">
+        <div class="hero-stat"><span>WINGSPAN / S-320</span><strong>40<small>m</small></strong><em>TWO-PERSON AIRCRAFT</em></div>
+        <svg class="flight-schematic" viewBox="0 0 650 340" aria-hidden="true" focusable="false">
+          <line class="measure" x1="48" y1="90" x2="602" y2="90"/>
+          <g class="ticks"><path d="M48 77v27 M602 77v27 M325 68v46"/><path d="M48 90l12-6v12z M602 90l-12-6v12z" fill="currentColor"/></g>
+          <text x="325" y="61" text-anchor="middle">40.0 m / WINGSPAN</text>
+          <path class="wing" d="M42 156 Q151 141 303 135 L345 135 Q499 141 608 156 L608 173 Q475 167 346 175 L304 175 Q175 167 42 173Z"/>
+          <path class="construction" d="M43 167H607 M81 152v18 M126 148v21 M177 144v26 M233 140v32 M277 137v37 M373 137v37 M417 140v32 M473 144v26 M524 148v21 M569 152v18"/>
+          <path class="wing" d="M317 146 L333 146 L335 304 L314 304 Z"/>
+          <path class="construction" d="M324 122v194 M314 284l-42 27h108l-45-27 M303 176v-36 M346 176v-36"/>
+          <circle cx="325" cy="196" r="14" class="construction"/><circle cx="325" cy="251" r="14" class="construction"/>
+          <path class="construction" d="M325 178V310 M277 311h95 M325 117V135 M311 124h28"/>
+          <line class="measure" x1="625" y1="135" x2="625" y2="307"/><path class="ticks" d="M618 135h13 M618 307h13"/>
+          <text x="592" y="326" text-anchor="end">TBT / FLIGHT CONCEPT</text>
+        </svg>
+        <div class="hero-photo-caption">TEAM BIRDMAN TRIAL <span>ENGINEERING THE SKY / 2026</span></div>
+        <span class="hero-marker" aria-hidden="true">DESIGN / BUILD / FLY</span>
+      </div>
     </div>
   </section>
   <div class="service-bar"><div class="shell service-items"><p><span class="service-icon">01</span><strong>全10種類</strong><span>あなたに合った返礼品を</span></p><p><span class="service-icon">02</span><strong>500円から</strong><span>気軽な応援コースも</span></p><p><span class="service-icon">03</span><strong>支援はCAMPFIREで</strong><span>決済・条件の確認は公式ページへ</span></p></div></div>
   <section class="catalog shell" aria-labelledby="catalog-title">
     <div class="breadcrumbs"><a href="#top">TOP</a><span aria-hidden="true">/</span><span>返礼品一覧</span></div>
-    <div class="catalog-heading"><div><p class="section-label">THE RETURNS</p><h2 id="catalog-title">返礼品を探す<span class="catalog-heading-dot">.</span></h2><p>価格から、カテゴリから。自分に合った応援を。</p></div><div class="catalog-counter"><strong>10</strong><span>ITEMS</span></div></div>
+    <div class="catalog-heading"><div><p class="section-label">REWARD MANIFEST / 2026–27</p><h2 id="catalog-title">応援を、選ぶ<span class="catalog-heading-dot">.</span></h2><p>10通りの応援から、あなたに合った一つを。検索・比較もできます。</p></div><div class="catalog-counter"><strong>10</strong><span>ITEMS</span></div></div>
     <div class="catalog-layout">
       <aside class="sidebar" aria-label="商品を絞り込む" id="filter-panel">
         <div class="sidebar-top"><h3>絞り込み</h3><button type="button" class="filters-clear" data-clear>クリア</button></div>
@@ -134,7 +329,7 @@ dialog{border:none;box-shadow:0 18px 85px #0f221f68;padding:0;max-height:min(90v
           <label class="radio-row"><input type="radio" name="price" value="10000-999999"><span>10,000円以上</span></label>
         </fieldset>
         <div class="filter-block special-filters"><h4>こだわり条件</h4><label class="check-row"><input type="checkbox" id="limited-only"><span>数量限定のみ</span></label></div>
-        <div class="sidebar-annotation"><strong>SHOPPING GUIDE</strong><p>このページは返礼品の紹介・比較専用です。お申し込みとお支払いはCAMPFIREで行います。</p><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">公式支援ページへ ↗</a></div><button type="button" class="mobile-filter-apply" id="mobile-filter-apply">この条件で商品を見る →</button>
+        <div class="sidebar-annotation"><strong>FLIGHT GUIDE / 003</strong><p>このページは返礼品の紹介・比較専用です。お申し込みとお支払いはCAMPFIREで行います。</p><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">公式支援ページへ ↗</a></div><button type="button" class="mobile-filter-apply" id="mobile-filter-apply">この条件で商品を見る →</button>
       </aside>
       <div class="catalog-content" id="results">
         <div class="toolbar"><div class="toolbar-top"><p id="result-status" role="status" aria-live="polite">10件の返礼品を表示</p><div class="toolbar-controls"><label for="sort-select">並べ替え</label><select id="sort-select"><option value="recommended">おすすめ順（掲載順）</option><option value="low">価格が安い順</option><option value="high">価格が高い順</option><option value="name">名前順</option></select></div></div><div class="toolbar-bottom"><button class="mobile-filter-button" id="mobile-filter-button" type="button" aria-expanded="false" aria-controls="filter-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10m-7 5h4"/></svg>絞り込み</button><div class="active-filters" id="active-filters" aria-label="適用中のフィルタ"></div><button type="button" class="view-switch is-active" id="view-grid" aria-label="グリッド表示" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></button><button type="button" class="view-switch" id="view-list" aria-label="リスト表示" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h1M3 12h1M3 18h1"/></svg></button></div></div>
@@ -343,10 +538,10 @@ dialog{border:none;box-shadow:0 18px 85px #0f221f68;padding:0;max-height:min(90v
       </div>
     </div>
   </section>
-  <section class="about-section" id="about"><div class="shell about-layout"><div><p class="section-label">ABOUT YOUR SUPPORT</p><h2>一つひとつの支援が、<br>次の飛行をつくる。</h2><p>設計する、削る、組み立てる、飛ばす。TBTの挑戦は、たくさんの人の力で成り立っています。返礼品は、応援してくださる皆さまへの感謝のしるしです。</p><a class="about-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで挑戦を見る <span aria-hidden="true">↗</span></a></div><div class="about-panel"><div class="about-panel-num">TBT<span>®</span></div><p>TEAM BIRDMAN TRIAL</p><b>ふたりで、空へ。</b></div></div></section>
+  <section class="about-section" id="about"><div class="shell about-layout"><div><p class="section-label">ABOUT YOUR SUPPORT</p><h2>一つひとつの支援が、<br>次の飛行をつくる。</h2><p>設計する、削る、組み立てる、飛ばす。TBTの挑戦は、たくさんの人の力で成り立っています。返礼品は、応援してくださる皆さまへの感謝のしるしです。</p><a class="about-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで挑戦を見る <span aria-hidden="true">↗</span></a></div><div class="about-panel"><div class="about-panel-num">40<span>m</span></div><p>DESIGN / BUILD / FLY</p><b>ふたりで、空へ。</b></div></div></section>
   <section class="notice-section shell" aria-labelledby="notice-title"><div><p class="section-label">PLEASE READ</p><h2 id="notice-title">ご支援前のご案内</h2></div><div class="notice-list"><div><h3>返礼品の画像について</h3><p>商品イラストはデザインイメージです。完成品とデザイン・仕様が異なる場合があります。試験見学会の写真は過去の記録です。</p></div><div><h3>ご支援内容の確認</h3><p>ご支援金額・提供時期・在庫・参加条件などは、必ずCAMPFIREの各コースの案内をご確認ください。</p></div><div><h3>10,000円以上のご支援特典</h3><p>ご希望のペンネーム（15文字以内）をTBTのYouTube動画概要欄に掲載します。記入方法などの正式条件はCAMPFIREをご確認ください。</p></div></div></section>
 </main>
-<footer class="footer"><div class="shell footer-in"><a class="footer-brand" href="#top">TBT <span>SUPPORTERS STORE</span></a><span>© Team Birdman Trial</span><div><a href="https://teambirdmantrial.jp/" target="_blank" rel="noopener noreferrer">TBT公式サイト</a><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIRE</a></div></div></footer>
+<footer class="footer"><div class="shell footer-in"><a class="footer-brand" href="#top">TBT <span>RETURN HANGAR</span></a><span>© Team Birdman Trial</span><div><a href="https://teambirdmantrial.jp/" target="_blank" rel="noopener noreferrer">TBT公式サイト</a><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIRE</a></div></div></footer>
 <div class="mobile-bottom-bar"><span>500円から支援できる</span><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援 ↗</a></div>
 <div class="compare-tray" id="compare-tray" hidden aria-live="polite"><div class="compare-tray-in shell"><div><p class="compare-eyebrow">COMPARE RETURNS</p><p><strong id="compare-count">0</strong> / 3 件を比較に追加 <span id="compare-names"></span></p></div><div class="compare-tray-actions"><button type="button" id="compare-reset">解除</button><button type="button" id="compare-open">比較する →</button></div></div></div>
 <dialog class="detail-dialog" id="detail-dialog" aria-labelledby="detail-title"><button type="button" class="dialog-close" data-close="detail" aria-label="閉じる">×</button><div id="detail-content"></div></dialog>
