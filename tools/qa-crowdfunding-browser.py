@@ -33,7 +33,14 @@ with sync_playwright() as p:
         bounds=button.bounding_box()
         assert bounds is not None,f'First-screen support button not visible at {width}x{height}'
         visible=0 <= bounds['y'] and bounds['y']+bounds['height'] <= height+1
-        overflow=page.evaluate("document.documentElement.scrollWidth > window.innerWidth + 1")
+        overhang=page.evaluate("""() => ({
+          width:window.innerWidth, scrollWidth:document.documentElement.scrollWidth,
+          offenders:Array.from(document.querySelectorAll('body *')).filter(el=>{
+            const r=el.getBoundingClientRect();
+            return r.width>0 && (r.right>innerWidth+2 || r.left < -2);
+          }).slice(0,15).map(el=>({tag:el.tagName,cls:String(el.className).slice(0,75),text:(el.textContent||'').slice(0,35),left:Math.round(el.getBoundingClientRect().left),right:Math.round(el.getBoundingClientRect().right)}))
+        })""")
+        overflow=overhang['scrollWidth'] > overhang['width'] + 1
         poster=page.locator('.flight-poster')
         poster_loaded=poster.evaluate('(img) => img.complete && img.naturalWidth > 0')
         page.screenshot(path=str(OUT/f'crowdfunding-{width}x{height}-first.png'))
@@ -42,7 +49,7 @@ with sync_playwright() as p:
             page.evaluate("""progress => {
               const el=document.querySelector('#flight-experience');
               const max=Math.max(1,el.getBoundingClientRect().height-innerHeight);
-              window.scrollTo(0,el.offsetTop+max*progress);
+              window.scrollTo({top:el.offsetTop+max*progress,behavior:'instant'});
             }""",progress)
             page.wait_for_timeout(600)
             return page.locator('.flight-beat.is-current').get_attribute('data-flight-beat')
@@ -55,7 +62,7 @@ with sync_playwright() as p:
             scene_state=page.locator('#flight-experience').get_attribute('class')
         except Exception:
             scene_state='UNRESOLVED'
-        result=dict(width=width,height=height,firstButton=bounds,ctaVisibleInitially=visible,horizontalOverflow=overflow,posterLoaded=poster_loaded,midBeat=mid,finalBeat=last,flightState=scene_state,pageErrors=errors)
+        result=dict(width=width,height=height,firstButton=bounds,ctaVisibleInitially=visible,horizontalOverflow=overflow,overhang=overhang,posterLoaded=poster_loaded,midBeat=mid,finalBeat=last,flightState=scene_state,pageErrors=errors)
         results.append(result)
         print(json.dumps(result,ensure_ascii=False))
         assert visible, f'CTA outside first viewport: {width}x{height}'
