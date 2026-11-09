@@ -62,13 +62,22 @@ with sync_playwright() as p:
             scene_state=page.locator('#flight-experience').get_attribute('class')
         except Exception:
             scene_state='UNRESOLVED'
-        result=dict(width=width,height=height,firstButton=bounds,ctaVisibleInitially=visible,horizontalOverflow=overflow,overhang=overhang,posterLoaded=poster_loaded,midBeat=mid,finalBeat=last,flightState=scene_state,pageErrors=errors)
+        launch_verified=False
+        if 'flight-ready' in scene_state:
+            launch=page.locator('#flight-launch')
+            assert launch.is_visible(), f'3D launch control hidden at {width}x{height}'
+            launch.click(timeout=5000)
+            page.wait_for_timeout(3500)
+            launch_verified=page.locator('#flight-launch-message').evaluate("e => e.classList.contains('is-shown')")
+            page.screenshot(path=str(OUT/f'crowdfunding-{width}x{height}-launched.png'))
+        result=dict(width=width,height=height,firstButton=bounds,ctaVisibleInitially=visible,horizontalOverflow=overflow,overhang=overhang,posterLoaded=poster_loaded,midBeat=mid,finalBeat=last,flightState=scene_state,launchVerified=launch_verified,pageErrors=errors)
         results.append(result)
         print(json.dumps(result,ensure_ascii=False))
         assert visible, f'CTA outside first viewport: {width}x{height}'
         assert not overflow, f'Horizontal overflow: {width}x{height}'
         assert poster_loaded, f'Fallback image not loaded: {width}x{height}'
         assert mid=='1' and last=='2', f'Flight beats did not change on scroll at {width}x{height}: {mid}/{last}'
+        assert launch_verified, f'3D launch animation did not finish at {width}x{height}'
         assert not errors, f'JavaScript page errors: {errors}'
         context.close()
     browser.close()
