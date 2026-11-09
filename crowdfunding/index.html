@@ -473,7 +473,7 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
 <section class="your-choice" id="join" aria-labelledby="join-title">
  <div class="wrap">
   <div class="join-intro">
-   <p class="join-eyebrow">YOUR NEXT STEP <span>01 / 03</span></p>
+   <p class="join-eyebrow">あなたの一歩 <span>01 / 03</span></p>
    <h2 id="join-title">あなたは、<br>どう関わる？</h2>
   </div>
   <div class="choice-steps" role="group" aria-label="あなたの参加方法を選ぶ">
@@ -484,7 +484,7 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
   <div class="choice-feature">
    <div class="choice-photo"><img id="choice-picture" src="../assets/crowdfunding/2026-wing-transport.jpg" alt="40mの翼を琵琶湖で運ぶ学生たち" width="2560" height="1706" loading="lazy" decoding="async"></div>
    <div class="choice-detail" aria-live="polite" aria-atomic="true">
-    <p class="choice-index" id="choice-index">01 / DISCOVER</p>
+    <p class="choice-index" id="choice-index">01 / 知る</p>
     <h3 id="choice-title">翼に、触れる。</h3>
     <p id="choice-description">まずは、あなたの目で、翼を。</p>
     <a id="choice-go" class="choice-go" href="#aircraft">3Dで機体を見る <span aria-hidden="true">↗</span></a>
@@ -502,7 +502,7 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
 </figure>
 <section class="story-bridge" aria-labelledby="bridge-title">
  <div class="wrap story-bridge-inner">
-  <p class="bridge-marker">01 / THE PEOPLE BEHIND THE WING</p>
+  <p class="bridge-marker">01 / 飛ぶまでの記録</p>
   <h2 class="bridge-heading" id="bridge-title"><span>飛ぶのは、一瞬。</span><br><em>つくるのは、みんな。</em></h2>
   <div class="bridge-trace" aria-hidden="true"><span></span></div>
  </div>
@@ -627,11 +627,12 @@ nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classL
  const description=document.getElementById('choice-description');
  const number=document.getElementById('choice-index');
  const go=document.getElementById('choice-go');
+ const counter=document.querySelector('.join-eyebrow span');
  if(!steps.length||!picture||!heading||!description||!number||!go)return;
  const options={
-  discover:{image:'../assets/crowdfunding/2026-wing-transport.jpg',alt:'40mの翼を琵琶湖で運ぶ学生たち',index:'01 / DISCOVER',title:'翼に、触れる。',description:'まずは、あなたの目で、翼を。',cta:'3Dで機体を見る',href:'#aircraft',external:false},
-  rewards:{image:'../assets/crowdfunding/2026-propeller-team.jpg',alt:'プロペラのブレードを掲げる学生メンバーたち',index:'02 / CHOOSE',title:'応援を、選ぶ。',description:'あなたらしい、応援のかたちを。',cta:'返礼品を見に行く',href:'https://camp-fire.jp/projects/990337/view',external:true},
-  support:{image:'../assets/crowdfunding/2026-assembly.jpg',alt:'飛行機の組み付け作業を行う学生メンバーたち',index:'03 / SUPPORT',title:'次の一機を、支える。',description:'次の一歩を、あなたから。',cta:'CAMPFIREで支援する',href:'https://camp-fire.jp/projects/990337/view',external:true}
+  discover:{image:'../assets/crowdfunding/2026-wing-transport.jpg',alt:'40mの翼を琵琶湖で運ぶ学生たち',index:'01 / 知る',title:'翼に、触れる。',description:'まずは、あなたの目で、翼を。',cta:'3Dで機体を見る',href:'#aircraft',external:false},
+  rewards:{image:'../assets/crowdfunding/2026-propeller-team.jpg',alt:'プロペラのブレードを掲げる学生メンバーたち',index:'02 / 選ぶ',title:'応援を、選ぶ。',description:'あなたらしい、応援のかたちを。',cta:'返礼品を見に行く',href:'https://camp-fire.jp/projects/990337/view',external:true},
+  support:{image:'../assets/crowdfunding/2026-assembly.jpg',alt:'飛行機の組み付け作業を行う学生メンバーたち',index:'03 / 支える',title:'次の一機を、支える。',description:'次の一歩を、あなたから。',cta:'CAMPFIREで支援する',href:'https://camp-fire.jp/projects/990337/view',external:true}
  };
  function choose(key){
   const next=options[key];
@@ -641,8 +642,14 @@ nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classL
    step.classList.toggle('is-selected',selected);
    step.setAttribute('aria-pressed',String(selected));
   });
-  picture.src=next.image;
+  if(picture.getAttribute('src')!==next.image){
+   picture.classList.add('is-switching');
+   picture.src=next.image;
+   if(typeof picture.decode==='function')picture.decode().catch(()=>{}).then(()=>{if(picture.getAttribute('src')===next.image)picture.classList.remove('is-switching')});
+   else picture.classList.remove('is-switching');
+  }
   picture.alt=next.alt;
+  if(counter)counter.textContent=key==='discover'?'01 / 03':key==='rewards'?'02 / 03':'03 / 03';
   number.textContent=next.index;
   heading.textContent=next.title;
   description.textContent=next.description;
