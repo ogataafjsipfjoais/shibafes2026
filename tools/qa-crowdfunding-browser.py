@@ -66,7 +66,14 @@ with sync_playwright() as p:
         if 'flight-ready' in scene_state:
             launch=page.locator('#flight-launch')
             assert launch.is_visible(), f'3D launch control hidden at {width}x{height}'
-            launch.click(timeout=5000)
+            hit=launch.evaluate("""e => {
+              const r=e.getBoundingClientRect();const x=r.left+r.width/2,y=r.top+r.height/2;
+              const target=document.elementFromPoint(x,y);
+              const rect=document.getElementById('flight-experience').getBoundingClientRect();
+              return {button:{x:r.x,y:r.y,w:r.width,h:r.height},center:{x,y},target:target&&{tag:target.tagName,cls:target.className,id:target.id},scrollY,root:{top:rect.top,bottom:rect.bottom},style:{position:getComputedStyle(e).position,pointerEvents:getComputedStyle(e).pointerEvents},lenis:!!window.Lenis};
+            }""")
+            print(json.dumps(dict(width=width,launchHit=hit),ensure_ascii=False),flush=True)
+            launch.click(timeout=7000)
             page.wait_for_timeout(3500)
             launch_verified=page.locator('#flight-launch-message').evaluate("e => e.classList.contains('is-shown')")
             page.screenshot(path=str(OUT/f'crowdfunding-{width}x{height}-launched.png'))
