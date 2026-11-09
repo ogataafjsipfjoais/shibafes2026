@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#19362f">
-  <meta name="description" content="人力飛行機の挑戦を応援する10種類の返礼品を、格納庫から選ぶように検索・比較。自分に合った応援を見つけよう。">
+  <meta name="description" content="人力飛行機への挑戦を支える10の返礼品。言葉、グッズ、体験を一つずつめぐる、空の余白の展示室。">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/rewards/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
-  <meta property="og:title" content="返礼品の格納庫 | FLIGHT COLLECTION">
-  <meta property="og:description" content="人力飛行機の返礼品10種類を検索・比較できる、格納庫をテーマにした特設ページ。">
+  <meta property="og:title" content="空の余白 | 10の返礼品">
+  <meta property="og:description" content="あなたの応援が、翼になる。10の返礼品から、あなたの一歩を選ぶ展示室。">
   <meta property="og:url" content="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/rewards/">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests">
-  <title>返礼品の格納庫 | FLIGHT COLLECTION</title>
+  <title>空の余白 | 10の返礼品</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -257,83 +257,294 @@ body{background:var(--paper)}
 @media(max-width:370px){.hero-footnote{display:none}.hero-copy h1{font-size:32px!important}.product-grid{grid-template-columns:1fr}.product-price strong{font-size:29px}}
 @media(prefers-reduced-motion:reduce){.reward-visual,.product-card{transition:none!important}.product-card:hover,.product-card:hover .reward-visual{transform:none!important}}
 
+
+/* THE FLIGHT ARCHIVE / editorial design — no conventional e-commerce chrome */
+:root{--archive-ink:#192922;--archive-paper:#f6f4ed;--archive-accent:#c44f33;--archive-line:#b9b9aa}
+html{scroll-behavior:smooth} body{background:var(--archive-paper);color:var(--archive-ink)}
+body,button,input,select{font-family:"Noto Sans JP",system-ui,sans-serif}
+#results{scroll-margin-top:85px} [hidden]{display:none!important}
+.archive-header{position:relative;background:#f6f4ed;border-bottom:1px solid #c6c8ba;z-index:30}
+.archive-header-row{min-height:89px;display:flex;align-items:center;gap:40px}
+.archive-signature{color:#182c26;text-decoration:none;display:flex;align-items:center;gap:12px;font-family:"Yu Mincho","Hiragino Mincho ProN",Georgia,serif;font-weight:800;font-size:29px;white-space:nowrap;line-height:1.1}
+.archive-signature small{display:block;font:700 9px/1.5 Arial,sans-serif;letter-spacing:.19em;margin-top:5px;color:#7b8379}
+.sig-mark{display:inline-grid;place-items:center;border:1px solid #a4b1a1;border-radius:50%;width:41px;height:41px;color:var(--archive-accent);font:24px Arial,sans-serif}
+.archive-navigation{display:flex;gap:28px;margin-left:auto}
+.archive-navigation a{color:#414f48;font-size:11px;font-weight:700;text-decoration:none;white-space:nowrap}
+.archive-navigation a:hover{color:var(--archive-accent)}
+.archive-support{padding:13px 21px;border:1px solid #23372d;font-size:11px;font-weight:800;color:#23372d;white-space:nowrap}
+.archive-support:hover{background:#23372d;color:#fff}
+.air-hero{background:#152a25;color:#f8f4e9;overflow:hidden}
+.air-hero-inner{position:relative;display:grid;grid-template-columns:.95fr 1.05fr;grid-template-rows:auto 1fr auto;min-height:700px;gap:0 35px}
+.air-hero-type{grid-column:1/-1;display:flex;justify-content:space-between;border-bottom:1px solid #71807880;padding:21px 0;color:#a9bdb1;font:700 10px Arial,sans-serif;letter-spacing:.19em}
+.air-hero-copy{align-self:center;padding:62px 0 80px;position:relative;z-index:2}
+.air-eyebrow{display:flex;align-items:center;gap:13px;font-size:12px;letter-spacing:.07em;color:#e5c1aa;margin-bottom:32px}
+.air-eyebrow i{width:31px;height:1px;background:#d56546}
+.air-hero h1{font:600 clamp(56px,6vw,93px)/1.27 "Yu Mincho","Hiragino Mincho ProN",Georgia,serif!important;letter-spacing:-.095em!important;color:#fffaf0;margin:0 0 33px!important}
+.air-hero h1 em{color:#da7858;font-style:normal}
+.air-intro{font-size:14px;line-height:2.2;color:#c6d2c6;letter-spacing:.02em;margin:0 0 33px}
+.air-hero-link{display:inline-flex;align-items:center;justify-content:space-between;gap:52px;color:#f8f4e9;border-bottom:1px solid #d37c59;padding:12px 0;font-size:13px;font-weight:700}
+.air-hero-link span{font-size:22px;font-weight:300;color:#da7858}
+.air-hero-link:hover{color:#da7858}
+.air-art{position:relative;align-self:stretch;min-height:530px;margin:35px -100px 35px 0;background:#273c34;overflow:hidden;isolation:isolate}
+.air-art:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#152a2573,#152a2514 55%),linear-gradient(0deg,#14221d85,transparent 50%);z-index:1;pointer-events:none}
+.air-art>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);opacity:.78}
+.air-art-drawing{position:absolute;z-index:2;inset:12% 3%;width:94%;height:75%;color:#f8eee0c9;mix-blend-mode:screen;pointer-events:none}
+.air-art-drawing text{font:12px Arial,sans-serif;letter-spacing:.15em;fill:#fff3de}
+.air-art-caption{position:absolute;z-index:3;bottom:20px;left:34px;right:70px;display:flex;align-items:end;justify-content:space-between;gap:12px;color:#f3ece0}
+.air-art-caption span{font-size:10px;letter-spacing:.13em}
+.air-art-caption strong{font:300 clamp(80px,10vw,152px)/.8 Georgia,serif;letter-spacing:-.1em}
+.air-art-caption small{font-size:26px;letter-spacing:0;margin-left:8px}
+.air-hero-bottom{grid-column:1/-1;display:flex;justify-content:space-between;padding:21px 0 22px;border-top:1px solid #71807880;color:#91aa9d;font:700 10px Arial,sans-serif;letter-spacing:.16em}
+.air-story{padding-top:120px;padding-bottom:100px}
+.story-number{display:flex;align-items:center;gap:24px;font:700 11px Arial,sans-serif;letter-spacing:.14em;color:#ba5035}
+.story-rule{flex:1;height:1px;background:#bbbdb2}
+.story-major{display:grid;grid-template-columns:1fr .65fr;gap:100px;align-items:start;padding:38px 0 75px}
+.story-major h2{font:600 clamp(34px,4.6vw,73px)/1.48 "Yu Mincho","Hiragino Mincho ProN",Georgia,serif;letter-spacing:-.09em;margin:0}
+.story-major h2 em{color:var(--archive-accent);font-style:normal}
+.story-major-right{padding:20px 0 0;max-width:390px}
+.story-major-right p{font-size:15px;line-height:2.15;margin:0 0 18px;color:#4b5750}
+.story-stamp{display:inline-block;font:700 10px Arial,sans-serif;letter-spacing:.16em;border-left:2px solid var(--archive-accent);margin-top:20px;padding-left:14px}
+.story-photo{margin:0;position:relative}
+.story-photo img{display:block;width:100%;height:clamp(280px,40vw,560px);object-fit:cover;filter:saturate(.7)}
+.story-photo figcaption{display:flex;justify-content:space-between;font:700 10px Arial,sans-serif;color:#636f64;letter-spacing:.14em;padding:16px 0}
+.chapter-section{background:#dce0d4;padding:104px 0 110px}
+.chapter-section-top{display:grid;grid-template-columns:.35fr 1fr .55fr;gap:50px;align-items:start}
+.chapter-section-top>span{font:700 10px Arial,sans-serif;letter-spacing:.14em;color:#a74931;margin-top:14px}
+.chapter-section-top h2{font:600 clamp(38px,5vw,74px)/1.35 "Yu Mincho","Hiragino Mincho ProN",Georgia,serif;letter-spacing:-.09em;margin:0}
+.chapter-section-top p{font-size:13px;line-height:2;color:#59645b;margin:14px 0}
+.chapter-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:55px;border-top:1px solid #a3aea2;border-bottom:1px solid #a3aea2}
+.chapter-options button{position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;min-height:310px;gap:0;padding:29px 32px 30px;background:transparent;border:0;color:#20342a;cursor:pointer;border-right:1px solid #a3aea2;transition:background-color .2s}
+.chapter-options button:first-child{border-left:1px solid #a3aea2}
+.chapter-options button:hover,.chapter-options button[aria-pressed=true]{background:#f7f6ef}
+.chapter-id{font:700 10px Arial,sans-serif;letter-spacing:.14em;color:#9c5139}
+.chapter-symbol{font:300 62px "Yu Mincho",Georgia,serif;color:#b45436;margin:33px 0 27px;height:64px}
+.chapter-options strong{font:600 clamp(17px,2vw,26px)/1.5 "Yu Mincho","Hiragino Mincho ProN",serif;letter-spacing:-.065em}
+.chapter-options small{font-size:11px;color:#66716a;margin-top:14px}
+.chapter-arrow{position:absolute;right:27px;bottom:23px;font:24px Arial,sans-serif;color:#a74d34}
+.gallery-section{padding-top:118px;padding-bottom:115px}
+.gallery-header{display:flex;justify-content:space-between;gap:60px;align-items:end;border-bottom:1px solid #b6bdb0;padding-bottom:47px}
+.gallery-overline{font:700 10px Arial,sans-serif;letter-spacing:.16em;color:#b65034}
+.gallery-header h2{font:600 clamp(43px,5vw,75px)/1.32 "Yu Mincho","Hiragino Mincho ProN",Georgia,serif;letter-spacing:-.09em;margin:25px 0 0}
+.gallery-header h2 em{font-style:normal;color:#be5036}
+.gallery-header>p{font-size:13px;color:#59645d;line-height:2.1;max-width:300px}
+.archive-controls{padding:16px 0 0}
+.archive-topline{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.archive-all,.archive-favorites{background:none;border:0;border-bottom:2px solid transparent;padding:12px 2px;font-size:12px;color:#4c5a50;cursor:pointer;font-weight:700}
+.archive-all[aria-pressed=true],.archive-favorites[aria-pressed=true]{border-bottom-color:#ae4f35;color:#142923}
+.archive-all span,.archive-favorites span{font:700 10px Arial,sans-serif;margin-left:8px;color:#b85d3c}
+.archive-filter-details{margin-left:auto;position:relative;min-width:240px;border:1px solid #b7c0b4;background:#f6f4ed}
+.archive-filter-details>summary{display:flex;justify-content:space-between;gap:30px;padding:13px 18px;list-style:none;cursor:pointer;font-size:12px;font-weight:700}
+.archive-filter-details>summary::-webkit-details-marker{display:none}
+.archive-filter-details>summary span{font-size:18px;font-weight:400;color:#bd563a}
+.archive-filter-details[open]>summary{background:#e8eae1}
+.archive-filter-body{padding:22px;background:#edeee7;border-top:1px solid #b7c0b4;display:grid;gap:18px}
+.archive-filter-body form label,.archive-filter-panel legend,.archive-sort-row label{font-size:11px;font-weight:800;display:block;margin-bottom:9px}
+.archive-search-line{display:flex;gap:7px}
+.archive-search-line input{min-width:0;flex:1;height:44px;background:#fff;border:1px solid #c2c9be;padding:10px;font-size:12px}
+.archive-search-line button,.archive-apply{background:#203b2e;color:#fff;border:0;padding:10px 16px;font-size:11px;white-space:nowrap;cursor:pointer}
+.archive-filter-panel{display:grid;gap:14px}
+.archive-filter-panel fieldset{border:0;border-top:1px solid #ced2c9;padding:13px 0 0;margin:0;display:flex;flex-wrap:wrap;gap:10px 18px}
+.archive-filter-panel legend{padding-right:10px}
+.archive-filter-panel label{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#3c4a41;cursor:pointer}
+.archive-limited{display:inline-flex!important;align-items:center;gap:7px;margin:0!important}
+.archive-apply{display:none}
+.archive-sort-row{border-top:1px solid #ced2c9;padding-top:12px;display:flex;align-items:center;gap:12px}
+.archive-sort-row label{margin:0}
+.archive-sort-row select{height:37px;padding:5px 11px;font-size:11px;flex:1;border:1px solid #c2c9be;background:white}
+.archive-sort-row button{border:0;text-decoration:underline;background:transparent;color:#a94c33;font-size:11px}
+.archive-hidden-view{display:none!important}
+.archive-status-row{padding:21px 0 26px;display:flex;justify-content:space-between;gap:20px;align-items:center}
+#result-status{font:700 11px Arial,sans-serif;letter-spacing:.09em;color:#727d70;margin:0}
+#active-filters{display:flex;gap:7px;flex-wrap:wrap}
+#active-filters .chip{border:1px solid #b5c0b4;background:#e9ebe5;color:#4c6252;border-radius:0;font-size:10px;padding:7px}
+#active-filters .chip button{color:#a34d36}
+.archive-results{padding-top:0}
+#product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;align-items:stretch;border-top:1px solid #aeb8aa}
+#product-grid.list-view{display:grid}
+.product-card,.product-grid.list-view .product-card{display:flex;flex-direction:column;grid-column:span 1;min-width:0;border:0;border-bottom:1px solid #aeb8aa!important;border-right:1px solid #aeb8aa;background:transparent!important;box-shadow:none!important;transform:none!important;transition:none!important;padding:26px 32px 44px 0;overflow:visible}
+.product-card:nth-child(even){border-right:0;padding-left:32px;padding-right:0}
+.product-card:nth-child(1),.product-card:nth-child(6){grid-column:1/-1;display:grid!important;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);align-items:center;gap:45px;border-right:0;padding:50px 0}
+.product-card:nth-child(6){grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr)}
+.product-card:nth-child(6)>.product-media{order:2}
+.product-card:nth-child(6)>.product-body{order:1}
+.product-card:nth-child(1)>.product-media,.product-card:nth-child(6)>.product-media{aspect-ratio:1.35}
+.product-card[hidden]{display:none!important}
+.product-media,.product-grid.list-view .product-media{width:100%;aspect-ratio:1.4;background:#e8e8dd;border:0;border-radius:0;margin:0}
+.product-media:before{content:'ARCHIVE / CONCEPT';top:14px;left:15px;background:#fffcf2e8;color:#445b49;letter-spacing:.12em}
+.product-media:after{content:'';position:absolute;bottom:12px;right:14px;width:18px;height:18px;border-bottom:1px solid #365546;border-right:1px solid #365546;z-index:2;pointer-events:none}
+.product-body,.product-grid.list-view .product-body{padding:26px 0 0;flex:1;display:flex;flex-direction:column;align-items:flex-start;background:transparent}
+.product-card:nth-child(1) .product-body,.product-card:nth-child(6) .product-body{padding:0 18px;align-self:center}
+.product-category{display:flex;width:100%;font:700 10px Arial,sans-serif;letter-spacing:.14em;color:#b0553a!important;justify-content:space-between}
+.product-category .index-no{color:#6b8071;font:700 10px Arial,sans-serif}
+.product-name{font:600 clamp(21px,2.6vw,38px)/1.5 "Yu Mincho","Hiragino Mincho ProN",Georgia,serif;letter-spacing:-.065em;color:#223a2b;margin:14px 0 12px}
+.product-name span{font:18px Arial,sans-serif;color:#af4d33}
+.product-description{font-size:13px;line-height:2;color:#667268;margin-bottom:12px;max-width:410px}
+.product-price{display:flex;align-items:baseline;gap:6px;margin:10px 0 15px}
+.product-price strong{font:500 29px/1 Georgia,serif;letter-spacing:-.03em;color:#294337}
+.product-price span{font-size:11px;color:#7e877a}
+.product-delivery{font-size:11px;color:#6e786d;margin-bottom:22px}
+.product-actions{display:flex;align-items:center;gap:23px;margin:0!important;padding:15px 0;border-top:1px solid #bdc6bb;width:100%}
+.primary-action,.secondary-action{min-height:0!important;flex:none;background:none!important;border:0!important;color:#a64930!important;font:800 12px/1.7 "Noto Sans JP",sans-serif;padding:3px 0;white-space:nowrap}
+.primary-action span{margin-left:8px;font-size:16px}
+.primary-action:hover,.secondary-action:hover{text-decoration:underline}
+.secondary-action{color:#40564a!important;font-weight:500}
+.compare-select{margin:3px 0 0;min-height:27px;color:#697a6e;font-size:10px}
+.favorite{background:#fcfaf0dd;border:1px solid #d0d7ca;box-shadow:none;border-radius:50%;width:39px;height:39px}
+.product-card:hover{background:transparent}
+.archive-footnote{display:flex;justify-content:space-between;gap:40px;padding:28px 0 0;color:#778176}
+.archive-footnote span{font:700 10px Arial,sans-serif;letter-spacing:.12em;white-space:nowrap}
+.archive-footnote p{font-size:11px;line-height:1.8;max-width:450px;margin:0}
+.about-section{background:#172f29;color:#f5f1e8;border:0;padding:110px 0}
+.about-section .about-layout{align-items:center}
+.about-section .section-label{color:#dc8463}
+.about-section h2{font:600 clamp(32px,4vw,58px)/1.45 "Yu Mincho","Hiragino Mincho ProN",Georgia,serif;letter-spacing:-.08em;color:#f8f2e4}
+.about-section p{color:#d8e1d8}
+.about-section .about-action{color:#f6e8d8;border-color:#d88362}
+.about-panel{background:#2c453b;border:1px solid #557062;color:#eee5d6}
+.about-panel-num{color:#e6b189}
+.notice-section{padding:84px 0 94px}
+.notice-section h2{font-family:"Yu Mincho","Hiragino Mincho ProN",Georgia,serif;font-size:35px}
+.footer{background:#12251f}
+.footer-brand{font-family:"Yu Mincho","Hiragino Mincho ProN",Georgia,serif;font-size:25px;letter-spacing:-.05em}
+.mobile-bottom-bar{display:none!important}
+.dialog-close,.dialog-close-inline{cursor:pointer}
+:focus-visible{outline:3px solid #ce784c;outline-offset:3px}
+@media(max-width:900px){
+ .archive-header-row{gap:16px}.archive-navigation{gap:12px}.archive-navigation a{font-size:10px}
+ .air-hero-inner{grid-template-columns:1fr 1fr;min-height:650px}.air-art{margin-right:-20px}
+ .chapter-section-top{grid-template-columns:1fr 2fr;gap:20px}.chapter-section-top p{grid-column:2;max-width:380px}
+ .product-card:nth-child(1),.product-card:nth-child(6){gap:25px}
+}
+@media(max-width:680px){
+ .archive-header-row{min-height:74px}.archive-signature{font-size:23px}.archive-signature small{font-size:7px}.sig-mark{width:35px;height:35px}
+ .archive-navigation{display:none}.archive-support{margin-left:auto;padding:10px 12px;font-size:10px}
+ .air-hero-inner{display:flex;flex-direction:column;min-height:0}
+ .air-hero-type{padding:15px 0;font-size:8px}
+ .air-hero-copy{padding:62px 0 35px}
+ .air-hero h1{font-size:clamp(52px,12vw,72px)!important;line-height:1.28!important}
+ .air-eyebrow{font-size:10px;margin-bottom:22px}
+ .air-intro{font-size:12px;line-height:2}
+ .air-art{margin:10px -18px 36px;min-height:320px;max-height:400px}
+ .air-art-caption{bottom:19px;left:20px;right:25px}.air-art-caption strong{font-size:88px}
+ .air-hero-bottom{font-size:8px;gap:10px}
+ .air-story{padding-top:80px;padding-bottom:70px}
+ .story-major{grid-template-columns:1fr;gap:20px;padding:32px 0 47px}
+ .story-major h2{font-size:clamp(36px,8vw,49px)}.story-major-right{padding:0}
+ .story-major-right p{font-size:13px}.story-photo img{height:300px}
+ .chapter-section{padding:75px 0 85px}
+ .chapter-section-top{grid-template-columns:1fr;gap:11px}.chapter-section-top p{grid-column:1}
+ .chapter-section-top h2{font-size:43px}.chapter-options{grid-template-columns:1fr;margin-top:33px}
+ .chapter-options button{min-height:155px;border:0;border-bottom:1px solid #b6bcae!important;padding:19px 24px;display:grid;grid-template-columns:45px 1fr;grid-template-rows:27px 1fr 28px;align-items:center}
+ .chapter-options button:first-child{border-top:1px solid #b6bcae;border-left:0}
+ .chapter-id{grid-column:1;grid-row:1}.chapter-symbol{font-size:38px;margin:0;grid-column:1;grid-row:2;height:auto}.chapter-options strong{grid-column:2;grid-row:2;font-size:22px}.chapter-options small{grid-column:2;grid-row:3;margin:0}.chapter-arrow{right:17px;top:20px;bottom:auto;font-size:18px}
+ .gallery-section{padding-top:83px;padding-bottom:72px}.gallery-header{display:block;padding-bottom:30px}
+ .gallery-header h2{font-size:clamp(40px,10vw,55px);margin:18px 0 22px}.gallery-header>p{font-size:12px}
+ .archive-topline{display:grid;grid-template-columns:1fr 1fr;gap:7px}.archive-all,.archive-favorites{font-size:11px;text-align:left}
+ .archive-filter-details{grid-column:1/-1;min-width:0;width:100%;margin:10px 0 0}
+ .archive-status-row{padding:20px 0 18px;display:block}
+ #active-filters{margin-top:9px}
+ #product-grid,#product-grid.list-view{display:grid;grid-template-columns:minmax(0,1fr);border-top:1px solid #aeb8aa}
+ .product-card,.product-grid.list-view .product-card,.product-card:nth-child(even),.product-card:nth-child(1),.product-card:nth-child(6){grid-column:1/-1;display:flex!important;flex-direction:column;gap:0;padding:30px 0!important;border-right:0!important;grid-template-columns:none}
+ .product-card:nth-child(6)>.product-media{order:0}
+ .product-card:nth-child(6)>.product-body{order:0}
+ .product-media,.product-card:nth-child(1)>.product-media,.product-card:nth-child(6)>.product-media{aspect-ratio:1.48!important}
+ .product-body,.product-card:nth-child(1) .product-body,.product-card:nth-child(6) .product-body{padding:22px 0 0}
+ .product-name{font-size:27px}.product-description{font-size:12px}.product-price strong{font-size:29px}
+ .archive-footnote{display:block}.archive-footnote p{margin-top:10px}
+ .about-section{padding:72px 0}
+ .footer-brand{font-size:18px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
 </style>
   
 </head>
 <body>
-<a class="skip-link" href="#results">商品一覧に移動</a>
-<div class="utility-strip"><div class="shell utility-inner"><span>人力飛行機への挑戦 <span class="utility-separator">/</span> SUPPORT COLLECTION</span><a href="https://teambirdmantrial.jp/" target="_blank" rel="noopener noreferrer">運営団体の公式サイト ↗</a></div></div>
-<header class="site-header">
-  <div class="shell header-main">
-    <a class="logo" href="#top" aria-label="返礼品紹介トップへ"><span class="logo-symbol">翼<span class="logo-line"></span></span><span class="logo-sub">FLIGHT<br>COLLECTION</span></a>
-    <form class="header-search" role="search" id="search-form"><label class="sr-only" for="search-input">返礼品を検索</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-input" type="search" placeholder="返礼品を検索（例：定規、バッグ、体験）" autocomplete="off"><button type="submit">検索</button></form>
-    <button class="header-fav" id="header-favorites" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.7a5.4 5.4 0 0 0-7.6 0L12 5.9l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 21l8.8-8.7a5.4 5.4 0 0 0 0-7.6Z"/></svg><span>お気に入り</span><span class="fav-count" id="favorite-count">0</span></button>
-    <a class="header-support" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援 <span aria-hidden="true">↗</span></a>
+<a class="skip-link" href="#results">返礼品一覧へ移動</a>
+<header class="archive-header">
+  <div class="shell archive-header-row">
+    <a href="#top" class="archive-signature" aria-label="空の余白、ページ先頭へ"><span class="sig-mark" aria-hidden="true">✳</span><span>空の余白<small>THE FLIGHT ARCHIVE</small></span></a>
+    <nav class="archive-navigation" aria-label="メインナビゲーション"><a href="#story">この展示について</a><a href="#chapters">応援のかたち</a><a href="#results">返礼品一覧</a></nav>
+    <a class="archive-support" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援する <span aria-hidden="true">↗</span></a>
   </div>
 </header>
-<nav class="category-nav" aria-label="返礼品カテゴリ"><div class="shell category-links">
-  <button type="button" data-nav-category="all" aria-pressed="true">すべての返礼品</button>
-  <button type="button" data-nav-category="heart" aria-pressed="false">気持ちを届ける</button>
-  <button type="button" data-nav-category="goods" aria-pressed="false">オリジナルグッズ</button>
-  <button type="button" data-nav-category="experience" aria-pressed="false">特別な体験</button>
-  <a href="#about">ご支援について <span aria-hidden="true">↗</span></a>
-</div></nav>
 <main id="top">
-  <section class="hero-band" aria-labelledby="hero-title">
-    <div class="shell hero-container">
-      <div class="hero-copy">
-        <div class="hero-rail"><span>FLIGHT COLLECTION / 2026</span><span>COLLECTION 2026 — 27</span></div>
-        <p class="hero-eyebrow">二人で飛ぶための、10通りの応援。</p>
-        <h1 id="hero-title">空をつくる、<br class="mobile-line-break">その先を。<br><em>あなたの手元へ。</em></h1>
-        <p>翼をつくり、機体を組み上げ、二人で空を目指す。<br>その挑戦に、あなたらしい形で参加してください。</p>
-        <div class="hero-bottom"><a href="#results" class="hero-cta">返礼品を探す <span aria-hidden="true">↘</span></a><span class="hero-footnote">全10コース / 検索・比較できます</span></div>
-        <div class="hero-coordinate"><span><b>01</b> SELECT A RETURN</span><span><b>02</b> EXPLORE</span><span><b>03</b> SUPPORT THE FLIGHT</span></div>
-      </div>
-      <div class="hero-image" role="img" aria-label="人力飛行機と翼の模式図を重ねたイメージ。翼の図形は装飾であり実寸設計図ではありません">
-        <div class="hero-stat"><span>WINGSPAN / S-320</span><strong>40<small>m</small></strong><em>TWO-PERSON AIRCRAFT</em></div>
-        <svg class="flight-schematic" viewBox="0 0 650 340" aria-hidden="true" focusable="false">
-          <line class="measure" x1="48" y1="90" x2="602" y2="90"/>
-          <g class="ticks"><path d="M48 77v27 M602 77v27 M325 68v46"/><path d="M48 90l12-6v12z M602 90l-12-6v12z" fill="currentColor"/></g>
-          <text x="325" y="61" text-anchor="middle">40.0 m / WINGSPAN</text>
-          <path class="wing" d="M42 156 Q151 141 303 135 L345 135 Q499 141 608 156 L608 173 Q475 167 346 175 L304 175 Q175 167 42 173Z"/>
-          <path class="construction" d="M43 167H607 M81 152v18 M126 148v21 M177 144v26 M233 140v32 M277 137v37 M373 137v37 M417 140v32 M473 144v26 M524 148v21 M569 152v18"/>
-          <path class="wing" d="M317 146 L333 146 L335 304 L314 304 Z"/>
-          <path class="construction" d="M324 122v194 M314 284l-42 27h108l-45-27 M303 176v-36 M346 176v-36"/>
-          <circle cx="325" cy="196" r="14" class="construction"/><circle cx="325" cy="251" r="14" class="construction"/>
-          <path class="construction" d="M325 178V310 M277 311h95 M325 117V135 M311 124h28"/>
-          <line class="measure" x1="625" y1="135" x2="625" y2="307"/><path class="ticks" d="M618 135h13 M618 307h13"/>
-          <text x="592" y="326" text-anchor="end">WING / FLIGHT CONCEPT</text>
-        </svg>
-        <div class="hero-photo-caption">HUMAN POWERED FLIGHT <span>ENGINEERING THE SKY / 2026</span></div>
-        <span class="hero-marker" aria-hidden="true">DESIGN / BUILD / FLY</span>
-      </div>
+<section class="air-hero" aria-labelledby="hero-title">
+  <div class="shell air-hero-inner">
+    <div class="air-hero-type"><span>2026 / HUMAN POWERED FLIGHT</span><span>EXHIBITION 01—10</span></div>
+    <div class="air-hero-copy">
+      <p class="air-eyebrow"><i></i> 空へ向かう、その途中に。</p>
+      <h1 id="hero-title">あなたの<br>応援が、<br><em>翼になる。</em></h1>
+      <p class="air-intro">飛ぶことを夢見る人がいる。<br>その夢を支える方法は、ひとつじゃない。<br>10の返礼品から、あなたの一歩を選んでください。</p>
+      <a href="#story" class="air-hero-link">展示をめぐる <span aria-hidden="true">↓</span></a>
     </div>
-  </section>
-  <div class="service-bar"><div class="shell service-items"><p><span class="service-icon">01</span><strong>全10種類</strong><span>あなたに合った返礼品を</span></p><p><span class="service-icon">02</span><strong>500円から</strong><span>気軽な応援コースも</span></p><p><span class="service-icon">03</span><strong>支援はCAMPFIREで</strong><span>決済・条件の確認は公式ページへ</span></p></div></div>
-  <section class="catalog shell" aria-labelledby="catalog-title">
-    <div class="breadcrumbs"><a href="#top">TOP</a><span aria-hidden="true">/</span><span>返礼品一覧</span></div>
-    <div class="catalog-heading"><div><p class="section-label">REWARD MANIFEST / 2026–27</p><h2 id="catalog-title">応援を、選ぶ<span class="catalog-heading-dot">.</span></h2><p>10通りの応援から、あなたに合った一つを。検索・比較もできます。</p></div><div class="catalog-counter"><strong>10</strong><span>ITEMS</span></div></div>
-    <div class="catalog-layout">
-      <aside class="sidebar" aria-label="商品を絞り込む" id="filter-panel">
-        <div class="sidebar-top"><h3>絞り込み</h3><button type="button" class="filters-clear" data-clear>クリア</button></div>
-        <fieldset class="filter-block"><legend>カテゴリ</legend>
-          <label class="radio-row"><input type="radio" name="category" value="all" checked><span>すべての返礼品</span><span class="filter-n">10</span></label>
-          <label class="radio-row"><input type="radio" name="category" value="heart"><span>気持ちを届ける</span><span class="filter-n">3</span></label>
-          <label class="radio-row"><input type="radio" name="category" value="goods"><span>オリジナルグッズ</span><span class="filter-n">6</span></label>
-          <label class="radio-row"><input type="radio" name="category" value="experience"><span>特別な体験</span><span class="filter-n">1</span></label>
-        </fieldset>
-        <fieldset class="filter-block"><legend>ご支援金額</legend>
-          <label class="radio-row"><input type="radio" name="price" value="all" checked><span>指定なし</span></label>
-          <label class="radio-row"><input type="radio" name="price" value="0-3000"><span>3,000円以下</span></label>
-          <label class="radio-row"><input type="radio" name="price" value="3001-9999"><span>3,001〜9,999円</span></label>
-          <label class="radio-row"><input type="radio" name="price" value="10000-999999"><span>10,000円以上</span></label>
-        </fieldset>
-        <div class="filter-block special-filters"><h4>こだわり条件</h4><label class="check-row"><input type="checkbox" id="limited-only"><span>数量限定のみ</span></label></div>
-        <div class="sidebar-annotation"><strong>FLIGHT GUIDE / 003</strong><p>このページは返礼品の紹介・比較専用です。お申し込みとお支払いはCAMPFIREで行います。</p><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">公式支援ページへ ↗</a></div><button type="button" class="mobile-filter-apply" id="mobile-filter-apply">この条件で商品を見る →</button>
+    <div class="air-art" aria-label="長い翼を運ぶ人たちの写真と、翼の線画">
+      <img src="../../assets/crowdfunding/2026-wing-transport.jpg" loading="eager" decoding="async" alt="長い翼を運ぶ人たちの写真">
+      <svg class="air-art-drawing" viewBox="0 0 700 380" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="currentColor" stroke-width="1.3">
+          <path d="M24 177 Q181 152 326 151 L373 151 Q520 152 680 177 L680 186 Q513 182 367 190 L331 190 Q177 182 24 186Z"/>
+          <path d="M348 148L348 331 M321 166L312 318 M373 166L383 318 M312 318L348 336 383 318"/>
+          <path d="M29 179H675 M63 173L63 183 M123 165L123 183 M194 161L194 185 M263 155L263 188 M434 155L434 188 M510 161L510 185 M577 165L577 183 M638 173L638 183"/>
+          <path d="M29 114H675 M29 105V123 M675 105V123 M348 104V122" stroke-dasharray="5 7"/>
+          <path d="M348 190C315 216 314 260 348 286C382 260 381 216 348 190Z"/>
+        </g>
+        <text x="350" y="100" text-anchor="middle">40.0m / WING SPAN</text>
+        <text x="674" y="356" text-anchor="end">DRAWING IS CONCEPTUAL</text>
+      </svg>
+      <div class="air-art-caption"><span>01 / 翼をつくる</span><strong>40<small>m</small></strong></div>
+    </div>
+    <div class="air-hero-bottom"><span>SCROLL TO EXPLORE</span><span>THE FLIGHT ARCHIVE © 2026</span></div>
+  </div>
+</section>
+<section class="air-story shell" id="story" aria-labelledby="story-title">
+ <div class="story-number"><span>01 / ABOUT THIS COLLECTION</span><span class="story-rule" aria-hidden="true"></span></div>
+ <div class="story-major">
+  <h2 id="story-title">買い物ではなく、<br><em>応援の記録を。</em></h2>
+  <div class="story-major-right"><p>メールや手紙のような小さなものから、手元に残るグッズ、飛行の現場に立ち会う体験まで。</p><p>ここに並ぶのは、単なる商品ではありません。支える人と、空へ挑む人をつなぐ10の選択肢です。</p><span class="story-stamp">10 RETURNS · ONE FLIGHT</span></div>
+ </div>
+ <figure class="story-photo">
+   <img loading="lazy" decoding="async" src="../../assets/crowdfunding/2026-assembly.jpg" alt="人力飛行機の製作に取り組む様子">
+   <figcaption><span>製作風景 / 2026</span><span>DESIGN · BUILD · FLY</span></figcaption>
+ </figure>
+</section>
+<section class="chapter-section" id="chapters" aria-labelledby="chapter-title">
+ <div class="shell">
+  <div class="chapter-section-top"><span>02 / CHOOSE YOUR WAY</span><h2 id="chapter-title">あなたは、<br>どう応援する？</h2><p>贈る。持ち歩く。会いに行く。<br>気になる入口から、返礼品を探せます。</p></div>
+  <div class="chapter-options" role="group" aria-label="返礼品の選び方">
+   <button type="button" data-nav-category="heart" aria-pressed="false"><span class="chapter-id">01</span><span class="chapter-symbol" aria-hidden="true">✉</span><strong>言葉を、届ける。</strong><small>メール・手紙・ポストカード</small><span class="chapter-arrow" aria-hidden="true">↗</span></button>
+   <button type="button" data-nav-category="goods" aria-pressed="false"><span class="chapter-id">02</span><span class="chapter-symbol" aria-hidden="true">◇</span><strong>形に、残す。</strong><small>手元に残るオリジナルグッズ</small><span class="chapter-arrow" aria-hidden="true">↗</span></button>
+   <button type="button" data-nav-category="experience" aria-pressed="false"><span class="chapter-id">03</span><span class="chapter-symbol" aria-hidden="true">↗</span><strong>その瞬間に、立ち会う。</strong><small>試験飛行の見学体験</small><span class="chapter-arrow" aria-hidden="true">↗</span></button>
+  </div>
+ </div>
+</section>
+<section class="gallery-section shell" aria-labelledby="catalog-title">
+ <div class="gallery-header">
+  <div><span class="gallery-overline">03 / THE RETURN ARCHIVE</span><h2 id="catalog-title">10の、<br><em>応援のかたち。</em></h2></div>
+  <p>気になる返礼品を選んで、詳しく見る。<br>正式な申込と決済はCAMPFIREへ。</p>
+ </div>
+ <div class="archive-controls">
+  <div class="archive-topline">
+   <button class="archive-all" type="button" data-nav-category="all" aria-pressed="true">すべてを眺める <span>10</span></button>
+   <button class="archive-favorites" type="button" id="header-favorites" aria-pressed="false">♡ 気になるもの <span id="favorite-count">0</span></button>
+   <details class="archive-filter-details">
+    <summary>条件を指定して探す <span aria-hidden="true">＋</span></summary>
+    <div class="archive-filter-body">
+      <form id="search-form" role="search"><label for="search-input">キーワード</label><div class="archive-search-line"><input type="search" id="search-input" placeholder="例：カード・バッグ・見学" autocomplete="off"><button type="submit">探す ↗</button></div></form>
+      <aside id="filter-panel" class="archive-filter-panel" aria-label="絞り込み条件">
+        <fieldset><legend>カテゴリ</legend><label><input type="radio" name="category" value="all" checked>すべて</label><label><input type="radio" name="category" value="heart">言葉を届ける</label><label><input type="radio" name="category" value="goods">形に残す</label><label><input type="radio" name="category" value="experience">現場に立ち会う</label></fieldset>
+        <fieldset><legend>ご支援金額</legend><label><input type="radio" name="price" value="all" checked>指定なし</label><label><input type="radio" name="price" value="0-3000">3,000円以下</label><label><input type="radio" name="price" value="3001-9999">3,001〜9,999円</label><label><input type="radio" name="price" value="10000-999999">10,000円以上</label></fieldset>
+        <label class="archive-limited"><input type="checkbox" id="limited-only">数量限定のみ</label>
+        <button class="archive-apply" type="button" id="mobile-filter-apply">絞り込みを適用</button>
       </aside>
-      <div class="catalog-content" id="results">
-        <div class="toolbar"><div class="toolbar-top"><p id="result-status" role="status" aria-live="polite">10件の返礼品を表示</p><div class="toolbar-controls"><label for="sort-select">並べ替え</label><select id="sort-select"><option value="recommended">おすすめ順（掲載順）</option><option value="low">価格が安い順</option><option value="high">価格が高い順</option><option value="name">名前順</option></select></div></div><div class="toolbar-bottom"><button class="mobile-filter-button" id="mobile-filter-button" type="button" aria-expanded="false" aria-controls="filter-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10m-7 5h4"/></svg>絞り込み</button><div class="active-filters" id="active-filters" aria-label="適用中のフィルタ"></div><button type="button" class="view-switch is-active" id="view-grid" aria-label="グリッド表示" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></button><button type="button" class="view-switch" id="view-list" aria-label="リスト表示" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h1M3 12h1M3 18h1"/></svg></button></div></div>
-        <div id="product-grid" class="product-grid"><article class="product-card" id="return-mail" data-id="return-mail" data-category="heart" data-price="500" data-limited="false" data-title="お礼メール" data-description="ご支援への感謝を込めて、部員からメールをお送りします。" data-lede="最初の一歩から、空につながる。" data-spec="メールでお届け" data-delivery="2026年12月" data-note="お申し込み・詳細条件はCAMPFIREをご確認ください。">
+      <div class="archive-sort-row"><label for="sort-select">表示順</label><select id="sort-select"><option value="recommended">掲載順</option><option value="low">金額が低い順</option><option value="high">金額が高い順</option><option value="name">名前順</option></select><button type="button" data-clear>条件を解除</button></div>
+      <div class="archive-hidden-view"><button type="button" id="view-grid" aria-label="通常表示" aria-pressed="true">通常</button><button type="button" id="view-list" aria-label="リスト表示" aria-pressed="false">リスト</button><button type="button" id="mobile-filter-button" aria-controls="filter-panel" aria-expanded="false">フィルタ</button></div>
+    </div>
+   </details>
+  </div>
+  <div class="archive-status-row"><p id="result-status" role="status" aria-live="polite">10件の返礼品を表示</p><div id="active-filters" aria-label="適用中の条件"></div></div>
+ </div>
+ <div id="results" tabindex="-1" class="archive-results">
+ <div id="product-grid" class="product-grid"><article class="product-card" id="return-mail" data-id="return-mail" data-category="heart" data-price="500" data-limited="false" data-title="お礼メール" data-description="ご支援への感謝を込めて、部員からメールをお送りします。" data-lede="最初の一歩から、空につながる。" data-spec="メールでお届け" data-delivery="2026年12月" data-note="お申し込み・詳細条件はCAMPFIREをご確認ください。">
     <div class="product-media">
       <div aria-label="お礼メールのコンセプトイメージ" class="reward-visual"><div class="mock mail-mock"><div class="mail-sheet"><span class="mail-top">FLIGHT PROJECT / 2026</span><b>ありがとう<br/>ございます。</b><span class="mail-lines"></span><span class="mail-sign">THANK YOU</span></div><div class="envelope"><i></i></div></div><span class="visual-label">DESIGN IMAGE</span></div>
       <div class="product-flags"></div>
@@ -347,10 +558,10 @@ body{background:var(--paper)}
       <p class="product-price"><strong>¥500</strong><span>のご支援</span></p>
       <p class="product-delivery"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4m10-4v4M3 10h18"/></svg> 提供予定：2026年12月</p>
       <div class="product-actions">
-        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでお礼メールの支援コースを確認">支援コースを見る <span aria-hidden="true">↗</span></a>
+        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでお礼メールの支援コースを確認">この応援を選ぶ <span aria-hidden="true">↗</span></a>
         <button class="secondary-action" type="button" data-open="return-mail">詳細</button>
       </div>
-      <label class="compare-select"><input type="checkbox" data-compare="return-mail"><span>比較リストに追加</span></label>
+      <label class="compare-select"><input type="checkbox" data-compare="return-mail"><span>選択して比べる</span></label>
     </div>
   </article>
 <article class="product-card" id="return-letter" data-id="return-letter" data-category="heart" data-price="2500" data-limited="false" data-title="部員からのメッセージ" data-description="製作に打ち込む部員から、感謝のメッセージをお届けします。" data-lede="つくる人の声を、あなたへ。" data-spec="郵送" data-delivery="2027年2月" data-note="デザインは製作中のイメージです。">
@@ -367,10 +578,10 @@ body{background:var(--paper)}
       <p class="product-price"><strong>¥2,500</strong><span>のご支援</span></p>
       <p class="product-delivery"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4m10-4v4M3 10h18"/></svg> 提供予定：2027年2月</p>
       <div class="product-actions">
-        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREで部員からのメッセージの支援コースを確認">支援コースを見る <span aria-hidden="true">↗</span></a>
+        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREで部員からのメッセージの支援コースを確認">この応援を選ぶ <span aria-hidden="true">↗</span></a>
         <button class="secondary-action" type="button" data-open="return-letter">詳細</button>
       </div>
-      <label class="compare-select"><input type="checkbox" data-compare="return-letter"><span>比較リストに追加</span></label>
+      <label class="compare-select"><input type="checkbox" data-compare="return-letter"><span>選択して比べる</span></label>
     </div>
   </article>
 <article class="product-card" id="return-postcard" data-id="return-postcard" data-category="heart" data-price="3000" data-limited="false" data-title="ポストカード" data-description="部員がデザインするチームオリジナルのポストカード。" data-lede="あの翼を、一枚に。" data-spec="郵送" data-delivery="2027年2月" data-note="デザインは製作中のイメージです。">
@@ -387,10 +598,10 @@ body{background:var(--paper)}
       <p class="product-price"><strong>¥3,000</strong><span>のご支援</span></p>
       <p class="product-delivery"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4m10-4v4M3 10h18"/></svg> 提供予定：2027年2月</p>
       <div class="product-actions">
-        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでポストカードの支援コースを確認">支援コースを見る <span aria-hidden="true">↗</span></a>
+        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでポストカードの支援コースを確認">この応援を選ぶ <span aria-hidden="true">↗</span></a>
         <button class="secondary-action" type="button" data-open="return-postcard">詳細</button>
       </div>
-      <label class="compare-select"><input type="checkbox" data-compare="return-postcard"><span>比較リストに追加</span></label>
+      <label class="compare-select"><input type="checkbox" data-compare="return-postcard"><span>選択して比べる</span></label>
     </div>
   </article>
 <article class="product-card" id="return-cards" data-id="return-cards" data-category="goods" data-price="4000" data-limited="false" data-title="トレカ ＋ クリアファイル" data-description="オリジナルトレカとA4クリアファイルを、各1種類ずつランダムでお届け。" data-lede="憧れを、日常のそばに。" data-spec="トレカ 約9×6.5cm / クリアファイル A4" data-delivery="2027年2月" data-note="図はイメージです。実物のデザインは変更の可能性があります。">
@@ -407,10 +618,10 @@ body{background:var(--paper)}
       <p class="product-price"><strong>¥4,000</strong><span>のご支援</span></p>
       <p class="product-delivery"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4m10-4v4M3 10h18"/></svg> 提供予定：2027年2月</p>
       <div class="product-actions">
-        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでトレカ ＋ クリアファイルの支援コースを確認">支援コースを見る <span aria-hidden="true">↗</span></a>
+        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでトレカ ＋ クリアファイルの支援コースを確認">この応援を選ぶ <span aria-hidden="true">↗</span></a>
         <button class="secondary-action" type="button" data-open="return-cards">詳細</button>
       </div>
-      <label class="compare-select"><input type="checkbox" data-compare="return-cards"><span>比較リストに追加</span></label>
+      <label class="compare-select"><input type="checkbox" data-compare="return-cards"><span>選択して比べる</span></label>
     </div>
   </article>
 <article class="product-card" id="return-ruler" data-id="return-ruler" data-category="goods" data-price="6000" data-limited="false" data-title="オリジナル定規" data-description="オリジナル定規。勉強にも、作業にも。" data-lede="つくる楽しさを、一本に。" data-spec="約15×3cm" data-delivery="2027年2月" data-note="製作中のイメージです。基板・電子回路の機能は保証・案内していません。">
@@ -427,10 +638,10 @@ body{background:var(--paper)}
       <p class="product-price"><strong>¥6,000</strong><span>のご支援</span></p>
       <p class="product-delivery"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4m10-4v4M3 10h18"/></svg> 提供予定：2027年2月</p>
       <div class="product-actions">
-        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでオリジナル定規の支援コースを確認">支援コースを見る <span aria-hidden="true">↗</span></a>
+        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでオリジナル定規の支援コースを確認">この応援を選ぶ <span aria-hidden="true">↗</span></a>
         <button class="secondary-action" type="button" data-open="return-ruler">詳細</button>
       </div>
-      <label class="compare-select"><input type="checkbox" data-compare="return-ruler"><span>比較リストに追加</span></label>
+      <label class="compare-select"><input type="checkbox" data-compare="return-ruler"><span>選択して比べる</span></label>
     </div>
   </article>
 <article class="product-card" id="return-tote" data-id="return-tote" data-category="goods" data-price="7000" data-limited="false" data-title="トートバッグ" data-description="オリジナルのトートバッグ。A4がぴったり収まるサイズです。" data-lede="鳥人間の夢を、持ち歩く。" data-spec="約32×27cm / マチなし / デザイン1種をランダムでお届け" data-delivery="2027年2月" data-note="ページ内の図はデザインイメージです。">
@@ -447,10 +658,10 @@ body{background:var(--paper)}
       <p class="product-price"><strong>¥7,000</strong><span>のご支援</span></p>
       <p class="product-delivery"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4m10-4v4M3 10h18"/></svg> 提供予定：2027年2月</p>
       <div class="product-actions">
-        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでトートバッグの支援コースを確認">支援コースを見る <span aria-hidden="true">↗</span></a>
+        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでトートバッグの支援コースを確認">この応援を選ぶ <span aria-hidden="true">↗</span></a>
         <button class="secondary-action" type="button" data-open="return-tote">詳細</button>
       </div>
-      <label class="compare-select"><input type="checkbox" data-compare="return-tote"><span>比較リストに追加</span></label>
+      <label class="compare-select"><input type="checkbox" data-compare="return-tote"><span>選択して比べる</span></label>
     </div>
   </article>
 <article class="product-card" id="return-member" data-id="return-member" data-category="goods" data-price="8000" data-limited="false" data-title="応援会員証" data-description="グッズよりも応援の気持ちを大切にしたい方へ。会員証風の記念カードです。" data-lede="応援している、その証。" data-spec="約85.6×54mm / カード1枚" data-delivery="2027年2月" data-note="実際の会員権や付帯特典はありません。図はデザインイメージです。">
@@ -467,10 +678,10 @@ body{background:var(--paper)}
       <p class="product-price"><strong>¥8,000</strong><span>のご支援</span></p>
       <p class="product-delivery"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4m10-4v4M3 10h18"/></svg> 提供予定：2027年2月</p>
       <div class="product-actions">
-        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREで応援会員証の支援コースを確認">支援コースを見る <span aria-hidden="true">↗</span></a>
+        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREで応援会員証の支援コースを確認">この応援を選ぶ <span aria-hidden="true">↗</span></a>
         <button class="secondary-action" type="button" data-open="return-member">詳細</button>
       </div>
-      <label class="compare-select"><input type="checkbox" data-compare="return-member"><span>比較リストに追加</span></label>
+      <label class="compare-select"><input type="checkbox" data-compare="return-member"><span>選択して比べる</span></label>
     </div>
   </article>
 <article class="product-card" id="return-bank" data-id="return-bank" data-category="goods" data-price="10000" data-limited="true" data-title="とびと君型貯金箱" data-description="公式キャラクター「とびと君」をモチーフに、部員が3Dプリンターで製作します。" data-lede="とびと君が、あなたのもとへ。" data-spec="約10×10cm / 数量限定" data-delivery="2027年2月" data-note="掲載のイラストは形状を保証するものではなく、参考イメージです。">
@@ -487,10 +698,10 @@ body{background:var(--paper)}
       <p class="product-price"><strong>¥10,000</strong><span>のご支援</span></p>
       <p class="product-delivery"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4m10-4v4M3 10h18"/></svg> 提供予定：2027年2月</p>
       <div class="product-actions">
-        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでとびと君型貯金箱の支援コースを確認">支援コースを見る <span aria-hidden="true">↗</span></a>
+        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでとびと君型貯金箱の支援コースを確認">この応援を選ぶ <span aria-hidden="true">↗</span></a>
         <button class="secondary-action" type="button" data-open="return-bank">詳細</button>
       </div>
-      <label class="compare-select"><input type="checkbox" data-compare="return-bank"><span>比較リストに追加</span></label>
+      <label class="compare-select"><input type="checkbox" data-compare="return-bank"><span>選択して比べる</span></label>
     </div>
   </article>
 <article class="product-card" id="return-battery" data-id="return-battery" data-category="goods" data-price="20000" data-limited="false" data-title="モバイルバッテリー" data-description="チームのロゴを名入れしたエレコム製のコンパクトなモバイルバッテリー。" data-lede="挑戦へのエネルギーを、ポケットに。" data-spec="5000mAh / 約112g / PSE対応 / メーカー保証1年" data-delivery="2027年2月" data-note="イメージ図です。詳細仕様と保証条件はCAMPFIREでご確認ください。">
@@ -507,10 +718,10 @@ body{background:var(--paper)}
       <p class="product-price"><strong>¥20,000</strong><span>のご支援</span></p>
       <p class="product-delivery"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4m10-4v4M3 10h18"/></svg> 提供予定：2027年2月</p>
       <div class="product-actions">
-        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでモバイルバッテリーの支援コースを確認">支援コースを見る <span aria-hidden="true">↗</span></a>
+        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREでモバイルバッテリーの支援コースを確認">この応援を選ぶ <span aria-hidden="true">↗</span></a>
         <button class="secondary-action" type="button" data-open="return-battery">詳細</button>
       </div>
-      <label class="compare-select"><input type="checkbox" data-compare="return-battery"><span>比較リストに追加</span></label>
+      <label class="compare-select"><input type="checkbox" data-compare="return-battery"><span>選択して比べる</span></label>
     </div>
   </article>
 <article class="product-card" id="return-visit" data-id="return-visit" data-category="experience" data-price="25000" data-limited="true" data-title="試験見学会" data-description="2027年4月18日に予定されている2nd走行試験を見学。製作の集大成を、間近で体感いただけます。" data-lede="完成間近の機体が、動き出す瞬間。" data-spec="2027年4月18日予定 / 詳細は後日メール案内" data-delivery="2027年4月" data-note="写真は過去の試験風景。天候・製作状況により日程変更の可能性があります。交通費は各自負担。">
@@ -527,18 +738,18 @@ body{background:var(--paper)}
       <p class="product-price"><strong>¥25,000</strong><span>のご支援</span></p>
       <p class="product-delivery"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4m10-4v4M3 10h18"/></svg> 提供予定：2027年4月</p>
       <div class="product-actions">
-        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREで試験見学会の支援コースを確認">支援コースを見る <span aria-hidden="true">↗</span></a>
+        <a class="primary-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer" aria-label="CAMPFIREで試験見学会の支援コースを確認">この応援を選ぶ <span aria-hidden="true">↗</span></a>
         <button class="secondary-action" type="button" data-open="return-visit">詳細</button>
       </div>
-      <label class="compare-select"><input type="checkbox" data-compare="return-visit"><span>比較リストに追加</span></label>
+      <label class="compare-select"><input type="checkbox" data-compare="return-visit"><span>選択して比べる</span></label>
     </div>
   </article></div>
-        <div class="empty-state" id="empty-state" hidden><div class="empty-graphic">NO MATCH / 0</div><h3>該当する返礼品がありません</h3><p>検索キーワードや絞り込み条件を変更してください。</p><button type="button" class="empty-reset" data-clear>すべての返礼品を見る</button></div>
-        <div class="catalog-foot"><p>掲載情報は2026年11月9日時点の内容です。最新のコース内容、残数、受付状況はCAMPFIREでご確認ください。</p><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">最新の支援コースを見る ↗</a></div>
-      </div>
-    </div>
-  </section>
-  <section class="about-section" id="about"><div class="shell about-layout"><div><p class="section-label">ABOUT YOUR SUPPORT</p><h2>一つひとつの支援が、<br>次の飛行をつくる。</h2><p>設計する、削る、組み立てる、飛ばす。この挑戦は、たくさんの人の力で成り立っています。返礼品は、応援してくださる皆さまへの感謝のしるしです。</p><a class="about-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで挑戦を見る <span aria-hidden="true">↗</span></a></div><div class="about-panel"><div class="about-panel-num">40<span>m</span></div><p>DESIGN / BUILD / FLY</p><b>ふたりで、空へ。</b></div></div></section>
+        
+ <div class="empty-state" id="empty-state" hidden><div class="empty-graphic">NO MATCH</div><h3>まだ、見つからない。</h3><p>条件を変えて、もう一度探してください。</p><button type="button" class="empty-reset" data-clear>すべての返礼品を見る</button></div>
+ <div class="archive-footnote"><span>01—10 / THE FLIGHT ARCHIVE</span><p>掲載内容は2026年11月9日時点のものです。金額・受付状況・提供条件はCAMPFIREの情報をご確認ください。</p></div>
+ </div>
+</section>
+<section class="about-section" id="about"><div class="shell about-layout"><div><p class="section-label">ABOUT YOUR SUPPORT</p><h2>一つひとつの支援が、<br>次の飛行をつくる。</h2><p>設計する、削る、組み立てる、飛ばす。この挑戦は、たくさんの人の力で成り立っています。返礼品は、応援してくださる皆さまへの感謝のしるしです。</p><a class="about-action" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで挑戦を見る <span aria-hidden="true">↗</span></a></div><div class="about-panel"><div class="about-panel-num">40<span>m</span></div><p>DESIGN / BUILD / FLY</p><b>ふたりで、空へ。</b></div></div></section>
   <section class="notice-section shell" aria-labelledby="notice-title"><div><p class="section-label">PLEASE READ</p><h2 id="notice-title">ご支援前のご案内</h2></div><div class="notice-list"><div><h3>返礼品の画像について</h3><p>商品イラストはデザインイメージです。完成品とデザイン・仕様が異なる場合があります。試験見学会の写真は過去の記録です。</p></div><div><h3>ご支援内容の確認</h3><p>ご支援金額・提供時期・在庫・参加条件などは、必ずCAMPFIREの各コースの案内をご確認ください。</p></div><div><h3>10,000円以上のご支援特典</h3><p>ご希望のペンネーム（15文字以内）をチームのYouTube動画概要欄に掲載します。記入方法などの正式条件はCAMPFIREをご確認ください。</p></div></div></section>
 </main>
 <footer class="footer"><div class="shell footer-in"><a class="footer-brand" href="#top">返礼品の格納庫 <span>FLIGHT COLLECTION</span></a><span>© Team Birdman Trial</span><div><a href="https://teambirdmantrial.jp/" target="_blank" rel="noopener noreferrer">運営団体の公式サイト</a><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIRE</a></div></div></footer>
