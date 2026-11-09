@@ -20,6 +20,32 @@
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-inview');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -7% 0px'});
   motionNodes.forEach(el=>io.observe(el));
  } else motionNodes.forEach(el=>el.classList.add('is-inview'));
+ // A physical gesture across a known distance. Not simulated flight telemetry.
+ const distanceRoot=$('#distance-experience'),distanceSlider=$('#flight-distance-slider');
+ const distanceOutput=$('#flight-distance-output'),distanceMessage=$('#distance-message');
+ const flightNext=$('#distance-next');
+ if(distanceRoot&&distanceSlider&&distanceOutput&&distanceMessage&&flightNext){
+  const total=180.67;
+  let visitedEnd=false;
+  distanceRoot.classList.add('is-interactive');
+  const update=()=>{
+   const p=Math.max(0,Math.min(100,Number(distanceSlider.value)||0));
+   distanceRoot.style.setProperty('--distance-progress',p+'%');
+   distanceRoot.style.setProperty('--distance-fraction',String(p/100));
+   distanceOutput.value=(total*p/100).toFixed(2);
+   const completed=p>=100;
+   distanceRoot.classList.toggle('is-complete',completed);
+   if(completed){visitedEnd=true;distanceMessage.textContent='ここで、記録は止まった。次はあなたと。';}
+   else if(visitedEnd)distanceMessage.textContent='この先を、もう一度飛ばしたい。';
+   else distanceMessage.textContent='指で線を動かして、記録をたどろう。';
+   flightNext.setAttribute('aria-hidden',String(!completed));
+   flightNext.tabIndex=completed?0:-1;
+  };
+  distanceSlider.value='0';
+  distanceSlider.addEventListener('input',update);
+  distanceSlider.addEventListener('change',update);
+  update();
+ }
  // Every amount is based on the public campaign plan. Interaction changes only the explanation.
  const plans={
   materials:{name:'翼の材料費',copy:'次の翼をつくるために。カーボンなどの機体材料。',amount:'約29',unit:'万円'},
