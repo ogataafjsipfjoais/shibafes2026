@@ -21,6 +21,8 @@ try:
    page.on('pageerror',lambda error:errors.append(str(error)))
    response=page.goto(url,wait_until='domcontentloaded',timeout=40000)
    assert response and response.status==200,f'Page not served {width}'
+   page.evaluate("() => document.fonts.ready.then(() => true)")
+   assert 'Noto Sans JP' in page.locator('.cover-facts .fact-metric').first.evaluate("(el) => getComputedStyle(el).fontFamily"),f'CJK price font fallback missing {width}'
    title=page.locator('.cover h1')
    title.wait_for(state='visible')
    assert 'もう一度遠くへ' in title.inner_text(),f'Hero missing {width}'
