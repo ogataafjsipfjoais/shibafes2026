@@ -15,6 +15,7 @@ const beats=[...document.querySelectorAll('.flight-beat')];
 const segmentBars=[...document.querySelectorAll('.flight-progress-segment')];
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const isMobile=matchMedia('(max-width: 760px)');
+const lowBudget=matchMedia('(max-width: 1100px)');
 const SPAN=14;
 let renderer=null,scene=null,camera=null,aircraft=null,rig=null;
 let visible=false,ready=false,failed=false,scrollPosition=0,launchAt=0,launchFinished=false;
@@ -94,9 +95,9 @@ async function init3D(){
   scene.add(rim);
   scene.add(rig);
   camera=new THREE.PerspectiveCamera(36,1,.1,200);
-  renderer=new THREE.WebGLRenderer({alpha:true,antialias:!isMobile.matches,powerPreference:'low-power',preserveDrawingBuffer:false});
+  renderer=new THREE.WebGLRenderer({alpha:true,antialias:!lowBudget.matches,powerPreference:'low-power',preserveDrawingBuffer:false});
   renderer.outputColorSpace=THREE.SRGBColorSpace;
-  renderer.setPixelRatio(Math.min(devicePixelRatio,isMobile.matches?1.15:1.6));
+  renderer.setPixelRatio(Math.min(devicePixelRatio,lowBudget.matches?1:1.25));
   canvasHost.appendChild(renderer.domElement);
   renderer.domElement.setAttribute('aria-hidden','true');
   resize3D();
@@ -115,7 +116,7 @@ function requestFrame(){if(!frame&&ready&&visible&&!document.hidden)frame=reques
 function render(now){
  frame=0;
  if(!ready||!visible||document.hidden)return;
- if(isMobile.matches && now-lastFrame<32){requestFrame();return;}
+ if(now-lastFrame<42){requestFrame();return;}
  lastFrame=now;
  let launch=0;
  if(launchAt){
