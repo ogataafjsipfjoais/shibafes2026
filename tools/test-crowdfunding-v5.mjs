@@ -24,7 +24,7 @@ expect(html.includes('data-goal="410000"')&&html.includes('data-raised="37000"')
 expect(html.includes('実機映像ではありません'),'3D disclaimer needs factual distinction');
 expect(html.includes('今回の結果には納得のいかない部分もあります'),'Genuine team testimony missing');
 expect(html.includes('S-330')&&html.includes('鵠'),'Named next aircraft missing');
-expect(html.includes('object-src \\'none\\''),'Security policy missing');
+expect(html.includes("object-src 'none'"),'Security policy missing');
 expect(!html.includes('noindex'),'Accidental noindex');
 expect(html.includes('experience-v5.css')&&html.includes('flight-3d.js'),'V5 assets absent');
 expect(css.includes('@import url("./experience-v4.css")'),'Base CSS dependency missing');
