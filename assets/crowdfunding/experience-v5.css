@@ -159,3 +159,10 @@ body{background:#061e2e;color:#102f42}
  .flight-poster{opacity:.85!important;mix-blend-mode:normal;filter:none}
  .flight-launch-message{opacity:1!important;transform:none!important}
 }
+/* Prevent tall portrait assets from imposing intrinsic min-content widths on mobile grids. */
+@media(max-width:760px){
+ .problem-gallery{grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+ .problem-gallery>.problem-photo{min-width:0;max-width:100%;width:100%;overflow:hidden}
+ .problem-photo img{min-width:0;max-width:100%;object-fit:cover}
+ .problem-photo.large{grid-column:1/-1;width:100%}
+}
