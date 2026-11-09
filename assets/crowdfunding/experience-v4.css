@@ -262,3 +262,9 @@ button:focus-visible,a:focus-visible{outline:3px solid:#ed8a24;outline-offset:4p
  *,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
  .progress-fill{transform:none!important}
 }
+
+/* The small aircraft reflects the verified fraction, not a simulated live counter. */
+.progress-track{position:relative;overflow:visible}
+.progress-track .progress-fill{position:absolute;inset:0 auto 0 0}
+.progress-marker{position:absolute;top:-20px;left:9.02439%;transform:translateX(-45%);color:var(--navy);font-size:25px;line-height:1;pointer-events:none;z-index:2;text-shadow:0 1px 4px #fff}
+@media(max-width:760px){.progress-marker{font-size:20px;top:-17px}}
