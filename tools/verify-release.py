@@ -37,6 +37,13 @@ for p in pages:
   target=root/unquote(urlsplit(link).path.removeprefix('/shibafes2026/'))
   if target.is_dir():target=target/'index.html'
   if not target.is_file():errors.append(str(p.relative_to(root))+': '+link)
+# Verify the separate crowdfunding microsite's relative assets, including its data snapshot.
+crowdfunding=root/'crowdfunding/index.html'
+if crowdfunding.is_file():
+ text=crowdfunding.read_text()
+ for relative in set(__import__('re').findall(r'\.\./assets/[A-Za-z0-9_./-]+\.(?:json|css|js|webp|avif|png|jpg|svg|glb)',text)):
+  target=(crowdfunding.parent/relative).resolve()
+  if not target.is_relative_to(root) or not target.is_file():errors.append('Missing crowdfunding asset '+relative)
 for name in ('assets/s320-desktop.glb','assets/s320-mobile.glb','models/toyosu-city-2023.glb'):
  if not (root/name).is_file():errors.append('Missing 3D model '+name)
 config=json.loads((root/'content/simulator-public-config.json').read_text())
