@@ -61,6 +61,19 @@ try:
    else:
     assert page.locator('.flight-poster').is_visible(),'No accessible 3D fallback'
    page.screenshot(path=str(OUT/f'next-flight-{width}x{height}-flight.png'))
+   # Visitor-driven distance interaction, including the real record's endpoint.
+   page.locator('#distance-experience').scroll_into_view_if_needed(timeout=15000)
+   scale=page.locator('#flight-distance-slider')
+   assert scale.count()==1,f'Flight distance control missing {width}'
+   scale.fill('47')
+   middle_distance=float(page.locator('#flight-distance-output').input_value())
+   assert 84<middle_distance<86,f'Distance not calculated from the real record {width}: {middle_distance}'
+   scale.fill('100')
+   page.wait_for_timeout(80)
+   assert page.locator('#distance-experience').evaluate("e=>e.classList.contains('is-complete')"),f'Distance finale did not unlock {width}'
+   assert page.locator('#distance-next').get_attribute('tabindex')=='0',f'Support action not keyboard reachable {width}'
+   assert 'ここで、記録は止まった' in page.locator('#distance-message').inner_text(),f'Emotional transition missing {width}'
+   page.screenshot(path=str(OUT/f'next-flight-{width}x{height}-distance.png'))
    page.locator('#assembly').scroll_into_view_if_needed(timeout=15000)
    page.wait_for_timeout(400)
    for key,expect in [('platform','約7.7'),('returns','約4'),('materials','約29')]:
