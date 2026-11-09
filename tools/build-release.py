@@ -22,7 +22,7 @@ while queue:
  seen.add(name);src=allfiles[name]
  if src.suffix not in ('.html','.js','.css','.json','.php'):continue
  text=src.read_text()
- for token in set(re.findall(r'[A-Za-z0-9_./-]+\.(?:js|css|webp|avif|png|jpg|svg|glb|woff2|json)',text)):
+ for token in set(re.findall(r'[A-Za-z0-9_./-]+\.(?:json|woff2|webp|avif|png|jpg|svg|glb|css|js)',text)):
   token=token.removeprefix('/shibafes2026/').removeprefix('./')
   matches=[token] if token in assets else byname.get(Path(token).name,[])
   for match in matches:
