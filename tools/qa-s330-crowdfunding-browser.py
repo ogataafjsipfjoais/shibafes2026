@@ -35,7 +35,12 @@ try:
    info=page.evaluate("""() => ({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,columns:getComputedStyle(document.querySelector('.hero-inner')).gridTemplateColumns,photos:[...document.querySelectorAll('.hero-photo img,.story-history img')].map(img=>({src:img.getAttribute('src'),ok:img.complete&&img.naturalWidth>0})),donateLinks:document.querySelectorAll('a[href="https://camp-fire.jp/projects/990337/view"]').length})""")
    assert info['scrollWidth']<=info['width']+1,f'Horizontal overflow {width}: {info}'
    assert len(info['columns'].split())==(1 if width<=780 else 2),f'Incorrect columns at {width}: {info}'
+   # Offscreen photographs are intentionally lazy loaded. Visit their section before checking.
+   page.locator('.story-history').scroll_into_view_if_needed()
+   page.wait_for_function("""() => [...document.querySelectorAll('.hero-photo img,.story-history img')].every(img => img.complete && img.naturalWidth > 0)""",timeout=25000)
+   info['photos']=page.evaluate("""() => [...document.querySelectorAll('.hero-photo img,.story-history img')].map(img=>({src:img.getAttribute('src'),ok:img.complete&&img.naturalWidth>0}))""")
    assert all(x['ok'] for x in info['photos']),f'Unloaded campaign photos: {info["photos"]}'
+   page.evaluate("window.scrollTo(0, 0)")
    assert info['donateLinks']>=3,f'No strategic donation links: {width}'
    assert '約29万円' in page.locator('#funding').inner_text(),f'Funding info missing: {width}'
    assert page.locator('a[href="./rewards/"]').count()==1,f'Catalog link absent: {width}'
