@@ -1,0 +1,291 @@
+/* F L I G H T   N O . 0 2  —  a bespoke, participant-led TeamBirdmanTrial experience.
+   No existing campaign CSS is imported. */
+:root{--ink:#0f2528;--deep:#0b1b21;--paper:#f0f0e8;--sky:#b8e7ee;--aero:#5faebe;--orange:#ff764e;--white:#fcfdf8;--edge:#98aaaa;--margin:clamp(20px,4vw,78px)}
+*,*:before,*:after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:78px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Zen Kaku Gothic New",sans-serif;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+a:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-offset:5px}
+::selection{background:var(--orange);color:var(--deep)}
+.display{font-family:"Dela Gothic One",sans-serif;letter-spacing:-.065em;font-weight:400}
+.mono{font-family:"IBM Plex Mono",monospace;letter-spacing:.07em}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.skip{position:absolute;z-index:99;top:-90px;left:var(--margin);background:white;color:var(--deep);padding:15px 20px}.skip:focus{top:7px}
+.line-tag{font:700 11px "IBM Plex Mono",monospace;letter-spacing:.14em;display:inline-flex;align-items:center;gap:13px;margin:0}
+.line-tag:before{content:"";width:25px;height:1px;background:currentColor;opacity:.75}
+.dot-tag:before{content:"";width:7px;height:7px;background:var(--orange);border-radius:50%;display:inline-block;margin-right:10px}
+:where(.story,.people,.making,.blueprint,.returns) h2{margin:0}
+.section-rail{position:fixed;z-index:30;right:18px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;color:white;mix-blend-mode:difference;pointer-events:none;font:700 10px "IBM Plex Mono",monospace;letter-spacing:.2em}
+/* Navigation is a control strip, not a second landing-page hero. */
+.site-head{height:70px;position:fixed;z-index:70;top:0;left:0;right:0;background:#0b1b20ed;color:var(--white);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid #ebfff447}
+.head-inner{height:100%;padding:0 var(--margin);display:flex;justify-content:space-between;align-items:center;gap:22px}
+.brand{display:flex;gap:11px;align-items:center;font-size:clamp(15px,1.4vw,21px);letter-spacing:-.055em;font-weight:900;white-space:nowrap}
+.brand img{width:31px;height:31px;flex:none}
+.brand small{display:block;font:700 9px "IBM Plex Mono",monospace;letter-spacing:.1em;color:#a6d7d7;margin-top:4px}
+.top-actions{display:flex;align-items:center;gap:22px}
+.section-nav{display:flex;gap:clamp(17px,2.1vw,32px);align-items:center}
+.section-nav a{font-size:12px;font-weight:800;position:relative;padding-block:8px}
+.section-nav a:after{position:absolute;content:"";bottom:2px;left:0;right:0;height:1px;transform:scaleX(0);background:white;transform-origin:left;transition:transform .25s}
+.section-nav a:hover:after{transform:scaleX(1)}
+.nav-support{display:inline-flex;align-items:center;gap:23px;background:var(--sky);color:var(--deep);font-size:13px;font-weight:900;padding:12px 18px;white-space:nowrap}
+.nav-support:hover{background:var(--orange)}
+.nav-toggle{display:none;border:1px solid #d7f7ee94;background:none;color:white;min-height:44px;padding:7px 13px}
+.scroll-track{position:absolute;bottom:-2px;left:0;width:100%;height:2px;background:var(--orange);transform-origin:left;transform:scaleX(0);pointer-events:none}
+.mobile-support{display:none}
+body.is-menu-open{overflow:hidden}
+/* Act zero: visitor inhabits the aircraft, not a page card. */
+.flight-experience{position:relative;height:292svh;min-height:1850px;background:#6aaeba;color:white;isolation:isolate}
+.flight-viewport{position:sticky;top:70px;height:calc(100svh - 70px);min-height:510px;overflow:hidden;isolation:isolate;background:#7bbbc6}
+.flight-viewport:before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse at 65% 32%,#d8f3ec,#78bdca 62%,#366c80)}
+.flight-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 53%;z-index:-1;opacity:.47;filter:grayscale(.35);transition:opacity .8s}
+.flight-ready .flight-poster{opacity:.08}
+.flight-fallback .flight-poster{opacity:.85;filter:none}
+.flight-canvas{position:absolute;inset:0;z-index:1;pointer-events:none}
+.flight-canvas canvas{width:100%;height:100%;display:block}
+.flight-shade{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,#0a2433bd,#0a243342 55%,#0a243311),linear-gradient(0deg,#09232cdb,transparent 60%)}
+.flight-grid{position:absolute;inset:0;z-index:2;pointer-events:none;background-image:linear-gradient(#dffeff24 1px,transparent 1px),linear-gradient(90deg,#dffeff24 1px,transparent 1px);background-size:10% 10%;mask-image:linear-gradient(90deg,#000 40%,transparent)}
+.flight-hud{position:absolute;z-index:10;top:26px;left:var(--margin);right:var(--margin);display:flex;justify-content:space-between;gap:20px;align-items:start;font:700 11px "IBM Plex Mono",monospace;letter-spacing:.13em}
+.hud-live:before{content:"";display:inline-block;background:var(--orange);width:7px;height:7px;margin-right:12px;box-shadow:0 0 0 5px #ff764e30}
+.flight-hud-right{display:flex;gap:24px}
+.flight-status{position:absolute;z-index:8;left:var(--margin);top:68px;color:#eefaf7;font-size:11px;line-height:1.6}
+.flight-axis{position:absolute;z-index:3;left:var(--margin);top:41%;height:126px;width:1px;background:#d9f5efb3;pointer-events:none}
+.flight-axis:before,.flight-axis:after{content:"";width:17px;height:1px;background:#d9f5efb3;position:absolute;left:-8px}
+.flight-axis:before{top:0}.flight-axis:after{bottom:0}
+.flight-flightline{position:absolute;z-index:3;left:6%;right:6%;top:40%;height:1px;transform:rotate(-8deg);background:#e9fcf75e;pointer-events:none}
+.flight-flightline:after{content:"";position:absolute;inset:0 100% 0 0;background:var(--orange);transition:inset 2.9s ease}
+.is-launching .flight-flightline:after{inset:0}
+.flight-beat{position:absolute;z-index:9;left:var(--margin);right:var(--margin);bottom:clamp(88px,12vh,145px);display:grid;grid-template-columns:minmax(0,1.55fr) minmax(235px,.55fr);gap:clamp(24px,4vw,90px);align-items:end;opacity:0;pointer-events:none;transform:translateY(25px);transition:opacity .62s ease,transform .72s cubic-bezier(.16,1,.3,1)}
+.flight-beat.is-current{opacity:1;pointer-events:auto;transform:none}
+.flight-kicker{display:inline-block;font:800 clamp(13px,1.5vw,20px) "Zen Kaku Gothic New",sans-serif;border-left:5px solid var(--orange);padding-left:11px;margin:0 0 23px}
+.flight-beat h1,.flight-beat h2{font-size:clamp(43px,6.5vw,109px);line-height:1.28;margin:0;color:white;font-weight:400;text-shadow:0 3px 22px #0a273f63}
+.flight-beat h1 em,.flight-beat h2 em{color:var(--sky);font-style:normal}
+.flight-side{align-self:end;justify-self:end;max-width:430px;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.flight-side p{font-size:clamp(14px,1.3vw,19px);line-height:1.85;margin:0;font-weight:850;text-shadow:0 2px 7px #0928328c}
+.flight-cta,.flight-launch{display:inline-flex;min-height:58px;align-items:center;justify-content:space-between;gap:22px;padding:16px 20px;border:1px solid white;background:white;color:#09252c;font-weight:900;font-size:clamp(14px,1.3vw,18px);transition:background .2s,transform .2s}
+.flight-cta:hover,.flight-launch:hover{background:var(--orange);border-color:var(--orange);transform:translateY(-2px)}
+.flight-link{color:white;background:#17394049;border-color:#fff9}
+.flight-link:hover{background:#f2fff9;color:#09242d}
+.flight-launch:disabled{cursor:wait;opacity:.8}
+.flight-footnote{position:absolute;z-index:9;bottom:41px;left:var(--margin);right:var(--margin);font-size:10px;line-height:1.45;color:#e1f8f4;margin:0}
+.flight-progress{position:absolute;z-index:10;bottom:24px;left:var(--margin);right:var(--margin);display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.flight-progress>span{display:block;height:3px;background:#dcebe959;overflow:hidden}
+.flight-progress-segment{display:block;background:var(--orange);width:100%;height:100%;transform-origin:left;transform:scaleX(0)}
+.flight-launch-message{position:absolute;z-index:11;right:var(--margin);top:19%;font-weight:900;font-size:clamp(25px,3.3vw,52px);line-height:1.5;margin:0;opacity:0;transform:translateY(24px);transition:opacity .65s,transform .65s;text-shadow:0 3px 20px #0a252e}
+.flight-launch-message.is-shown{opacity:1;transform:none}
+/* A real moment. The single archival photograph is much larger than the words around it. */
+.record{background:var(--deep);color:var(--white);position:relative;overflow:hidden}
+.record-image{position:relative;height:clamp(550px,75vw,1010px);width:100%;margin:0;background:#658a91;overflow:hidden}
+.record-image img{width:100%;height:100%;object-fit:cover;object-position:center 48%}
+.record-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#051519c7,transparent 72%),linear-gradient(0deg,#071a20df,transparent 70%)}
+.record-image figcaption{position:absolute;z-index:2;bottom:38px;right:var(--margin);font:700 11px "IBM Plex Mono",monospace;letter-spacing:.14em}
+.record-overlay{position:absolute;z-index:2;inset:clamp(50px,8vw,110px) var(--margin) auto}
+.record-overlay h2{font-size:clamp(70px,13.5vw,225px);line-height:1;margin:26px 0;color:var(--white)}
+.record-overlay h2 span{font-family:"IBM Plex Mono",monospace;font-weight:800;letter-spacing:-.105em}
+.record-overlay h2 small{font:700 clamp(25px,3vw,50px) "IBM Plex Mono",monospace}
+.record-voice{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:clamp(28px,7vw,130px);padding:clamp(73px,10vw,154px) var(--margin);align-items:start}
+.record-voice blockquote{margin:0;font-size:clamp(30px,4.8vw,78px);line-height:1.46;letter-spacing:-.07em;font-weight:900}
+.record-voice blockquote span{color:var(--sky)}
+.record-attribution{font-size:clamp(14px,1.5vw,20px);line-height:1.95;font-weight:650;max-width:500px}
+.record-attribution small{font-size:11px;color:#b0cbca;display:block;margin-bottom:26px}
+.text-link{display:inline-flex;align-items:center;gap:21px;border-bottom:1px solid;padding-bottom:10px;font-size:13px;font-weight:900;margin-top:18px}
+/* Two people in the actual story, no fabricated portrait photos */
+.people{background:var(--paper);padding:clamp(110px,12vw,190px) var(--margin) clamp(115px,13vw,205px);overflow:hidden}
+.people-heading{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,8vw,140px);align-items:end;padding-bottom:clamp(50px,6vw,95px);border-bottom:1px solid var(--ink)}
+.people-heading h2{font-size:clamp(53px,8.6vw,137px);line-height:1.25;margin:32px 0 0}
+.people-heading p{font-size:clamp(16px,2vw,27px);font-weight:750;line-height:1.9;margin:0}
+.people-contents{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(35px,7vw,120px);align-items:start;padding-top:clamp(50px,7vw,100px)}
+.people-photo{margin:0;background:#849898;overflow:hidden;position:relative;aspect-ratio:1.1}
+.people-photo img{width:100%;height:100%;object-fit:cover}
+.people-photo figcaption{position:absolute;bottom:0;left:0;background:var(--ink);color:var(--white);font:700 10px "IBM Plex Mono",monospace;letter-spacing:.1em;padding:13px 17px}
+.people-list{border-top:2px solid var(--ink)}
+.people-entry{border-bottom:1px solid #93a7a2;padding:clamp(26px,3.8vw,51px) 0}
+.people-entry small{display:block;font:700 11px "IBM Plex Mono",monospace;color:#52736d;letter-spacing:.1em}
+.people-entry h3{font-size:clamp(25px,3.35vw,52px);letter-spacing:-.06em;font-weight:900;margin:13px 0}
+.people-entry p{font-size:clamp(14px,1.45vw,19px);line-height:2;margin:0}
+.people-s330{display:flex;align-items:baseline;justify-content:space-between;gap:30px;border-top:1px solid var(--ink);margin-top:clamp(70px,9vw,142px);padding-top:27px}
+.people-s330 strong{font-size:clamp(47px,8vw,128px);line-height:1.3}
+.people-s330 .future{max-width:430px;font-size:14px;line-height:1.9}
+.people-s330 .future a{display:inline-block;border-bottom:1px solid;margin-top:18px;padding-bottom:5px}
+/* Hands: arranged as a film strip, with three different photographic rhythms. */
+.making{background:#122528;color:var(--white);padding:clamp(120px,14vw,225px) var(--margin)}
+.making-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:clamp(55px,8vw,120px)}
+.making-heading h2{font-size:clamp(55px,8.8vw,145px);line-height:1.28;margin:28px 0 0}
+.making-heading p{max-width:345px;font-size:14px;line-height:2.1;color:#d0ded8}
+.film{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,100px);align-items:start}
+.film figure{margin:0}
+.film figure:first-child{grid-row:span 2}
+.film figure:nth-child(2){margin-top:clamp(35px,7vw,115px)}
+.film figure:nth-child(3){width:79%}
+.film-frame{overflow:hidden;background:#4b6974;position:relative}
+.film figure:first-child .film-frame{aspect-ratio:.78}
+.film figure:nth-child(2) .film-frame{aspect-ratio:1.22}
+.film figure:nth-child(3) .film-frame{aspect-ratio:1.04}
+.film-frame img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.25,1)}
+.film figure:hover .film-frame img{transform:scale(1.045)}
+.film figcaption{font-size:clamp(20px,2.7vw,42px);font-weight:900;letter-spacing:-.06em;margin-top:15px}
+.film figcaption small{display:block;font:700 11px "IBM Plex Mono",monospace;color:#96bbba;margin-top:9px}
+/* A touchable technical document, not a rows-of-cards explanation. */
+.blueprint{background:#d6edf0;padding:clamp(110px,12vw,195px) var(--margin);position:relative;isolation:isolate;overflow:hidden}
+.blueprint:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#24454e10 1px,transparent 1px),linear-gradient(#24454e10 1px,transparent 1px);background-size:34px 34px;z-index:-1}
+.blueprint-head{display:grid;grid-template-columns:1.3fr .7fr;align-items:end;gap:40px}
+.blueprint h2{font-size:clamp(53px,8vw,135px);line-height:1.3;margin:25px 0 0}
+.blueprint-head p:last-child{font-size:clamp(15px,1.8vw,24px);font-weight:800;line-height:1.8;max-width:490px;margin:0}
+.assembly{position:relative;border-block:1px solid #59838a;margin-top:clamp(45px,7vw,110px);padding:clamp(42px,6vw,90px) 0;display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(24px,6vw,94px);align-items:center}
+.assembly-graphic{position:relative;aspect-ratio:1.55;display:flex;align-items:center}
+.assembly-graphic svg{width:100%;height:100%;overflow:visible}
+.assembly-graphic path,.assembly-graphic line{stroke:#1d4c58;fill:none;stroke-width:1.4}
+.assembly-graphic .fill{fill:#f7fefb78;stroke:#0d4553;stroke-width:2}
+.assembly-graphic .struct{stroke:#2c7d8c;stroke-width:.9}
+.assembly-graphic .measure-line{stroke:var(--orange);stroke-width:2;stroke-dasharray:860;stroke-dashoffset:860}
+.assembly.is-inview .measure-line{stroke-dashoffset:0;transition:stroke-dashoffset 2.3s cubic-bezier(.18,.82,.19,1)}
+.assembly-graphic .highlight{stroke:var(--orange);stroke-width:5;stroke-dasharray:30 18;opacity:.0;transition:opacity .3s}
+.assembly[data-active="materials"] .highlight{opacity:.9}
+.drawing-note{position:absolute;bottom:0;left:0;font:700 10px "IBM Plex Mono",monospace;letter-spacing:.1em}
+.assembly-controller{border-top:2px solid #19434b}
+.assembly-controller h3{font-size:clamp(33px,4.5vw,67px);line-height:1.4;letter-spacing:-.065em;margin:25px 0 15px}
+.assembly-controller p{font-size:clamp(14px,1.45vw,18px);line-height:1.9;margin:0 0 20px}
+.fund-tabs{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid #5d9095;margin-top:34px}
+.fund-tab{min-width:0;appearance:none;border:0;border-right:1px solid #5d9095;padding:17px 5px;text-align:center;background:transparent;color:#285560;font-weight:900;font-size:clamp(12px,1.2vw,15px);cursor:pointer}
+.fund-tab:last-child{border-right:0}
+.fund-tab[aria-pressed="true"]{background:#154754;color:#fff}
+.fund-amount{font:800 clamp(40px,5vw,77px)/1.2 "IBM Plex Mono",monospace;letter-spacing:-.09em}
+.fund-amount small{font:800 .42em "Zen Kaku Gothic New",sans-serif;letter-spacing:0;margin-left:6px}
+.fund-note{font-size:11px;line-height:1.8;color:#315b64}
+.assembly-cta{display:inline-flex;justify-content:space-between;gap:25px;border-bottom:2px solid;padding:12px 0;font-weight:900;font-size:14px}
+.fund-total{display:flex;align-items:baseline;gap:32px;justify-content:space-between;border-top:1px solid #59838a;margin-top:clamp(35px,6vw,75px);padding-top:29px}
+.fund-total strong{font:800 clamp(47px,7vw,112px) "IBM Plex Mono",monospace;letter-spacing:-.1em}
+.fund-total small{font-size:12px;max-width:290px;line-height:1.9}
+/* Reward decisions are one typographic index */
+.returns{padding:clamp(113px,13vw,200px) var(--margin);background:var(--paper)}
+.returns h2{font-size:clamp(55px,8.6vw,140px);line-height:1.27;margin:30px 0 clamp(55px,8vw,115px)}
+.return-list{border-top:2px solid var(--ink)}
+.return-list a{display:grid;grid-template-columns:75px 1.3fr .8fr 32px;gap:clamp(15px,3vw,45px);align-items:center;border-bottom:1px solid #a8b6ac;padding:clamp(22px,3.8vw,53px) 0;transition:background .25s,padding .25s}
+.return-list a:hover{background:#dce8e3;padding-inline:18px}
+.return-list .return-num{font:800 14px "IBM Plex Mono",monospace}
+.return-list strong{font-size:clamp(26px,4vw,64px);font-weight:900;letter-spacing:-.06em}
+.return-list p{font-size:clamp(13px,1.25vw,18px);margin:0;line-height:1.8}
+.return-list .arrow{font:400 27px "IBM Plex Mono",monospace}
+.return-all{display:inline-flex;align-items:center;gap:28px;padding-bottom:12px;border-bottom:2px solid;font-weight:900;font-size:clamp(17px,2vw,25px);margin-top:54px}
+.rewards-note{font-size:11px;line-height:1.8;margin:20px 0 0;color:#5a7169}
+/* A photographic decision, no endless bouncing support button */
+.finale{position:relative;background:#254b53;color:white;min-height:760px;height:98svh;max-height:1240px;overflow:hidden;display:flex;align-items:end;isolation:isolate}
+.finale img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 49%}
+.finale:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,#071a22f8,#071a2266 68%,#071a223d)}
+.finale-inner{padding:clamp(110px,14vw,188px) var(--margin) clamp(85px,10vw,145px)}
+.finale h2{font-size:clamp(69px,9.5vw,154px);line-height:1.24;margin:28px 0 52px}
+.finale .final-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:30px;background:var(--orange);color:var(--deep);font-size:clamp(17px,1.8vw,25px);font-weight:900;padding:23px 28px;min-width:min(100%,420px)}
+.finale .final-cta:hover{background:var(--sky)}
+.finale small{display:block;margin-top:22px;font-size:11px;opacity:.82}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:25px;background:#0a181c;color:white;padding:35px var(--margin) 46px}
+.foot-links{display:flex;gap:22px;font-size:12px}
+.foot small{font-size:11px;color:#9bb9b3}
+/* Motion only follows comprehension, never prevents reading */
+@media(prefers-reduced-motion:no-preference){
+ .is-enhanced [data-reveal]{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+ .is-enhanced [data-reveal].is-inview{opacity:1;transform:none}
+ .is-enhanced .film-frame{clip-path:inset(0 0 10% 0);transition:clip-path 1s cubic-bezier(.16,1,.3,1)}
+ .is-enhanced .film-frame.is-inview{clip-path:inset(0)}
+}
+@media(max-width:1080px){
+ .flight-beat{grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr)}
+ .flight-beat h1,.flight-beat h2{font-size:clamp(43px,5.6vw,76px)}
+ .record-overlay h2{font-size:clamp(80px,12.5vw,150px)}
+ .assembly-controller h3{font-size:clamp(29px,4vw,49px)}
+}
+@media(max-width:760px){
+ :root{--margin:20px}
+ html{scroll-padding-top:65px}
+ .site-head{height:65px}
+ .brand{font-size:16px}.brand img{width:26px;height:26px}.brand small{display:none}
+ .nav-toggle{display:block}
+ .section-nav{position:fixed;top:65px;left:0;right:0;height:calc(100svh - 65px);display:none;background:#0b1b20;flex-direction:column;align-items:stretch;gap:0;padding:23px var(--margin) 95px}
+ .section-nav.is-open{display:flex}
+ .section-nav a{font-size:clamp(24px,7vw,37px);border-bottom:1px solid #ffffff3d;padding:17px 0}
+ .section-nav a:after{display:none}
+ .section-nav .nav-support{text-align:center;justify-content:center;margin-top:23px;border:0;font-size:17px}
+ .top-actions{gap:10px}
+ .nav-support{display:none}
+ .section-rail{display:none}
+ .flight-experience{height:260svh;min-height:1800px}
+ .flight-viewport{top:65px;height:calc(100svh - 65px);min-height:490px}
+ .flight-poster{object-position:48% 38%}
+ .flight-shade{background:linear-gradient(0deg,#09202de9,transparent 92%),linear-gradient(90deg,#09252b88,transparent)}
+ .flight-hud{top:19px;font-size:9px}
+ .flight-hud-right span:nth-child(1){display:none}
+ .flight-status{top:45px;font-size:10px;max-width:210px}
+ .flight-axis,.flight-flightline{display:none}
+ .flight-beat{display:flex;flex-direction:column;align-items:stretch;gap:13px;bottom:clamp(77px,10vh,112px)}
+ .flight-kicker{font-size:13px;margin-bottom:13px}
+ .flight-beat h1,.flight-beat h2{font-size:clamp(36px,9.3vw,61px);line-height:1.31}
+ .flight-side{max-width:none;width:100%;gap:9px;align-items:stretch}
+ .flight-side p{font-size:13px;line-height:1.6}
+ .flight-cta,.flight-launch{width:100%;min-height:47px;padding:12px 17px;font-size:13px}
+ .flight-footnote{bottom:40px;font-size:9px}
+ .flight-launch-message{top:18%;font-size:clamp(23px,6.4vw,40px)}
+ .record-image{height:clamp(555px,105svh,760px)}
+ .record-image img{object-position:47% center}
+ .record-overlay{top:100px}
+ .record-overlay h2{font-size:clamp(74px,16vw,130px)}
+ .record-voice{grid-template-columns:1fr;padding:93px var(--margin);gap:35px}
+ .record-voice blockquote{font-size:clamp(32px,8.6vw,54px)}
+ .record-attribution{font-size:14px}
+ .people{padding:100px var(--margin)}
+ .people-heading,.people-contents{display:block}
+ .people-heading h2{font-size:clamp(53px,13vw,83px)}
+ .people-heading p{margin-top:28px;font-size:17px}
+ .people-contents{padding-top:31px}
+ .people-photo{aspect-ratio:1.2}
+ .people-list{margin-top:40px}
+ .people-entry{padding:27px 0}
+ .people-entry h3{font-size:34px}
+ .people-entry p{font-size:15px}
+ .people-s330{display:block;margin-top:70px}
+ .people-s330 strong{font-size:clamp(50px,12vw,80px)}
+ .people-s330 .future{margin-top:15px}
+ .making{padding:110px var(--margin)}
+ .making-heading{display:block;margin-bottom:41px}
+ .making-heading h2{font-size:clamp(53px,12vw,83px)}
+ .making-heading p{margin-top:28px}
+ .film{display:block}
+ .film figure{margin-bottom:60px}
+ .film figure:nth-child(2){margin-top:0}
+ .film figure:nth-child(3){width:100%}
+ .film figure:first-child .film-frame{aspect-ratio:1.05}
+ .film figure:nth-child(2) .film-frame{aspect-ratio:1.2}
+ .film figure:nth-child(3) .film-frame{aspect-ratio:1.2}
+ .film figcaption{font-size:25px}
+ .blueprint{padding:100px var(--margin)}
+ .blueprint-head,.assembly{display:block}
+ .blueprint h2{font-size:clamp(48px,11.7vw,79px)}
+ .blueprint-head p:last-child{font-size:15px;margin-top:23px}
+ .assembly{margin-top:45px;padding:35px 0}
+ .assembly-graphic{aspect-ratio:1.35;margin-bottom:30px}
+ .assembly-controller h3{font-size:clamp(31px,8.5vw,50px)}
+ .fund-tab{padding:14px 3px;font-size:12px}
+ .fund-total{display:block}
+ .fund-total strong{font-size:clamp(47px,14vw,83px)}
+ .fund-total small{display:block;margin-top:12px}
+ .returns{padding:110px var(--margin)}
+ .returns h2{font-size:clamp(48px,11.9vw,82px)}
+ .return-list a{grid-template-columns:39px minmax(0,1fr) 21px;gap:10px;padding:21px 0}
+ .return-list strong{font-size:clamp(23px,6.5vw,40px)}
+ .return-list p{grid-column:2;grid-row:2;font-size:13px}
+ .return-list .arrow{grid-column:3;grid-row:1/3}
+ .finale{min-height:660px;max-height:940px}
+ .finale img{object-position:42% center}
+ .finale h2{font-size:clamp(53px,13.2vw,91px)}
+ .finale .final-cta{width:100%;min-width:0}
+ .foot{flex-direction:column;align-items:flex-start;padding-bottom:115px}
+ .mobile-support{position:fixed;display:block;bottom:0;left:0;right:0;z-index:70;background:var(--deep);padding:9px 13px max(9px,env(safe-area-inset-bottom));border-top:1px solid #ffffff50}
+ .mobile-support a{display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--orange);color:var(--deep);padding:13px 17px;min-height:49px;font-size:14px;font-weight:900}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*:before,*:after{animation:none!important;transition:none!important}
+ .flight-poster{opacity:.83!important;filter:none}
+ .assembly-graphic .measure-line{stroke-dashoffset:0!important}
+ .is-enhanced [data-reveal]{opacity:1!important;transform:none!important}
+ .is-enhanced .film-frame{clip-path:inset(0)!important}
+}
