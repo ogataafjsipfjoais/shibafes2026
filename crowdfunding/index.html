@@ -8,15 +8,15 @@
 <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="description" content="芝浦工業大学 Team Birdman Trialのクラウドファンディング特設サイト。二人乗り人力飛行機S-320の設計と製作、40mの主翼、CAMPFIREでの支援について紹介します。">
-<meta property="og:title" content="次の一機を、空へ。｜TeamBirdmanTrial クラウドファンディング">
-<meta property="og:description" content="芝浦工業大学 Team Birdman Trialの二人乗り人力飛行機。機体製作・試験飛行を支えるクラウドファンディング特設サイト。">
+<meta property="og:title" content="次の一機へ、あなたも。｜TeamBirdmanTrial クラウドファンディング">
+<meta property="og:description" content="次の一機へ、あなたも。機体を見て、返礼品を選んで、TeamBirdmanTrialの挑戦に参加するクラウドファンディング。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:url" content="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/">
 <meta property="og:image" content="https://ogataafjsipfjoais.github.io/shibafes2026/assets/crowdfunding/2026-wing-transport.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/">
-<title>次の一機を、空へ。｜TeamBirdmanTrial クラウドファンディング</title>
+<title>次の一機へ、あなたも。｜TeamBirdmanTrial クラウドファンディング</title>
 <style>
 :root{--paper:#f3f0e9;--ink:#202820;--rust:#d55430;--muted:#69716b;--line:#b7bbb2;--light:#fffdf8;--blueprint:#cad0c7;--max:1440px}
 *,*::before,*::after{box-sizing:border-box}
@@ -333,6 +333,60 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
  .reward-columns h2{font-size:clamp(70px,16vw,110px)}
  .action h2{font-size:clamp(72px,15vw,110px)}
 }
+
+/* Participation is a deliberate choice, not a simulated donation counter. */
+.opening-row{grid-template-columns:minmax(0,1.72fr) minmax(240px,.8fr);gap:clamp(24px,4vw,72px)}
+.chapter-opening h1{font-size:clamp(63px,7.8vw,122px);line-height:1.17}
+.join-invite{display:inline-flex;align-items:center;justify-content:space-between;gap:15px;align-self:flex-start;font-weight:850;font-size:13px;border-bottom:1px solid var(--ink);padding-bottom:8px;transition:color .18s}
+.join-invite:hover{color:var(--rust)}
+.your-choice{background:#132d29;color:var(--paper);padding:clamp(83px,10vw,145px) 0 clamp(92px,11vw,170px)}
+.join-eyebrow{font-family:Arial,sans-serif;font-weight:800;letter-spacing:.13em;font-size:12px;display:flex;justify-content:space-between;align-items:center;gap:20px;max-width:280px;color:#b6c9bc;margin:0 0 23px}
+.join-eyebrow span{letter-spacing:0;font-weight:500}
+.join-intro h2{font-size:clamp(60px,9.4vw,140px);font-weight:900;line-height:1.14;letter-spacing:-.105em;margin:0 0 clamp(40px,5.2vw,85px)}
+.choice-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #91aa9b;border-bottom:1px solid #91aa9b}
+.choice-step{appearance:none;display:flex;align-items:center;justify-content:space-between;gap:13px;background:transparent;color:#9ab5a6;border:0;border-right:1px solid #91aa9b;padding:clamp(18px,2.8vw,37px) clamp(12px,2vw,29px);text-align:left;cursor:pointer;transition:background .16s,color .16s}
+.choice-step:last-child{border-right:0}
+.choice-step>span:first-child{font:700 12px Arial,sans-serif;align-self:flex-start}
+.choice-step strong{font-size:clamp(28px,4.3vw,66px);letter-spacing:-.075em;font-weight:900;line-height:1.1}
+.choice-step>span:last-child{font:400 26px Arial,sans-serif;align-self:flex-end}
+.choice-step:hover{background:#27463d;color:white}
+.choice-step.is-selected{background:var(--paper);color:var(--ink)}
+.choice-step:focus-visible{outline:3px solid #e5a083;outline-offset:-5px}
+.choice-feature{display:grid;grid-template-columns:minmax(0,1.17fr) minmax(0,.83fr);gap:clamp(25px,5vw,80px);align-items:center;margin-top:clamp(28px,4vw,59px)}
+.choice-photo{min-height:0;aspect-ratio:1.56;background:#425e55;overflow:hidden}
+.choice-photo img{width:100%;height:100%;object-fit:cover;object-position:center center}
+.choice-detail{padding-block:25px}
+.choice-index{margin:0 0 23px;font:700 12px Arial,sans-serif;letter-spacing:.13em;color:#bad1c1}
+.choice-detail h3{font-size:clamp(39px,5.3vw,80px);font-weight:900;letter-spacing:-.09em;line-height:1.2;margin:0 0 22px}
+.choice-detail>p:not(.choice-index){font-size:clamp(14px,1.25vw,18px);line-height:1.9;color:#d0ddd1;font-weight:600;margin:0 0 31px;max-width:430px}
+.choice-go{display:inline-flex;justify-content:space-between;align-items:center;gap:36px;padding:18px 24px;background:var(--rust);color:white;font-size:15px;font-weight:900;min-width:250px}
+.choice-go:hover{background:#a73e23}
+.choice-go span{font:400 24px Arial,sans-serif}
+@media(max-width:1080px){
+ .opening-row{grid-template-columns:minmax(0,1.4fr) minmax(220px,.9fr)}
+ .chapter-opening h1{font-size:clamp(57px,7.7vw,92px)}
+ .choice-step strong{font-size:clamp(30px,4vw,55px)}
+}
+@media(max-width:760px){
+ .opening-row{display:block}
+ .chapter-opening h1{font-size:clamp(54px,12.7vw,84px);line-height:1.15}
+ .join-invite{font-size:12px}
+ .your-choice{padding:76px 0 90px}
+ .join-intro h2{font-size:clamp(56px,12.5vw,92px);margin-bottom:36px}
+ .choice-step{flex-direction:column;gap:13px;align-items:flex-start;padding:17px 12px 16px}
+ .choice-step>span:first-child{font-size:11px}
+ .choice-step strong{font-size:clamp(30px,8vw,51px)}
+ .choice-step>span:last-child{align-self:flex-end;font-size:19px}
+ .choice-feature{grid-template-columns:1fr;gap:19px;margin-top:26px}
+ .choice-photo{aspect-ratio:1.5}
+ .choice-detail{padding:12px 0 0}
+ .choice-index{margin-bottom:16px}
+ .choice-detail h3{font-size:clamp(44px,10.8vw,70px);margin-bottom:13px}
+ .choice-detail>p:not(.choice-index){font-size:14px;margin-bottom:21px}
+ .choice-go{display:flex;min-width:0;width:100%}
+}
+@media(prefers-reduced-motion:reduce){.choice-step,.choice-go,.join-invite{transition:none}}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"次の一機を、空へ。｜TeamBirdmanTrial クラウドファンディング","url":"https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/","inLanguage":"ja","description":"芝浦工業大学の人力飛行機製作チームによる二人乗り人力飛行機の挑戦と支援案内","about":{"@type":"Organization","name":"Team Birdman Trial","url":"https://teambirdmantrial.jp/"}}</script>
 </head>
@@ -342,7 +396,7 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
   <a class="brand" href="https://teambirdmantrial.jp/" aria-label="公式ホームページへ"><img class="brand-icon" src="../assets/tbt-official-emblem.svg" width="28" height="28" alt="">TeamBirdmanTrial</a>
   <button class="menu" type="button" aria-controls="main-nav" aria-expanded="false">メニュー</button>
   <nav class="nav" id="main-nav" aria-label="メインナビゲーション">
-   <a href="#making">製作</a><a href="#aircraft">機体</a><a href="#why">支援の使い道</a><a href="#rewards">返礼品</a><a class="nav-support" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援する ↗</a>
+   <a href="#join">参加する</a><a href="#making">製作</a><a href="#aircraft">機体</a><a href="#rewards">返礼品</a><a class="nav-support" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援する ↗</a>
   </nav>
  </div>
 </header>
@@ -351,27 +405,50 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
  <div class="wrap opening-intro">
   <p class="campaign-label">クラウドファンディング</p>
   <div class="opening-row">
-   <h1 id="cover-title">次の一機を、<br><span class="red">空へ。</span></h1>
+   <h1 id="cover-title">次の一機へ、<br><span class="red">あなたも。</span></h1>
    <div class="opening-ask"><span>芝浦工業大学 / TeamBirdmanTrial</span>
     <a class="new-cover-cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援する <span aria-hidden="true">↗</span></a>
+    <a class="join-invite" href="#join">参加のしかたを選ぶ <span aria-hidden="true">↓</span></a>
    </div>
   </div>
  </div>
  <figure class="opening-portrait"><img src="../assets/crowdfunding/2026-propeller-team.jpg" alt="琵琶湖の岸辺でプロペラを掲げるTeamBirdmanTrialの学生たち" width="2560" height="1706" fetchpriority="high" decoding="async">
  <figcaption>TeamBirdmanTrial / 2026</figcaption></figure>
 </section>
+<section class="your-choice" id="join" aria-labelledby="join-title">
+ <div class="wrap">
+  <div class="join-intro">
+   <p class="join-eyebrow">YOUR NEXT STEP <span>01 / 03</span></p>
+   <h2 id="join-title">あなたは、<br>どう関わる？</h2>
+  </div>
+  <div class="choice-steps" role="group" aria-label="あなたの参加方法を選ぶ">
+   <button type="button" class="choice-step is-selected" data-join="discover" aria-pressed="true"><span>01</span><strong>知る</strong><span aria-hidden="true">↗</span></button>
+   <button type="button" class="choice-step" data-join="rewards" aria-pressed="false"><span>02</span><strong>選ぶ</strong><span aria-hidden="true">↗</span></button>
+   <button type="button" class="choice-step" data-join="support" aria-pressed="false"><span>03</span><strong>支える</strong><span aria-hidden="true">↗</span></button>
+  </div>
+  <div class="choice-feature">
+   <div class="choice-photo"><img id="choice-picture" src="../assets/crowdfunding/2026-wing-transport.jpg" alt="40mの翼を琵琶湖で運ぶ学生たち" width="2560" height="1706" loading="lazy" decoding="async"></div>
+   <div class="choice-detail" aria-live="polite" aria-atomic="true">
+    <p class="choice-index" id="choice-index">01 / DISCOVER</p>
+    <h3 id="choice-title">翼に、触れる。</h3>
+    <p id="choice-description">まずは、40mの機体を自分の目で。</p>
+    <a id="choice-go" class="choice-go" href="#aircraft">3Dで機体を見る <span aria-hidden="true">↗</span></a>
+   </div>
+  </div>
+ </div>
+</section>
 <figure class="wing-documentary" aria-label="40メートルの主翼を運ぶTeamBirdmanTrialの記録写真">
  <div class="wing-stage">
   <img class="wing-motion-photo" src="../assets/crowdfunding/2026-wing-transport.jpg" alt="琵琶湖の桟橋で、40mの主翼を学生たちが協力して運んでいる" width="2560" height="1706" loading="lazy" decoding="async">
   <div class="wing-number" aria-hidden="true">40<small>m</small></div>
   <div class="wing-measure" aria-hidden="true"><span class="wing-tick"></span><span class="wing-measure-line"></span><span class="wing-tick"></span></div>
-  <figcaption><span>その翼は、40m。</span><small>2026 / 琵琶湖</small></figcaption>
+  <figcaption><span>目の前に、40mの翼。</span><small>2026 / 琵琶湖</small></figcaption>
  </div>
 </figure>
 <section class="work" id="making">
  <div class="wrap work-grid">
   <div class="work-copy">
-   <h2>飛ぶ、その前に。</h2>
+   <h2>飛ぶまでを、<br>見てみる。</h2>
    <a class="editorial-link" href="https://teambirdmantrial.jp/gallery/" target="_blank" rel="noopener noreferrer">もっと見る <span class="arrow" aria-hidden="true">↗</span></a>
   </div>
   <div class="work-photography">
@@ -391,7 +468,7 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
 </section>
 <section class="measure" id="aircraft">
  <div class="wrap">
-  <div class="measure-top"><h2>一機の、すべて。</h2><p>S-320 Element / 3D</p></div>
+  <div class="measure-top"><h2>動かして、<br>確かめる。</h2><p>S-320 Element / 3D</p></div>
   <div class="measure-diagram" id="s320-preview">
    <div class="model-shell" id="s320-model" aria-label="S-320の機体3Dビュー">
      <div class="model-visual" id="s320-visual">
@@ -418,7 +495,7 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
  <div class="wrap why-columns">
   <div class="why-intro">
    <p class="why-kicker">支援の使い道</p>
-   <h2 id="why-title">次の一機も、<br>飛ばしたい。</h2>
+   <h2 id="why-title">次の一機に、<br>必要なこと。</h2>
    <p class="why-number"><small>年間活動費の目安</small>約1,000<span>万円</span></p>
    <p class="why-disclaimer">※年間活動費の参考値。今回の募集目標額ではありません。</p>
   </div>
@@ -432,7 +509,7 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
 </section>
 <section class="reward-next" id="rewards" aria-labelledby="reward-title">
  <div class="wrap reward-columns">
-  <div><p class="reward-kicker">返礼品</p><h2 id="reward-title">公開中。</h2></div>
+  <div><p class="reward-kicker">返礼品</p><h2 id="reward-title">あなたが選ぶ、<br>応援のかたち。</h2></div>
   <div>
    <p>CAMPFIREで公開中。</p>
    <a class="reward-link" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">返礼品を見る <span aria-hidden="true">↗</span></a>
@@ -444,9 +521,9 @@ button,a{font:inherit}a{color:inherit;text-decoration:none}a:focus-visible,butto
  <div class="wrap">
   <div class="action-top"><span>クラウドファンディング</span><span>CAMPFIRE</span></div>
   <div class="action-head">
-   <h2>次の空を、<br>一緒に。</h2>
+   <h2>この先を、<br>あなたと。</h2>
    <div class="action-right">
-    <a class="action-link" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援する <span class="arrow" aria-hidden="true">↗</span></a>
+    <a class="action-link" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援に参加する <span class="arrow" aria-hidden="true">↗</span></a>
    </div>
   </div>
   <p class="action-foot">募集状況・返礼品の詳細はCAMPFIREでご確認ください。</p>
@@ -474,6 +551,48 @@ nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classL
   if(entries.some(entry=>entry.isIntersecting)){wing.classList.add('is-measured');observer.disconnect()}
  },{threshold:0.17});
  observer.observe(wing);
+})();
+</script>
+
+
+<script>
+/* Give visitors a real choice: explore the 3D, see published rewards or back the project. */
+(()=>{
+ const steps=[...document.querySelectorAll('.choice-step')];
+ const picture=document.getElementById('choice-picture');
+ const heading=document.getElementById('choice-title');
+ const description=document.getElementById('choice-description');
+ const number=document.getElementById('choice-index');
+ const go=document.getElementById('choice-go');
+ if(!steps.length||!picture||!heading||!description||!number||!go)return;
+ const options={
+  discover:{image:'../assets/crowdfunding/2026-wing-transport.jpg',alt:'40mの翼を琵琶湖で運ぶ学生たち',index:'01 / DISCOVER',title:'翼に、触れる。',description:'まずは、40mの機体を自分の目で。',cta:'3Dで機体を見る',href:'#aircraft',external:false},
+  rewards:{image:'../assets/crowdfunding/2026-propeller-team.jpg',alt:'プロペラのブレードを掲げる学生メンバーたち',index:'02 / CHOOSE',title:'応援を、選ぶ。',description:'返礼品はCAMPFIREで公開中。',cta:'返礼品を見に行く',href:'https://camp-fire.jp/projects/990337/view',external:true},
+  support:{image:'../assets/crowdfunding/2026-assembly.jpg',alt:'飛行機の組み付け作業を行う学生メンバーたち',index:'03 / SUPPORT',title:'次の一機を、支える。',description:'あなたの参加が、次の挑戦につながる。',cta:'CAMPFIREで支援する',href:'https://camp-fire.jp/projects/990337/view',external:true}
+ };
+ function choose(key){
+  const next=options[key];
+  if(!next)return;
+  steps.forEach(step=>{
+   const selected=step.dataset.join===key;
+   step.classList.toggle('is-selected',selected);
+   step.setAttribute('aria-pressed',String(selected));
+  });
+  picture.src=next.image;
+  picture.alt=next.alt;
+  number.textContent=next.index;
+  heading.textContent=next.title;
+  description.textContent=next.description;
+  go.href=next.href;
+  if(next.external){go.target='_blank';go.rel='noopener noreferrer'}
+  else{go.removeAttribute('target');go.removeAttribute('rel')}
+  go.innerHTML='';
+  const text=document.createTextNode(next.cta+' ');
+  const arrow=document.createElement('span');
+  arrow.setAttribute('aria-hidden','true');arrow.textContent='↗';
+  go.append(text,arrow);
+ }
+ steps.forEach(step=>step.addEventListener('click',()=>choose(step.dataset.join)));
 })();
 </script>
 
