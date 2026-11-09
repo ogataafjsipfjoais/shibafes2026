@@ -26,9 +26,9 @@ for p in pages:
  expected_official='https://teambirdmantrial.jp/shibafes2026/'
  # The crowdfunding microsite currently launches first on GitHub Pages.
  # Allow its exact public URL, without loosening checks for existing festival pages.
- is_crowdfunding=p.relative_to(root).as_posix()=='crowdfunding/index.html'
- pages_canonical='https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/'
- valid_canonical=len(page.canonical)==1 and (page.canonical[0].startswith(expected_official) or (is_crowdfunding and page.canonical[0]==pages_canonical))
+ current_path=p.relative_to(root).as_posix()
+ pages_canonicals={'crowdfunding/index.html':'https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/','crowdfunding/rewards/index.html':'https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/rewards/'}
+ valid_canonical=len(page.canonical)==1 and (page.canonical[0].startswith(expected_official) or page.canonical[0]==pages_canonicals.get(current_path))
  if not valid_canonical:errors.append(str(p)+': canonical')
  if not page.metas.get('description') or 'noindex' in page.metas.get('robots',''):errors.append(str(p)+': search metadata')
  if "object-src 'none'" not in page.metas.get('Content-Security-Policy',''):errors.append(str(p)+': CSP')
