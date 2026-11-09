@@ -34,7 +34,7 @@ function updateScroll(){
    item.style.transform='scaleX('+p.toFixed(3)+')';
  });
  root.style.setProperty('--flight-progress',scrollPosition.toFixed(3));
- if(!ready)return;
+ if(ready)requestFrame();
 }
 let scheduled=false;
 function requestScroll(){if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;updateScroll();});}
@@ -50,6 +50,7 @@ function resize3D(){
  camera.position.set(isMobile.matches?0:4,isMobile.matches?6:5,isMobile.matches?34:23);
  camera.lookAt(0,0,0);
  camera.updateProjectionMatrix();
+ requestFrame();
 }
 function onFallback(reason){
  failed=true;
@@ -137,7 +138,8 @@ function render(now){
  rig.scale.setScalar(scale);
  camera.lookAt(0,launch*2.5,0);
  renderer.render(scene,camera);
- requestFrame();
+ // Render on input; only the brief user-triggered ascent needs continuous frames.
+ if(launchAt&&!launchFinished)requestFrame();
 }
 function launch(){
  if(launchFinished){window.open('https://camp-fire.jp/projects/990337/view','_blank','noopener,noreferrer');return;}
@@ -157,8 +159,9 @@ viewport?.addEventListener('pointermove',event=>{
  const rect=viewport.getBoundingClientRect();
  mouseX=clamp((event.clientX-rect.left)/rect.width)*2-1;
  mouseY=clamp((event.clientY-rect.top)/rect.height)*2-1;
+ requestFrame();
 },{passive:true});
-viewport?.addEventListener('pointerleave',()=>{mouseX=0;mouseY=0;});
+viewport?.addEventListener('pointerleave',()=>{mouseX=0;mouseY=0;requestFrame();});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)requestFrame()});
 if(root && 'IntersectionObserver' in window){
  const preload=new IntersectionObserver(entries=>{
