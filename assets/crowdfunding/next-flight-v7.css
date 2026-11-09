@@ -289,3 +289,48 @@ body.is-menu-open{overflow:hidden}
  .is-enhanced [data-reveal]{opacity:1!important;transform:none!important}
  .is-enhanced .film-frame{clip-path:inset(0)!important}
 }
+
+
+/* A tangible flight log: a visitor traces the actual 180.67m record.
+   Not a simulation of trajectory, speed or donation progress. */
+.distance-experience{padding:clamp(85px,10vw,150px) var(--margin) clamp(85px,11vw,165px);background:#101f26;color:#f3faf6;border-top:1px solid #bbd9d04d;position:relative;overflow:hidden}
+.distance-experience:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;background-image:linear-gradient(90deg,#b6e9e31b 1px,transparent 1px);background-size:10% 100%}
+.distance-experience>*{position:relative}
+.distance-caption{display:flex;justify-content:space-between;align-items:start;gap:20px;color:#bcdbdc;font:700 11px "IBM Plex Mono",monospace;letter-spacing:.07em}
+.distance-caption .line-tag{color:var(--sky)}
+.distance-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;padding:clamp(25px,5vw,73px) 0 clamp(55px,8vw,115px)}
+.distance-heading h3{margin:0;font-size:clamp(38px,6.3vw,91px);line-height:1.29;font-weight:900;letter-spacing:-.08em}
+.distance-value{font:800 clamp(55px,10vw,152px)/1 "IBM Plex Mono",monospace;letter-spacing:-.095em;white-space:nowrap;color:#c4f2f6}
+.distance-value small{font-size:.25em;letter-spacing:0;margin-left:.13em}
+.distance-field{position:relative;padding-top:35px}
+.distance-line{height:3px;background:#91c2c455;position:relative}
+.distance-line-fill{display:block;width:100%;height:3px;background:var(--orange);transform-origin:left;transform:scaleX(1);pointer-events:none}
+.distance-aircraft{display:grid;place-items:center;position:absolute;left:100%;top:0;transform:translate(-50%,-50%) rotate(90deg);width:50px;height:50px;color:#f8fffb;filter:drop-shadow(0 2px 12px #f0ffff70);pointer-events:none}
+.distance-slider{display:block;position:relative;width:100%;height:52px;margin:-24px 0 0;opacity:.01;cursor:ew-resize;touch-action:pan-y;z-index:2}
+.distance-slider:focus-visible{outline:3px solid var(--orange);outline-offset:3px;opacity:.25}
+.distance-ticks{display:flex;justify-content:space-between;gap:14px;font:700 11px "IBM Plex Mono",monospace;color:#bbd8d5;letter-spacing:.08em;margin-top:8px}
+.distance-reveal{display:flex;justify-content:space-between;align-items:center;gap:25px;margin-top:clamp(45px,6vw,90px);border-top:1px solid #a0bdb74f;padding-top:30px;min-height:100px}
+.distance-reveal p{font-size:clamp(20px,2.7vw,39px);font-weight:900;letter-spacing:-.06em;line-height:1.5;margin:0}
+.distance-next{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;padding:17px 21px;min-height:58px;font-size:14px;font-weight:900;color:#102226;background:#c9f4f1;transition:background .2s}
+.distance-next:hover{background:var(--orange)}
+.distance-experience.is-interactive:not(.is-complete) .distance-next{opacity:.4;pointer-events:none}
+.distance-experience.is-interactive:not(.is-complete) .distance-reveal p{color:#b4d8d6}
+.distance-disclaimer{font-size:11px;line-height:1.85;color:#9bb9b5;margin:clamp(18px,3vw,40px) 0 0}
+.distance-experience.is-interactive .distance-aircraft{left:var(--distance-progress,0%)}
+.distance-experience.is-interactive .distance-line-fill{transform:scaleX(var(--distance-fraction,0))}
+@media(max-width:760px){
+ .distance-experience{padding:75px var(--margin) 85px}
+ .distance-caption{font-size:10px;flex-wrap:wrap}
+ .distance-heading{display:block;padding:27px 0 80px}
+ .distance-heading h3{font-size:clamp(38px,10vw,66px)}
+ .distance-value{display:block;font-size:clamp(61px,16vw,99px);margin-top:24px}
+ .distance-aircraft{width:40px;height:40px}
+ .distance-aircraft svg{width:38px;height:38px}
+ .distance-reveal{display:block;margin-top:40px;padding-top:27px}
+ .distance-reveal p{font-size:clamp(21px,6.8vw,34px)}
+ .distance-next{display:flex;width:100%;margin-top:24px}
+ .distance-ticks{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ .distance-experience .distance-line-fill,.distance-experience .distance-aircraft{transition:none!important}
+}
