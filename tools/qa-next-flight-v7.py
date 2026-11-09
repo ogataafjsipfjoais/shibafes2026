@@ -66,7 +66,7 @@ try:
    scale=page.locator('#flight-distance-slider')
    assert scale.count()==1,f'Flight distance control missing {width}'
    scale.fill('47')
-   middle_distance=float(page.locator('#flight-distance-output').input_value())
+   middle_distance=float(page.locator('#flight-distance-output').evaluate('el => el.value'))
    assert 84<middle_distance<86,f'Distance not calculated from the real record {width}: {middle_distance}'
    scale.fill('100')
    page.wait_for_timeout(80)
