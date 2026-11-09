@@ -15,6 +15,7 @@ const beats=[...document.querySelectorAll('.flight-beat')];
 const segmentBars=[...document.querySelectorAll('.flight-progress-segment')];
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const isMobile=matchMedia('(max-width: 760px)');
+const lowBudget=matchMedia('(max-width: 1100px)');
 const SPAN=14;
 let renderer=null,scene=null,camera=null,aircraft=null,rig=null;
 let visible=false,ready=false,failed=false,scrollPosition=0,launchAt=0,launchFinished=false;
@@ -33,7 +34,7 @@ function updateScroll(){
    item.style.transform='scaleX('+p.toFixed(3)+')';
  });
  root.style.setProperty('--flight-progress',scrollPosition.toFixed(3));
- if(!ready)return;
+ if(ready)requestFrame();
 }
 let scheduled=false;
 function requestScroll(){if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;updateScroll();});}
@@ -49,6 +50,7 @@ function resize3D(){
  camera.position.set(isMobile.matches?0:4,isMobile.matches?6:5,isMobile.matches?34:23);
  camera.lookAt(0,0,0);
  camera.updateProjectionMatrix();
+ requestFrame();
 }
 function onFallback(reason){
  failed=true;
@@ -94,9 +96,9 @@ async function init3D(){
   scene.add(rim);
   scene.add(rig);
   camera=new THREE.PerspectiveCamera(36,1,.1,200);
-  renderer=new THREE.WebGLRenderer({alpha:true,antialias:!isMobile.matches,powerPreference:'low-power',preserveDrawingBuffer:false});
+  renderer=new THREE.WebGLRenderer({alpha:true,antialias:!lowBudget.matches,powerPreference:'low-power',preserveDrawingBuffer:false});
   renderer.outputColorSpace=THREE.SRGBColorSpace;
-  renderer.setPixelRatio(Math.min(devicePixelRatio,isMobile.matches?1.15:1.6));
+  renderer.setPixelRatio(Math.min(devicePixelRatio,lowBudget.matches?1:1.25));
   canvasHost.appendChild(renderer.domElement);
   renderer.domElement.setAttribute('aria-hidden','true');
   resize3D();
@@ -115,7 +117,7 @@ function requestFrame(){if(!frame&&ready&&visible&&!document.hidden)frame=reques
 function render(now){
  frame=0;
  if(!ready||!visible||document.hidden)return;
- if(isMobile.matches && now-lastFrame<32){requestFrame();return;}
+ if(now-lastFrame<42){requestFrame();return;}
  lastFrame=now;
  let launch=0;
  if(launchAt){
@@ -136,7 +138,8 @@ function render(now){
  rig.scale.setScalar(scale);
  camera.lookAt(0,launch*2.5,0);
  renderer.render(scene,camera);
- requestFrame();
+ // Render on input; only the brief user-triggered ascent needs continuous frames.
+ if(launchAt&&!launchFinished)requestFrame();
 }
 function launch(){
  if(launchFinished){window.open('https://camp-fire.jp/projects/990337/view','_blank','noopener,noreferrer');return;}
@@ -156,8 +159,9 @@ viewport?.addEventListener('pointermove',event=>{
  const rect=viewport.getBoundingClientRect();
  mouseX=clamp((event.clientX-rect.left)/rect.width)*2-1;
  mouseY=clamp((event.clientY-rect.top)/rect.height)*2-1;
+ requestFrame();
 },{passive:true});
-viewport?.addEventListener('pointerleave',()=>{mouseX=0;mouseY=0;});
+viewport?.addEventListener('pointerleave',()=>{mouseX=0;mouseY=0;requestFrame();});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)requestFrame()});
 if(root && 'IntersectionObserver' in window){
  const preload=new IntersectionObserver(entries=>{
