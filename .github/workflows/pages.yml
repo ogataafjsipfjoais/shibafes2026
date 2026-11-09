@@ -20,7 +20,7 @@ jobs:
       - name: Build static Pages release
         run: |
           node tools/test-live-ranking.mjs
-          node tools/test-crowdfunding-s330.mjs
+          node tools/test-next-flight-v7.mjs
           node gas/visitor-record/test-gas.cjs
           python3 tools/build-goods-hangar.py
           python3 tools/build-release.py --target pages --output dist --live-data
