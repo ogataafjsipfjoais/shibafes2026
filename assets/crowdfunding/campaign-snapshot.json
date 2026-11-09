@@ -1,0 +1,33 @@
+{
+  "name": "TeamBirdmanTrial 2026 Crowdfunding",
+  "projectUrl": "https://camp-fire.jp/projects/990337/view",
+  "verifiedOn": "2026-11-09",
+  "freshness": "Manually verified snapshot; NOT a live or automatic feed.",
+  "goalJPY": 410000,
+  "raisedJPY": 37000,
+  "supporters": 3,
+  "startsOn": "2026-11-01",
+  "endsOn": "2026-11-30",
+  "goalBreakdownJPY": {
+    "wingMaterialsApprox": 290000,
+    "platformFeesApprox": 77000,
+    "rewardsCostsApprox": 40000
+  },
+  "flight": {
+    "model": "S-320 Element",
+    "competitionYear": 2026,
+    "distanceMeters": 180.67
+  },
+  "officialReturns": [
+    {
+      "amountJPY": 500,
+      "name": "お礼メール"
+    },
+    {
+      "amountJPY": 2500,
+      "name": "部員からのメッセージ"
+    }
+  ],
+  "caveat": "For current money, supporters, dates, returns, and conditions see the official CAMPFIRE page. Allocation examples are not unit purchase conversions.",
+  "flightSource": "https://teambirdmantrial.jp/news/s-320-element-%E5%BF%9C%E6%8F%B4%E3%81%82%E3%82%8A%E3%81%8C%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81/"
+}
