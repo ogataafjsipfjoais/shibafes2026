@@ -27,7 +27,15 @@ try:
    box=cta.bounding_box()
    assert box and box['height']>=44 and box['width']>=140,f'CTA too small: {width} {box}'
    assert box['y']>=0 and box['y']+box['height']<=height+1,f'CTA below the first screen: {width}x{height}: {box}'
-   overflow=page.evaluate('document.documentElement.scrollWidth - innerWidth')
+   overhang=page.evaluate("""() => ({
+     innerWidth,scrollWidth:document.documentElement.scrollWidth,
+     elements:[...document.querySelectorAll('body *')].map(el=>{
+       const r=el.getBoundingClientRect();
+       return {tag:el.tagName,cls:String(el.className).slice(0,75),left:r.left,right:r.right,w:r.width}
+     }).filter(r=>r.w>0&&(r.right>innerWidth+2||r.left < -2)).slice(0,18)
+   })""")
+   overflow=overhang['scrollWidth']-overhang['innerWidth']
+   if overflow>1: print('OVERFLOW DEBUG '+json.dumps(overhang,ensure_ascii=False),flush=True)
    assert overflow<=1,f'Horizontal overflow at {width}: {overflow}'
    poster=page.locator('.human-hero-image img')
    assert poster.evaluate('img=>img.complete&&img.naturalWidth>0'),f'Team portrait missing at {width}'
