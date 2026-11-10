@@ -11,7 +11,7 @@ const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]),anchors=[...html.ma
 check((html.match(/<h1\b/g)||[]).length===1,'Use a single primary heading');
 check(ids.length===new Set(ids).size,'No duplicate IDs');
 check(anchors.every(id=>ids.includes(id)),'Every internal anchor resolves');
-check(html.includes('クラウドファンディング')&&html.includes('この挑戦を支援する'),'Campaign visible in hero');
+check(html.includes('クラウドファンディング')&&html.includes('CAMPFIREで支援する'),'Campaign visible in hero');
 check([0,1,2].every(i=>html.includes('data-flight-beat="'+i+'"')),'3D flight progression preserved');
 check(html.includes('id="flight-launch"')&&html.includes('id="flight-launch-message"'),'3D controls and feedback preserved');
 check(html.includes("flight-3d.js")&&model.includes("new URL('../',import.meta.url)"),'Original real GLB model preserved');
