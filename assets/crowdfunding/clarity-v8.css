@@ -210,3 +210,114 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
  *,*:before,*:after{animation:none!important;transition:none!important}
  [data-reveal]{opacity:1!important;transform:none!important}
 }
+
+
+/* PEOPLE FIRST / November 2026.
+   Warmth comes from authentic student photography, gentle contrast and time to read.
+   This layer intentionally makes the 3D scene secondary to the team. */
+:root{
+ --ink:#352f2a;--deep:#2d3532;--paper:#f7f3eb;--white:#fffcf7;
+ --mint:#efe8dd;--cyan:#c9ded8;--accent:#a8472d;--line:#dfd4c7;
+ --muted:#685d54;
+}
+body{background:var(--paper)}
+.site-head{background:rgba(249,245,237,.97);color:var(--ink);border-bottom:1px solid #d9cec0}
+.nav-cta{color:white;background:var(--accent)}
+.nav-cta:hover{background:#7d3926;color:white}
+.menu-toggle{border-color:#8a776b;color:var(--ink)}
+.section-title{font-size:clamp(42px,5.4vw,82px)}
+.kicker::before{background:var(--accent)}
+.button{background:var(--accent)}
+.button:hover{background:#7d3926}
+.human-hero{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr);min-height:min(970px,100svh);padding-top:73px;background:#f4ecdf;color:#322c27}
+.human-hero-copy{min-width:0;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(45px,6vw,110px) clamp(28px,5vw,95px) clamp(25px,3vw,48px) var(--space)}
+.human-hero-words{margin-block:auto}
+.human-eyebrow{display:flex;align-items:center;gap:12px;color:#7b5c4b;font-size:clamp(11px,1.13vw,15px);font-weight:800;line-height:1.7;margin:0 0 clamp(26px,4vw,63px)}
+.human-eyebrow:before{content:"";height:1px;width:22px;flex:none;background:#b36b4f}
+.human-hero h1{font-size:clamp(49px,5.7vw,92px);font-weight:900;letter-spacing:-.085em;line-height:1.33;margin:0;white-space:nowrap}
+.human-hero h1 span{color:#a64b30}
+.human-lead{font-size:clamp(17px,1.7vw,24px);font-weight:750;line-height:1.9;margin:clamp(17px,2.4vw,37px) 0 clamp(23px,3.5vw,55px)}
+.human-hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 24px}
+.human-primary{min-height:62px}
+.human-story-link{font-size:clamp(13px,1.18vw,17px);font-weight:800;padding:10px 0;border-bottom:1px solid #8e6657;display:inline-flex;gap:19px;align-items:center}
+.human-story-link:hover{color:#a64b30}
+.human-footnote{font-size:11px;color:#776659;line-height:1.7;margin:clamp(35px,5vw,65px) 0 0;letter-spacing:.02em}
+.human-hero-image{min-width:0;min-height:0;overflow:hidden;position:relative;margin:0;background:#bea996}
+.human-hero-image img{width:100%;height:100%;object-fit:cover;object-position:center center}
+.human-hero-image:after{content:"";position:absolute;inset:65% 0 0;background:linear-gradient(to top,#24181080,transparent);pointer-events:none}
+.human-hero-image figcaption{position:absolute;bottom:clamp(20px,3vw,53px);left:clamp(20px,3.3vw,55px);right:clamp(20px,3vw,45px);z-index:2;color:#fff;display:flex;flex-direction:column;gap:5px;text-shadow:0 2px 12px #140b0b77}
+.human-hero-image figcaption span{font-size:clamp(18px,1.6vw,25px);font-weight:850;letter-spacing:-.035em}
+.human-hero-image figcaption small{font-size:11px;font-weight:650}
+.record{background:#fdfbf7}
+.record-photo img{aspect-ratio:1.28;object-position:50% 45%}
+.record-number{color:#9c482f}
+.record-quote{border-color:#ac563d}
+.people{background:#ece6dc}
+.people-image img{aspect-ratio:1.22;object-position:50% 45%}
+.pilot{border-color:#c4b7a8}
+.pilot:first-child{border-color:#c4b7a8}
+.making{background:#303a36}
+.making .kicker{color:#d7d1c5}
+.making-gallery figcaption{color:#f5f1e9}
+.funding{background:#faf7f0}
+.funding-summary{border-color:#51473d}
+.funding-status{border-color:#d1c8bb}
+.rewards{background:#ebe1d4}
+.rewards .button{background:#3c423c}
+.rewards .button:hover{background:#744c3c}
+.finale:before{background:linear-gradient(0deg,rgba(41,30,26,.93),rgba(41,30,26,.46) 66%,rgba(41,30,26,.12))}
+.finale .kicker{color:#f7e4d8}
+.finale .button{background:#ab4e32}
+.finale .button:hover{background:#813d29}
+.flight-viewport:before{background:#a5b9b6}
+.flight-experience{background:#a5b9b6}
+.flight-viewport{background:#a5b9b6}
+.flight-shade{background:linear-gradient(90deg,rgba(27,37,34,.80),rgba(27,37,34,.4) 44%,transparent 90%),linear-gradient(0deg,rgba(27,37,34,.65),transparent 66%)}
+.flight-beat h1,.flight-beat h2{font-size:clamp(42px,5vw,80px)}
+.flight-launch{background:#f9efe4;color:#38302a}
+.flight-launch:hover{background:#fff}
+.flight-progress-segment{background:#f2d1bb}
+.flight-viewport .kicker:before{background:#e9ae8d}
+@media(max-width:1100px){
+ .human-hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .human-hero h1{font-size:clamp(41px,5.5vw,69px)}
+ .human-hero-copy{padding-right:23px}
+ .human-hero-actions{align-items:flex-start;flex-direction:column;gap:10px}
+}
+@media(max-width:760px){
+ .site-head{height:65px}
+ .nav{background:#f7f2e9;color:var(--ink);border-top:1px solid #d9cec0}
+ .nav a:not(.nav-cta){border-color:#d6c9b8}
+ .nav-cta{color:#fff;background:var(--accent)}
+ .human-hero{min-height:100svh;padding-top:65px;display:flex;flex-direction:column}
+ .human-hero-image{order:-1;height:clamp(182px,31svh,270px);min-height:0;flex:none}
+ .human-hero-image img{object-position:center 47%}
+ .human-hero-image figcaption{left:20px;right:20px;bottom:14px;gap:2px}
+ .human-hero-image figcaption span{font-size:16px}
+ .human-hero-image figcaption small{font-size:9px}
+ .human-hero-copy{flex:1;min-height:0;padding:20px var(--space) max(17px,env(safe-area-inset-bottom));justify-content:center}
+ .human-hero-words{margin:0}
+ .human-eyebrow{font-size:10px;gap:8px;line-height:1.6;margin:0 0 12px;letter-spacing:-.025em}
+ .human-eyebrow:before{width:13px}
+ .human-hero h1{font-size:clamp(30px,9.1vw,57px);letter-spacing:-.075em;line-height:1.27;white-space:normal}
+ .human-hero h1 span{white-space:nowrap}
+ .human-lead{font-size:clamp(13px,3.7vw,17px);line-height:1.55;margin:13px 0 14px}
+ .human-hero-actions{gap:5px;align-items:stretch}
+ .human-primary{width:100%;min-height:50px;padding:11px 15px;font-size:14px}
+ .human-story-link{font-size:12px;align-self:flex-start;padding:7px 0}
+ .human-footnote{display:none}
+ .record,.people,.making,.funding,.rewards{padding:74px 0}
+ .people-image img{aspect-ratio:1.48}
+ .flight-beat h2{font-size:clamp(37px,9.8vw,63px)}
+ .flight-viewport .flight-shade{background:linear-gradient(0deg,rgba(27,37,34,.95),rgba(27,37,34,.55) 49%,rgba(27,37,34,.03) 94%)}
+ .flight-viewport .flight-status{color:#fff}
+}
+@media(max-width:375px) and (max-height:700px){
+ .human-hero-image{height:188px}
+ .human-hero-copy{padding-top:17px;padding-bottom:13px}
+ .human-hero h1{font-size:34px}
+ .human-lead{margin:11px 0}
+ .human-primary{min-height:47px}
+ .human-story-link{padding:4px 0}
+}
+@media(prefers-reduced-motion:reduce){.human-hero-image img{transition:none}}
