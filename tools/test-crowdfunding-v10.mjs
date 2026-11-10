@@ -26,19 +26,19 @@ check(html.includes('./rewards/')&&existsSync('crowdfunding/rewards/index.html')
 check(html.includes('https://camp-fire.jp/projects/990337/view'),'Live support action');
 
 check(html.includes('500円から参加できます')&&html.includes('募集は2026年11月30日まで'),'Hero must state entry amount and deadline');
-check(html.indexOf('この悔しさを、次の翼へ')>html.indexOf('それでも、')&&html.indexOf('この悔しさを、次の翼へ')<html.indexOf('id="people"'),'Support CTA immediately follows emotional peak');
-check((html.match(/class="support-seat"/g)||[]).length>=7,'Each story chapter needs a supporter role');
+check(html.indexOf('次の機体づくりを支援する')>html.indexOf('それでも、')&&html.indexOf('次の機体づくりを支援する')<html.indexOf('id="people"'),'Support CTA immediately follows emotional peak');
+check(!html.includes('class="support-seat"'),'No repeated guilt-based copy');
 check(['お礼メール','トートバッグ','試験見学会','500円','7,000円','25,000円'].every(x=>html.includes(x)),'Three featured rewards with actual prices');
-check(html.includes('迷ったらこちら・おすすめ')&&!html.includes('一番選ばれている'),'Recommendation must not impersonate support statistics');
+check(html.includes('グッズで応援・おすすめ')&&!html.includes('一番選ばれている'),'Recommendation must not impersonate support statistics');
 check(!html.includes('支援状況の記録（2026年11月9日時点）'),'Historical-only funding readout removed');
-check(html.includes('現在の支援進捗率は未確認')&&!html.includes('aria-valuenow='),'Unverified progress is never presented as factual');
+check(html.includes('最新の進捗を見る')&&!html.includes('live-funding-track')&&!html.includes('aria-valuenow='),'Unverified progress is never presented as factual');
 check(html.includes('S-330の実機映像ではありません'),'Preserve honest 3D model notice');
 check(!html.includes('flight-distance-slider')&&!html.includes('fund-tab'),'Redundant interactions removed');
 check(!html.includes('assembly-graphic')&&!html.includes('next-flight-v7.css'),'Unused fake CAD and layout removed');
 check(css.includes('@media(max-width:760px)')&&css.includes('@media(prefers-reduced-motion:reduce)'),'Responsive and reduced motion');
 check(!css.includes('@import'),'Standalone CSS');
 check(css.includes('V10 | THE WORKBENCH')&&css.includes('.opening-image:before')&&css.includes('.atelier-photo:nth-child(2)'),'The independent asymmetric workbench design is missing');
-check(html.includes('集まって、つくって、直して。'),'Natural language is missing');
+check(html.includes('設計して、つくって、飛ばして。'),'Natural language is missing');
 check(html.includes('hand-to-hand-v9.css')===false,'Old styling accidentally linked');
 check(html.includes("object-src 'none'")&&!html.includes('noindex'),'Security and indexability');
 check([...html.matchAll(/<img\b[^>]*>/g)].every(m=>/\balt=/.test(m[0])),'All images have alt');
