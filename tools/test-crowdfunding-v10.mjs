@@ -24,6 +24,15 @@ check(html.includes('2026-propeller-team.jpg')&&html.includes('2026-assembly.jpg
 check(html.includes('約29万円')&&html.includes('約7.7万円')&&html.includes('約4万円')&&html.includes('410,000円'),'Funding allocations readable');
 check(html.includes('./rewards/')&&existsSync('crowdfunding/rewards/index.html'),'Published rewards page linked');
 check(html.includes('https://camp-fire.jp/projects/990337/view'),'Live support action');
+
+check(html.includes('500円から参加できます')&&html.includes('募集は2026年11月30日まで'),'Hero must state entry amount and deadline');
+check(html.indexOf('この悔しさを、次の翼へ')>html.indexOf('それでも、')&&html.indexOf('この悔しさを、次の翼へ')<html.indexOf('id="people"'),'Support CTA immediately follows emotional peak');
+check((html.match(/class="support-seat"/g)||[]).length>=7,'Each story chapter needs a supporter role');
+check(['お礼メール','トートバッグ','試験見学会','500円','7,000円','25,000円'].every(x=>html.includes(x)),'Three featured rewards with actual prices');
+check(html.includes('迷ったらこちら・おすすめ')&&!html.includes('一番選ばれている'),'Recommendation must not impersonate support statistics');
+check(!html.includes('支援状況の記録（2026年11月9日時点）'),'Historical-only funding readout removed');
+check(html.includes('現在の支援進捗率は未確認')&&!html.includes('aria-valuenow='),'Unverified progress is never presented as factual');
+check(html.includes('S-330の実機映像ではありません'),'Preserve honest 3D model notice');
 check(!html.includes('flight-distance-slider')&&!html.includes('fund-tab'),'Redundant interactions removed');
 check(!html.includes('assembly-graphic')&&!html.includes('next-flight-v7.css'),'Unused fake CAD and layout removed');
 check(css.includes('@media(max-width:760px)')&&css.includes('@media(prefers-reduced-motion:reduce)'),'Responsive and reduced motion');
