@@ -406,3 +406,14 @@ body{background:var(--cream)}
 @media(prefers-reduced-motion:reduce){
  .opening-image,.prequel-photo,.handover-photo,.atelier-photo{transition:none}
 }
+
+
+/* Narrow phones: allow the second headline to wrap if glyph widths differ. */
+@media(max-width:760px){
+ .opening h1{overflow-wrap:anywhere}
+ .opening h1 em{white-space:normal}
+ .opening-image{max-width:calc(100% - 36px)}
+}
+@media(max-width:375px){
+ .opening h1{font-size:32px}
+}
