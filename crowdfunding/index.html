@@ -22,6 +22,17 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700;800&family=Noto+Serif+JP:wght@500;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/crowdfunding/workbench-v10.css">
 <title>ふたりが飛ぶ。みんなで、飛ばす。｜TeamBirdmanTrial クラウドファンディング</title>
+<style id="support-journey-v11">
+.opening-facts{display:inline-block;margin:0 0 18px;padding:11px 15px;background:#211b16d9;border-left:3px solid #f4b99e;color:#fff;font-size:clamp(12px,1.2vw,16px);font-weight:900}.opening-facts span{padding:0 9px;color:#f4b99e}
+.support-seat{margin:28px 0 0;font-size:clamp(15px,1.55vw,21px);font-weight:850;line-height:1.9;border-left:3px solid #b45435;padding:8px 0 8px 21px;max-width:750px}
+.opening .support-seat,.finale .support-seat{color:#fff;border-color:#f4b99e;text-shadow:0 2px 8px #201813a6}
+.emotion-action{margin:30px 0 22px;padding:19px 20px 23px;background:#f4e9da;border-top:3px solid #b45435}.emotion-action .support-seat{margin:0 0 18px;padding:0;border:0;font-size:17px}.emotion-action .cta{max-width:100%}
+.flight-participation{position:absolute;bottom:70px;left:var(--gutter);right:var(--gutter);color:#fff;z-index:4;font-size:13px;text-shadow:0 2px 4px #000;pointer-events:none}.flight-participation a{pointer-events:auto;margin-left:12px;text-decoration:underline;text-underline-offset:4px}
+.impact-panel{margin:42px 0 35px;padding:clamp(24px,4vw,52px);background:#fffaf2;border:1px solid #d7c2aa}.impact-panel h3{font-family:"Noto Serif JP",serif;font-size:clamp(27px,3vw,45px);margin:0 0 15px}.impact-panel>p{line-height:1.9}.impact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#d8c7b5;margin:23px 0}.impact-grid>div{background:#fffaf2;padding:24px 18px;display:flex;flex-direction:column;gap:10px}.impact-grid strong{font:800 clamp(24px,3vw,40px)/1.2 "IBM Plex Mono",monospace;color:#a74c32}.impact-grid span{font-weight:800}.impact-grid small,.impact-note{font-size:12px;color:#736659}
+.live-funding{background:#efe5d9;padding:24px;margin-top:30px}.live-funding h3{margin:0 0 13px}.live-funding-track{height:13px;background:#d7c8b9;overflow:hidden;position:relative}.live-funding-track span{display:block;width:100%;height:100%;background:repeating-linear-gradient(110deg,#c5aa92 0 14px,#ebdbca 14px 28px);opacity:.55}.live-funding p{line-height:1.8;font-size:13px}
+.reward-choices{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:30px}.reward-choices article{background:#fffaf2;border:1px solid #d1bda7;padding:clamp(19px,2.5vw,34px);display:flex;flex-direction:column;gap:13px}.reward-choices .reward-recommended{border:3px solid #b45435;background:#f6e7d7}.reward-choices-label{font-size:12px;color:#a34b31;font-weight:900}.reward-choices h3{font-size:clamp(20px,2vw,29px);margin:0}.reward-price{font:900 clamp(29px,3vw,44px)/1.2 "IBM Plex Mono",monospace!important;color:#a74c32;margin:0!important}.reward-choices article>p:not(.reward-price){line-height:1.8;font-size:14px}.reward-choices a{margin-top:auto;background:#a84b30;color:white;padding:14px;font-weight:800;text-align:center}.reward-choices-note{grid-column:1/-1;font-size:12px;line-height:1.8}
+@media(max-width:750px){.impact-grid,.reward-choices{grid-template-columns:1fr}.opening-facts{font-size:12px}.opening-facts span{padding:0 3px}.flight-participation{bottom:80px;font-size:11px}.flight-participation a{display:block;margin:5px 0 0}.emotion-action{padding:18px 13px}}
+</style>
 </head>
 <body>
 <a href="#main" class="skip">本文へスキップ</a>
@@ -50,10 +61,12 @@
    <p class="kicker" style="color:#f9d2b8">クラウドファンディング</p>
    <h1 id="human-title">ふたりが飛ぶ。<br><em>みんなで、飛ばす。</em></h1>
    <p class="opening-copy">集まって、つくって、直して。<br>そんな日々の先の空を、あなたと。</p>
+   <p class="opening-facts">500円から参加できます <span aria-hidden="true">／</span> 募集は2026年11月30日まで</p>
    <div class="opening-actions">
     <a class="cta human-primary" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この挑戦を支援する <span aria-hidden="true">↗</span></a>
     <a class="opening-scroll" href="#record">その物語を読む <span aria-hidden="true">↓</span></a>
    </div>
+   <p class="support-seat">次の翼を飛ばす「みんな」の中に、あなたの席もあります。</p>
   </div>
  </div>
  <div class="opening-photo-credit"><span>TeamBirdmanTrial / 2026年の活動記録</span></div>
@@ -75,6 +88,7 @@
     <blockquote class="true-quote record-quote">「今回の結果には納得のいかない部分もあります」</blockquote>
     <p class="true-source">髙草木 雄太 / 26代副代表<br>2026年9月4日の公式メッセージから抜粋</p>
     <p class="prequel-details">飛び立つ瞬間の美しさと、残った悔しさ。積み重ねた経験は、引退した26代から次の世代へ託されました。</p>
+    <div class="emotion-action"><p class="support-seat">この悔しさを次の飛行につなぐ一人に、あなたもなれます。</p><a class="cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この悔しさを、次の翼へ <span aria-hidden="true">↗</span></a></div>
     <a class="text-link" href="https://teambirdmantrial.jp/news/s-320-element-%E5%BF%9C%E6%8F%B4%E3%81%82%E3%82%8A%E3%81%8C%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81/" target="_blank" rel="noopener noreferrer">本人の言葉を全文読む <span aria-hidden="true">↗</span></a>
     <a class="text-link" style="margin-left:clamp(0px,2vw,24px)" href="https://youtu.be/s1ggG4gD4V4" target="_blank" rel="noopener noreferrer">あの日の飛行映像を見る <span aria-hidden="true">▶</span></a>
    </div>
@@ -116,6 +130,7 @@
   </div>
   <div class="handover-action">
    <p>その想いを、次の一機につなぐ。<br>あなたも、支える一人に。</p>
+   <p class="support-seat">27代が受け取った想いを、あなたの支援で次の一歩へ。</p>
    <a class="cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">次の翼を支援する <span aria-hidden="true">↗</span></a>
   </div>
  </div>
@@ -138,6 +153,7 @@
    </figure>
   </div>
   <p class="atelier-finale" data-reveal>人がつくった翼を、<br><span>また、人の力で飛ばす。</span></p>
+  <p class="support-seat">あなたの参加は、この製作の日々を支える力になります。</p>
  </div>
 </section>
 <!-- Existing original 3D S-320 glTF scene, now encountered after knowing the humans. -->
@@ -165,6 +181,7 @@
    <a class="flight-link" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">実際の支援はCAMPFIREで ↗</a>
   </div>
   <p class="flight-launch-message" id="flight-launch-message" aria-live="polite">この先も、<br>一緒に。</p>
+  <p class="flight-participation">3Dで触れた翼の、その次をつくる仲間に。<a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援に参加する ↗</a></p>
   <p class="flight-footnote">※S-320の3Dモデルによる演出です。S-330の実機映像ではありません。</p>
   <div class="flight-progress" aria-hidden="true"><span><i class="flight-progress-segment"></i></span><span><i class="flight-progress-segment"></i></span><span><i class="flight-progress-segment"></i></span></div>
  </div>
@@ -176,6 +193,15 @@
    <div><p class="kicker">その支援が向かう先</p><h2 class="title serif" id="funding-title" data-reveal>想いを、<br>翼の材料へ。</h2></div>
    <p>次の機体 S-330「鵠（くぐい）」。名前には、かつて飛んだ機体から思いを受け継ぐ意味が込められています。あなたの支援は、これからの製作を支える力になります。</p>
   </div>
+<div class="impact-panel" aria-labelledby="impact-title">
+<h3 id="impact-title">あなたの支援で、翼に何が届く？</h3>
+<p>例えば500円から、次の翼に必要な材料費を支えられます。正確な「材料を何個・何m買えるか」は仕入れ単価を確認してから掲載します。</p>
+<div class="impact-grid">
+<div><strong>500円</strong><span>翼の材料費を500円分支える</span><small>材料費29万円の約0.17%相当</small></div>
+<div><strong>7,000円</strong><span>翼の材料費を7,000円分支える</span><small>材料費29万円の約2.41%相当</small></div>
+<div><strong>25,000円</strong><span>翼の材料費を25,000円分支える</span><small>材料費29万円の約8.62%相当</small></div>
+</div><p class="impact-note">※上記は金額の規模を示す比較であり、各支援金が全額材料購入に使われるという意味ではありません。部材ごとの単価と購入数量は未確認のため掲載していません。</p>
+</div>
   <div class="material-content">
    <div class="material-big">
     <strong>29<small>万円</small></strong>
@@ -190,12 +216,10 @@
     <div class="funding-total"><span>目標金額</span><strong>410,000円</strong></div>
     <p class="funding-foot">資金計画はCAMPFIREに公開された概算です。支援金の実際の使途・募集条件は公式ページをご確認ください。</p>
     <a class="text-link" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援に参加する <span aria-hidden="true">↗</span></a>
-    <details class="funding-status">
-     <summary>支援状況の記録（2026年11月9日時点）</summary>
-     <p>確認時点で支援総額37,000円、支援者3人でした。これは過去の記録で、最新の支援状況はCAMPFIREに掲載されています。</p>
-    </details>
+    <div class="live-funding" aria-labelledby="live-funding-title"><h3 id="live-funding-title">いま、どこまで届いた？</h3><div class="live-funding-track" role="progressbar" aria-label="支援目標への進捗。現在の支援額は未確認" aria-valuemin="0" aria-valuemax="410000"><span></span></div><p>目標 410,000円。現在の支援額・達成率はCAMPFIREで直接ご確認ください。最新値を検証できていないため、ここでは数値・バーの長さを確定表示していません。</p><a class="text-link" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">現在の支援状況を見る ↗</a></div>
    </div>
   </div>
+  <p class="support-seat">この製作費の一部を、あなたが支えることができます。</p>
  </div>
 </section>
 <section class="return" id="rewards" aria-labelledby="rewards-title">
@@ -206,6 +230,12 @@
    <a class="cta" href="./rewards/">返礼品を見る <span aria-hidden="true">↗</span></a>
    <small>返礼品の内容・条件は紹介ページで確認できます。支援手続きはCAMPFIREで行います。</small>
   </div>
+  <div class="reward-choices" aria-label="代表的な支援コース">
+<article><span class="reward-choices-label">まずは気持ちから</span><h3>お礼メール</h3><p class="reward-price">500円</p><p>部員からの感謝のメール。2026年12月にお届け予定。</p><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この支援を確認する ↗</a></article>
+<article class="reward-recommended"><span class="reward-choices-label">迷ったらこちら・おすすめ</span><h3>オリジナル トートバッグ</h3><p class="reward-price">7,000円</p><p>A4がぴったり収まる約32×27cm、マチなし。デザイン1種をランダムでお届け。2027年2月予定。</p><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この支援を確認する ↗</a></article>
+<article><span class="reward-choices-label">製作の現場にふれる</span><h3>試験見学会</h3><p class="reward-price">25,000円</p><p>2027年4月18日予定の2nd走行試験を見学。天候等で変更の場合あり、交通費は自己負担。</p><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この支援を確認する ↗</a></article>
+</div><p class="reward-choices-note">掲載内容は既存の返礼品紹介ページに基づきます。最新の残数・条件はCAMPFIREを優先します。「おすすめ」はサイト編集上の提案であり、選択件数の実績を示すものではありません。</p>
+  <p class="support-seat">500円の一通から、現場を見に行く体験まで。あなたの参加の形を選んでください。</p>
  </div>
 </section>
 <section class="finale" id="support" aria-labelledby="support-title">
@@ -215,6 +245,7 @@
   <h2 id="support-title" data-reveal>次の空に、<br>あなたもいてほしい。</h2>
   <p class="note">この飛行機をつくっているのは、特別な誰かだけじゃない。<br>仲間と、先輩と、支えてくれる人たち。その輪の先に、あなたがいてくれたら。</p>
   <a class="cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">次の飛行を支援する <span aria-hidden="true">↗</span></a>
+  <p class="support-seat">この一機の物語に、あなた自身の一歩を残してください。</p>
   <p class="finale-disclaimer">募集期間：2026年11月1日〜30日。支援の申し込み・決済はCAMPFIREで行われます。</p>
  </div>
 </section>
