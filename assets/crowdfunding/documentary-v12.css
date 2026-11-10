@@ -1,0 +1,125 @@
+/* Calm visual direction. Photographs are records, not scrapbook props. */
+:root{--orange:#98583c;--paper:#faf9f5;--cream:#f3f3ee;--coal:#273e35;--ink:#2e3930;--line:#cbd2c9}
+body{background:var(--cream);color:var(--ink);font-weight:500}
+.container{max-width:1240px}
+.cta{background:#2b5a47;font-size:14px;min-height:52px;padding:14px 21px;box-shadow:none}
+.cta:hover{background:#1f4335}
+.title{font-size:clamp(40px,5vw,76px)}
+.opening{background:#f3f1e9;color:#23372c;min-height:680px;height:auto;max-height:none;padding-top:70px}
+.opening:before,.opening:after,.opening-image:before,.opening-image:after{content:none;display:none}
+.opening-image{position:absolute;z-index:0;inset:70px 0 0 50%;padding:0;margin:0;transform:none;background:#d6dbd4;box-shadow:none}
+.opening-image img{object-position:50% 42%}
+.opening-inner{display:block;height:auto;min-height:610px;padding:56px 0 76px;position:relative;z-index:1}
+.opening-top{width:46%;margin:0 0 95px}
+.opening-top .mini{color:#516055}
+.opening-content{width:46%;max-width:none;padding:0;margin:0}
+.opening .kicker{color:#98583c!important}
+.opening h1{font-size:clamp(43px,5.2vw,77px);color:#263e32;line-height:1.37;letter-spacing:-.08em;white-space:nowrap;text-shadow:none;margin:0 0 19px}
+.opening h1 em{color:#98583c}
+.opening-copy{color:#3f4f42;font-weight:550;font-size:clamp(15px,1.4vw,19px);margin:0 0 20px}
+.opening-facts{font-size:13px;font-weight:750;margin:0 0 22px;padding:11px 0;background:transparent;color:#345241;border-block:1px solid #bcc9bc;border-left:0}
+.opening-actions{flex-direction:column;align-items:flex-start;gap:12px}
+.opening-actions .cta{min-width:250px}
+.opening-scroll{color:#42604e;border:0;padding:7px 0}
+.opening-photo-credit{display:none}
+.prequel{background:#faf9f5;padding:100px 0}
+.prequel:before{content:none;display:none}
+.prequel h2{font-size:clamp(42px,5.4vw,78px);transform:none}
+.prequel-heading{margin-bottom:50px}
+.prequel-story{gap:clamp(28px,5vw,72px);align-items:start}
+.prequel-photo,.handover-photo{transform:none;box-shadow:none;padding:0;background:transparent}
+.prequel-photo:before,.handover-photo:after{content:none;display:none}
+.prequel-photo img{aspect-ratio:4/3}
+.prequel-voice{padding:0;transform:none}
+.record-number{font-size:clamp(65px,7.5vw,105px);margin:0 0 20px}
+.true-quote{font-size:clamp(23px,2.5vw,35px)}
+.emotion-action{margin:26px 0 20px;border-block:1px solid var(--line);padding:19px 0}
+.emotion-note{font-size:14px;color:#526459;margin:0 0 14px;line-height:1.7}
+.handover{background:#eaece6;padding:98px 0}
+.handover-intro:after{content:none;display:none}
+.handover-intro h2{font-size:clamp(43px,5.2vw,77px)}
+.handover-intro{margin-bottom:52px}
+.handover-photo{position:static}
+.handover-photo img{aspect-ratio:4/5}
+.voice,.voice:nth-child(2),.voice:nth-child(3){margin:0;border-bottom:1px solid #bfcabc;padding:31px 0}
+.voice:before{content:none;display:none}
+.voice-quote{font-size:clamp(22px,2.5vw,33px)}
+.atelier{background:#2a4338;padding:100px 0}
+.atelier h2{font-size:clamp(45px,5.4vw,81px)}
+.atelier-photos{grid-template-columns:1.12fr .88fr;gap:22px;padding:0}
+.atelier-photo,.atelier-photo:first-child,.atelier-photo:nth-child(2){margin:0;padding:0;background:transparent;color:#edf0e9;transform:none;box-shadow:none;width:auto}
+.atelier-photo:before,.atelier-photo:first-child:before,.atelier-photo:nth-child(2):before{content:none;display:none}
+.atelier-photo img,.atelier-photo:nth-child(2) img{aspect-ratio:4/3}
+.atelier-photo figcaption{color:#e2e9e0;font-weight:500;font-size:13px}
+.atelier-finale{font-size:clamp(24px,3.2vw,42px);margin:52px 0 0;padding:30px 0 0}
+.flight-experience{height:170svh;min-height:1000px}
+.flight-beat h2{font-size:clamp(39px,4.8vw,72px)}
+.material{background:#faf9f5;padding:100px 0}
+.material-big strong{font-size:clamp(68px,8vw,115px)}
+.material-content{gap:75px}
+.funding-row{font-size:15px}
+.funding-row strong{font-size:clamp(18px,2vw,27px)}
+.funding-update{border-top:1px solid var(--line);margin-top:25px;padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.funding-update p{font-size:12px;color:#5c6a60;line-height:1.8;margin:0}
+.funding-update a{font-size:12px;font-weight:800;text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
+.return{background:#eaece6;padding:90px 0}
+.return-content{grid-template-columns:1fr 1fr;gap:30px 75px;align-items:start}
+.return-content h2{font-size:clamp(41px,5vw,75px)}
+.reward-choices{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:30px;border-top:1px solid #bfcabc}
+.reward-choices article{display:flex;flex-direction:column;gap:13px;padding:24px 22px 17px 0;border:0;border-bottom:1px solid #bfcabc;background:transparent}
+.reward-choices article+article{border-left:1px solid #bfcabc;padding-left:22px}
+.reward-choices .reward-recommended{background:#dfe7dc;padding:24px 22px;border:0;border-bottom:2px solid #41694d}
+.reward-choices h3{font-size:clamp(20px,1.9vw,27px);margin:0}
+.reward-price{font:700 clamp(29px,2.8vw,39px)/1.2 "IBM Plex Mono",monospace;color:#2a5843;margin:0}
+.reward-choices-label{font-size:11px;color:#51705a}
+.reward-choices article>p:not(.reward-price){font-size:13px;line-height:1.8}
+.reward-choices a{margin-top:auto;color:#285842;font-size:12px;font-weight:800;text-decoration:underline;text-underline-offset:4px}
+.reward-choices-note{grid-column:1/-1;color:#68776a;font-size:11px;margin-top:13px}
+.finale{min-height:620px;height:auto;max-height:none}
+.finale h2{font-size:clamp(43px,6vw,87px)}
+.finale-content{padding-bottom:85px}
+.mobile-support{display:none!important}
+@media(prefers-reduced-motion:no-preference){[data-reveal].is-visible{animation:none}}
+@media(max-width:900px){.opening-image{left:52%}.opening-content,.opening-top{width:48%}}
+@media(max-width:760px){
+ .opening{display:flex;flex-direction:column;min-height:0;height:auto;max-height:none;padding-top:65px}
+ .opening-image{order:0;position:relative;inset:auto;top:auto;left:auto;right:auto;bottom:auto;width:100%;height:clamp(175px,29svh,280px);margin:0;padding:0;transform:none;box-shadow:none}
+ .opening-inner{order:1;display:block;flex:none;min-height:0;height:auto;width:calc(100% - 2*var(--gutter));padding:24px 0 45px}
+ .opening-top,.opening-content{width:100%;max-width:none;margin:0}
+ .opening-top{margin-bottom:15px}
+ .opening h1{font-size:clamp(34px,8.7vw,53px);white-space:normal;margin:0 0 14px;line-height:1.32;overflow-wrap:normal}
+ .opening h1 em{white-space:normal}
+ .opening-copy{font-size:14px;margin:0 0 14px}
+ .opening-facts{font-size:12px;padding:10px 0;margin:0 0 14px}
+ .opening-actions{gap:4px}
+ .opening-actions .cta{width:100%;min-width:0;min-height:48px}
+ .opening-scroll{margin:0}
+ .prequel,.handover,.atelier,.material,.return{padding:68px 0}
+ .prequel-heading,.prequel-story,.handover-body,.material-head,.material-content,.return-content{display:block}
+ .prequel h2{font-size:clamp(40px,9.5vw,61px)}
+ .prequel-voice{padding-top:22px}
+ .record-number{font-size:clamp(64px,15vw,92px)}
+ .emotion-action .cta{width:100%}
+ .handover-intro h2{font-size:clamp(40px,9.5vw,63px)}
+ .handover-photo{width:100%;margin:0}
+ .handover-photo img{aspect-ratio:4/3}
+ .handover-voices{margin-top:30px}
+ .atelier-heading{display:block}
+ .atelier h2{font-size:clamp(42px,10vw,65px)}
+ .atelier-photos{display:block}
+ .atelier-photo:nth-child(2){margin:25px 0 0}
+ .atelier-photo img,.atelier-photo:nth-child(2) img{aspect-ratio:4/3}
+ .atelier-finale{font-size:24px}
+ .flight-experience{height:160svh;min-height:820px}
+ .flight-beat h2{font-size:clamp(35px,8.5vw,54px)}
+ .material-big strong{font-size:72px}
+ .funding-update{display:block}
+ .funding-update a{display:inline-block;margin-top:12px}
+ .return-content h2{font-size:clamp(40px,10vw,59px)}
+ .reward-choices{grid-template-columns:1fr;margin-top:30px}
+ .reward-choices article,.reward-choices article+article,.reward-choices .reward-recommended{border-left:0;background:transparent;padding:22px 0;border-bottom:1px solid #bfcabc}
+ .reward-choices .reward-recommended{border-left:3px solid #41694d;padding-left:16px}
+ .finale{min-height:540px;height:auto}
+ .finale h2{font-size:clamp(40px,9vw,60px)}
+}
+@media(max-width:375px){.opening h1{font-size:33px}.opening-image{height:220px}}
