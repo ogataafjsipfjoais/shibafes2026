@@ -22,16 +22,133 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700;800&family=Noto+Serif+JP:wght@500;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/crowdfunding/workbench-v10.css">
 <title>ふたりが飛ぶ。みんなで、飛ばす。｜TeamBirdmanTrial クラウドファンディング</title>
-<style id="support-journey-v11">
-.opening-facts{display:inline-block;margin:0 0 18px;padding:11px 15px;background:#211b16d9;border-left:3px solid #f4b99e;color:#fff;font-size:clamp(12px,1.2vw,16px);font-weight:900}.opening-facts span{padding:0 9px;color:#f4b99e}
-.support-seat{margin:28px 0 0;font-size:clamp(15px,1.55vw,21px);font-weight:850;line-height:1.9;border-left:3px solid #b45435;padding:8px 0 8px 21px;max-width:750px}
-.opening .support-seat,.finale .support-seat{color:#fff;border-color:#f4b99e;text-shadow:0 2px 8px #201813a6}
-.emotion-action{margin:30px 0 22px;padding:19px 20px 23px;background:#f4e9da;border-top:3px solid #b45435}.emotion-action .support-seat{margin:0 0 18px;padding:0;border:0;font-size:17px}.emotion-action .cta{max-width:100%}
-.flight-participation{position:absolute;bottom:70px;left:var(--gutter);right:var(--gutter);color:#fff;z-index:4;font-size:13px;text-shadow:0 2px 4px #000;pointer-events:none}.flight-participation a{pointer-events:auto;margin-left:12px;text-decoration:underline;text-underline-offset:4px}
-.impact-panel{margin:42px 0 35px;padding:clamp(24px,4vw,52px);background:#fffaf2;border:1px solid #d7c2aa}.impact-panel h3{font-family:"Noto Serif JP",serif;font-size:clamp(27px,3vw,45px);margin:0 0 15px}.impact-panel>p{line-height:1.9}.impact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#d8c7b5;margin:23px 0}.impact-grid>div{background:#fffaf2;padding:24px 18px;display:flex;flex-direction:column;gap:10px}.impact-grid strong{font:800 clamp(24px,3vw,40px)/1.2 "IBM Plex Mono",monospace;color:#a74c32}.impact-grid span{font-weight:800}.impact-grid small,.impact-note{font-size:12px;color:#736659}
-.live-funding{background:#efe5d9;padding:24px;margin-top:30px}.live-funding h3{margin:0 0 13px}.live-funding-track{height:13px;background:#d7c8b9;overflow:hidden;position:relative}.live-funding-track span{display:block;width:100%;height:100%;background:repeating-linear-gradient(110deg,#c5aa92 0 14px,#ebdbca 14px 28px);opacity:.55}.live-funding p{line-height:1.8;font-size:13px}
-.reward-choices{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:30px}.reward-choices article{background:#fffaf2;border:1px solid #d1bda7;padding:clamp(19px,2.5vw,34px);display:flex;flex-direction:column;gap:13px}.reward-choices .reward-recommended{border:3px solid #b45435;background:#f6e7d7}.reward-choices-label{font-size:12px;color:#a34b31;font-weight:900}.reward-choices h3{font-size:clamp(20px,2vw,29px);margin:0}.reward-price{font:900 clamp(29px,3vw,44px)/1.2 "IBM Plex Mono",monospace!important;color:#a74c32;margin:0!important}.reward-choices article>p:not(.reward-price){line-height:1.8;font-size:14px}.reward-choices a{margin-top:auto;background:#a84b30;color:white;padding:14px;font-weight:800;text-align:center}.reward-choices-note{grid-column:1/-1;font-size:12px;line-height:1.8}
-@media(max-width:750px){.impact-grid,.reward-choices{grid-template-columns:1fr}.opening-facts{font-size:12px}.opening-facts span{padding:0 3px}.flight-participation{bottom:80px;font-size:11px}.flight-participation a{display:block;margin:5px 0 0}.emotion-action{padding:18px 13px}}
+
+<style id="documentary-v12">
+/* Calm visual direction. Photographs are records, not scrapbook props. */
+:root{--orange:#98583c;--paper:#faf9f5;--cream:#f3f3ee;--coal:#273e35;--ink:#2e3930;--line:#cbd2c9}
+body{background:var(--cream);color:var(--ink);font-weight:500}
+.container{max-width:1240px}
+.cta{background:#2b5a47;font-size:14px;min-height:52px;padding:14px 21px;box-shadow:none}
+.cta:hover{background:#1f4335}
+.title{font-size:clamp(40px,5vw,76px)}
+.opening{background:#f3f1e9;color:#23372c;min-height:680px;height:auto;max-height:none;padding-top:70px}
+.opening:before,.opening:after,.opening-image:before,.opening-image:after{content:none;display:none}
+.opening-image{position:absolute;z-index:0;inset:70px 0 0 50%;padding:0;margin:0;transform:none;background:#d6dbd4;box-shadow:none}
+.opening-image img{object-position:50% 42%}
+.opening-inner{display:block;height:auto;min-height:610px;padding:56px 0 76px;position:relative;z-index:1}
+.opening-top{width:46%;margin:0 0 95px}
+.opening-top .mini{color:#516055}
+.opening-content{width:46%;max-width:none;padding:0;margin:0}
+.opening .kicker{color:#98583c!important}
+.opening h1{font-size:clamp(43px,5.2vw,77px);color:#263e32;line-height:1.37;letter-spacing:-.08em;white-space:nowrap;text-shadow:none;margin:0 0 19px}
+.opening h1 em{color:#98583c}
+.opening-copy{color:#3f4f42;font-weight:550;font-size:clamp(15px,1.4vw,19px);margin:0 0 20px}
+.opening-facts{font-size:13px;font-weight:750;margin:0 0 22px;padding:11px 0;background:transparent;color:#345241;border-block:1px solid #bcc9bc;border-left:0}
+.opening-actions{flex-direction:column;align-items:flex-start;gap:12px}
+.opening-actions .cta{min-width:250px}
+.opening-scroll{color:#42604e;border:0;padding:7px 0}
+.opening-photo-credit{display:none}
+.prequel{background:#faf9f5;padding:100px 0}
+.prequel:before{content:none;display:none}
+.prequel h2{font-size:clamp(42px,5.4vw,78px);transform:none}
+.prequel-heading{margin-bottom:50px}
+.prequel-story{gap:clamp(28px,5vw,72px);align-items:start}
+.prequel-photo,.handover-photo{transform:none;box-shadow:none;padding:0;background:transparent}
+.prequel-photo:before,.handover-photo:after{content:none;display:none}
+.prequel-photo img{aspect-ratio:4/3}
+.prequel-voice{padding:0;transform:none}
+.record-number{font-size:clamp(65px,7.5vw,105px);margin:0 0 20px}
+.true-quote{font-size:clamp(23px,2.5vw,35px)}
+.emotion-action{margin:26px 0 20px;border-block:1px solid var(--line);padding:19px 0}
+.emotion-note{font-size:14px;color:#526459;margin:0 0 14px;line-height:1.7}
+.handover{background:#eaece6;padding:98px 0}
+.handover-intro:after{content:none;display:none}
+.handover-intro h2{font-size:clamp(43px,5.2vw,77px)}
+.handover-intro{margin-bottom:52px}
+.handover-photo{position:static}
+.handover-photo img{aspect-ratio:4/5}
+.voice,.voice:nth-child(2),.voice:nth-child(3){margin:0;border-bottom:1px solid #bfcabc;padding:31px 0}
+.voice:before{content:none;display:none}
+.voice-quote{font-size:clamp(22px,2.5vw,33px)}
+.atelier{background:#2a4338;padding:100px 0}
+.atelier h2{font-size:clamp(45px,5.4vw,81px)}
+.atelier-photos{grid-template-columns:1.12fr .88fr;gap:22px;padding:0}
+.atelier-photo,.atelier-photo:first-child,.atelier-photo:nth-child(2){margin:0;padding:0;background:transparent;color:#edf0e9;transform:none;box-shadow:none;width:auto}
+.atelier-photo:before,.atelier-photo:first-child:before,.atelier-photo:nth-child(2):before{content:none;display:none}
+.atelier-photo img,.atelier-photo:nth-child(2) img{aspect-ratio:4/3}
+.atelier-photo figcaption{color:#e2e9e0;font-weight:500;font-size:13px}
+.atelier-finale{font-size:clamp(24px,3.2vw,42px);margin:52px 0 0;padding:30px 0 0}
+.flight-experience{height:170svh;min-height:1000px}
+.flight-beat h2{font-size:clamp(39px,4.8vw,72px)}
+.material{background:#faf9f5;padding:100px 0}
+.material-big strong{font-size:clamp(68px,8vw,115px)}
+.material-content{gap:75px}
+.funding-row{font-size:15px}
+.funding-row strong{font-size:clamp(18px,2vw,27px)}
+.funding-update{border-top:1px solid var(--line);margin-top:25px;padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.funding-update p{font-size:12px;color:#5c6a60;line-height:1.8;margin:0}
+.funding-update a{font-size:12px;font-weight:800;text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
+.return{background:#eaece6;padding:90px 0}
+.return-content{grid-template-columns:1fr 1fr;gap:30px 75px;align-items:start}
+.return-content h2{font-size:clamp(41px,5vw,75px)}
+.reward-choices{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:30px;border-top:1px solid #bfcabc}
+.reward-choices article{display:flex;flex-direction:column;gap:13px;padding:24px 22px 17px 0;border:0;border-bottom:1px solid #bfcabc;background:transparent}
+.reward-choices article+article{border-left:1px solid #bfcabc;padding-left:22px}
+.reward-choices .reward-recommended{background:#dfe7dc;padding:24px 22px;border:0;border-bottom:2px solid #41694d}
+.reward-choices h3{font-size:clamp(20px,1.9vw,27px);margin:0}
+.reward-price{font:700 clamp(29px,2.8vw,39px)/1.2 "IBM Plex Mono",monospace;color:#2a5843;margin:0}
+.reward-choices-label{font-size:11px;color:#51705a}
+.reward-choices article>p:not(.reward-price){font-size:13px;line-height:1.8}
+.reward-choices a{margin-top:auto;color:#285842;font-size:12px;font-weight:800;text-decoration:underline;text-underline-offset:4px}
+.reward-choices-note{grid-column:1/-1;color:#68776a;font-size:11px;margin-top:13px}
+.finale{min-height:620px;height:auto;max-height:none}
+.finale h2{font-size:clamp(43px,6vw,87px)}
+.finale-content{padding-bottom:85px}
+.mobile-support{display:none!important}
+@media(prefers-reduced-motion:no-preference){[data-reveal].is-visible{animation:none}}
+@media(max-width:900px){.opening-image{left:52%}.opening-content,.opening-top{width:48%}}
+@media(max-width:760px){
+ .opening{display:flex;flex-direction:column;min-height:0;height:auto;max-height:none;padding-top:65px}
+ .opening-image{order:0;position:relative;inset:auto;top:auto;left:auto;right:auto;bottom:auto;width:100%;height:clamp(220px,42svh,390px);margin:0;padding:0;transform:none;box-shadow:none}
+ .opening-inner{order:1;display:block;flex:none;min-height:0;height:auto;width:calc(100% - 2*var(--gutter));padding:24px 0 45px}
+ .opening-top,.opening-content{width:100%;max-width:none;margin:0}
+ .opening-top{margin-bottom:15px}
+ .opening h1{font-size:clamp(34px,8.7vw,53px);white-space:normal;margin:0 0 14px;line-height:1.32;overflow-wrap:normal}
+ .opening h1 em{white-space:normal}
+ .opening-copy{font-size:14px;margin:0 0 14px}
+ .opening-facts{font-size:12px;padding:10px 0;margin:0 0 14px}
+ .opening-actions{gap:4px}
+ .opening-actions .cta{width:100%;min-width:0;min-height:48px}
+ .opening-scroll{margin:0}
+ .prequel,.handover,.atelier,.material,.return{padding:68px 0}
+ .prequel-heading,.prequel-story,.handover-body,.material-head,.material-content,.return-content{display:block}
+ .prequel h2{font-size:clamp(40px,9.5vw,61px)}
+ .prequel-voice{padding-top:22px}
+ .record-number{font-size:clamp(64px,15vw,92px)}
+ .emotion-action .cta{width:100%}
+ .handover-intro h2{font-size:clamp(40px,9.5vw,63px)}
+ .handover-photo{width:100%;margin:0}
+ .handover-photo img{aspect-ratio:4/3}
+ .handover-voices{margin-top:30px}
+ .atelier-heading{display:block}
+ .atelier h2{font-size:clamp(42px,10vw,65px)}
+ .atelier-photos{display:block}
+ .atelier-photo:nth-child(2){margin:25px 0 0}
+ .atelier-photo img,.atelier-photo:nth-child(2) img{aspect-ratio:4/3}
+ .atelier-finale{font-size:24px}
+ .flight-experience{height:160svh;min-height:820px}
+ .flight-beat h2{font-size:clamp(35px,8.5vw,54px)}
+ .material-big strong{font-size:72px}
+ .funding-update{display:block}
+ .funding-update a{display:inline-block;margin-top:12px}
+ .return-content h2{font-size:clamp(40px,10vw,59px)}
+ .reward-choices{grid-template-columns:1fr;margin-top:30px}
+ .reward-choices article,.reward-choices article+article,.reward-choices .reward-recommended{border-left:0;background:transparent;padding:22px 0;border-bottom:1px solid #bfcabc}
+ .reward-choices .reward-recommended{border-left:3px solid #41694d;padding-left:16px}
+ .finale{min-height:540px;height:auto}
+ .finale h2{font-size:clamp(40px,9vw,60px)}
+}
+@media(max-width:375px){.opening h1{font-size:33px}.opening-image{height:220px}}
 </style>
 </head>
 <body>
@@ -60,14 +177,13 @@
   <div class="opening-content">
    <p class="kicker" style="color:#f9d2b8">クラウドファンディング</p>
    <h1 id="human-title">ふたりが飛ぶ。<br><em>みんなで、飛ばす。</em></h1>
-   <p class="opening-copy">集まって、つくって、直して。<br>そんな日々の先の空を、あなたと。</p>
+   <p class="opening-copy">設計して、つくって、飛ばして。<br>2026年の記録と、次の機体づくり。</p>
    <p class="opening-facts">500円から参加できます <span aria-hidden="true">／</span> 募集は2026年11月30日まで</p>
    <div class="opening-actions">
-    <a class="cta human-primary" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この挑戦を支援する <span aria-hidden="true">↗</span></a>
-    <a class="opening-scroll" href="#record">その物語を読む <span aria-hidden="true">↓</span></a>
+    <a class="cta human-primary" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援する <span aria-hidden="true">↗</span></a>
+    <a class="opening-scroll" href="#record">活動の記録を見る <span aria-hidden="true">↓</span></a>
    </div>
-   <p class="support-seat">次の翼を飛ばす「みんな」の中に、あなたの席もあります。</p>
-  </div>
+   </div>
  </div>
  <div class="opening-photo-credit"><span>TeamBirdmanTrial / 2026年の活動記録</span></div>
 </section>
@@ -88,7 +204,7 @@
     <blockquote class="true-quote record-quote">「今回の結果には納得のいかない部分もあります」</blockquote>
     <p class="true-source">髙草木 雄太 / 26代副代表<br>2026年9月4日の公式メッセージから抜粋</p>
     <p class="prequel-details">飛び立つ瞬間の美しさと、残った悔しさ。積み重ねた経験は、引退した26代から次の世代へ託されました。</p>
-    <div class="emotion-action"><p class="support-seat">この悔しさを次の飛行につなぐ一人に、あなたもなれます。</p><a class="cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この悔しさを、次の翼へ <span aria-hidden="true">↗</span></a></div>
+    <div class="emotion-action"><p class="emotion-note">2026年の経験を、次の機体 S-330 の製作へ。</p><a class="cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">次の機体づくりを支援する <span aria-hidden="true">↗</span></a></div>
     <a class="text-link" href="https://teambirdmantrial.jp/news/s-320-element-%E5%BF%9C%E6%8F%B4%E3%81%82%E3%82%8A%E3%81%8C%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81/" target="_blank" rel="noopener noreferrer">本人の言葉を全文読む <span aria-hidden="true">↗</span></a>
     <a class="text-link" style="margin-left:clamp(0px,2vw,24px)" href="https://youtu.be/s1ggG4gD4V4" target="_blank" rel="noopener noreferrer">あの日の飛行映像を見る <span aria-hidden="true">▶</span></a>
    </div>
@@ -99,8 +215,8 @@
 <section class="handover" id="people" aria-labelledby="people-title">
  <div class="container">
   <div class="handover-intro">
-   <div><p class="kicker">次へ手渡す</p><h2 id="people-title" data-reveal>一人の想いが、<br><span>次の誰かへ。</span></h2></div>
-   <p>悔しかった人がいる。その気持ちを受け取って、また工具を手にする人がいる。</p>
+   <div><p class="kicker">次へ手渡す</p><h2 id="people-title" data-reveal>経験を、<br><span>次の世代へ。</span></h2></div>
+   <p>2026年の大会を終え、27代が次の機体の製作を引き継ぎました。</p>
   </div>
   <div class="handover-body">
    <figure class="handover-photo" data-reveal>
@@ -128,11 +244,7 @@
     </article>
    </div>
   </div>
-  <div class="handover-action">
-   <p>その想いを、次の一機につなぐ。<br>あなたも、支える一人に。</p>
-   <p class="support-seat">27代が受け取った想いを、あなたの支援で次の一歩へ。</p>
-   <a class="cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">次の翼を支援する <span aria-hidden="true">↗</span></a>
-  </div>
+  
  </div>
 </section>
 <!-- Craftsmanship: actual documentary shots, without claims about an exact date, quantity, or worker. -->
@@ -152,9 +264,8 @@
     <figcaption>確かめる。もう一度、丁寧に。</figcaption>
    </figure>
   </div>
-  <p class="atelier-finale" data-reveal>人がつくった翼を、<br><span>また、人の力で飛ばす。</span></p>
-  <p class="support-seat">あなたの参加は、この製作の日々を支える力になります。</p>
- </div>
+  <p class="atelier-finale" data-reveal>設計と製作の積み重ねが、<br><span>一機の飛行機になる。</span></p>
+  </div>
 </section>
 <!-- Existing original 3D S-320 glTF scene, now encountered after knowing the humans. -->
 <section class="flight-experience" id="flight-experience" aria-labelledby="main-title">
@@ -164,10 +275,10 @@
   <div class="flight-shade" aria-hidden="true"></div>
   <p class="flight-status" id="flight-status" role="status" aria-live="polite">S-320の3Dモデルを準備しています。</p>
   <div class="flight-beat is-current" data-flight-beat="0">
-   <p class="kicker">あの日の機体を、あなたの手で</p>
-   <h2 id="main-title">この翼には、<br><span>みんながいる。</span></h2>
+   <p class="kicker">S-320 / 3Dアーカイブ</p>
+   <h2 id="main-title">S-320を、<br><span>立体で見る。</span></h2>
    <p class="message">仲間がつくったS-320の形を、3Dで近くから。</p>
-   <a class="cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">次の一機を支援する <span aria-hidden="true">↗</span></a>
+   
   </div>
   <div class="flight-beat" data-flight-beat="1">
    <p class="kicker">S-320 / 人力飛行機</p>
@@ -175,13 +286,13 @@
    <p class="message">設計し、組み立て、琵琶湖へ届けた翼。</p>
   </div>
   <div class="flight-beat" data-flight-beat="2">
-   <p class="kicker">次はあなたの番</p>
+   <p class="kicker">3D体験</p>
    <h2>あの翼を、<br><span>飛ばしてみる。</span></h2>
    <button class="flight-launch" type="button" id="flight-launch">3Dで飛ばす ↗</button>
-   <a class="flight-link" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">実際の支援はCAMPFIREで ↗</a>
+   
   </div>
   <p class="flight-launch-message" id="flight-launch-message" aria-live="polite">この先も、<br>一緒に。</p>
-  <p class="flight-participation">3Dで触れた翼の、その次をつくる仲間に。<a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援に参加する ↗</a></p>
+  
   <p class="flight-footnote">※S-320の3Dモデルによる演出です。S-330の実機映像ではありません。</p>
   <div class="flight-progress" aria-hidden="true"><span><i class="flight-progress-segment"></i></span><span><i class="flight-progress-segment"></i></span><span><i class="flight-progress-segment"></i></span></div>
  </div>
@@ -193,15 +304,7 @@
    <div><p class="kicker">その支援が向かう先</p><h2 class="title serif" id="funding-title" data-reveal>想いを、<br>翼の材料へ。</h2></div>
    <p>次の機体 S-330「鵠（くぐい）」。名前には、かつて飛んだ機体から思いを受け継ぐ意味が込められています。あなたの支援は、これからの製作を支える力になります。</p>
   </div>
-<div class="impact-panel" aria-labelledby="impact-title">
-<h3 id="impact-title">あなたの支援で、翼に何が届く？</h3>
-<p>例えば500円から、次の翼に必要な材料費を支えられます。正確な「材料を何個・何m買えるか」は仕入れ単価を確認してから掲載します。</p>
-<div class="impact-grid">
-<div><strong>500円</strong><span>支援金500円の規模を知る</span><small>材料費29万円の約0.17%相当</small></div>
-<div><strong>7,000円</strong><span>支援金7,000円の規模を知る</span><small>材料費29万円の約2.41%相当</small></div>
-<div><strong>25,000円</strong><span>支援金25,000円の規模を知る</span><small>材料費29万円の約8.62%相当</small></div>
-</div><p class="impact-note">※上記は金額の規模を示す比較であり、各支援金が全額材料購入に使われるという意味ではありません。部材ごとの単価と購入数量は未確認のため掲載していません。</p>
-</div>
+
   <div class="material-content">
    <div class="material-big">
     <strong>29<small>万円</small></strong>
@@ -215,37 +318,34 @@
     </div>
     <div class="funding-total"><span>目標金額</span><strong>410,000円</strong></div>
     <p class="funding-foot">資金計画はCAMPFIREに公開された概算です。支援金の実際の使途・募集条件は公式ページをご確認ください。</p>
-    <a class="text-link" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援に参加する <span aria-hidden="true">↗</span></a>
-    <div class="live-funding" aria-labelledby="live-funding-title"><h3 id="live-funding-title">いま、どこまで届いた？</h3><div class="live-funding-track" role="img" aria-label="現在の支援進捗率は未確認のため表示していません"><span></span></div><p>目標 410,000円。現在の支援額・達成率はCAMPFIREで直接ご確認ください。外部サイトの数字を継続的に同期する仕組みがないため、このページでは未確認の進捗値を表示しません。</p><a class="text-link" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">現在の支援状況を見る ↗</a></div>
+    
+    <div class="funding-update"><p><strong>現在の支援状況</strong><br>支援額・支援人数はCAMPFIREの最新表示をご確認ください。</p><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">最新の進捗を見る ↗</a></div>
    </div>
   </div>
-  <p class="support-seat">この製作費の一部を、あなたが支えることができます。</p>
- </div>
+  </div>
 </section>
 <section class="return" id="rewards" aria-labelledby="rewards-title">
  <div class="container return-content">
-  <div><p class="kicker">感謝を、あなたのもとへ</p><h2 class="title serif" id="rewards-title" data-reveal>応援のかたちは、<br>一つじゃない。</h2></div>
+  <div><p class="kicker">支援コース</p><h2 class="title serif" id="rewards-title" data-reveal>返礼品を、<br>選ぶ。</h2></div>
   <div class="return-side">
-   <p>気持ちを届けたい人も、ものづくりを近くで見たい人も。公開中の返礼品10コースから、あなたらしい応援を選べます。</p>
+   <p>お礼メールから、製作の現場を見られる見学会まで。返礼品は全10コース。</p>
    <a class="cta" href="./rewards/">返礼品を見る <span aria-hidden="true">↗</span></a>
    <small>返礼品の内容・条件は紹介ページで確認できます。支援手続きはCAMPFIREで行います。</small>
   </div>
   <div class="reward-choices" aria-label="代表的な支援コース">
 <article><span class="reward-choices-label">まずは気持ちから</span><h3>お礼メール</h3><p class="reward-price">500円</p><p>部員からの感謝のメール。2026年12月にお届け予定。</p><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この支援を確認する ↗</a></article>
-<article class="reward-recommended"><span class="reward-choices-label">迷ったらこちら・おすすめ</span><h3>オリジナル トートバッグ</h3><p class="reward-price">7,000円</p><p>A4がぴったり収まる約32×27cm、マチなし。デザイン1種をランダムでお届け。2027年2月予定。</p><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この支援を確認する ↗</a></article>
+<article class="reward-recommended"><span class="reward-choices-label">グッズで応援・おすすめ</span><h3>オリジナル トートバッグ</h3><p class="reward-price">7,000円</p><p>A4がぴったり収まる約32×27cm、マチなし。デザイン1種をランダムでお届け。2027年2月予定。</p><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この支援を確認する ↗</a></article>
 <article><span class="reward-choices-label">製作の現場にふれる</span><h3>試験見学会</h3><p class="reward-price">25,000円</p><p>2027年4月18日予定の2nd走行試験を見学。天候等で変更の場合あり、交通費は自己負担。</p><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">この支援を確認する ↗</a></article>
-</div><p class="reward-choices-note">掲載内容は既存の返礼品紹介ページに基づきます。最新の残数・条件はCAMPFIREを優先します。「おすすめ」はサイト編集上の提案であり、選択件数の実績を示すものではありません。</p>
-  <p class="support-seat">500円の一通から、現場を見に行く体験まで。あなたの参加の形を選んでください。</p>
- </div>
+</div><p class="reward-choices-note">返礼品の最新情報・残数・申込条件はCAMPFIREをご確認ください。「おすすめ」は編集上の提案で、人気ランキングではありません。</p>
+  </div>
 </section>
 <section class="finale" id="support" aria-labelledby="support-title">
  <img src="../assets/crowdfunding/2026-propeller-team.jpg" width="2560" height="1706" alt="" loading="lazy" decoding="async">
  <div class="container finale-content">
   <p class="kicker">次の一機へ / S-330「鵠」</p>
-  <h2 id="support-title" data-reveal>次の空に、<br>あなたもいてほしい。</h2>
-  <p class="note">この飛行機をつくっているのは、特別な誰かだけじゃない。<br>仲間と、先輩と、支えてくれる人たち。その輪の先に、あなたがいてくれたら。</p>
-  <a class="cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">次の飛行を支援する <span aria-hidden="true">↗</span></a>
-  <p class="support-seat">この一機の物語に、あなた自身の一歩を残してください。</p>
+  <h2 id="support-title" data-reveal>次の機体を、<br>つくっています。</h2>
+  <p class="note">S-330「鵠」の製作を進めています。活動や返礼品をご覧になって、支援を検討いただけます。</p>
+  <a class="cta" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援する <span aria-hidden="true">↗</span></a>
   <p class="finale-disclaimer">募集期間：2026年11月1日〜30日。支援の申し込み・決済はCAMPFIREで行われます。</p>
  </div>
 </section>
@@ -256,7 +356,6 @@
   <div class="footer-links"><a href="https://teambirdmantrial.jp/gallery/" target="_blank" rel="noopener noreferrer">活動記録</a><a href="./rewards/">返礼品</a><a href="#main">ページ上部 ↑</a></div>
  </div>
 </footer>
-<div class="mobile-support"><a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援する <span aria-hidden="true">↗</span></a></div>
 <script defer src="../assets/crowdfunding/clarity-v8.js"></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
 <script type="module" src="../assets/crowdfunding/flight-3d.js"></script>
