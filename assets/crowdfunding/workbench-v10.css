@@ -417,3 +417,11 @@ body{background:var(--cream)}
 @media(max-width:375px){
  .opening h1{font-size:32px}
 }
+
+/* Mobile scrapbook frames: rotate within the sheet, never beyond the viewport. */
+@media(max-width:760px){
+ .handover{overflow-x:clip}
+ .handover-body{max-width:100%;min-width:0}
+ .handover-photo{width:min(90%,calc(100vw - 72px));max-width:100%;margin:0 auto}
+ .atelier-photo:nth-child(2){width:77%;margin-right:7%}
+}
