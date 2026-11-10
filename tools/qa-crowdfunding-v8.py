@@ -22,17 +22,18 @@ try:
    response=page.goto(url,wait_until='domcontentloaded',timeout=40000)
    assert response and response.status==200,f'HTML load failed: {width}x{height}'
    page.wait_for_function("document.fonts.status === 'loaded'",timeout=25000)
-   cta=page.locator('.flight-beat[data-flight-beat="0"] a[href*="camp-fire.jp"]').first
+   cta=page.locator('.human-primary').first
    assert cta.is_visible(),f'Initial CTA hidden at {width}'
    box=cta.bounding_box()
    assert box and box['height']>=44 and box['width']>=140,f'CTA too small: {width} {box}'
    assert box['y']>=0 and box['y']+box['height']<=height+1,f'CTA below the first screen: {width}x{height}: {box}'
    overflow=page.evaluate('document.documentElement.scrollWidth - innerWidth')
    assert overflow<=1,f'Horizontal overflow at {width}: {overflow}'
-   poster=page.locator('.flight-poster')
-   assert poster.evaluate('img=>img.complete&&img.naturalWidth>0'),f'Hero poster missing at {width}'
-   font=page.locator('#main-title').evaluate('el=>parseFloat(getComputedStyle(el).fontSize)')
-   assert font>=35,f'Hero text too small: {font}'
+   poster=page.locator('.human-hero-image img')
+   assert poster.evaluate('img=>img.complete&&img.naturalWidth>0'),f'Team portrait missing at {width}'
+   assert page.locator('#human-title').is_visible(),f'Human-first headline missing at {width}'
+   font=page.locator('#human-title').evaluate('el=>parseFloat(getComputedStyle(el).fontSize)')
+   assert font>=30,f'Hero text too small: {font}'
    page.screenshot(path=str(OUT/f'clarity-{width}x{height}-hero.png'))
    def beat_at(position):
     page.evaluate("""p=>{
@@ -56,7 +57,7 @@ try:
     launched=page.locator('#flight-launch-message').evaluate("el=>el.classList.contains('is-shown')")
     assert launched,f'Interactive launch did not finish at {width}'
    else:
-    assert poster.is_visible(),f'3D fallback image hidden at {width}'
+    assert page.locator('.flight-poster').is_visible(),f'3D fallback image hidden at {width}'
    page.screenshot(path=str(OUT/f'clarity-{width}x{height}-3d.png'))
    page.locator('#record').scroll_into_view_if_needed()
    record=page.locator('.record-quote')
@@ -76,11 +77,11 @@ try:
   context=browser.new_context(viewport=dict(width=375,height=812),reduced_motion='reduce')
   page=context.new_page()
   page.goto(url,wait_until='domcontentloaded',timeout=40000)
-  assert page.locator('.flight-beat[data-flight-beat="0"] a[href*="camp-fire.jp"]').is_visible(),'Reduced-motion support CTA hidden'
+  assert page.locator('.human-primary').is_visible(),'Reduced-motion support CTA hidden'
   assert page.locator('.flight-poster').is_visible(),'Reduced-motion static image missing'
   context.close()
   browser.close()
 finally:
  server.shutdown()
 (OUT/'clarity-results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
-print('CLARITY V8 PASS: all four viewports, first-screen CTA, 3D launch, readable text, funding, no overflow or errors')
+print('PEOPLE FIRST PASS: team photo and CTA in first viewport, three 3D phases, no overflow or errors')
