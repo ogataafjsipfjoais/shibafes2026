@@ -101,6 +101,7 @@
     if(reducedMotion||!state.ready){openInfo('3Dが利用できないため、読む形式で物語を表示しています。');return;}
     resetScene();
     state.mode='flying';
+    root.classList.add('has-started');
     show(intro,false);show(info,false);show(finale,false);show(pausePanel,false);show(hud,true);
     progressText.textContent='GATE 00 / 04';
     chapterNum.textContent='FLIGHT / 00';
