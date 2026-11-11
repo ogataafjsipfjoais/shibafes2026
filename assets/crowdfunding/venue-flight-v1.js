@@ -60,7 +60,7 @@ function drawVenue(scene){
  water.rotation.x=-Math.PI/2;
  // Faint water surface reflection lines, cheap enough for a phone.
  const lineMat=new T.MeshBasicMaterial({color:0xa7d7dc,transparent:true,opacity:.16});
- for(let row=0;row<48;row++){
+ for(let row=0;row<(lightModel?18:48);row++){ 
   const z=-(row*11+8);
   for(let k=0;k<3;k++){
    const length=1.4+(row%4)*1.0;
@@ -85,7 +85,7 @@ function drawVenue(scene){
  // Eastern shore behind the platform, sandy ground and dark trees.
  mesh(new T.PlaneGeometry(650,240),sand,scene,0,-.59,155).rotation.x=-Math.PI/2;
  mesh(new T.BoxGeometry(650,2,85),forest,scene,0,.18,235);
- for(let i=0;i<34;i++){
+ for(let i=0;i<(lightModel?14:34);i++){ 
   const x=-190+i*12+(i%3)*2,z=82+(i%5)*11;
   mesh(new T.CylinderGeometry(.18,.26,3.2,6),wood,scene,x,1.9,z);
   const tree=mesh(new T.ConeGeometry(2.5+(i%3)*.4,6+(i%5),7),forest,scene,x,6,z);
@@ -132,7 +132,7 @@ function drawVenue(scene){
  }
  // A few small safety boats and buoys in the lake.
  const buoyMat=mat(0xe0a25d);
- for(let i=0;i<24;i++){
+ for(let i=0;i<(lightModel?12:24);i++){ 
   const x=(i%6-2.5)*25,z=-(22+Math.floor(i/6)*60);
   mesh(new T.SphereGeometry(.35,8,6),buoyMat,scene,x,-.1,z);
  }
