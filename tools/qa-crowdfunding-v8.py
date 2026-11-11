@@ -100,6 +100,38 @@ try:
   assert page.locator('.flight-poster').is_visible(),'Static S-320 rendering missing'
   assert page.locator('.chapter').count()==4
   ctx.close()
+  # iPad Safari-like touch environment: enforce real production CSP (no bypass).
+  # This specifically catches the Meshopt WASM CSP issue concealed by older tests.
+  ipad=browser.new_context(
+   viewport={'width':1024,'height':768},
+   device_scale_factor=2,
+   has_touch=True,
+   is_mobile=False,
+   bypass_csp=False,
+   user_agent='Mozilla/5.0 (iPad; CPU OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1'
+  )
+  ipad_page=ipad.new_page()
+  ipad_errors=[]
+  ipad_console=[]
+  ipad_page.on('pageerror',lambda e:ipad_errors.append(str(e)))
+  ipad_page.on('console',lambda m:ipad_console.append(m.text) if m.type=='error' else None)
+  ipad_page.goto(URL,wait_until='domcontentloaded',timeout=45000)
+  ipad_page.locator('#pilot-stage').scroll_into_view_if_needed()
+  # Locators do not require injecting page eval blocked by CSP.
+  ipad_page.locator('#pilot-stage.is-ready').wait_for(state='attached',timeout=60000)
+  assert ipad_page.locator('#pilot-begin').is_enabled(),'Touch pilot takeoff button is disabled'
+  ipad_page.locator('#pilot-begin').click()
+  ipad_page.locator('#pilot-hud').wait_for(state='visible',timeout=10000)
+  aircraft=ipad_page.evaluate('window.TBTVenueFlight.aircraft')
+  assert aircraft=='s320-mobile.glb',f'iPad did not use low-memory festival model: {aircraft}'
+  ipad_page.screenshot(path=str(OUT/'pilot-ipad-csp-enforced.png'))
+  ipad_page.locator('#pilot-quit').click()
+  ipad_page.locator('#flight').scroll_into_view_if_needed()
+  ipad_page.locator('#flight-stage.has-fallback').wait_for(state='attached',timeout=6000)
+  assert 'タッチ端末では負荷を抑え' in ipad_page.locator('#model-status').inner_text(),'Touch scroll static fallback missing'
+  assert not ipad_errors,f'iPad-like uncaught JS errors: {ipad_errors} console={ipad_console}'
+  print(json.dumps({'viewport':'1024x768 touch iPad-like','model':aircraft,'CSP':'enforced','pilot':'ready','scroll3d':'static to avoid dual contexts'},ensure_ascii=False),flush=True)
+  ipad.close()
   browser.close()
 finally:
  server.shutdown()
