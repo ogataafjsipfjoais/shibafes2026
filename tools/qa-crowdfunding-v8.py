@@ -21,6 +21,8 @@ try:
             ctx=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=1,ignore_https_errors=True,reduced_motion='no-preference')
             page=ctx.new_page()
             errors=[]
+            browser_console=[]
+            page.on('console',lambda msg:browser_console.append(msg.type+': '+msg.text) if msg.type in ('warning','error') else None)
             page.on('pageerror',lambda error:errors.append(str(error)))
             resp=page.goto(url,wait_until='domcontentloaded',timeout=55000)
             assert resp and resp.status==200,f'HTML not available: {width}x{height}'
@@ -36,7 +38,11 @@ try:
             assert overflow<=1,f'Horizontal overflow {width}: {overflow}'
             page.screenshot(path=str(OUT/f'gate-{width}x{height}-intro.png'))
             ready=page.evaluate('TBTFlight.ready')
-            assert ready,f'Three.js/WebGL scene not ready on {width}x{height}'
+            assert ready,f'WebGL initialization failed at {width}x{height}; diagnostic='+json.dumps(page.evaluate("""() => ({
+                three:typeof window.THREE,webgl:!!document.createElement('canvas').getContext('webgl'),
+                status:document.getElementById('status-text')?.textContent,
+                game:window.TBTFlight,src:[...document.scripts].map(s=>s.src)
+            })"""),ensure_ascii=False)+' console='+str(browser_console)+' jsErrors='+str(errors)
             cta.click()
             assert page.locator('#hud').is_visible(),f'HUD unavailable at {width}'
             assert page.evaluate('TBTFlight.mode')=='flying',f'Not flying at {width}'
