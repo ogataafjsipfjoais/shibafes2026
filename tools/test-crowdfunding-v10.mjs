@@ -24,7 +24,9 @@ check((html.match(/<aside\b/g)||[]).length===1,'One compact documentary source s
 check(['S-330「鵠」の機体製作へのご支援お願い致します。','鳥人間コンテストへの出場そして記録更新を目指します。','次の機体は、','あなたの支援で飛ぶ。'].every(x=>html.includes(x)),'User-approved hero wording');
 check(['180.67m','髙草木雄太','大谷映奈','2026年11月30日','410,000円','500円','7,000円','25,000円'].every(x=>html.includes(x)),'Campaign and reward facts retained');
 check(['鳥人間コンテスト2026で','02 / 2027年','来年の機体','次の機体製作のために'].every(x=>html.includes(x)),'Requested 3 summary captions retained');
-check(html.includes('href="#rewards"')&&!html.includes('href="#flight"'),'Finale continues to rewards, not deleted stage');
+check(!html.includes('href="#flight"')&&!html.includes('id="pilot-repeat"')&&!html.includes('id="pilot-finish"'),'No replay button or interrupting finale overlay');
+check(html.includes('id="pilot-support"')&&html.includes('href="#pilot"'),'Support is available while flying, with original flight anchor');
+check(html.includes('自動で4つのゲートを通過し')&&html.includes('繰り返しつながります'),'Automatic infinite-loop behavior is explained');
 check(html.includes('金銭的なリターンはありません'),'Support is not an investment');
 check(html.includes('https://camp-fire.jp/projects/990337/view'),'CAMPFIRE is the payment destination');
 check(!html.includes('href="./rewards/"'),'Do not route through outdated rewards micro-site');
@@ -37,6 +39,12 @@ check(html.includes('S-330の実機や飛行映像ではありません'),'3D da
 check((html.match(/https:\/\/teambirdmantrial\.jp\/news\//g)||[]).length===2 && html.includes('https://teambirdmantrial.jp/gallery/'),'Two sourced statements and gallery link');
 check(pilot.includes('s320-')&&pilot.includes('GLTFLoader')&&pilot.includes('setMeshoptDecoder'),'Original festival aircraft loaded through GLTF');
 check(pilot.includes('gateSpots')&&pilot.includes('pass()')&&pilot.includes("state.mode='takeoff'"),'Real 4-gate pilot kept');
+check(pilot.includes('state.loops++')&&pilot.includes('prepareNextLoop(now)')&&pilot.includes("state.mode='looping'"),'Completed four-gate flight restarts automatically');
+check(pilot.includes('nextGate.x')&&pilot.includes('nextGate.y')&&pilot.includes('input.lastManual'),'Autopilot eventually clears gates even without touch input');
+check(!pilot.includes('repeatBtn')&&!pilot.includes('finishFlight()')&&!pilot.includes("state.mode='complete'"),'No manual replay requirement or permanent completion state');
+check(pilotCSS.includes('is-loop-transition')&&pilotCSS.includes('.pilot-support'),'Smooth replay and direct support action');
+check(pilotCSS.includes('.pilot-hud[hidden]{display:none!important}'),'HUD remains hidden until takeoff');
+
 check(pilot.includes('function maybeAutoStart()')&&pilot.includes('aircraft.rotation.y=Math.PI'),'Auto takeoff and correct heading');
 check(pilot.includes('pointermove')&&pilot.includes('pointerdown')&&pilot.includes('arrowleft'),'Pointer/touch/keyboard steering retained');
 check(pilot.includes('touchLimited')&&pilot.includes("lightModel?'mobile':'desktop'"),'iPad selects lightweight GLB');
