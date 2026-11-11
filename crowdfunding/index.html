@@ -2,127 +2,121 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#101b19">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#122a25">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="description" content="S-330「鵠」の機体製作へのご支援お願い致します。二人乗り人力プロペラ機で、鳥人間コンテストへの出場と記録更新を目指します。TeamBirdmanTrialの飛行体験型クラウドファンディングサイト。">
+<meta name="description" content="TeamBirdmanTrialのクラウドファンディング。S-320 Elementの実際の3D機体データをスクロールで見ながら、S-330「鵠」への挑戦と返礼品を知る。目標41万円、500円から支援できます。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="次の機体は、あなたの支援で飛ぶ。｜TeamBirdmanTrial">
-<meta property="og:description" content="操縦して、4つのゲートを越える。S-320の記録と27代のS-330「鵠」への挑戦をたどる体験型クラウドファンディングサイト。">
+<meta property="og:description" content="スクロールだけでS-320の実際の3Dデータと、26代から27代へつながる物語をたどる。S-330「鵠」クラウドファンディング。">
 <meta property="og:url" content="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/">
 <meta property="og:image" content="https://ogataafjsipfjoais.github.io/shibafes2026/assets/crowdfunding/2026-propeller-team.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests">
-<link rel="icon" type="image/svg+xml" href="../assets/tbt-official-emblem.svg">
 <link rel="canonical" href="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/">
+<link rel="icon" type="image/svg+xml" href="../assets/tbt-official-emblem.svg">
 <link rel="preload" href="../assets/crowdfunding/2026-propeller-team.jpg" as="image">
-<link rel="stylesheet" href="../assets/crowdfunding/flight-gates.css">
+<link rel="stylesheet" href="../assets/crowdfunding/scroll-flight-v1.css">
 <title>次の機体は、あなたの支援で飛ぶ。｜TeamBirdmanTrial</title>
 <script defer src="../assets/crowdfunding/vendor/three-r128.min.js"></script>
-<script defer src="../assets/crowdfunding/flight-gates.js"></script>
+<script defer src="../assets/crowdfunding/vendor/meshopt_decoder-r128.js"></script>
+<script defer src="../assets/crowdfunding/vendor/GLTFLoader-r128.js"></script>
+<script defer src="../assets/crowdfunding/scroll-flight-v1.js"></script>
 </head>
 <body>
-<a class="skip" href="#start">体験の案内へ移動</a>
-<main id="flight-app" class="flight-app">
- <img class="poster" src="../assets/crowdfunding/2026-propeller-team.jpg" width="2560" height="1706" alt="" decoding="async" fetchpriority="high">
- <canvas id="scene" aria-hidden="true" tabindex="-1"></canvas>
- <div class="scene-wash" aria-hidden="true"></div>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="sitebar">
+ <a class="brand" href="https://teambirdmantrial.jp/" target="_blank" rel="noopener noreferrer"><img src="../assets/tbt-official-emblem.svg" width="29" height="29" alt="">TeamBirdmanTrial</a>
+ <nav class="sitebar-actions" aria-label="ナビゲーション"><a href="./rewards/">返礼品を見る</a><a class="support-small" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援する ↗</a></nav>
+</header>
+<main id="main">
+<section class="hero" id="top" aria-labelledby="hero-title">
+ <div class="hero-media"><img class="hero-photo" src="../assets/crowdfunding/2026-propeller-team.jpg" width="2560" height="1706" alt="TeamBirdmanTrialの2026年の活動記録写真" fetchpriority="high" decoding="async"></div>
+ <div class="container hero-content">
+  <p class="kicker">TBT / S-330「鵠」<span style="margin-left:10px;color:#eef2e8;letter-spacing:0">ふたりが飛ぶ。みんなで、飛ばす。</span></p>
+  <h1 id="hero-title">次の機体は、<br><em>あなたの支援で飛ぶ。</em></h1>
+  <p class="hero-copy">S-330「鵠」の機体製作へのご支援お願い致します。二人乗り人力プロペラ機で、鳥人間コンテストへの出場そして記録更新を目指します。</p>
+  <div class="hero-facts"><span>目標 <strong>410,000円</strong></span><span>500円から支援可能</span><span>募集は2026年11月30日まで</span></div>
+  <div class="hero-links"><a class="action-primary" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援する <span aria-hidden="true">↗</span></a><a class="action-secondary" href="#flight">機体を見ながら続きを読む ↓</a></div>
+ </div>
+ <div class="scroll-cue" aria-hidden="true">SCROLL TO FLY</div>
+</section>
 
- <header class="sitebar">
-  <a class="site-id" href="https://teambirdmantrial.jp/" target="_blank" rel="noopener noreferrer" aria-label="TeamBirdmanTrial公式サイト">
-   <img src="../assets/tbt-official-emblem.svg" alt="" width="29" height="29">
-   <span>TeamBirdmanTrial<span class="name-caption">S-330「鵠」 / 27th generation</span></span>
-  </a>
-  <nav class="site-actions" aria-label="支援と詳細">
-   <a class="text-link" href="./rewards/">返礼品一覧</a>
-   <a class="small-donate" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援する ↗</a>
-  </nav>
- </header>
+<div class="summary-strip" aria-label="これまでと次の機体">
+ <div><small>2026年 / 26代</small><strong>180.67m</strong><span>S-320 Element の記録</span></div>
+ <div><small>2027年へ / 27代</small><strong>S-330「鵠」</strong><span>次の二人乗り機体</span></div>
+ <div><small>支援募集中</small><strong>11月30日まで</strong><span>返礼品は全10コース</span></div>
+</div>
 
- <section id="start" class="overlay" aria-labelledby="start-title">
-  <div class="panel">
-   <p class="eyebrow">FOUR GATES, ONE FLIGHT <span>ふたりが飛ぶ。みんなで、飛ばす。</span></p>
-   <h1 id="start-title">次の機体は、<br><em>あなたの支援で飛ぶ。</em></h1>
-   <p class="intro-copy">S-330「鵠」の機体製作へのご支援お願い致します。二人乗り人力プロペラ機で、鳥人間コンテストへの出場そして記録更新を目指します。</p>
-   <p class="intro-experience">ここからは、機体を操作して4つのゲートを進む飛行体験です。</p>
-   <div class="controls-hint"><span class="hint-index">CONTROL</span><p>マウスを動かす / スマホは画面を指でなぞる。キーボードの矢印キー・WASDでも操作できます。ゲートの前で止まれるので、焦らず狙ってください。</p></div>
-   <div class="cta-row">
-    <button id="takeoff" class="primary-btn" type="button">離陸する <span aria-hidden="true">↗</span></button>
-    <button id="read-story" class="secondary-btn" type="button">操作せずに読む</button>
+<section class="flight-journey" id="flight" aria-label="スクロールしてたどるS-320の機体と物語">
+ <div class="flight-stage" id="flight-stage" aria-label="芝浦祭サイトと同じS-320の3Dモデル。スクロールで機体の角度が変わります">
+  <img class="flight-poster" src="../assets/s320-render.webp" width="800" height="500" alt="" loading="lazy" decoding="async">
+  <canvas id="aircraft-canvas" aria-hidden="true"></canvas>
+  <div class="flight-topline"><span>S-320 ELEMENT / 3D AIRCRAFT ARCHIVE</span><strong id="flight-number">01 / 04</strong></div>
+  <div class="flight-progress" aria-hidden="true"><i id="flight-progress"></i></div>
+  <p class="flight-status" id="model-status" role="status">芝浦祭サイトと共通のS-320機体データを使用しています。</p>
+ </div>
+ <div class="chapter-list">
+  <article class="chapter" data-chapter="0">
+   <div class="chapter-text">
+    <p class="chapter-number">01 / RECORD</p>
+    <h2>180.67m。<br>その先へ。</h2>
+    <p>2026年、S-320 Elementは琵琶湖の空で180.67mを記録しました。飛べた喜びと、それでも残った悔しさ。</p>
+    <a href="https://teambirdmantrial.jp/news/s-320-element-%E5%BF%9C%E6%8F%B4%E3%81%82%E3%82%8A%E3%81%8C%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81/" target="_blank" rel="noopener noreferrer">26代副代表・髙草木雄太さんの言葉 ↗</a>
    </div>
-   <p class="intro-note">目標41万円 ／ 募集は2026年11月30日まで ／ 500円から支援できます。金銭的なリターンはありません。3Dは実機の飛行ではなく、体験用の簡略モデルです。</p>
-  </div>
-  <span class="intro-count" aria-hidden="true">04</span>
- </section>
-
- <section id="hud" class="hud" aria-label="飛行中の操作情報" hidden>
-  <div class="flight-top">
-   <div class="progress-wrap">
-    <div class="flight-label" id="gate" role="status">GATE 00 / 04</div>
-    <div class="progress-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  </article>
+  <article class="chapter" data-chapter="1">
+   <div class="chapter-text">
+    <p class="chapter-number">02 / HANDOVER</p>
+    <h2>26代から、<br>27代へ。</h2>
+    <p>新代表・大谷映奈さんは、部員の悔しい思いを結果につなげたいと語っています。次の記録を目指して、技術と経験が引き継がれます。</p>
+    <a href="https://teambirdmantrial.jp/news/s-330%E3%80%80%E4%BB%A3%E8%A1%A8%E6%8C%A8%E6%8B%B6/" target="_blank" rel="noopener noreferrer">27代代表・大谷映奈さんの言葉 ↗</a>
    </div>
-   <div class="flight-actions">
-    <button type="button" id="pause" class="ghost-btn">一時停止</button>
-    <button type="button" id="skip" class="ghost-btn">体験をスキップ</button>
+  </article>
+  <article class="chapter" data-chapter="2">
+   <div class="chapter-text">
+    <p class="chapter-number">03 / BUILD</p>
+    <h2>飛ぶために、<br>つくり続ける。</h2>
+    <p>設計し、組み立て、確かめる。次の機体S-330「鵠」も、日々の製作から生まれていきます。</p>
+    <a href="https://teambirdmantrial.jp/gallery/" target="_blank" rel="noopener noreferrer">部員たちの活動記録 ↗</a>
    </div>
-  </div>
-  <div class="flight-bottom">
-   <div class="story-panel" aria-live="polite" aria-atomic="true">
-    <p id="chapter-number" class="number">FLIGHT / 00</p>
-    <h2 id="chapter-title">最初のゲートへ。</h2>
-    <p id="chapter">前方の光の輪を目指して機体を操作してください。</p>
-    <a id="chapter-source" class="story-source" href="https://teambirdmantrial.jp/" target="_blank" rel="noopener noreferrer" hidden>引用元を見る ↗</a>
+  </article>
+  <article class="chapter final-chapter" data-chapter="3">
+   <div class="chapter-text">
+    <p class="chapter-number">04 / THE NEXT FLIGHT</p>
+    <h2>次の機体へ、<br>つながる。</h2>
+    <p>S-330「鵠」の製作に必要な翼の材料費を中心に、目標41万円の支援を募っています。500円から応援できます。</p>
+    <span class="chapter-note">※3Dは芝浦祭サイトのS-320モデルです。S-330の実機や飛行映像ではありません。</span>
    </div>
-   <div class="heading-guide"><span>GUIDANCE</span><b id="guide">前方のゲートへ</b><small id="guide-hint">マウス・指で機首を操作</small></div>
-  </div>
- </section>
- <div class="aim" aria-hidden="true"></div>
+  </article>
+ </div>
+</section>
 
- <section id="pause-panel" class="overlay simple" aria-labelledby="pause-title" hidden>
-  <div class="panel">
-   <p class="eyebrow">PAUSED</p>
-   <h2 id="pause-title">飛行を一時停止しました。</h2>
-   <p class="intro-copy">操作を再開するか、物語の結末へ進めます。Esc / P キーでも再開できます。</p>
-   <div class="cta-row"><button class="primary-btn" type="button" id="resume">飛行を再開 ↗</button><button id="pause-skip" class="secondary-btn" type="button">結末を見る</button></div>
+<section class="rewards" id="rewards" aria-labelledby="rewards-title">
+ <div class="container">
+  <p class="kicker dark">SUPPORT / REWARDS</p>
+  <div class="section-header"><h2 id="rewards-title">応援の形を、<br>選ぶ。</h2><p>長い説明を読み終えなくても、自分に合うコースが選べるように。返礼品は全10コース。ここでは代表的な3つを紹介します。</p></div>
+  <div class="reward-list">
+   <article><small>気軽に応援</small><strong>500円</strong><h3>お礼メール</h3><p>部員からの感謝のメール。2026年12月にお届け予定。</p><a href="./rewards/">内容を見る ↗</a></article>
+   <article><small>オリジナルグッズ</small><strong>7,000円</strong><h3>トートバッグ</h3><p>A4が入るオリジナルトートバッグ。2027年2月にお届け予定。</p><a href="./rewards/">内容を見る ↗</a></article>
+   <article><small>製作の現場にふれる</small><strong>25,000円</strong><h3>試験見学会</h3><p>2027年4月18日予定の2nd走行試験を見学。日程・条件は公式案内をご確認ください。</p><a href="./rewards/">内容を見る ↗</a></article>
   </div>
- </section>
+  <div class="reward-footer"><p>残数・申込条件の最新情報はCAMPFIREが優先されます。</p><a href="./rewards/">返礼品10コースをすべて見る ↗</a></div>
+ </div>
+</section>
 
- <section id="info" class="overlay simple" aria-labelledby="info-title" hidden>
-  <div class="panel">
-   <p class="eyebrow">THE STORY / TEXT EDITION</p>
-   <h2 id="info-title">4つのゲートにある話。</h2>
-   <ol class="info-chapters">
-    <li><b>01</b><span><strong>飛んだ記録。</strong> 2026年、S-320 Elementは180.67mを記録。26代副代表・髙草木雄太さんは、結果に納得のいかない部分もあったと語りました。<a href="https://teambirdmantrial.jp/news/s-320-element-%E5%BF%9C%E6%8F%B4%E3%81%82%E3%82%8A%E3%81%8C%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81/" target="_blank" rel="noopener noreferrer">本人の言葉 ↗</a></span></li>
-    <li><b>02</b><span><strong>引き継ぐ決意。</strong> 27代代表の大谷映奈さんは、悔しさを結果につなげたいと語っています。<a href="https://teambirdmantrial.jp/news/s-330%E3%80%80%E4%BB%A3%E8%A1%A8%E6%8C%A8%E6%8B%B6/" target="_blank" rel="noopener noreferrer">代表挨拶 ↗</a></span></li>
-    <li><b>03</b><span><strong>製作を続ける。</strong> 27代は新しい二人乗り人力飛行機S-330「鵠」の製作に取り組んでいます。<a href="https://teambirdmantrial.jp/gallery/" target="_blank" rel="noopener noreferrer">活動記録 ↗</a></span></li>
-    <li><b>04</b><span><strong>次の翼へ。</strong> 目標41万円。翼の材料費などを支える購入型クラウドファンディングで、500円からの返礼品が用意されています。<a href="./rewards/">返礼品の詳細 ↗</a></span></li>
-   </ol>
-   <div class="cta-row"><button id="return-flight" class="primary-btn" type="button">飛行に戻る ↗</button><a href="https://camp-fire.jp/projects/990337/view" class="secondary-btn" target="_blank" rel="noopener noreferrer">CAMPFIREで支援する</a></div>
+<section class="support" id="support" aria-labelledby="support-title">
+ <div class="container support-layout">
+  <div><p class="kicker">S-330「鵠」 / CROWDFUNDING</p><h2 id="support-title">次の一機を、<br>つくっています。</h2><p>2026年の経験を次の機体へ。活動や返礼品に納得していただけたら、CAMPFIREから応援できます。</p></div>
+  <div>
+   <div class="support-amount"><span>目標金額</span><strong>410,000<small>円</small></strong><p>翼の材料費約29万円を中心に、手数料・返礼品費などに使う計画です。</p></div>
+   <div class="support-facts"><p>募集は2026年11月30日まで ／ 500円から</p><p>現在の達成額と支援者数は<a href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREの最新表示</a>をご確認ください。</p></div>
+   <a class="action-primary" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援する <span aria-hidden="true">↗</span></a>
+   <p class="support-note">※本プロジェクトは購入型のクラウドファンディングであり、利益・配当などの金銭的なリターンはありません。決済はCAMPFIREで行われます。</p>
   </div>
- </section>
-
- <section id="finale" class="overlay finale-overlay" aria-labelledby="finale-heading" hidden>
-  <div class="panel">
-   <p class="eyebrow" id="finale-label">FOUR GATES COMPLETED</p>
-   <h2 id="finale-heading">四つのゲートの、その先へ。</h2>
-   <p class="finale-copy">2026年のS-320の記録と、27代がつくるS-330「鵠」。飛行体験はここで終わりますが、機体の製作は続いています。応援は、どのコースからでも。</p>
-   <p class="facts-line">目標 410,000円 ／ 2026年11月30日まで ／ 500円から</p>
-   <div class="rewards-inline" aria-label="代表的な返礼品">
-    <a href="./rewards/"><strong>500円</strong><span>部員からのお礼メール</span></a>
-    <a href="./rewards/"><strong>7,000円</strong><span>オリジナルトートバッグ</span></a>
-    <a href="./rewards/"><strong>25,000円</strong><span>2nd走行試験の見学会（予定）</span></a>
-   </div>
-   <div class="finale-buttons">
-    <a class="primary-btn" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援する <span aria-hidden="true">↗</span></a>
-    <button type="button" id="replay" class="secondary-btn">もう一度飛ぶ ↺</button>
-   </div>
-   <div class="mini-links"><a href="./rewards/">全10コースを見る ↗</a><a href="https://youtu.be/s1ggG4gD4V4" target="_blank" rel="noopener noreferrer">実際のS-320の飛行映像 ↗</a><a id="source-credits" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">最新の支援状況 ↗</a></div>
-   <p class="disclaimer">※体験用の3Dは実機の形状・挙動や実際の飛行を再現したものではありません。S-330の飛行映像ではありません。購入型の支援で、配当などの金銭的なリターンはありません。申し込みと決済はCAMPFIREで行います。</p>
-  </div>
- </section>
-
- <div id="status-text" class="status-banner" role="status" hidden></div>
+ </div>
+</section>
 </main>
-</body>
-</html>
+<footer class="footer"><div class="footer-inner"><span>© TeamBirdmanTrial / 2026 crowdfunding introduction</span><span><a href="https://teambirdmantrial.jp/" target="_blank" rel="noopener noreferrer">チーム公式サイト ↗</a>　 <a href="./rewards/">返礼品詳細 ↗</a>　 <a href="#top">ページ上部へ ↑</a></span></div></footer>
+</body></html>
