@@ -37,7 +37,7 @@ const gateSpots=[
  {x:6.2,y:14.0,z:-128},
  {x:-2.8,y:13.2,z:-176}
 ];
-const expose=()=>Object.freeze({mode:state.mode,ready:state.ready,passed:state.passed,distance:Math.round(state.distance),aircraft:state.aircraft,position:game?{x:game.rig.position.x,y:game.rig.position.y,z:game.rig.position.z}:null});
+const expose=()=>Object.freeze({mode:state.mode,ready:state.ready,passed:state.passed,distance:Math.round(state.distance),aircraft:state.aircraft,modelYaw:game?game.aircraft.rotation.y:null,position:game?{x:game.rig.position.x,y:game.rig.position.y,z:game.rig.position.z}:null});
 Object.defineProperty(window,'TBTVenueFlight',{configurable:false,get:expose});
 function show(el,on){if(el)el.hidden=!on}
 function info(text){if(status){status.textContent=text;status.hidden=!text}}
@@ -184,6 +184,9 @@ async function setup(){
   const scale=22/Math.max(size.x,size.y,size.z,.001);
   aircraft.scale.setScalar(scale);
   aircraft.position.copy(center).multiplyScalar(-scale);
+  // The festival GLB faces +Z, whereas the runway and gates advance toward -Z.
+  // Rotate the aircraft itself so its nose points toward the lake, not the camera.
+  aircraft.rotation.y=Math.PI;
   // Keep the real model and its material/detail, with no substitute box-plane.
   const rig=new T.Group();rig.add(aircraft);rig.position.set(0,11.45,10);scene.add(rig);
   game={renderer,scene,camera,rig,aircraft,gates,target:new T.Vector3()};
@@ -334,11 +337,14 @@ if(reduced.matches){
  fail('動きを抑える設定に合わせ、飛行演出の代わりに会場写真を表示しています。');
  return;
 }
+// Load the real S-320 automatically, before a visitor presses the takeoff button.
+// The observer controls animation, not asset loading.
+setup();
 if('IntersectionObserver' in window){
  const io=new IntersectionObserver(entries=>{
   active=entries.some(e=>e.isIntersecting);
-  if(active){setup();last=performance.now();request()}
+  if(active){last=performance.now();request()}
  },{rootMargin:'300px 0px',threshold:0});
  io.observe(stage);
-}else{active=true;setup()}
+}else{active=true;last=performance.now();request()}
 })();
