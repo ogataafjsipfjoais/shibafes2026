@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#122a25">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="description" content="TeamBirdmanTrialのクラウドファンディング。S-320 Elementの実際の3D機体データをスクロールで見ながら、S-330「鵠」への挑戦と返礼品を知る。目標41万円、500円から支援できます。">
+<meta name="description" content="TeamBirdmanTrialのクラウドファンディング。芝浦祭サイトと共通のS-320 Elementを琵琶湖の離陸台から自動操縦体験し、S-330「鵠」への挑戦と返礼品を知る。目標41万円、500円から支援できます。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="次の機体は、あなたの支援で飛ぶ。｜TeamBirdmanTrial">
-<meta property="og:description" content="スクロールだけでS-320の実際の3Dデータと、26代から27代へつながる物語をたどる。S-330「鵠」クラウドファンディング。">
+<meta property="og:description" content="琵琶湖の離陸台から自動で飛び出すS-320の3D体験。26代から27代へ受け継ぐ挑戦と支援を紹介。S-330「鵠」クラウドファンディング。">
 <meta property="og:url" content="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/">
 <meta property="og:image" content="https://ogataafjsipfjoais.github.io/shibafes2026/assets/crowdfunding/2026-propeller-team.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -17,13 +17,13 @@
 <link rel="canonical" href="https://ogataafjsipfjoais.github.io/shibafes2026/crowdfunding/">
 <link rel="icon" type="image/svg+xml" href="../assets/tbt-official-emblem.svg">
 <link rel="preload" href="../assets/crowdfunding/2026-propeller-team.jpg" as="image">
-<link rel="stylesheet" href="../assets/crowdfunding/scroll-flight-v1.css">
+<link rel="stylesheet" href="../assets/crowdfunding/campaign-story-v2.css">
 <link rel="stylesheet" href="../assets/crowdfunding/venue-flight-v1.css">
 <title>次の機体は、あなたの支援で飛ぶ。｜TeamBirdmanTrial</title>
 <script defer src="../assets/crowdfunding/vendor/three-r128.min.js"></script>
 <script defer src="../assets/crowdfunding/vendor/meshopt_decoder-r128.js"></script>
 <script defer src="../assets/crowdfunding/vendor/GLTFLoader-r128.js"></script>
-<script defer src="../assets/crowdfunding/scroll-flight-v1.js"></script>
+
 <script defer src="../assets/crowdfunding/venue-flight-v1.js"></script>
 </head>
 <body>
@@ -54,7 +54,7 @@
 <section class="pilot-section" id="pilot" aria-labelledby="pilot-title">
  <div class="container pilot-heading">
   <div><p class="kicker">TAKEOFF / LAKE BIWA</p><h2 id="pilot-title">琵琶湖から、<br>自分で飛ぶ。</h2></div>
-  <p>鳥人間コンテストの舞台、滋賀県彦根市・松原湖岸。離陸シーンが画面に入ると、芝浦祭サイトのS-320 Elementの3D機体が自動でテイクオフします。マウス・指・矢印キー／WASDで操縦できます。操作せずに下へスクロールしても、機体と活動の物語を読めます。</p>
+  <p>鳥人間コンテストの舞台、滋賀県彦根市・松原湖岸。離陸シーンが画面に入ると、芝浦祭サイトのS-320 Elementの3D機体が自動でテイクオフします。マウス・指・矢印キー／WASDで操縦できます。操縦しなくても下へスクロールして、部員の言葉と返礼品を確認できます。</p>
  </div>
  <div id="pilot-stage" class="pilot-area" aria-label="琵琶湖・松原湖岸を参考にしたS-320の操縦体験">
   <img class="pilot-poster" src="../assets/crowdfunding/2026-tail-lake.jpg" width="1600" height="1000" alt="TeamBirdmanTrialが琵琶湖で活動する様子" loading="lazy" decoding="async">
@@ -75,7 +75,7 @@
    <div class="pilot-finish-inner"><p class="kicker">FOUR GATES COMPLETE</p><h3>湖を越えて、<br>次の機体へ。</h3><p>S-320の記録と、次のS-330「鵠」への挑戦。機体づくりを支える方法も、この先で紹介します。</p>
     <div class="pilot-finish-actions">
      <button id="pilot-repeat" class="pilot-button" type="button">もう一度飛ぶ ↻</button>
-     <a id="pilot-read-next" class="pilot-text-btn" href="#flight">スクロールして物語を読む ↓</a>
+     <a id="pilot-read-next" class="pilot-text-btn" href="#rewards">続けて返礼品を見る ↓</a>
      <a class="pilot-text-btn" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援する ↗</a>
     </div>
    </div>
@@ -87,49 +87,14 @@
  </div>
 </section>
 
-<section class="flight-journey" id="flight" aria-label="スクロールしてたどるS-320の機体と物語">
- <div class="flight-stage" id="flight-stage" aria-label="芝浦祭サイトと同じS-320の3Dモデル。スクロールで機体の角度が変わります">
-  <img class="flight-poster" src="../assets/s320-render.webp" width="800" height="500" alt="" loading="lazy" decoding="async">
-  <canvas id="aircraft-canvas" aria-hidden="true"></canvas>
-  <div class="flight-topline"><span>S-320 ELEMENT / 3D AIRCRAFT ARCHIVE</span><strong id="flight-number">01 / 04</strong></div>
-  <div class="flight-progress" aria-hidden="true"><i id="flight-progress"></i></div>
-  <p class="flight-status" id="model-status" role="status">芝浦祭サイトと共通のS-320機体データを使用しています。</p>
+<aside class="record-sources" aria-label="部員の言葉と活動記録">
+ <div class="container record-sources-inner">
+  <strong>機体をつくる人たちの言葉</strong>
+  <a href="https://teambirdmantrial.jp/news/s-320-element-%E5%BF%9C%E6%8F%B4%E3%81%82%E3%82%8A%E3%81%8C%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81/" target="_blank" rel="noopener noreferrer">26代副代表・髙草木雄太さんの言葉 ↗</a>
+  <a href="https://teambirdmantrial.jp/news/s-330%E3%80%80%E4%BB%A3%E8%A1%A8%E6%8C%A8%E6%8B%B6/" target="_blank" rel="noopener noreferrer">27代代表・大谷映奈さんの言葉 ↗</a>
+  <a href="https://teambirdmantrial.jp/gallery/" target="_blank" rel="noopener noreferrer">活動記録 ↗</a>
  </div>
- <div class="chapter-list">
-  <article class="chapter" data-chapter="0">
-   <div class="chapter-text">
-    <p class="chapter-number">01 / RECORD</p>
-    <h2>180.67m。<br>その先へ。</h2>
-    <p>2026年、S-320 Elementは琵琶湖の空で180.67mを記録しました。飛べた喜びと、それでも残った悔しさ。</p>
-    <a href="https://teambirdmantrial.jp/news/s-320-element-%E5%BF%9C%E6%8F%B4%E3%81%82%E3%82%8A%E3%81%8C%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81/" target="_blank" rel="noopener noreferrer">26代副代表・髙草木雄太さんの言葉 ↗</a>
-   </div>
-  </article>
-  <article class="chapter" data-chapter="1">
-   <div class="chapter-text">
-    <p class="chapter-number">02 / HANDOVER</p>
-    <h2>26代から、<br>27代へ。</h2>
-    <p>新代表・大谷映奈さんは、部員の悔しい思いを結果につなげたいと語っています。次の記録を目指して、技術と経験が引き継がれます。</p>
-    <a href="https://teambirdmantrial.jp/news/s-330%E3%80%80%E4%BB%A3%E8%A1%A8%E6%8C%A8%E6%8B%B6/" target="_blank" rel="noopener noreferrer">27代代表・大谷映奈さんの言葉 ↗</a>
-   </div>
-  </article>
-  <article class="chapter" data-chapter="2">
-   <div class="chapter-text">
-    <p class="chapter-number">03 / BUILD</p>
-    <h2>飛ぶために、<br>つくり続ける。</h2>
-    <p>設計し、組み立て、確かめる。次の機体S-330「鵠」も、日々の製作から生まれていきます。</p>
-    <a href="https://teambirdmantrial.jp/gallery/" target="_blank" rel="noopener noreferrer">部員たちの活動記録 ↗</a>
-   </div>
-  </article>
-  <article class="chapter final-chapter" data-chapter="3">
-   <div class="chapter-text">
-    <p class="chapter-number">04 / THE NEXT FLIGHT</p>
-    <h2>次の機体へ、<br>つながる。</h2>
-    <p>S-330「鵠」の製作に必要な翼の材料費を中心に、目標41万円の支援を募っています。500円から応援できます。</p>
-    <span class="chapter-note">※3Dは芝浦祭サイトのS-320モデルです。S-330の実機や飛行映像ではありません。</span>
-   </div>
-  </article>
- </div>
-</section>
+</aside>
 
 <section class="rewards" id="rewards" aria-labelledby="rewards-title">
  <div class="container">
