@@ -183,9 +183,19 @@
 
 ## 2026-11-11 20:36 JST 写真を尾翼の実写へ変更
 - ユーザー指示: 27代のメッセージ写真欄に表示されていた写真を、添付の青空・琵琶湖・水色の尾翼とTBTの紋章が写る画像に変更（「webのほうで」と明示）。
-- `crowdfunding/index.html`: `#record .record-visual img` の表示を低解像度のスクリーンショット切り出し `2026-lake-sky-reference.webp` から、リポジトリに存在する実写 `assets/crowdfunding/2026-tail-lake.jpg` へ変更。送られた画像に相当する既存の実写ファイルを再利用し、生成画像はサイトに使っていない。
+- `crowdfunding/index.html`: `#record .record-visual img` の表示を低解像度のスクリーンショット切り出し `2026-lake-sky-reference.webp` から、リポジトリに存在する実写 `assets/crowdfunding/2026-tail-lake.jpg` へ変更。送られた画像に相当する既存の実写ファイルを再利用し、生成画像はサイトに使っていない。 **追記：この既存実写は別カットと判明し、以下の正しい添付写真に差し替え済み。**
 - `assets/crowdfunding/campaign-story-v2.css`: PC、iPad、スマホで尾翼と紋章が切れにくい `object-fit:contain` に修正。表示サイズを写真向けに調整。
 - `tools/test-crowdfunding-v10.mjs` に旧写真参照の不在、新しい実写の参照、非トリミング表示の検査を追加。
 - 副代表リンク「副代表からのお知らせを全文読む」、公式出典、支援CTA、3D無限ループは変更なし。
 - 今回も単一AIによる実装・検証。独立した複数AIの協議は未実施。
 - デプロイとブラウザテストの最終ステータスはGitHub Actionsで確認。iPad Safari実機テストは未実施。
+
+
+## 2026-11-11 写真の正確な再差し替え
+- 検証スクリーンショットから、従来の `2026-tail-lake.jpg` は**人物が尾翼を支える別カット**であり、ユーザー指定の写真とは違うことが判明した。
+- チャットに添付された**尾翼の紋章と湖が写る元写真そのもの**をWebPに縮小・最適化（480x720、10,470バイト）。元写真の主題と画角は維持、AI生成画像は使用しない。
+- 元画像データをGitHub `assets/crowdfunding/2026-tail-user-photo.webp` に実ファイルとして保存。Git blob SHA `b7fd7bc84199cc4accc66cea0fedd834287fa1ae` はローカル最適化ファイルから計算したものと完全一致。
+- `crowdfunding/index.html` の `#record img` をこの新ファイルへ再差し替え。尾翼・紋章・水平翼が見切れない `object-fit:contain` は維持。元画像のサイズは1365x2048であり、表示用最適化画像の解像度480x720はやや低い。必要に応じて高解像度に再最適化。
+- `tools/test-crowdfunding-v10.mjs` と `tools/qa-crowdfunding-v8.py` に、正しい添付写真のパスを検証するチェックを変更済み。
+- 写真差し替え以外の3D、支援ボタン、返礼品、本文、引用リンクなどは触らない。iPad Safariの実機検証は引き続き未実施。
+- 最新のGitHub PagesおよびBrowser QAの結果を確認すること。独立した複数AIでの議論は未実施。
