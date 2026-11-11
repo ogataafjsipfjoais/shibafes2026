@@ -20,6 +20,11 @@ jobs:
         run: |
           python3 -m pip install --disable-pip-version-check playwright==1.56.0
           python3 -m playwright install chromium
+      - name: Install Japanese fonts for meaningful visual screenshots
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          fc-cache -f
       - name: Validate interactive story and assets
         run: node tools/test-crowdfunding-v8.mjs
       - name: Verify real desktop and mobile layouts
