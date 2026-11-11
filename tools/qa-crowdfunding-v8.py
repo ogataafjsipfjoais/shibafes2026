@@ -61,11 +61,16 @@ try:
      page.mouse.move(canvas_box['x']+canvas_box['width']*.50,canvas_box['y']+canvas_box['height']*.48,steps=6)
     page.wait_for_function('TBTVenueFlight.passed >= 1',timeout=23000)
     assert page.locator('#pilot-story-title').inner_text().startswith('180.67m'),'First gate story did not change'
+    assert page.locator('#pilot-checkpoint').inner_text()=='飛行の記録','First gate has wrong narrative label'
+    assert 'GATE' not in page.locator('#pilot-checkpoint').inner_text(),'Legacy numeric gate HUD still visible'
     page.screenshot(path=str(OUT/f'pilot-{width}x{height}-flight.png'))
     if width==1440:
      # Hands-free continuation must pass all 4 gates, then take off again.
      # No clicking, fake time, or artificial gate state injection.
-     page.wait_for_function('TBTVenueFlight.passed >= 4',timeout=85000)
+     page.wait_for_function('TBTVenueFlight.passed >= 3',timeout=85000)
+     assert page.locator('#pilot-checkpoint').inner_text()=='機体製作の日々','Third gate should describe the story, not show a number'
+     page.wait_for_function('TBTVenueFlight.passed >= 4',timeout=30000)
+     assert page.locator('#pilot-checkpoint').inner_text()=='次の空を目指して','Fourth gate narrative label missing'
      assert page.locator('#pilot-hud').is_visible(),'4th gate hid the in-flight support HUD'
      page.screenshot(path=str(OUT/f'pilot-{width}x{height}-fourth-gate.png'))
      page.wait_for_function('TBTVenueFlight.loops >= 1',timeout=17000)
