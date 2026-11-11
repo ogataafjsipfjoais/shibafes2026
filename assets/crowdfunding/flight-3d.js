@@ -58,12 +58,12 @@ function onFallback(reason){
  root?.classList.add('flight-fallback');
  if(launchButton){
   launchButton.disabled=false;
-  launchButton.textContent='この挑戦を支援する ↗';
-  launchButton.onclick=()=>window.open('https://camp-fire.jp/projects/990337/view','_blank','noopener,noreferrer');
+  launchButton.textContent='実際の飛行映像を見る ↗';
+  launchButton.onclick=()=>window.open('https://youtu.be/s1ggG4gD4V4','_blank','noopener,noreferrer');
  }
 }
 async function init3D(){
- if(ready||failed||loading||!canvasHost)return;
+ if(ready||failed||loading||!canvasHost||root?.classList.contains('flight-fallback'))return;
  if(reduced.matches){onFallback('動きを抑える設定のため静止画像を表示しています。');return;}
  const test=document.createElement('canvas');
  if(!test.getContext('webgl2')&&!test.getContext('webgl')){onFallback('この端末では静止画像を表示しています。');return;}
@@ -74,7 +74,12 @@ async function init3D(){
   loader.setMeshoptDecoder(MeshoptDecoder);
   const url=new URL('../',import.meta.url).href+'s320-'+(isMobile.matches?'mobile':'desktop')+'.glb';
   if(status)status.textContent='S-320の3Dモデルを読み込んでいます。';
-  const result=await loader.loadAsync(url);
+  // Model CDN/asset failures must not leave a permanent loading message.
+  const result=await Promise.race([
+    loader.loadAsync(url),
+    new Promise((_,reject)=>setTimeout(()=>reject(new Error('model loading timed out')),18000))
+  ]);
+  if(failed || root?.classList.contains('flight-fallback'))return;
   if(!root?.isConnected)return;
   aircraft=result.scene;
   const bounds=new THREE.Box3().setFromObject(aircraft);
@@ -110,7 +115,7 @@ async function init3D(){
    if(visible)requestFrame();
   },{threshold:0});io.observe(root);}
   requestFrame();
- }catch(err){console.warn('S-320 flight scene unavailable',err);onFallback('3Dを読み込めませんでした。写真と支援ページをご利用ください。');}
+ }catch(err){console.warn('S-320 flight scene unavailable',err);onFallback('3Dを表示できませんでした。ここでは活動写真をご覧ください。');}
  finally{loading=false;}
 }
 function requestFrame(){if(!frame&&ready&&visible&&!document.hidden)frame=requestAnimationFrame(render);}
@@ -126,7 +131,7 @@ function render(now){
    launchFinished=true;
    launchMessage?.classList.add('is-shown');
    launchButton?.classList.add('is-done');
-   if(launchButton)launchButton.textContent='実際の支援はCAMPFIREへ ↗';
+   if(launchButton){launchButton.disabled=false;launchButton.textContent='飛行演出をもう一度見る ↻';}
   }
  }
  const p=scrollPosition;
@@ -142,7 +147,7 @@ function render(now){
  if(launchAt&&!launchFinished)requestFrame();
 }
 function launch(){
- if(launchFinished){window.open('https://camp-fire.jp/projects/990337/view','_blank','noopener,noreferrer');return;}
+ if(launchFinished){launchFinished=false;launchAt=0;launchMessage?.classList.remove('is-shown');launchButton?.classList.remove('is-done');root?.classList.remove('is-launching');}
  if(!ready){init3D().then(()=>{if(ready)startLaunch();});return;}
  startLaunch();
 }
@@ -150,7 +155,7 @@ function startLaunch(){
  if(launchAt||reduced.matches||!ready)return;
  launchAt=performance.now();
  root.classList.add('is-launching');
- if(launchButton){launchButton.disabled=true;launchButton.textContent='あなたの一歩で、次の空へ。';}
+ if(launchButton){launchButton.disabled=true;launchButton.textContent='飛行演出を再生しています…';}
  requestFrame();
 }
 launchButton?.addEventListener('click',launch);
