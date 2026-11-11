@@ -4,14 +4,27 @@ Does not bypass the production CSP. Models come from the festival website assets
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 from playwright.sync_api import sync_playwright
-import functools, threading, json
+import functools, threading, json, ssl, tempfile, subprocess
 
 ROOT=Path(__file__).resolve().parents[1]
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*args): pass
+# Production GitHub Pages uses HTTPS and upgrade-insecure-requests. Test on HTTPS too;
+# otherwise WebKit upgrades local HTTP asset requests and causes false TLS errors.
+tls=tempfile.TemporaryDirectory(prefix='tbt-webkit-')
+cert=Path(tls.name)/'cert.pem'
+key=Path(tls.name)/'key.pem'
+subprocess.run([
+ 'openssl','req','-x509','-nodes','-days','1','-newkey','rsa:2048',
+ '-keyout',str(key),'-out',str(cert),
+ '-subj','/CN=localhost','-addext','subjectAltName=DNS:localhost,IP:127.0.0.1'
+],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT)))
+context_ssl=ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+context_ssl.load_cert_chain(str(cert),str(key))
+server.socket=context_ssl.wrap_socket(server.socket,server_side=True)
 threading.Thread(target=server.serve_forever,daemon=True).start()
-url=f'http://127.0.0.1:{server.server_port}/crowdfunding/'
+url=f'https://127.0.0.1:{server.server_port}/crowdfunding/'
 try:
  with sync_playwright() as pw:
   browser=pw.webkit.launch(headless=True)
@@ -19,7 +32,7 @@ try:
    viewport={'width':1024,'height':768},device_scale_factor=2,
    is_mobile=True,has_touch=True,reduced_motion='no-preference',
    user_agent='Mozilla/5.0 (iPad; CPU OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1',
-   bypass_csp=False
+   bypass_csp=False,ignore_https_errors=True
   )
   page=context.new_page()
   logs=[]
@@ -48,3 +61,4 @@ try:
   context.close();browser.close()
 finally:
  server.shutdown()
+ tls.cleanup()
