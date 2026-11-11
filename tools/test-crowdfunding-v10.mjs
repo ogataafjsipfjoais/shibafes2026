@@ -17,6 +17,7 @@ check(html.includes('scroll-flight-v1.js')&&html.includes('scroll-flight-v1.css'
 check(html.includes('three-r128.min.js')&&html.includes('GLTFLoader-r128.js')&&html.includes('meshopt_decoder-r128.js'),'GLTF + Meshopt runtime scripts');
 check(['S-330「鵠」の機体製作へのご支援お願い致します。','鳥人間コンテストへの出場そして記録更新を目指します。','次の機体は、','あなたの支援で飛ぶ。'].every(x=>html.includes(x)),'User-approved copy preserved');
 check(['180.67m','髙草木雄太','大谷映奈','2026年11月30日','410,000円','500円','7,000円','25,000円'].every(x=>html.includes(x)),'Grounded facts and rewards');
+check(['鳥人間コンテスト2026で','02 / 2027年','来年の機体','次の機体製作のために'].every(x=>html.includes(x)),'Requested three summary wording changes');
 check(html.includes('金銭的なリターンはありません'),'Purchase-model crowdfunding disclosure');
 check(html.includes('https://camp-fire.jp/projects/990337/view')&&html.includes('./rewards/'),'Support and rewards pages');
 check(html.includes('S-330の実機や飛行映像ではありません'),'S-320 vs S-330 clear distinction');
