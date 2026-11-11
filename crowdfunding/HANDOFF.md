@@ -117,3 +117,14 @@
 - ユーザーメッセージの「3. 2２２２…」は修正指示として意味を特定できず、サイト変更は行わない。
 - 残る確認: 最新GitHub ActionsのデプロイおよびブラウザQA結果。iPad Safari実機テストは未実施。
 - 独立した複数AI協議は未実施。単一AIでデザイン・実装・検証の観点から判断。
+
+
+## 2026-11-11 17:52 JST トップ画像を元に戻す
+- ユーザー要望:「ダサくなったから画像を戻して」。
+- `crowdfunding/index.html` のヒーロー画像を `assets/crowdfunding/2026-propeller-team.jpg` へ戻した。`picture` / AVIFソースとAVIF preloadを除去。
+- `assets/crowdfunding/campaign-story-v2.css` に追加されていたAVIF向けの画像全体表示・ヘッダー移動・文字色変更などの上書きを除去し、以前の全画面写真背景と重ね文字・CTAの構成へ復旧。
+- `tools/test-crowdfunding-v10.mjs` の検査も元画像・従来レイアウトへ更新。
+- ユーザー指定の見出し・説明文、操縦体験、返礼品、CAMPFIRE導線は変更せず維持。
+- `assets/crowdfunding/2026-flight-hero.avif` は履歴保全のため残すが、現ページから参照しない。
+- AI協議: 単一AIでデザイン・実装・検証を確認。独立した複数AI協議は未実施。
+- GitHub Actions公開・ブラウザテスト結果は最新コミットで要確認。
