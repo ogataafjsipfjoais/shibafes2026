@@ -63,3 +63,14 @@
 
 ## 注意
 引き継ぎ時は最初にこのHANDOFF.mdを読み、他の芝浦祭ページを変更せず、GitHubの現コードとActions結果を確認して作業を再開する。
+
+
+## 2026-11-11 06:08 返礼品導線とiPad Safariの3D読み込み
+- ユーザーから、iPad上で「3Dを読み込めなかった」と表示されたとの報告。
+- 分析：`crowdfunding/index.html` の従来CSP `script-src 'self'` は、Meshopt GLBを解凍するWebAssembly実行を阻害し得る。ここに `'wasm-unsafe-eval'` を追加した。サードパーティのJSや `unsafe-eval` は許可していない。
+- iPad/タッチ端末では、操縦用モデルに芝浦祭の `assets/s320-mobile.glb` を優先利用（デスクトップ約6MB、モバイル約2.8MB）。描画ピクセル比・アンチエイリアス・会場の小物数を減らした。
+- iPad Safariで2つのWebGLコンテキストを同時に使用しないため、タッチ端末のスクロール記事ではS-320の静止画を表示。**3D操縦体験は維持**。iPad以外のPCではスクロール3Dも使用。
+- Playwright ChromiumでCSPをバイパスせずiPad風タッチ環境で操縦ができるチェックを追加し成功（Actions run 42971010013）。さらにLinux WebKitでのiPad近似テスト `tools/qa-crowdfunding-webkit.py` を導入。GitHub Actions `webkit-ipad` jobで実行し、結果を要確認。
+- 全6か所の `./rewards/` リンクをCAMPFIRE公式 `https://camp-fire.jp/projects/990337/view` へ直接変更。旧返礼品紹介ページのソースは削除せず維持。
+- 「オリジナルトートバッグ。2027年2月にお届け予定。」の配送時期記載を削除。サイト上は「A4が入るオリジナルトートバッグ。」。
+- iPad Safari実機を直接操作する検証は**未実施**。ユーザーによる再表示で問題が続く場合はエラー表示位置とiPadOSを確認。機密情報や購入操作は不要。
