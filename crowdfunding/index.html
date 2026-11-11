@@ -18,11 +18,13 @@
 <link rel="icon" type="image/svg+xml" href="../assets/tbt-official-emblem.svg">
 <link rel="preload" href="../assets/crowdfunding/2026-propeller-team.jpg" as="image">
 <link rel="stylesheet" href="../assets/crowdfunding/scroll-flight-v1.css">
+<link rel="stylesheet" href="../assets/crowdfunding/venue-flight-v1.css">
 <title>次の機体は、あなたの支援で飛ぶ。｜TeamBirdmanTrial</title>
 <script defer src="../assets/crowdfunding/vendor/three-r128.min.js"></script>
 <script defer src="../assets/crowdfunding/vendor/meshopt_decoder-r128.js"></script>
 <script defer src="../assets/crowdfunding/vendor/GLTFLoader-r128.js"></script>
 <script defer src="../assets/crowdfunding/scroll-flight-v1.js"></script>
+<script defer src="../assets/crowdfunding/venue-flight-v1.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">本文へ移動</a>
@@ -38,9 +40,9 @@
   <h1 id="hero-title">次の機体は、<br><em>あなたの支援で飛ぶ。</em></h1>
   <p class="hero-copy">S-330「鵠」の機体製作へのご支援お願い致します。二人乗り人力プロペラ機で、鳥人間コンテストへの出場そして記録更新を目指します。</p>
   <div class="hero-facts"><span>目標 <strong>410,000円</strong></span><span>500円から支援可能</span><span>募集は2026年11月30日まで</span></div>
-  <div class="hero-links"><a class="action-primary" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援する <span aria-hidden="true">↗</span></a><a class="action-secondary" href="#flight">機体を見ながら続きを読む ↓</a></div>
+  <div class="hero-links"><a class="action-primary" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">CAMPFIREで支援する <span aria-hidden="true">↗</span></a><a class="action-secondary" href="#pilot">琵琶湖からの操縦を体験 ↓</a></div>
  </div>
- <div class="scroll-cue" aria-hidden="true">SCROLL TO FLY</div>
+ <div class="scroll-cue" aria-hidden="true">SCROLL TO THE LAKE</div>
 </section>
 
 <div class="summary-strip" aria-label="これまでと次の機体">
@@ -48,6 +50,48 @@
  <div><small>02 / 2027年</small><strong>S-330「鵠」</strong><span>来年の機体</span></div>
  <div><small>次の機体製作のために</small><strong>11月30日まで</strong><span>返礼品は全10コース</span></div>
 </div>
+
+<section class="pilot-section" id="pilot" aria-labelledby="pilot-title">
+ <div class="container pilot-heading">
+  <div><p class="kicker">TAKEOFF / LAKE BIWA</p><h2 id="pilot-title">琵琶湖から、<br>自分で飛ぶ。</h2></div>
+  <p>鳥人間コンテストの舞台、滋賀県彦根市・松原湖岸。離陸台から飛び出す風景を、芝浦祭サイトで使われているS-320 Elementの3D機体で体験できます。操縦は自由参加。下にスクロールすれば、機体と活動の物語をそのまま読めます。</p>
+ </div>
+ <div id="pilot-stage" class="pilot-area" aria-label="琵琶湖・松原湖岸を参考にしたS-320の操縦体験">
+  <img class="pilot-poster" src="../assets/crowdfunding/2026-tail-lake.jpg" width="1600" height="1000" alt="TeamBirdmanTrialが琵琶湖で活動する様子" loading="lazy" decoding="async">
+  <canvas id="pilot-canvas" class="pilot-canvas" aria-label="マウス、指、矢印キーで操縦する3D飛行体験" tabindex="0"></canvas>
+  <div class="pilot-shade" aria-hidden="true"></div>
+  <p id="pilot-loading" class="pilot-loading" role="status" hidden></p>
+  <div id="pilot-intro" class="pilot-intro">
+   <p class="intro-tag">HIKONE / MATSUBARA SHORE</p>
+   <h3>離陸台の上から、<br>琵琶湖の空へ。</h3>
+   <p>水面から約10mの離陸台をイメージした会場から、4つのゲートを目指して飛行します。操縦はマウス・指・矢印キー／WASD。離陸操作は一度のクリックだけです。</p>
+   <button id="pilot-begin" class="pilot-button" type="button">ここから離陸する <span aria-hidden="true">↗</span></button>
+  </div>
+  <div id="pilot-hud" class="pilot-hud" hidden>
+   <div class="pilot-top">
+    <div class="pilot-data"><div class="pilot-data-label">S-320 / FLIGHT SIMULATION</div><strong id="pilot-metrics">RUNWAY 10m <span>演出上の数値</span></strong></div>
+    <button id="pilot-quit" class="pilot-quit" type="button">操縦を終了して戻る</button>
+   </div>
+   <div class="pilot-bottom">
+    <div class="pilot-story" aria-live="polite" aria-atomic="true"><small id="pilot-checkpoint">TAKEOFF / HIKONE MATSUBARA</small><h4 id="pilot-story-title">琵琶湖、離陸台から。</h4><p id="pilot-message">機体を湖へ送り出します。</p></div>
+    <div class="pilot-guidance"><b id="pilot-guide">離陸準備</b><span>マウス・指・矢印キー／WASD</span></div>
+   </div>
+  </div>
+  <div id="pilot-finish" class="pilot-finish" hidden>
+   <div class="pilot-finish-inner"><p class="kicker">FOUR GATES COMPLETE</p><h3>湖を越えて、<br>次の機体へ。</h3><p>S-320の記録と、次のS-330「鵠」への挑戦。機体づくりを支える方法も、この先で紹介します。</p>
+    <div class="pilot-finish-actions">
+     <button id="pilot-repeat" class="pilot-button" type="button">もう一度飛ぶ ↻</button>
+     <a id="pilot-read-next" class="pilot-text-btn" href="#flight">スクロールして物語を読む ↓</a>
+     <a class="pilot-text-btn" href="https://camp-fire.jp/projects/990337/view" target="_blank" rel="noopener noreferrer">支援する ↗</a>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="pilot-venue-note">
+  <p>※2026年大会の開催地は琵琶湖・彦根市松原湖岸。離陸台は水面から約10m、助走路約10m・傾斜3.5度という大会公式資料を参考にしています。周辺地形・施設・飛行挙動は演出用の概略表現で、本番会場の精密な復元や実際の飛行映像ではありません。機体データのみ芝浦祭サイトと共通のS-320です。</p>
+  <a href="https://www.ytv.co.jp/birdman/about/" target="_blank" rel="noopener noreferrer">鳥人間コンテスト公式・大会概要 ↗</a>
+ </div>
+</section>
 
 <section class="flight-journey" id="flight" aria-label="スクロールしてたどるS-320の機体と物語">
  <div class="flight-stage" id="flight-stage" aria-label="芝浦祭サイトと同じS-320の3Dモデル。スクロールで機体の角度が変わります">
