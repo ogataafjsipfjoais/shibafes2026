@@ -16,10 +16,12 @@ const guide=$('pilot-guide'), message=$('pilot-message'), checkpoint=$('pilot-ch
 const readNext=$('pilot-read-next');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const mobile=matchMedia('(max-width:760px)');
+const touchLimited=matchMedia('(pointer:coarse)').matches||navigator.maxTouchPoints>1;
+const lightModel=mobile.matches||touchLimited;
 const T=window.THREE;
 const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
 const smooth=(a,b,k)=>a+(b-a)*k;
-const state={mode:'preview',ready:false,passed:0,distance:0,aircraft:'s320-'+(mobile.matches?'mobile':'desktop')+'.glb'};
+const state={mode:'preview',ready:false,passed:0,distance:0,aircraft:'s320-'+(lightModel?'mobile':'desktop')+'.glb'};
 const input={x:0,y:0,keys:new Set(),touchId:null};
 let game=null,frame=0,last=0,active=false,loading=false,failed=false,beginRequested=false,elapsed=0,holdUntil=0;
 const modelPath='../assets/'+state.aircraft;
@@ -161,10 +163,10 @@ async function setup(){
  if(!T||!T.GLTFLoader||!window.MeshoptDecoder){fail('モデルの読み込みに必要な処理が利用できません。');return;}
  loading=true;info('芝浦祭サイトのS-320機体データと会場を準備しています。');
  try{
-  const renderer=new T.WebGLRenderer({canvas,antialias:!mobile.matches,powerPreference:'low-power',alpha:false});
+  const renderer=new T.WebGLRenderer({canvas,antialias:!lightModel,powerPreference:'low-power',alpha:false,failIfMajorPerformanceCaveat:false});
   renderer.toneMapping=T.ACESFilmicToneMapping;
   renderer.toneMappingExposure=1.04;
-  renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobile.matches?1:1.25));
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1,lightModel?1:1.25));
   renderer.outputEncoding=T.sRGBEncoding;
   const scene=new T.Scene();scene.background=new T.Color(0x8eb7c6);scene.fog=new T.Fog(0x89abb4,210,650);
   scene.add(new T.HemisphereLight(0xfaf6e7,0x315b63,0.92));
@@ -197,7 +199,7 @@ function resize(){
 }
 function renderPreview(){
  if(!game)return;
- game.camera.position.set(mobile.matches?17:22,mobile.matches?19.5:19,mobile.matches?29:28);
+ game.camera.position.set(lightModel?17:22,lightModel?19.5:19,lightModel?29:28);
  game.camera.lookAt(0,10.9,6);
  game.renderer.render(game.scene,game.camera);
 }
@@ -284,7 +286,7 @@ function animate(now){
   if(metrics)metrics.innerHTML=(state.mode==='takeoff'?'RUNWAY 10m':'SIM '+Math.round(state.distance)+'m')+' <span>進行距離は演出上の数値</span>';
  }
  if(playing){
-  const desired=new T.Vector3(p.x+(mobile.matches?5:12),p.y+(mobile.matches?9.4:9.0),p.z+(mobile.matches?25:22));
+  const desired=new T.Vector3(p.x+(lightModel?5:12),p.y+(lightModel?9.4:9.0),p.z+(lightModel?25:22));
   game.camera.position.lerp(desired,1-Math.exp(-dt*2.75));
   game.target.set(p.x*.82,p.y+.2,p.z-2.0);
   game.camera.lookAt(game.target);
