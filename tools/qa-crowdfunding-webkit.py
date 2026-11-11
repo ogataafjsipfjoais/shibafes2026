@@ -66,10 +66,12 @@ try:
   assert mode in ('takeoff','flying','holding','complete'),f'WebKit takeoff did not start automatically: {mode}'
   page.locator('#pilot-quit').click()
   assert page.evaluate('window.TBTVenueFlight.mode')=='stopped','WebKit stop action broken'
-  page.locator('#flight').scroll_into_view_if_needed()
-  page.locator('#flight-stage.has-fallback').wait_for(state='attached',timeout=7000)
+  page.locator('#rewards').scroll_into_view_if_needed()
+  assert page.locator('canvas').count()==1,'Second 3D viewer remains on WebKit'
+  assert page.locator('.record-sources a').count()==3,'Official team links missing on WebKit'
+  assert page.locator('#pilot-read-next').get_attribute('href')=='#rewards','Pilot finale does not lead directly to rewards'
   assert not logs,f'WebKit JS errors: {logs}'
-  print(json.dumps({'engine':'webkit','device':'iPad-like 1024x768','csp':'enforced','aircraft':aircraft,'pilot':'ready','touchScroll':'safe'},ensure_ascii=False))
+  print(json.dumps({'engine':'webkit','device':'iPad-like 1024x768','csp':'enforced','aircraft':aircraft,'pilot':'ready','touchScroll':'safe','single3D':True},ensure_ascii=False))
   context.close();browser.close()
 finally:
  server.shutdown()
