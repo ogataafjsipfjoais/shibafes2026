@@ -43,8 +43,15 @@ try:
                 status:document.getElementById('status-text')?.textContent,
                 game:window.TBTFlight,src:[...document.scripts].map(s=>s.src)
             })"""),ensure_ascii=False)+' console='+str(browser_console)+' jsErrors='+str(errors)
+            # Photograph leads; immersive canvas replaces it only after choosing takeoff.
+            poster_opacity=page.locator('.poster').evaluate('el=>parseFloat(getComputedStyle(el).opacity)')
+            canvas_opacity=page.locator('#scene').evaluate('el=>parseFloat(getComputedStyle(el).opacity)')
+            assert poster_opacity>0.9 and canvas_opacity<0.05,f'Intro must show photograph, not 3D canvas: {width}: {poster_opacity}/{canvas_opacity}'
+            assert page.locator('#start-title').inner_text()=='次の機体は、\nあなたの支援で飛ぶ。',f'User-approved hero text missing at {width}'
             cta.click()
             assert page.locator('#hud').is_visible(),f'HUD unavailable at {width}'
+            page.wait_for_timeout(1100)
+            assert page.locator('#scene').evaluate('el=>parseFloat(getComputedStyle(el).opacity)')>0.9,f'3D not visible after launch: {width}'
             assert page.evaluate('TBTFlight.mode')=='flying',f'Not flying at {width}'
             stage=page.locator('#scene').bounding_box()
             def steer(point):
