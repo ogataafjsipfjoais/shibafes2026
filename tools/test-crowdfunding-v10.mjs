@@ -2,6 +2,7 @@
 import {readFileSync,existsSync,statSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 const html=readFileSync('crowdfunding/index.html','utf8');
+const legacyRewards=readFileSync('crowdfunding/rewards/index.html','utf8');
 const css=readFileSync('assets/crowdfunding/campaign-story-v2.css','utf8');
 const pilot=readFileSync('assets/crowdfunding/venue-flight-v1.js','utf8');
 const pilotCSS=readFileSync('assets/crowdfunding/venue-flight-v1.css','utf8');
@@ -32,6 +33,12 @@ check(html.includes('自動で4つのゲートを通過し')&&html.includes('繰
 check(html.includes('金銭的なリターンはありません'),'Support is not an investment');
 check(html.includes('https://camp-fire.jp/projects/990337/view'),'CAMPFIRE is the payment destination');
 check(!html.includes('href="./rewards/"'),'Do not route through outdated rewards micro-site');
+check(html.includes('全10コースを見る（CAMPFIREへ移動）')&&html.includes('https://camp-fire.jp/projects/990337/view'),'All 10 course CTA must explicitly open CAMPFIRE');
+check(legacyRewards.includes('<meta http-equiv="refresh" content="0; url=https://camp-fire.jp/projects/990337/view">'),'Old reward detail URL must redirect directly to CAMPFIRE');
+const legacyToteStart=legacyRewards.indexOf('¥7,000');
+const legacyToteEnd=legacyRewards.indexOf('¥8,000',legacyToteStart);
+check(legacyToteStart>=0&&legacyToteEnd>legacyToteStart&&!legacyRewards.slice(legacyToteStart,legacyToteEnd).includes('2027年2月'),'Remove February 2027 delivery from old tote-bag entry');
+
 check((html.match(/href="https:\/\/camp-fire.jp\/projects\/990337\/view"/g)||[]).length>=8,'Direct support/reward options preserved');
 check(!html.includes('2027年2月にお届け予定。'),'Removed requested tote delivery date');
 check(!html.includes('id="pilot-begin"')&&!html.includes('ここから離陸する'),'No launch button');
