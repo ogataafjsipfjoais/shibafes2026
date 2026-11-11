@@ -47,7 +47,7 @@
 .pilot-venue-note p{margin:0;max-width:800px}
 .pilot-venue-note a{color:#f1d7ad;text-underline-offset:4px;white-space:nowrap}
 .pilot-loading{position:absolute;z-index:8;top:21px;left:var(--gutter);color:#ffe5af;background:#112c24de;font-size:12px;padding:7px 12px;max-width:370px}
-.pilot-loading[hidden],.pilot-hud[hidden],{display:none!important}
+.pilot-loading[hidden],.pilot-hud[hidden]{display:none!important}
 @media(max-width:760px){
  .pilot-section{padding:57px 0 0}
  .pilot-heading{display:block;padding-bottom:24px}
