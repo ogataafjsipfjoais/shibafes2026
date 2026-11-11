@@ -676,7 +676,7 @@ body{background:var(--cream);font-weight:500}
 .flight-beat .message{max-width:450px}
 .flight-status{background:#19382b77;padding:8px 10px;border-radius:3px;font-size:11px}
 @media(max-width:900px){
- .opening h1{font-size:clamp(29px,3.7vw,42px)}
+ .opening h1{font-size:clamp(31px,3.9vw,43px)}
  .campaign-status-inner{gap:26px}
  .campaign-status-facts{padding-left:22px}
  .reward-choices h3{font-size:21px}
