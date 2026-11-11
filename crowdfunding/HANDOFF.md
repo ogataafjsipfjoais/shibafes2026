@@ -77,3 +77,12 @@
 
 - 追加修正: WebKitのCSPがHTMLのインラインstyle属性を無視することを確認。heroの文字装飾をCSSクラスへ移動。実WebKitテストでJSエラーなし。
 - Playwright WebKitはSafariと同じエンジンだがLinux上のiPad近似テスト。iPad Safariの実機検証完了とは扱わない。
+
+
+## 2026-11-11 16:38 JST: 機首方向と3D自動読み込み
+- ユーザー報告: 琵琶湖の操縦システムで飛行機が進行方向と逆向き。離陸ボタンを押さなくても3Dを読み込んでほしい。
+- 対応: `assets/crowdfunding/venue-flight-v1.js` でGLBの機体ルートのY回転をπラジアン（180度）に設定。コースとカメラは変更せず、機首を- Z方向のゲートと湖に向ける。実際のGLBは引き続きS-320のモバイル/デスクトップデータ。
+- 対応: ページ表示時に `setup()` を自動開始。IntersectionObserverは読み込み開始ではなく、可視領域でのフレーム描画制御に使用。離陸ボタンは飛行開始のみ。自動でスクロールや離陸はしない。
+- QA: `tools/test-crowdfunding-v10.mjs` に自動初期化と回転設定の検査を追加。Chromium 375px・1440pxではスクロール・クリック前の3D準備、機体方向を検査。iPad相当のLinux WebKitもCSP有効のままクリック前読み込みを検査。
+- GitHub Pages: run 42981309653 successful (commit a8621356)。WebKit job run 42981309686 passed; Chromiumは実行完了後に結果を記録すること。
+- 未確認: 実際のiPad Safari・実機操縦視覚による前後向きの最終確認は未実施。自動テストは内部の向きと動作を確認するが、実機視覚検証の代わりにならない。
