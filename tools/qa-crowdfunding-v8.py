@@ -88,6 +88,7 @@ try:
    assert page.locator('.chapter').count()==0,f'Repeated story chapters at {width}'
    assert page.locator('.record-feature a[href*="teambirdmantrial.jp"]').count()==3,f'Original named sources missing at {width}'
    photo=page.locator('.record-feature img')
+   assert photo.get_attribute('src')=='../assets/crowdfunding/2026-tail-lake.jpg',f'Wrong record photo source at {width}'
    photo.scroll_into_view_if_needed()
    assert photo.evaluate('(img)=>img.complete && img.naturalWidth>0'),f'Uploaded flight record photo did not load at {width}'
    assert page.locator('.record-source-link').inner_text().startswith('副代表からのお知らせを全文読む'),f'Wrong vice representative CTA at {width}'
