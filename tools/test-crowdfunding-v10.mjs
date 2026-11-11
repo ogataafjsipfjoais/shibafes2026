@@ -22,7 +22,7 @@ check(['180.67m','髙草木雄太','大谷映奈','2026年11月30日','410,000�
 check(['鳥人間コンテスト2026で','02 / 2027年','来年の機体','次の機体製作のために'].every(x=>html.includes(x)),'Requested three summary wording changes');
 check(html.includes('金銭的なリターンはありません'),'Purchase-model crowdfunding disclosure');
 
-check(html.includes('id="pilot"')&&html.includes('id="pilot-stage"')&&html.includes('id="pilot-begin"'),'Optional takeoff stage and one-click start');
+check(html.includes('id="pilot"')&&html.includes('id="pilot-stage"')&&!html.includes('id="pilot-begin"')&&!html.includes('id="pilot-intro"'),'Automatic takeoff without click-gated intro');
 check(html.indexOf('id="pilot"')<html.indexOf('id="flight"'),'Pilot before the scroll story');
 check(html.includes('venue-flight-v1.js')&&html.includes('venue-flight-v1.css'),'Pilot assets linked');
 check(html.includes('約10m')&&html.includes('3.5度')&&html.includes('会場の精密な復元'),'Historical platform parameters and reconstruction disclaimer');
@@ -30,7 +30,7 @@ check(pilot.includes('s320-')&&pilot.includes('GLTFLoader')&&pilot.includes('set
 check(pilot.includes('gateSpots')&&pilot.includes('pass()')&&pilot.includes("state.mode='takeoff'"),'Real takeoff and four interactive gates');
 check(pilot.includes("pointermove")&&pilot.includes("arrowleft")&&pilot.includes("pointerdown"),'Pointer, touch and keyboard steering');
 check(pilot.includes("prefers-reduced-motion")&&pilot.includes("webglcontextlost"),'Motion accessibility and WebGL fallback');
-check(pilotCSS.includes('.pilot-area')&&pilotCSS.includes('touch-action:none')&&pilotCSS.includes('@media(max-width:760px)'),'Responsive takeoff stage');
+check(pilotCSS.includes('.pilot-area')&&pilotCSS.includes('touch-action:pan-y')&&pilotCSS.includes('@media(max-width:760px)'),'Responsive takeoff stage and touch scrolling');
 for(const file of ['assets/crowdfunding/venue-flight-v1.js','assets/crowdfunding/venue-flight-v1.css','assets/crowdfunding/2026-tail-lake.jpg'])
  check(existsSync(file)&&statSync(file).size>500,'Missing pilot resource '+file);
 const pilotSyntax=spawnSync(process.execPath,['--check'],{input:pilot,encoding:'utf8'});
@@ -50,6 +50,9 @@ check(js.includes('s320-')&&js.includes("mobile':'desktop")&&js.includes('.glb')
 check(js.includes('limitedTouch')&&js.includes('タッチ端末では負荷を抑え'),'Avoid simultaneous WebGL contexts on iPad');
 check(pilot.includes('touchLimited')&&pilot.includes("lightModel?'mobile':'desktop'"),'Select low-memory S-320 model for iPad Safari');
 check(pilot.includes('aircraft.rotation.y=Math.PI'),'Correct the S-320 model heading 180 degrees toward the -Z takeoff path');
+check(pilot.includes('function maybeAutoStart()')&&pilot.includes("if(active){last=performance.now();maybeAutoStart();request()}"),'Flight begins automatically on intersection without clicking');
+check(!pilot.includes("beginBtn")&&!pilot.includes('stage.scrollIntoView'),'No takeoff button dependency or automatic scroll hijack');
+check(!html.includes('ここから離陸する')&&html.includes('自動でテイクオフ'),'Automatic flight is communicated without a start button');
 check(pilot.includes('// Load the real S-320 automatically')&&/setup\(\);\s*if\('IntersectionObserver' in window\)/.test(pilot),'Eager GLB initialization without takeoff click');
 check(pilot.includes('const io=new IntersectionObserver')&&!pilot.includes('if(active){setup();'),'IntersectionObserver must only control rendering, not model loading');
 
