@@ -53,7 +53,7 @@ function mat(color,roughness=1){return new T.MeshStandardMaterial({color,roughne
 function drawVenue(scene){
  // Facing the open lake toward -Z. The platform is roughly ten metres above the water.
  const lake=mat(0x2b6776,.94),sand=mat(0xafa48e),forest=mat(0x42664b),dark=mat(0x364a43),
- deck=mat(0xe8c45c,.72),blue=mat(0x398ac3,.58),metal=mat(0x738988,.62),wood=mat(0x827d69);
+ deck=mat(0xd4a941,.78),blue=mat(0x2871b4,.67),metal=mat(0x738988,.62),wood=mat(0x827d69);
  const water=mesh(new T.PlaneGeometry(1100,1100,40,40),lake,scene,0,-.65,-220);
  water.rotation.x=-Math.PI/2;
  // Faint water surface reflection lines, cheap enough for a phone.
