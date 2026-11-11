@@ -19,6 +19,10 @@ check(html.indexOf('id="start"')<html.indexOf('id="hud"'),'The start interface m
 check(html.includes('role="status"')&&html.includes('aria-live="polite"'),'Live feedback must be accessible');
 check(html.includes('操作せずに読む')&&html.includes('3Dは実機の飛行ではなく'),'Noninteractive alternative and disclaimer');
 check(html.includes('https://camp-fire.jp/projects/990337/view'),'Official support URL present');
+check(html.includes('次の機体は、<br><em>あなたの支援で飛ぶ。</em>'),'User-approved lead sentence missing');
+check(html.includes('S-330「鵠」の機体製作へのご支援お願い致します。二人乗り人力プロペラ機で、鳥人間コンテストへの出場そして記録更新を目指します。'),'User-approved campaign description missing');
+check(html.includes('2026-propeller-team.jpg')&&css.includes('.flight-app:not(.has-started) .poster'),'Documentary photo must remain visible before takeoff');
+check(game.includes("root.classList.add('has-started')"),'3D must take over the start photo only when takeoff begins');
 check(html.includes('./rewards/')&&existsSync('crowdfunding/rewards/index.html'),'Original 10 rewards page stays reachable');
 check(html.includes('金銭的なリターンはありません'),'No investment-like promises');
 check(html.includes('410,000円')&&html.includes('11月30日')&&html.includes('500円'),'Grounded campaign terms');
