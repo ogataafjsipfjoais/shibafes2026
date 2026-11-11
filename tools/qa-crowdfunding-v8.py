@@ -128,9 +128,9 @@ try:
   ipad_page.locator('#pilot-stage').scroll_into_view_if_needed()
   # Locators do not require injecting page eval blocked by CSP.
   ipad_page.locator('#pilot-stage.is-ready').wait_for(state='attached',timeout=60000)
-  assert ipad_page.locator('#pilot-begin').is_enabled(),'Touch pilot takeoff button is disabled'
-  ipad_page.locator('#pilot-begin').click()
+  assert ipad_page.locator('#pilot-begin').count()==0,'Touch device still has click-to-takeoff button'
   ipad_page.locator('#pilot-hud').wait_for(state='visible',timeout=10000)
+  assert ipad_page.evaluate('window.TBTVenueFlight.mode') in ('takeoff','flying','holding','complete'),'iPad-like scene did not auto-launch'
   aircraft=ipad_page.evaluate('window.TBTVenueFlight.aircraft')
   assert aircraft=='s320-mobile.glb',f'iPad did not use low-memory festival model: {aircraft}'
   ipad_page.screenshot(path=str(OUT/'pilot-ipad-csp-enforced.png'))
