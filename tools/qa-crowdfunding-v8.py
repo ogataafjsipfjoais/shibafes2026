@@ -86,7 +86,7 @@ try:
    assert page.locator('#flight-stage').count()==0,f'Repeated 3D exhibit at {width}'
    assert page.locator('script[src*="scroll-flight-v1.js"]').count()==0,f'Old viewer loaded at {width}'
    assert page.locator('.chapter').count()==0,f'Repeated story chapters at {width}'
-   assert page.locator('.record-sources a').count()==3,f'Original named sources missing at {width}'
+   assert page.locator('.record-feature a[href*="teambirdmantrial.jp"]').count()==3,f'Original named sources missing at {width}'
    assert page.locator('#pilot-support').get_attribute('href')=='https://camp-fire.jp/projects/990337/view','In-flight support CTA must lead to CAMPFIRE'
    page.locator('#rewards').scroll_into_view_if_needed()
    assert page.locator('.reward-list article').count()==3,f'Rewards missing at {width}'
@@ -106,7 +106,7 @@ try:
   page.wait_for_function('window.TBTVenueFlight !== undefined')
   assert page.evaluate('TBTVenueFlight.mode')=='unavailable','Reduced motion must avoid animated 3D'
   assert page.locator('.pilot-poster').is_visible(),'Static Lake Biwa fallback image missing'
-  assert page.locator('.record-sources a').count()==3,'Official story sources lost for reduced-motion visitors'
+  assert page.locator('.record-feature a[href*="teambirdmantrial.jp"]').count()==3,'Official story sources lost for reduced-motion visitors'
   assert page.locator('canvas').count()==1,'Duplicate canvas for reduced-motion visitors'
   ctx.close()
   # iPad Safari-like touch environment: enforce real production CSP (no bypass).
@@ -137,7 +137,7 @@ try:
   ipad_page.locator('#pilot-quit').click()
   ipad_page.locator('#rewards').scroll_into_view_if_needed()
   assert ipad_page.locator('canvas').count()==1,'iPad must have only one WebGL scene'
-  assert ipad_page.locator('.record-sources a').count()==3,'Official record sources unavailable on iPad'
+  assert ipad_page.locator('.record-feature a[href*="teambirdmantrial.jp"]').count()==3,'Official record sources unavailable on iPad'
   assert not ipad_errors,f'iPad-like uncaught JS errors: {ipad_errors} console={ipad_console}'
   print(json.dumps({'viewport':'1024x768 touch iPad-like','model':aircraft,'CSP':'enforced','pilot':'ready','scroll3d':'static to avoid dual contexts'},ensure_ascii=False),flush=True)
   ipad.close()
