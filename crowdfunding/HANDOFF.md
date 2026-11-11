@@ -179,4 +179,4 @@
 - `crowdfunding/index.html`: 髙草木雄太26代副代表の引用・出典リンク、写真、次の機体製作支援CTA、27代代表記事・ギャラリーリンクを1か所に整理。**表示リンク文言を「副代表からのお知らせを全文読む」**に変更。青線の「2026年9月4日の公式メッセージから抜粋」という日付記述は追加していない。
 - `assets/crowdfunding/campaign-story-v2.css`: 写真と引用のPC 2カラム／スマホ縦積み表示を追加。重複する2つ目の3D表示は復活させない。
 - `tools/test-crowdfunding-v10.mjs`、`tools/qa-crowdfunding-v8.py`、`tools/qa-crowdfunding-webkit.py` の回帰テストも新構成に合わせて更新。名前の空白で誤検知する古いテストを修正。
-- GitHub PagesとChromium/WebKitの実行結果は最新コミットで確認する必要がある。実機iPad Safariでの写真配置検証は未実施。独立した複数AI協議は未実施。
+- 検証：GitHub Pages build/deploy 43003813230 success。Chromium＋WebKitのBrowser QA 43003813398 success。375x667、375x812、768x1024、1440x900、iPad相当のCSP有効タッチ条件で写真読み込み、公式リンク3件、縦スクロール、横はみ出し0、JS例外0、4ゲートと2周目を確認。実機iPad Safariでの写真配置検証は未実施。独立した複数AI協議は未実施。
