@@ -93,5 +93,5 @@
 - `venue-flight-v1.js` で、3Dロード完了かつステージ可視率35%以上で `maybeAutoStart()` が自動離陸。離陸時の `scrollIntoView()` は除去。ロード前に到達した場合もロード完了後に開始。
 - タッチでスクロールが止まらないよう `venue-flight-v1.css` の `touch-action` を `pan-y` に変更。矢印キー/WASDとマウス操作、4ゲート、終了、ゴールからのリプレイは維持。
 - 「操縦を終了」した後は同じ画面内で勝手に再始動せず、いったん画面外に出て戻ると再開可能。reduced-motion設定やGLB失敗時の写真フォールバックも維持。
-- 自動テスト: GitHub Pages run 42984428914 success。WebKit iPad類似テスト run 42984428715 の WebKit job success。Chromium同runの最終結果は確認後に追記する。
+- 自動テスト: GitHub Pages run 42984428914 success。Browser QA run 42984428715 はWebKit iPad類似・Chromium双方 success。Chromiumは375x667、375x812、768x1024、1440x900でGLB・自動離陸・4ゲート・支援導線・横はみ出し0・JSエラー0を確認。iPad風タッチ＋CSP有効も検証。
 - 今回の独立した複数AI協議は未実施。単一AIでUI・実装・QAの観点から修正。
