@@ -18,7 +18,7 @@ try:
     with sync_playwright() as playwright:
         browser=playwright.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--enable-webgl','--use-angle=swiftshader','--use-gl=angle'])
         for width,height in [(375,667),(375,812),(768,1024),(1440,900)]:
-            ctx=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=1,ignore_https_errors=True,reduced_motion='no-preference')
+            ctx=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=1,ignore_https_errors=True,reduced_motion='no-preference',bypass_csp=True)
             page=ctx.new_page()
             errors=[]
             browser_console=[]
@@ -81,7 +81,7 @@ try:
             results.append(result)
             ctx.close()
         # Reduced-motion visitors must get an actual, readable non-WebGL route.
-        ctx=browser.new_context(viewport={'width':375,'height':812},reduced_motion='reduce')
+        ctx=browser.new_context(viewport={'width':375,'height':812},reduced_motion='reduce',bypass_csp=True)
         page=ctx.new_page()
         page.goto(url,wait_until='domcontentloaded',timeout=50000)
         page.wait_for_function('window.TBTFlight !== undefined',timeout=25000)
@@ -92,7 +92,7 @@ try:
         assert page.locator('#finale').is_visible(),'Cannot reach support with reduced motion'
         ctx.close()
         # CDN failure must not strand visitors with a nonworking takeoff.
-        ctx=browser.new_context(viewport={'width':375,'height':812})
+        ctx=browser.new_context(viewport={'width':375,'height':812},bypass_csp=True)
         page=ctx.new_page()
         page.route('**/assets/crowdfunding/vendor/three-r128.min.js',lambda route:route.abort())
         page.goto(url,wait_until='domcontentloaded',timeout=50000)
