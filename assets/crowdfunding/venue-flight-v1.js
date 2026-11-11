@@ -197,8 +197,8 @@ function resize(){
 }
 function renderPreview(){
  if(!game)return;
- game.camera.position.set(mobile.matches?18:21,20.5,mobile.matches?31:24);
- game.camera.lookAt(0,10.7,-3);
+ game.camera.position.set(mobile.matches?17:22,mobile.matches?19.5:19,mobile.matches?29:28);
+ game.camera.lookAt(0,10.9,6);
  game.renderer.render(game.scene,game.camera);
 }
 function setInputs(e){
@@ -286,7 +286,7 @@ function animate(now){
  if(playing){
   const desired=new T.Vector3(p.x+(mobile.matches?5:12),p.y+(mobile.matches?9.4:9.0),p.z+(mobile.matches?25:22));
   game.camera.position.lerp(desired,1-Math.exp(-dt*2.75));
-  game.target.set(p.x*.82,p.y+.2,p.z-7.0);
+  game.target.set(p.x*.82,p.y+.2,p.z-2.0);
   game.camera.lookAt(game.target);
  }
  game.renderer.render(game.scene,game.camera);
