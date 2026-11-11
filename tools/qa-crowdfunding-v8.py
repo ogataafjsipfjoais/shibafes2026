@@ -40,6 +40,9 @@ try:
     assert abs(preflight['modelYaw']-3.141592653589793)<.001,'Aircraft nose still points opposite the -Z flight direction'
     assert page.evaluate('window.scrollY') == 0,'Automatic loading must not scroll the page'
     page.locator('#pilot-stage').scroll_into_view_if_needed()
+    page.wait_for_function('window.TBTVenueFlight && ["takeoff","flying","holding","complete"].includes(TBTVenueFlight.mode)',timeout=12000)
+    assert page.locator('#pilot-begin').count()==0,'Takeoff button must not exist'
+    assert page.locator('#pilot-hud').is_visible() or page.locator('#pilot-finish').is_visible(),'Automatic flight HUD not visible'
     page.wait_for_function('window.TBTVenueFlight !== undefined',timeout=10000)
     page.wait_for_function('TBTVenueFlight.ready || TBTVenueFlight.mode === "unavailable"',timeout=45000)
     pilot=page.evaluate('TBTVenueFlight')
@@ -47,8 +50,7 @@ try:
     assert pilot['aircraft'].endswith('s320-mobile.glb' if width<760 else 's320-desktop.glb'),f'Wrong pilot model: {pilot}'
     page.wait_for_function("parseFloat(getComputedStyle(document.querySelector('#pilot-canvas')).opacity) > 0.98",timeout=5000)
     page.screenshot(path=str(OUT/f'pilot-{width}x{height}-deck.png'))
-    page.locator('#pilot-begin').click()
-    page.wait_for_function('TBTVenueFlight.mode === "takeoff" || TBTVenueFlight.mode === "flying"',timeout=5000)
+    assert page.evaluate('TBTVenueFlight.mode') in ('takeoff','flying','holding','complete'),'Flight failed to auto-start after scrolling into view'
     canvas_box=page.locator('#pilot-canvas').bounding_box()
     assert canvas_box,'Pilot canvas absent'
     def pilot_steer(x,y):
@@ -67,7 +69,7 @@ try:
      page.locator('#pilot-repeat').click()
      assert page.evaluate('TBTVenueFlight.passed')==0,'Pilot did not reset'
     page.locator('#pilot-quit').click()
-    assert page.evaluate('TBTVenueFlight.mode')=='preview','Pilot did not exit back to scroll mode'
+    assert page.evaluate('TBTVenueFlight.mode')=='stopped','Pilot did not stop without a click-gated restart'
    # The aircraft stage scrolls into view and independently loads the exact festival GLB.
    page.locator('#flight').scroll_into_view_if_needed()
    page.wait_for_function('window.TBTScrollFlight !== undefined',timeout=10000)
