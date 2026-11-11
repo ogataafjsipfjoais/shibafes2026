@@ -38,6 +38,7 @@ try:
     pilot=page.evaluate('TBTVenueFlight')
     assert pilot['ready'],f'Lake Biwa pilot could not initialize: {width} {pilot}; '+page.locator('#pilot-loading').inner_text()+' errors='+str(errors)
     assert pilot['aircraft'].endswith('s320-mobile.glb' if width<760 else 's320-desktop.glb'),f'Wrong pilot model: {pilot}'
+    page.wait_for_function("parseFloat(getComputedStyle(document.querySelector('#pilot-canvas')).opacity) > 0.98",timeout=5000)
     page.screenshot(path=str(OUT/f'pilot-{width}x{height}-deck.png'))
     page.locator('#pilot-begin').click()
     page.wait_for_function('TBTVenueFlight.mode === "takeoff" || TBTVenueFlight.mode === "flying"',timeout=5000)
