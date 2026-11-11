@@ -1,52 +1,42 @@
-// Four-gate crowdfunding flight: deployment gate for accessible, honest interaction.
-import {readFileSync,statSync,existsSync} from 'node:fs';
+// Crowdfunding / scroll-driven S-320 real aircraft regression checks.
+import {readFileSync,existsSync,statSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 const html=readFileSync('crowdfunding/index.html','utf8');
-const css=readFileSync('assets/crowdfunding/flight-gates.css','utf8');
-const game=readFileSync('assets/crowdfunding/flight-gates.js','utf8');
-const errors=[];
-const check=(condition,message)=>{if(!condition)errors.push(message);};
+const css=readFileSync('assets/crowdfunding/scroll-flight-v1.css','utf8');
+const js=readFileSync('assets/crowdfunding/scroll-flight-v1.js','utf8');
+const errors=[],check=(v,msg)=>{if(!v)errors.push(msg)};
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
-check(ids.length===new Set(ids).size,'Duplicate element IDs');
-check((html.match(/<h1\b/g)||[]).length===1,'There must be exactly one h1');
-const required=['flight-app','scene','start','takeoff','hud','gate','chapter','chapter-title','chapter-source','guide','pause','resume','skip','info','return-flight','replay','finale','status-text'];
-check(required.every(id=>ids.includes(id)),'Missing required game UI elements');
-check(html.includes('assets/crowdfunding/vendor/three-r128.min.js'),'Load vendored and pinned Three.js r128 library');
-check(existsSync('assets/crowdfunding/vendor/three-r128.min.js')&&statSync('assets/crowdfunding/vendor/three-r128.min.js').size>500000,'Pinned upstream Three.js build is missing');
-check(html.includes('flight-gates.js')&&html.includes('flight-gates.css'),'Load game JS/CSS from own assets');
-check(!html.includes('editorial-v13.css')&&!html.includes('flight-3d.js'),'Do not load old scroll storytelling scripts');
-check(html.indexOf('id="start"')<html.indexOf('id="hud"'),'The start interface must precede HUD');
-check(html.includes('role="status"')&&html.includes('aria-live="polite"'),'Live feedback must be accessible');
-check(html.includes('操作せずに読む')&&html.includes('3Dは実機の飛行ではなく'),'Noninteractive alternative and disclaimer');
-check(html.includes('https://camp-fire.jp/projects/990337/view'),'Official support URL present');
-check(html.includes('次の機体は、<br><em>あなたの支援で飛ぶ。</em>'),'User-approved lead sentence missing');
-check(html.includes('S-330「鵠」の機体製作へのご支援お願い致します。二人乗り人力プロペラ機で、鳥人間コンテストへの出場そして記録更新を目指します。'),'User-approved campaign description missing');
-check(html.includes('2026-propeller-team.jpg')&&css.includes('.flight-app:not(.has-started) .poster'),'Documentary photo must remain visible before takeoff');
-check(game.includes("root.classList.add('has-started')"),'3D must take over the start photo only when takeoff begins');
-check(html.includes('./rewards/')&&existsSync('crowdfunding/rewards/index.html'),'Original 10 rewards page stays reachable');
-check(html.includes('金銭的なリターンはありません'),'No investment-like promises');
-check(html.includes('410,000円')&&html.includes('11月30日')&&html.includes('500円'),'Grounded campaign terms');
-check(html.includes('180.67m')&&html.includes('髙草木雄太')&&html.includes('大谷映奈'),'Historical facts and attribution');
-check(!html.includes('現在37,000円')&&!html.includes('残り2枠')&&!html.includes('人気No.1'),'No stale funding or invented scarcity');
-check(html.includes('S-330の飛行映像ではありません'),'Honest model disclaimer');
-check(['pointermove','pointerdown','keydown','arrowleft','arrowright','arrowup','arrowdown','webglcontextlost','prefers-reduced-motion','flight-fallback'].filter(x=>game.includes(x)).length>=9,
-      'Pointer/keyboard/fallback/reduced-motion logic must be available');
-check(game.includes('gatePassed()')&&game.includes('Math.abs(deltaX)<=2.0')&&game.includes("state.passed===4"),'Actual gate collision and progression logic');
-check(game.includes("'TBTFlight'")&&game.includes('const gateData=['),'Observable four-gate runtime');
-check(game.includes('Math.max(1,innerWidth)')&&game.includes('renderer.setPixelRatio'),'Responsive rendering');
-check(css.includes('@media(max-width:760px)')&&css.includes('prefers-reduced-motion'),'Responsive and reduced-motion styles');
-check(css.includes('touch-action:none')&&css.includes('[hidden]'),'Touch steering and hidden-state styles');
-check(css.includes(':focus-visible'),'Keyboard focus indication');
-check(html.includes("object-src 'none'")&&html.includes('upgrade-insecure-requests'),'CSP safeguards');
-check([...html.matchAll(/<img\b[^>]*>/g)].every(m=>/\balt=/.test(m[0])),'Every image needs alt');
-for(const file of ['assets/crowdfunding/2026-propeller-team.jpg','assets/tbt-official-emblem.svg','assets/crowdfunding/flight-gates.js','assets/crowdfunding/flight-gates.css']){
- check(existsSync(file)&&statSync(file).size>500,'Missing original or game asset: '+file);
-}
-for(const [label,source] of [['game',game]]){
- const r=spawnSync(process.execPath,['--check','--input-type=commonjs'],{input:source,encoding:'utf8'});
- check(r.status===0,'JS syntax failed '+label+': '+r.stderr);
-}
-let braces=0;for(const ch of css){if(ch==='{')braces++;if(ch==='}')braces--;}
-check(braces===0,'CSS braces unbalanced');
-if(errors.length){console.error('FOUR GATES FAIL\n'+errors.join('\n'));process.exit(1);}
-console.log('FOUR GATES PASS: source facts, 4 controllable gates, accessibility, sharing and support preserved');
+check(ids.length===new Set(ids).size,'Duplicate IDs');
+check((html.match(/<h1\b/g)||[]).length===1,'Exactly one heading H1');
+const localLinks=[...html.matchAll(/href="#([^"]+)"/g)].map(x=>x[1]);
+check(localLinks.every(id=>ids.includes(id)),'Local anchor targets');
+check(['hero-title','flight','flight-stage','aircraft-canvas','model-status','rewards','support'].every(x=>ids.includes(x)),'Required chapters & stage');
+check(!html.includes('id="takeoff"')&&!html.includes('id="pause"')&&!html.includes('id="replay"'),'No mandatory flight buttons');
+check(!html.includes('flight-gates.js')&&!html.includes('flight-gates.css'),'Old mandatory-gate game unlinked');
+check(html.includes('scroll-flight-v1.js')&&html.includes('scroll-flight-v1.css'),'New scroll experience assets present');
+check(html.includes('three-r128.min.js')&&html.includes('GLTFLoader-r128.js')&&html.includes('meshopt_decoder-r128.js'),'GLTF + Meshopt runtime scripts');
+check(['S-330「鵠」の機体製作へのご支援お願い致します。','鳥人間コンテストへの出場そして記録更新を目指します。','次の機体は、','あなたの支援で飛ぶ。'].every(x=>html.includes(x)),'User-approved copy preserved');
+check(['180.67m','髙草木雄太','大谷映奈','2026年11月30日','410,000円','500円','7,000円','25,000円'].every(x=>html.includes(x)),'Grounded facts and rewards');
+check(html.includes('金銭的なリターンはありません'),'Purchase-model crowdfunding disclosure');
+check(html.includes('https://camp-fire.jp/projects/990337/view')&&html.includes('./rewards/'),'Support and rewards pages');
+check(html.includes('S-330の実機や飛行映像ではありません'),'S-320 vs S-330 clear distinction');
+check(html.includes('https://teambirdmantrial.jp/news/')&&html.includes('https://teambirdmantrial.jp/gallery/'),'Named sources with citations');
+check((html.match(/data-chapter="\d+"/g)||[]).length===4,'Four scroll chapters');
+check(css.includes('position:sticky')&&css.includes('.chapter')&&css.includes('prefers-reduced-motion'),'Sticky scene, chapters, accessibility');
+check(css.includes('scroll-behavior:smooth')&&!css.includes('touch-action:none'),'Native scroll must remain enabled');
+check(js.includes('GLTFLoader')&&js.includes('setMeshoptDecoder')&&js.includes('MeshoptDecoder.ready'),'Actual glTF Meshopt loader');
+check(js.includes('s320-')&&js.includes("mobile':'desktop")&&js.includes('.glb'),'Mobile/desktop real festival GLB selection');
+check(js.includes('addEventListener')&&js.includes("'scroll'")&&js.includes("scrollValue")&&!js.includes('gatePassed'),'Scroll, not gate collision, drives story');
+check(js.includes('matchMedia')&&js.includes('prefers-reduced-motion'),'Reduced-motion still image');
+check(js.includes('IntersectionObserver')&&js.includes("loadModel()"),'Lazy 3D load');
+check(js.includes('is-ready')&&js.includes('has-fallback'),'Fallback status');
+check(html.includes("object-src 'none'")&&html.includes('base-uri')&&html.includes('canonical'),'SEO and CSP retained');
+check([...html.matchAll(/<img\b[^>]*>/g)].every(m=>/\balt=/.test(m[0])),'Images have alternative text');
+const req=['assets/s320-desktop.glb','assets/s320-mobile.glb','assets/s320-render.webp','assets/crowdfunding/vendor/three-r128.min.js','assets/crowdfunding/vendor/GLTFLoader-r128.js','assets/crowdfunding/vendor/meshopt_decoder-r128.js','assets/crowdfunding/scroll-flight-v1.js','assets/crowdfunding/scroll-flight-v1.css','crowdfunding/rewards/index.html'];
+for(const path of req)check(existsSync(path)&&statSync(path).size>100,'Missing required asset: '+path);
+const syntax=spawnSync(process.execPath,['--check'],{input:js,encoding:'utf8'});
+check(syntax.status===0,'JS syntax: '+syntax.stderr);
+let brace=0;for(const ch of css){if(ch==='{')brace++;if(ch==='}')brace--;}
+check(brace===0,'CSS braces balanced');
+if(errors.length){console.error('S-320 SCROLL FAIL\n'+errors.join('\n'));process.exit(1)}
+console.log('S-320 SCROLL PASS: source GLB, accessible native scroll, facts, support and rewards');
