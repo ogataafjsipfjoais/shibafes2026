@@ -120,7 +120,7 @@ img,canvas{display:block;max-width:100%}
 .record-feature{background:#f6f4ed;padding:clamp(48px,7vw,94px) 0;border-bottom:1px solid #c7cec4}
 .record-feature-inner{display:grid;grid-template-columns:minmax(0,.98fr) minmax(0,1fr);gap:clamp(25px,6.2vw,94px);align-items:center}
 .record-visual{margin:0;min-width:0}
-.record-visual img{width:100%;height:clamp(360px,47vw,625px);object-fit:cover;object-position:center bottom;background:#86b8ed}
+.record-visual img{display:block;width:100%;height:clamp(430px,52vw,700px);object-fit:contain;object-position:center;background:#85b8e3}
 .record-visual figcaption{margin-top:11px;color:#637970;font:700 10px/1.6 system-ui,sans-serif;letter-spacing:.07em}
 .record-copy{min-width:0}
 .record-copy .kicker{margin-bottom:12px}
@@ -137,7 +137,7 @@ img,canvas{display:block;max-width:100%}
  .record-feature{padding:47px 0 58px}
  .record-feature-inner{display:block}
  .record-visual{margin-bottom:29px}
- .record-visual img{height:clamp(260px,73vw,460px);object-position:center bottom}
+ .record-visual img{height:clamp(340px,112vw,580px);object-fit:contain;object-position:center}
  .record-copy h2{font-size:clamp(32px,8vw,43px);margin-bottom:15px}
  .record-copy blockquote{font-size:clamp(21px,5.7vw,27px)}
  .record-explain{font-size:13px}
