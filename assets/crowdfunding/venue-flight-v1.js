@@ -52,7 +52,7 @@ function mesh(geometry,material,parent,x=0,y=0,z=0){
 function mat(color,roughness=1){return new T.MeshStandardMaterial({color,roughness,metalness:0.0})}
 function drawVenue(scene){
  // Facing the open lake toward -Z. The platform is roughly ten metres above the water.
- const lake=mat(0x397488,.62),sand=mat(0xb2a98e),forest=mat(0x42664b),dark=mat(0x364a43),
+ const lake=mat(0x2b6776,.94),sand=mat(0xafa48e),forest=mat(0x42664b),dark=mat(0x364a43),
  deck=mat(0xe8c45c,.72),blue=mat(0x398ac3,.58),metal=mat(0x738988,.62),wood=mat(0x827d69);
  const water=mesh(new T.PlaneGeometry(1100,1100,40,40),lake,scene,0,-.65,-220);
  water.rotation.x=-Math.PI/2;
@@ -145,11 +145,11 @@ function makeGates(scene){
  for(let i=0;i<gateSpots.length;i++){
   const p=gateSpots[i],group=new T.Group();group.position.set(p.x,p.y,p.z);
   const ring=new T.Mesh(new T.TorusGeometry(1,.027,8,64),new T.MeshStandardMaterial({
-   color:0xf0d19c,emissive:0x665020,emissiveIntensity:.68,transparent:true,opacity:.72
+   color:0xf0d19c,emissive:0x45381c,emissiveIntensity:.24,transparent:true,opacity:.58
   }));
   ring.scale.set(9.8,5.3,1);group.add(ring);
   const halo=new T.Mesh(new T.TorusGeometry(1,.013,4,48),new T.MeshBasicMaterial({
-   color:0xc5edf1,transparent:true,opacity:.3
+   color:0xa7dfdc,transparent:true,opacity:.18
   }));
   halo.scale.set(10.1,5.55,1);group.add(halo);
   scene.add(group);gates.push({group,ring,passed:false,p});
@@ -162,11 +162,13 @@ async function setup(){
  loading=true;info('芝浦祭サイトのS-320機体データと会場を準備しています。');
  try{
   const renderer=new T.WebGLRenderer({canvas,antialias:!mobile.matches,powerPreference:'low-power',alpha:false});
+  renderer.toneMapping=T.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.04;
   renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobile.matches?1:1.25));
   renderer.outputEncoding=T.sRGBEncoding;
-  const scene=new T.Scene();scene.background=new T.Color(0x88b5c7);scene.fog=new T.Fog(0x91afaf,165,600);
-  scene.add(new T.HemisphereLight(0xfaf6e7,0x315b63,2.0));
-  const sun=new T.DirectionalLight(0xfff3d4,2.6);sun.position.set(-65,135,-40);scene.add(sun);
+  const scene=new T.Scene();scene.background=new T.Color(0x8eb7c6);scene.fog=new T.Fog(0x89abb4,210,650);
+  scene.add(new T.HemisphereLight(0xfaf6e7,0x315b63,0.92));
+  const sun=new T.DirectionalLight(0xfff3d4,1.18);sun.position.set(-65,135,-40);scene.add(sun);
   drawVenue(scene);
   const gates=makeGates(scene);
   const camera=new T.PerspectiveCamera(56,1,.12,1000);
@@ -177,7 +179,7 @@ async function setup(){
   const bounds=new T.Box3().setFromObject(aircraft);
   if(bounds.isEmpty())throw Error('No geometry in festival GLB');
   const size=bounds.getSize(new T.Vector3()),center=bounds.getCenter(new T.Vector3());
-  const scale=20/Math.max(size.x,size.y,size.z,.001);
+  const scale=22/Math.max(size.x,size.y,size.z,.001);
   aircraft.scale.setScalar(scale);
   aircraft.position.copy(center).multiplyScalar(-scale);
   // Keep the real model and its material/detail, with no substitute box-plane.
@@ -195,8 +197,8 @@ function resize(){
 }
 function renderPreview(){
  if(!game)return;
- game.camera.position.set(24,18.8,34);
- game.camera.lookAt(0,9.8,-16);
+ game.camera.position.set(mobile.matches?18:21,20.5,mobile.matches?31:24);
+ game.camera.lookAt(0,10.7,-3);
  game.renderer.render(game.scene,game.camera);
 }
 function setInputs(e){
@@ -282,9 +284,9 @@ function animate(now){
   if(metrics)metrics.innerHTML=(state.mode==='takeoff'?'RUNWAY 10m':'SIM '+Math.round(state.distance)+'m')+' <span>進行距離は演出上の数値</span>';
  }
  if(playing){
-  const desired=new T.Vector3(p.x*.8,p.y+7.8,p.z+25.5);
+  const desired=new T.Vector3(p.x+(mobile.matches?5:12),p.y+(mobile.matches?9.4:9.0),p.z+(mobile.matches?25:22));
   game.camera.position.lerp(desired,1-Math.exp(-dt*2.75));
-  game.target.set(p.x*.82,p.y+.65,p.z-22);
+  game.target.set(p.x*.82,p.y+.2,p.z-7.0);
   game.camera.lookAt(game.target);
  }
  game.renderer.render(game.scene,game.camera);
