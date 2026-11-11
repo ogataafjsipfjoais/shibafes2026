@@ -158,3 +158,18 @@ h2{font-family:"Yu Mincho","Hiragino Mincho ProN","Noto Serif JP",serif;font-siz
  #scene,.progress-dots i{transition:none}
  .intro-count{display:none}
 }
+
+/* The introduction deliberately features documentary photography; the 3D scene takes over on takeoff. */
+.flight-app:not(.has-started) .poster{opacity:1;visibility:visible}
+.flight-app.is-ready:not(.has-started) #scene{opacity:0}
+.flight-app.is-ready:not(.has-started) .poster{opacity:1}
+.flight-app.has-started .poster{opacity:0;transition:opacity .5s ease}
+.flight-app:not(.has-started) .scene-wash{opacity:.85;background:linear-gradient(90deg,#071713ed 0%,#0b1b17cd 43%,#0c1b166e 75%,#0a15103d 100%)}
+.intro-experience{font-size:13px;color:#f1d49f;line-height:1.7;margin:0 0 12px}
+@media(max-width:760px){
+  .flight-app:not(.has-started) .poster{object-position:52% 34%;filter:brightness(.56) saturate(.8)}
+  .flight-app:not(.has-started) .scene-wash{background:linear-gradient(0deg,#061713f6,#071813df 61%,#0718139c)}
+  .overlay h1{font-size:clamp(31px,8vw,42px)}
+  .intro-copy{font-size:12px;line-height:1.8;margin-bottom:13px}
+  .intro-experience{font-size:11px;margin-bottom:7px}
+}
