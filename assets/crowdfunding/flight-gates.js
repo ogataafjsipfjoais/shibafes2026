@@ -17,6 +17,15 @@
   const guide = $('guide'), guideText = $('guide-hint');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const CAMPFIRE = 'https://camp-fire.jp/projects/990337/view';
+  // Prefer the user-approved hero photo once the binary asset is available.
+  // Keep the existing team photo when that image has not been uploaded yet.
+  const poster = document.querySelector('.poster[data-replacement-src]');
+  if(poster){
+    const replacement = new Image();
+    replacement.onload=()=>{if(replacement.naturalWidth>0)poster.src=replacement.src;};
+    replacement.src=poster.dataset.replacementSrc;
+  }
+
 
   const stories = [
     { label: '01 / 2026年の記録', title: '180.67m。その先へ。',
