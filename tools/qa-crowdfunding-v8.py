@@ -88,12 +88,12 @@ try:
         # CDN failure must not strand visitors with a nonworking takeoff.
         ctx=browser.new_context(viewport={'width':375,'height':812})
         page=ctx.new_page()
-        page.route('**/cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',lambda route:route.abort())
+        page.route('**/assets/crowdfunding/vendor/three-r128.min.js',lambda route:route.abort())
         page.goto(url,wait_until='domcontentloaded',timeout=50000)
         page.wait_for_function('window.TBTFlight !== undefined',timeout=25000)
-        assert not page.evaluate('TBTFlight.ready'),'Forced CDN outage unexpectedly initialized 3D'
+        assert not page.evaluate('TBTFlight.ready'),'Forced engine asset outage unexpectedly initialized 3D'
         page.locator('#takeoff').click()
-        assert page.locator('#info').is_visible(),'No fallback when Three.js is missing'
+        assert page.locator('#info').is_visible(),'No fallback when vendored Three.js is missing'
         assert page.locator('#info a[href*="camp-fire.jp"]').count()>=1,'Fallback lost support link'
         ctx.close()
         browser.close()
