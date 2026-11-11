@@ -49,6 +49,10 @@ check(js.includes('GLTFLoader')&&js.includes('setMeshoptDecoder')&&js.includes('
 check(js.includes('s320-')&&js.includes("mobile':'desktop")&&js.includes('.glb'),'Mobile/desktop real festival GLB selection');
 check(js.includes('limitedTouch')&&js.includes('タッチ端末では負荷を抑え'),'Avoid simultaneous WebGL contexts on iPad');
 check(pilot.includes('touchLimited')&&pilot.includes("lightModel?'mobile':'desktop'"),'Select low-memory S-320 model for iPad Safari');
+check(pilot.includes('aircraft.rotation.y=Math.PI'),'Correct the S-320 model heading 180 degrees toward the -Z takeoff path');
+check(pilot.includes('// Load the real S-320 automatically')&&/setup\(\);\s*if\('IntersectionObserver' in window\)/.test(pilot),'Eager GLB initialization without takeoff click');
+check(pilot.includes('const io=new IntersectionObserver')&&!pilot.includes('if(active){setup();'),'IntersectionObserver must only control rendering, not model loading');
+
 check(js.includes('addEventListener')&&js.includes("'scroll'")&&js.includes("scrollValue")&&!js.includes('gatePassed'),'Scroll, not gate collision, drives story');
 check(js.includes('matchMedia')&&js.includes('prefers-reduced-motion'),'Reduced-motion still image');
 check(js.includes('IntersectionObserver')&&js.includes("loadModel()"),'Lazy 3D load');
