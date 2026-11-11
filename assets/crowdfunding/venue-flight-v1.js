@@ -21,7 +21,7 @@ const T=window.THREE;
 const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
 const smooth=(a,b,k)=>a+(b-a)*k;
 const state={mode:'preview',ready:false,passed:0,loops:0,distance:0,aircraft:'s320-'+(lightModel?'mobile':'desktop')+'.glb'};
-const input={x:0,y:0,keys:new Set(),touchId:null,lastManual:0};
+const input={x:0,y:0,keys:new Set(),touchId:null,lastManual:-1000000000};
 let game=null,frame=0,last=0,active=false,loading=false,failed=false,autoStarted=false,elapsed=0,holdUntil=0,loopUntil=0;
 const modelPath='../assets/'+state.aircraft;
 const gateStories=[
@@ -223,7 +223,7 @@ function start(){
  if(!state.ready||failed)return;
  autoStarted=true;
  state.mode='takeoff';state.passed=0;state.distance=0;elapsed=0;holdUntil=0;loopUntil=0;
- input.x=0;input.y=0;input.lastManual=0;input.keys.clear();
+ input.x=0;input.y=0;input.lastManual=-1000000000;input.keys.clear();
  game.rig.position.set(0,11.45,10);
  game.rig.rotation.set(0,0,0);
  game.gates.forEach(g=>{
@@ -357,7 +357,7 @@ if(reduced.matches){
  fail('動きを抑える設定に合わせ、飛行演出の代わりに会場写真を表示しています。');
  return;
 }
-// Load the real S-320 automatically, before a visitor presses the takeoff button.
+// Load the real S-320 automatically on page open, without any takeoff button.
 // The observer controls animation, not asset loading.
 setup();
 if('IntersectionObserver' in window){
