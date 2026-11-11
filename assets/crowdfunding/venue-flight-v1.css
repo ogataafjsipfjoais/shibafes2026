@@ -56,6 +56,8 @@
  .pilot-heading h2{font-size:clamp(37px,9vw,50px);margin-bottom:16px}
  .pilot-heading p:not(.kicker){font-size:12px;line-height:1.8}
  .pilot-area{height:min(75svh,660px);min-height:480px}
+ .pilot-shade{background:linear-gradient(0deg,#071e1bea 0%,#0b2825d8 38%,#0d34336e 69%,transparent 100%)}
+ .pilot-area.is-playing .pilot-shade{background:linear-gradient(0deg,#09211dbc,transparent 44%)}
  .pilot-intro{left:var(--gutter);right:var(--gutter);bottom:34px}
  .pilot-intro h3{font-size:31px;line-height:1.4}
  .pilot-intro p{font-size:12px;line-height:1.75}
