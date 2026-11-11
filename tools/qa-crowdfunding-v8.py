@@ -40,9 +40,9 @@ try:
     assert abs(preflight['modelYaw']-3.141592653589793)<.001,'Aircraft nose still points opposite the -Z flight direction'
     assert page.evaluate('window.scrollY') == 0,'Automatic loading must not scroll the page'
     page.locator('#pilot-stage').scroll_into_view_if_needed()
-    page.wait_for_function('window.TBTVenueFlight && ["takeoff","flying","holding","complete"].includes(TBTVenueFlight.mode)',timeout=12000)
+    page.wait_for_function('window.TBTVenueFlight && ["takeoff","flying","holding","looping"].includes(TBTVenueFlight.mode)',timeout=12000)
     assert page.locator('#pilot-begin').count()==0,'Takeoff button must not exist'
-    assert page.locator('#pilot-hud').is_visible() or page.locator('#pilot-finish').is_visible(),'Automatic flight HUD not visible'
+    assert page.locator('#pilot-hud').is_visible(),'Automatic flight HUD not visible'
     page.wait_for_function('window.TBTVenueFlight !== undefined',timeout=10000)
     page.wait_for_function('TBTVenueFlight.ready || TBTVenueFlight.mode === "unavailable"',timeout=45000)
     pilot=page.evaluate('TBTVenueFlight')
@@ -50,24 +50,30 @@ try:
     assert pilot['aircraft'].endswith('s320-mobile.glb' if width<760 else 's320-desktop.glb'),f'Wrong pilot model: {pilot}'
     page.wait_for_function("parseFloat(getComputedStyle(document.querySelector('#pilot-canvas')).opacity) > 0.98",timeout=5000)
     page.screenshot(path=str(OUT/f'pilot-{width}x{height}-deck.png'))
-    assert page.evaluate('TBTVenueFlight.mode') in ('takeoff','flying','holding','complete'),'Flight failed to auto-start after scrolling into view'
+    assert page.evaluate('TBTVenueFlight.mode') in ('takeoff','flying','holding','looping'),'Flight failed to auto-start after scrolling into view'
+    assert page.locator('#pilot-repeat').count()==0,'Old replay button unexpectedly shown'
+    assert page.locator('#pilot-finish').count()==0,'Blocking finish overlay unexpectedly shown'
+    assert page.locator('#pilot-support').get_attribute('href')=='https://camp-fire.jp/projects/990337/view','Persistent support link missing'
     canvas_box=page.locator('#pilot-canvas').bounding_box()
     assert canvas_box,'Pilot canvas absent'
-    def pilot_steer(x,y):
-     page.mouse.move(canvas_box['x']+canvas_box['width']*x,canvas_box['y']+canvas_box['height']*y,steps=6)
-    pilot_steer(.50,.48)
-    page.wait_for_function('TBTVenueFlight.passed >= 1',timeout=16000)
+    if width==375:
+     # Actual manual steering remains available; autoplay resumes after idle.
+     page.mouse.move(canvas_box['x']+canvas_box['width']*.50,canvas_box['y']+canvas_box['height']*.48,steps=6)
+    page.wait_for_function('TBTVenueFlight.passed >= 1',timeout=23000)
     assert page.locator('#pilot-story-title').inner_text().startswith('180.67m'),'First gate story did not change'
     page.screenshot(path=str(OUT/f'pilot-{width}x{height}-flight.png'))
     if width==1440:
-     for index,point in enumerate([(.24,.59),(.75,.37),(.39,.47)],start=2):
-      pilot_steer(*point)
-      page.wait_for_function(f'TBTVenueFlight.passed >= {index}',timeout=22000)
-     page.wait_for_function('TBTVenueFlight.mode === "complete"',timeout=12000)
-     assert page.locator('#pilot-finish').is_visible(),'Pilot finale not shown after 4 gates'
-     page.screenshot(path=str(OUT/f'pilot-{width}x{height}-finish.png'))
-     page.locator('#pilot-repeat').click()
-     assert page.evaluate('TBTVenueFlight.passed')==0,'Pilot did not reset'
+     # Hands-free continuation must pass all 4 gates, then take off again.
+     # No clicking, fake time, or artificial gate state injection.
+     page.wait_for_function('TBTVenueFlight.passed >= 4',timeout=85000)
+     assert page.locator('#pilot-hud').is_visible(),'4th gate hid the in-flight support HUD'
+     page.screenshot(path=str(OUT/f'pilot-{width}x{height}-fourth-gate.png'))
+     page.wait_for_function('TBTVenueFlight.loops >= 1',timeout=17000)
+     restarted=page.evaluate('TBTVenueFlight')
+     assert restarted['passed'] < 4 and restarted['mode'] in ('takeoff','flying','holding'),'Automatic replay did not reset gate sequence'
+     assert page.locator('#pilot-hud').is_visible(),'In-flight HUD missing on next lap'
+     page.wait_for_function('TBTVenueFlight.loops >= 1 && TBTVenueFlight.passed >= 1',timeout=24000)
+     page.screenshot(path=str(OUT/f'pilot-{width}x{height}-second-flight.png'))
     page.locator('#pilot-quit').click()
     assert page.evaluate('TBTVenueFlight.mode')=='stopped','Pilot did not stop without a click-gated restart'
    # Duplicate S-320 scroll viewer and repeated chapters have been removed.
@@ -76,7 +82,7 @@ try:
    assert page.locator('script[src*="scroll-flight-v1.js"]').count()==0,f'Old viewer loaded at {width}'
    assert page.locator('.chapter').count()==0,f'Repeated story chapters at {width}'
    assert page.locator('.record-sources a').count()==3,f'Original named sources missing at {width}'
-   assert page.locator('#pilot-read-next').get_attribute('href')=='#rewards','Flight finale does not lead to rewards'
+   assert page.locator('#pilot-support').get_attribute('href')=='https://camp-fire.jp/projects/990337/view','In-flight support CTA must lead to CAMPFIRE'
    page.locator('#rewards').scroll_into_view_if_needed()
    assert page.locator('.reward-list article').count()==3,f'Rewards missing at {width}'
    page.screenshot(path=str(OUT/f'scroll-{width}x{height}-rewards.png'))
@@ -119,7 +125,7 @@ try:
   ipad_page.locator('#pilot-stage.is-ready').wait_for(state='attached',timeout=60000)
   assert ipad_page.locator('#pilot-begin').count()==0,'Touch device still has click-to-takeoff button'
   ipad_page.locator('#pilot-hud').wait_for(state='visible',timeout=10000)
-  assert ipad_page.evaluate('window.TBTVenueFlight.mode') in ('takeoff','flying','holding','complete'),'iPad-like scene did not auto-launch'
+  assert ipad_page.evaluate('window.TBTVenueFlight.mode') in ('takeoff','flying','holding','looping'),'iPad-like scene did not auto-launch'
   aircraft=ipad_page.evaluate('window.TBTVenueFlight.aircraft')
   assert aircraft=='s320-mobile.glb',f'iPad did not use low-memory festival model: {aircraft}'
   ipad_page.screenshot(path=str(OUT/'pilot-ipad-csp-enforced.png'))
@@ -134,4 +140,4 @@ try:
 finally:
  server.shutdown()
 (OUT/'scroll-results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
-print('S-320 SINGLE SCENE CHROMIUM PASS: one flight experience, official links, rewards, native scroll and reduced motion')
+print('S-320 INFINITE FLIGHT CHROMIUM PASS: real S-320 automatic four-gate replay, manual control, support and mobile scroll')
