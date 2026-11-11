@@ -23,6 +23,7 @@ img,canvas{display:block;max-width:100%}
 .hero-media:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#091a18e8 0%,#09241cba 40%,#0b251b49 80%),linear-gradient(0deg,#0b1a16ad,transparent 45%)}
 .hero-content{position:relative;z-index:1;padding:118px 0 86px}
 .kicker{font:750 11px/1.5 system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;margin:0 0 18px;color:var(--gold)}
+.hero-tagline{margin-left:10px;color:#eef2e8;letter-spacing:0}
 .hero h1{font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;font-size:clamp(39px,5.2vw,77px);letter-spacing:-.074em;font-weight:650;line-height:1.42;max-width:1000px;margin:0 0 28px;text-wrap:balance}
 .hero h1 em{font-style:normal;color:#f0d8ad}
 .hero-copy{max-width:690px;color:#e6eee6;font-size:clamp(14px,1.3vw,18px);line-height:2.04;margin:0 0 22px}
