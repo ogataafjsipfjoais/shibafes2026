@@ -42,6 +42,16 @@ try:
   assert page.locator('h1').is_visible(),'Hero invisible'
   assert page.locator('.reward-list article').count()==3,'Rewards lost'
   assert page.locator('a[href*="camp-fire.jp"]').count()>=8,'Direct CAMPFIRE links missing'
+  # The real model loads automatically before an iPad user taps or scrolls.
+  assert page.evaluate('window.scrollY')==0,'Automatic setup changed scroll position'
+  try:
+   page.locator('#pilot-stage.is-ready').wait_for(state='attached',timeout=60000)
+  except Exception:
+   status=page.locator('#pilot-loading').inner_text()
+   raise AssertionError('WebKit automatic 3D preload failed: '+status+'; '+str(logs))
+  before_start=page.evaluate('window.TBTVenueFlight')
+  assert before_start['mode']=='preview' and abs(before_start['modelYaw']-3.141592653589793)<.001,'Wrong aircraft heading or premature takeoff'
+  assert page.evaluate('window.scrollY')==0,'Model loading should not scroll to the game'
   page.locator('#pilot-stage').scroll_into_view_if_needed()
   try:
    page.locator('#pilot-stage.is-ready').wait_for(state='attached',timeout=60000)
