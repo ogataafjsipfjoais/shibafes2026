@@ -10,7 +10,7 @@
   const info = $('info'), finale = $('finale'), pausePanel = $('pause-panel');
   const status = $('status-text'), takeoff = $('takeoff'), nextBtn = $('return-flight');
   const pauseBtn = $('pause'), resumeBtn = $('resume'), skipBtn = $('skip');
-  const replayBtn = $('replay'), infoBtn = $('read-story'), infoBack = $('info-back');
+  const replayBtn = $('replay'), infoBtn = $('read-story'), infoBack = $('return-flight');
   const progressText = $('gate'), dots = [...document.querySelectorAll('.progress-dots i')];
   const chapterNum = $('chapter-number'), chapterTitle = $('chapter-title');
   const chapterText = $('chapter'), sourceLink = $('chapter-source');
@@ -273,7 +273,6 @@
   }
   function bindEvents(){
     takeoff.addEventListener('click',begin);
-    $('support-skip').addEventListener('click',()=>finish(true));
     infoBtn.addEventListener('click',()=>openInfo(''));
     skipBtn.addEventListener('click',()=>finish(true));
     pauseBtn.addEventListener('click',pause);
