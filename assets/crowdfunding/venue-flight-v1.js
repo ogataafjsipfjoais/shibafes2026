@@ -241,7 +241,7 @@ function pass(){
 function animate(now){
  frame=0;
  if(!game||document.hidden||!active)return;
- const dt=Math.min(.05,Math.max(.002,(now-last)/1000||.016));last=now;
+ const dt=Math.min(.22,Math.max(.002,(now-last)/1000||.016));last=now;
  const p=game.rig.position;
  const playing=['takeoff','flying','holding'].includes(state.mode);
  if(playing){
