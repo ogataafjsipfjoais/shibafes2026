@@ -9,7 +9,7 @@ const check=(condition,message)=>{if(!condition)errors.push(message);};
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
 check(ids.length===new Set(ids).size,'Duplicate element IDs');
 check((html.match(/<h1\b/g)||[]).length===1,'There must be exactly one h1');
-const required=['flight-app','scene','start','takeoff','hud','gate','chapter','chapter-title','chapter-source','guide','pause','resume','skip','info','info-back','replay','finale','status-text'];
+const required=['flight-app','scene','start','takeoff','hud','gate','chapter','chapter-title','chapter-source','guide','pause','resume','skip','info','return-flight','replay','finale','status-text'];
 check(required.every(id=>ids.includes(id)),'Missing required game UI elements');
 check(html.includes('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'),'Use pinned Three.js r128 library');
 check(html.includes('flight-gates.js')&&html.includes('flight-gates.css'),'Load game JS/CSS from own assets');
@@ -27,7 +27,7 @@ check(html.includes('S-330の飛行映像ではありません'),'Honest model d
 check(['pointermove','pointerdown','keydown','arrowleft','arrowright','arrowup','arrowdown','webglcontextlost','prefers-reduced-motion','flight-fallback'].filter(x=>game.includes(x)).length>=9,
       'Pointer/keyboard/fallback/reduced-motion logic must be available');
 check(game.includes('gatePassed()')&&game.includes('Math.abs(deltaX)<=2.0')&&game.includes("state.passed===4"),'Actual gate collision and progression logic');
-check(game.includes('window.TBTFlight')&&game.includes('const gateData=['),'Observable four-gate runtime');
+check(game.includes("'TBTFlight'")&&game.includes('const gateData=['),'Observable four-gate runtime');
 check(game.includes('Math.max(1,innerWidth)')&&game.includes('renderer.setPixelRatio'),'Responsive rendering');
 check(css.includes('@media(max-width:760px)')&&css.includes('prefers-reduced-motion'),'Responsive and reduced-motion styles');
 check(css.includes('touch-action:none')&&css.includes('[hidden]'),'Touch steering and hidden-state styles');
