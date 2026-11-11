@@ -9,11 +9,10 @@
 const $=id=>document.getElementById(id);
 const section=$('pilot'), stage=$('pilot-stage'), canvas=$('pilot-canvas');
 if(!section||!stage||!canvas)return;
-const quitBtn=$('pilot-quit'), repeatBtn=$('pilot-repeat');
-const hud=$('pilot-hud'), finish=$('pilot-finish');
+const quitBtn=$('pilot-quit');
+const hud=$('pilot-hud');
 const status=$('pilot-loading'), metrics=$('pilot-metrics');
 const guide=$('pilot-guide'), message=$('pilot-message'), checkpoint=$('pilot-checkpoint'), storyTitle=$('pilot-story-title');
-const readNext=$('pilot-read-next');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const mobile=matchMedia('(max-width:760px)');
 const touchLimited=matchMedia('(pointer:coarse)').matches||navigator.maxTouchPoints>1;
@@ -21,9 +20,9 @@ const lightModel=mobile.matches||touchLimited;
 const T=window.THREE;
 const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
 const smooth=(a,b,k)=>a+(b-a)*k;
-const state={mode:'preview',ready:false,passed:0,distance:0,aircraft:'s320-'+(lightModel?'mobile':'desktop')+'.glb'};
-const input={x:0,y:0,keys:new Set(),touchId:null};
-let game=null,frame=0,last=0,active=false,loading=false,failed=false,autoStarted=false,elapsed=0,holdUntil=0;
+const state={mode:'preview',ready:false,passed:0,loops:0,distance:0,aircraft:'s320-'+(lightModel?'mobile':'desktop')+'.glb'};
+const input={x:0,y:0,keys:new Set(),touchId:null,lastManual:0};
+let game=null,frame=0,last=0,active=false,loading=false,failed=false,autoStarted=false,elapsed=0,holdUntil=0,loopUntil=0;
 const modelPath='../assets/'+state.aircraft;
 const gateStories=[
  {title:'180.67mを飛んだ。',text:'2026年のS-320 Elementは、琵琶湖で180.67mを記録しました。'},
@@ -37,13 +36,13 @@ const gateSpots=[
  {x:6.2,y:14.0,z:-128},
  {x:-2.8,y:13.2,z:-176}
 ];
-const expose=()=>Object.freeze({mode:state.mode,ready:state.ready,passed:state.passed,distance:Math.round(state.distance),aircraft:state.aircraft,modelYaw:game?game.aircraft.rotation.y:null,position:game?{x:game.rig.position.x,y:game.rig.position.y,z:game.rig.position.z}:null});
+const expose=()=>Object.freeze({mode:state.mode,ready:state.ready,passed:state.passed,loops:state.loops,distance:Math.round(state.distance),aircraft:state.aircraft,modelYaw:game?game.aircraft.rotation.y:null,position:game?{x:game.rig.position.x,y:game.rig.position.y,z:game.rig.position.z}:null});
 Object.defineProperty(window,'TBTVenueFlight',{configurable:false,get:expose});
 function show(el,on){if(el)el.hidden=!on}
 function info(text){if(status){status.textContent=text;status.hidden=!text}}
 function fail(text){
  failed=true;state.ready=false;state.mode='unavailable';
- show(hud,false);show(finish,false);
+ show(hud,false);
  stage.classList.remove('is-playing');stage.classList.remove('is-ready');
  info(text||'3Dが利用できないため、会場写真をご覧ください。');
 }
@@ -210,6 +209,7 @@ function setInputs(e){
  const rect=canvas.getBoundingClientRect();
  input.x=clamp((e.clientX-rect.left)/rect.width*2-1,-1,1);
  input.y=clamp((e.clientY-rect.top)/rect.height*2-1,-1,1);
+ input.lastManual=performance.now();
 }
 function maybeAutoStart(){
  // Start once the aircraft is ready AND the visitor has actually reached the scene.
@@ -222,8 +222,8 @@ function maybeAutoStart(){
 function start(){
  if(!state.ready||failed)return;
  autoStarted=true;
- state.mode='takeoff';state.passed=0;state.distance=0;elapsed=0;holdUntil=0;
- input.x=0;input.y=0;input.keys.clear();
+ state.mode='takeoff';state.passed=0;state.distance=0;elapsed=0;holdUntil=0;loopUntil=0;
+ input.x=0;input.y=0;input.lastManual=0;input.keys.clear();
  game.rig.position.set(0,11.45,10);
  game.rig.rotation.set(0,0,0);
  game.gates.forEach(g=>{
@@ -232,15 +232,21 @@ function start(){
  });
  storyTitle.textContent='琵琶湖、離陸台から。';
  message.textContent='機体を湖へ送り出します。マウス・指・矢印キーで進路と高度を操作できます。';
- checkpoint.textContent='TAKEOFF / HIKONE MATSUBARA';
+ checkpoint.textContent='FLIGHT '+String(state.loops+1).padStart(2,'0')+' / HIKONE MATSUBARA';
  guide.textContent='離陸準備';
- show(hud,true);show(finish,false);
+ show(hud,true);
  stage.classList.add('is-playing');status.hidden=true;
+ renderPreview();
+ stage.classList.remove('is-loop-transition');
  last=performance.now();request();
 }
-function finishFlight(){
- state.mode='complete';show(hud,false);show(finish,true);
- stage.classList.remove('is-playing');
+function prepareNextLoop(now){
+ // Display the fourth story, fade briefly, then return to the lake departure
+ // platform. The already loaded S-320 model and renderer remain in memory.
+ state.mode='looping';
+ loopUntil=now+500;
+ guide.textContent='次の飛行へ';
+ stage.classList.add('is-loop-transition');
 }
 function pass(){
  const g=game.gates[state.passed];g.passed=true;
@@ -255,6 +261,10 @@ function animate(now){
  frame=0;
  if(!game||document.hidden||!active)return;
  const dt=Math.min(.22,Math.max(.002,(now-last)/1000||.016));last=now;
+ if(state.mode==='looping'&&now>=loopUntil){
+  state.loops++;
+  start();
+ }
  const p=game.rig.position;
  const playing=['takeoff','flying','holding'].includes(state.mode);
  if(playing){
@@ -269,7 +279,13 @@ function animate(now){
    p.y=11.45-.8*t+1.85*Math.max(0,(t-.77)/.23);
    if(t>=1){state.mode='flying';storyTitle.textContent='湖上へ。';message.textContent='向こうに見える光のゲートへ。左右と上下の位置を合わせて進んでください。';}
   }else{
-   const targetX=steerX*12.5,targetY=clamp(12.9-steerY*4.2,7.1,19.8);
+   // Autopilot guides a passive viewer through all four gates.
+   // Pointer/keyboard control takes priority temporarily, then releases
+   // automatically after a short idle period so a gate cannot trap the flight.
+   const manual=input.keys.size>0||input.touchId!==null||now-input.lastManual<3000;
+   const nextGate=game.gates[Math.min(state.passed,3)].p;
+   const targetX=manual?steerX*12.5:nextGate.x;
+   const targetY=manual?clamp(12.9-steerY*4.2,7.1,19.8):nextGate.y;
    const easing=1-Math.exp(-dt*3.6);
    p.x=smooth(p.x,targetX,easing);
    p.y=smooth(p.y,targetY,easing);
@@ -283,7 +299,7 @@ function animate(now){
     else if(p.z<=waitZ+2.0)guide.textContent=!aligned?(dx>0?'左へ':'右へ')+(Math.abs(dy)>4.6?(dy>0?'・下へ':'・上へ'):''):'そのまま進む';
     else guide.textContent='次の光のゲートへ';
    }else if(state.mode==='holding'&&now>=holdUntil){
-    if(state.passed===4)finishFlight();
+    if(state.passed===4)prepareNextLoop(now);
     else state.mode='flying';
    }
    if(state.mode==='holding')p.z-=.4*dt;
@@ -301,18 +317,17 @@ function animate(now){
   game.camera.lookAt(game.target);
  }
  game.renderer.render(game.scene,game.camera);
- if(active&&['takeoff','flying','holding'].includes(state.mode))request();
+ if(active&&['takeoff','flying','holding','looping'].includes(state.mode))request();
 }
 function request(){if(!frame&&active&&!document.hidden&&game)frame=requestAnimationFrame(animate)}
 function quit(){
- state.mode='stopped';show(hud,false);show(finish,false);
- stage.classList.remove('is-playing');input.keys.clear();
+ state.mode='stopped';show(hud,false);
+ stage.classList.remove('is-playing','is-loop-transition');input.keys.clear();
  info('飛行を停止しました。いったんスクロールで離れて戻ると、自動で再開します。');
  if(game){game.rig.position.set(0,11.45,10);game.rig.rotation.set(0,0,0);renderPreview()}
 }
 function listen(){
  quitBtn.addEventListener('click',quit);
- repeatBtn.addEventListener('click',start);
  canvas.addEventListener('pointerdown',e=>{
   if(!['takeoff','flying','holding'].includes(state.mode))return;
   input.touchId=e.pointerId;
@@ -329,14 +344,13 @@ function listen(){
   if(['arrowleft','arrowright','arrowup','arrowdown','w','a','s','d'].includes(k)&&['takeoff','flying','holding'].includes(state.mode)){
    e.preventDefault();input.keys.add(k);
   }
-  if(k==='escape'&&['takeoff','flying','holding','complete'].includes(state.mode))quit();
+  if(k==='escape'&&['takeoff','flying','holding','looping'].includes(state.mode))quit();
  });
  document.addEventListener('keyup',e=>input.keys.delete(e.key.toLowerCase()));
  addEventListener('blur',()=>input.keys.clear());
  addEventListener('resize',()=>{if(game){resize();if(state.mode==='preview')renderPreview()}},{passive:true});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){last=performance.now();request()}});
  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();fail('3Dの表示が中断されたため、写真へ切り替えました。')});
- if(readNext)readNext.addEventListener('click',()=>{quit();});
 }
 listen();
 if(reduced.matches){
