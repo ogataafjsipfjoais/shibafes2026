@@ -48,6 +48,10 @@ check(html.includes('S-330の実機や飛行映像ではありません'),'3D da
 check((html.match(/https:\/\/teambirdmantrial\.jp\/news\//g)||[]).length===2 && html.includes('https://teambirdmantrial.jp/gallery/'),'Two sourced statements and gallery link');
 check(pilot.includes('s320-')&&pilot.includes('GLTFLoader')&&pilot.includes('setMeshoptDecoder'),'Original festival aircraft loaded through GLTF');
 check(pilot.includes('gateSpots')&&pilot.includes('pass()')&&pilot.includes("state.mode='takeoff'"),'Real 4-gate pilot kept');
+check(['飛行の記録','受け継ぐ想い','機体製作の日々','次の空を目指して'].every(label=>pilot.includes("label:'"+label+"'")),'Gate captions use human story, not numerical stage counters');
+check(!pilot.includes("'GATE '+state.passed")&&!pilot.includes("'FLIGHT '+String(state.loops")&&!pilot.includes("'SIM '+Math.round(state.distance)"),'No numbered gate, lap, or artificial simulated distance in visible HUD');
+check(html.includes('<small id="pilot-checkpoint">琵琶湖・松原湖岸</small>')&&html.includes('<strong id="pilot-metrics">離陸準備中</strong>'),'Loading view uses Japanese narrative labels, not numbers');
+
 check(pilot.includes('state.loops++')&&pilot.includes('prepareNextLoop(now)')&&pilot.includes("state.mode='looping'"),'Completed four-gate flight restarts automatically');
 check(pilot.includes('nextGate.x')&&pilot.includes('nextGate.y')&&pilot.includes('input.lastManual'),'Autopilot eventually clears gates even without touch input');
 check(!pilot.includes('repeatBtn')&&!pilot.includes('finishFlight()')&&!pilot.includes("state.mode='complete'"),'No manual replay requirement or permanent completion state');
