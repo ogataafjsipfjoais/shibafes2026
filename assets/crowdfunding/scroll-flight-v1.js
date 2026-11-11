@@ -140,6 +140,15 @@
       fail('3Dモデルを読み込めないため、S-320の画像を表示しています。');
     }
   }
+  // iOS/iPadOS may evict one WebGL context when the full pilot scene and
+  // this additional aircraft renderer allocate two copies of the same GLB.
+  // Prefer the interactive flight, with a static aircraft illustration in the article.
+  const limitedTouch=matchMedia('(pointer:coarse)').matches||navigator.maxTouchPoints>1;
+  if(limitedTouch){
+    stage.classList.add('has-fallback');
+    setStatus('タッチ端末では負荷を抑え、ここはS-320の静止画像を表示しています。上の操縦体験では実際の3D機体を使用できます。');
+    return;
+  }
   if(reduce.matches){
     stage.classList.add('has-fallback');
     setStatus('動きを抑える設定に合わせ、S-320の静止画像を表示しています。');
