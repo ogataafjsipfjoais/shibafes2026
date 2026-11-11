@@ -4,6 +4,8 @@ import {spawnSync} from 'node:child_process';
 const html=readFileSync('crowdfunding/index.html','utf8');
 const css=readFileSync('assets/crowdfunding/scroll-flight-v1.css','utf8');
 const js=readFileSync('assets/crowdfunding/scroll-flight-v1.js','utf8');
+const pilot=readFileSync('assets/crowdfunding/venue-flight-v1.js','utf8');
+const pilotCSS=readFileSync('assets/crowdfunding/venue-flight-v1.css','utf8');
 const errors=[],check=(v,msg)=>{if(!v)errors.push(msg)};
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
 check(ids.length===new Set(ids).size,'Duplicate IDs');
@@ -19,6 +21,20 @@ check(['S-330「鵠」の機体製作へのご支援お願い致します。','�
 check(['180.67m','髙草木雄太','大谷映奈','2026年11月30日','410,000円','500円','7,000円','25,000円'].every(x=>html.includes(x)),'Grounded facts and rewards');
 check(['鳥人間コンテスト2026で','02 / 2027年','来年の機体','次の機体製作のために'].every(x=>html.includes(x)),'Requested three summary wording changes');
 check(html.includes('金銭的なリターンはありません'),'Purchase-model crowdfunding disclosure');
+
+check(html.includes('id="pilot"')&&html.includes('id="pilot-stage"')&&html.includes('id="pilot-begin"'),'Optional takeoff stage and one-click start');
+check(html.indexOf('id="pilot"')<html.indexOf('id="flight"'),'Pilot before the scroll story');
+check(html.includes('venue-flight-v1.js')&&html.includes('venue-flight-v1.css'),'Pilot assets linked');
+check(html.includes('約10m')&&html.includes('3.5度')&&html.includes('会場の精密な復元'),'Historical platform parameters and reconstruction disclaimer');
+check(pilot.includes('s320-')&&pilot.includes('GLTFLoader')&&pilot.includes('setMeshoptDecoder'),'Pilot must use existing GLB, not a box approximation');
+check(pilot.includes('gateSpots')&&pilot.includes('pass()')&&pilot.includes("state.mode='takeoff'"),'Real takeoff and four interactive gates');
+check(pilot.includes("pointermove")&&pilot.includes("arrowleft")&&pilot.includes("pointerdown"),'Pointer, touch and keyboard steering');
+check(pilot.includes("prefers-reduced-motion")&&pilot.includes("webglcontextlost"),'Motion accessibility and WebGL fallback');
+check(pilotCSS.includes('.pilot-area')&&pilotCSS.includes('touch-action:none')&&pilotCSS.includes('@media(max-width:760px)'),'Responsive takeoff stage');
+for(const file of ['assets/crowdfunding/venue-flight-v1.js','assets/crowdfunding/venue-flight-v1.css','assets/crowdfunding/2026-tail-lake.jpg'])
+ check(existsSync(file)&&statSync(file).size>500,'Missing pilot resource '+file);
+const pilotSyntax=spawnSync(process.execPath,['--check'],{input:pilot,encoding:'utf8'});
+check(pilotSyntax.status===0,'Pilot JS syntax: '+pilotSyntax.stderr);
 check(html.includes('https://camp-fire.jp/projects/990337/view')&&html.includes('./rewards/'),'Support and rewards pages');
 check(html.includes('S-330の実機や飛行映像ではありません'),'S-320 vs S-330 clear distinction');
 check(html.includes('https://teambirdmantrial.jp/news/')&&html.includes('https://teambirdmantrial.jp/gallery/'),'Named sources with citations');
