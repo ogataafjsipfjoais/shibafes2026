@@ -1,116 +1,76 @@
-"""Full-screen four-gate flight QA: real pointer play, accessible skip and fallback."""
-import functools,json,threading
+"""Chromium QA for the zero-click S-320 scroll-story, on mobile / tablet / desktop."""
 from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
-from pathlib import Path
 from playwright.sync_api import sync_playwright
+from pathlib import Path
+import functools,json,threading
 
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'qa-artifacts'
-OUT.mkdir(exist_ok=True)
+OUT=ROOT/'qa-artifacts';OUT.mkdir(exist_ok=True)
 class Quiet(SimpleHTTPRequestHandler):
-    def log_message(self,*args):pass
+ def log_message(self,*args):pass
 server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT)))
 threading.Thread(target=server.serve_forever,daemon=True).start()
-url=f'http://127.0.0.1:{server.server_port}/crowdfunding/'
+URL=f'http://127.0.0.1:{server.server_port}/crowdfunding/'
 results=[]
-GATES=[(.63,.50),(.17,.32),(.85,.65),(.22,.40)]
 try:
-    with sync_playwright() as playwright:
-        browser=playwright.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--enable-webgl','--use-angle=swiftshader','--use-gl=angle'])
-        for width,height in [(375,667),(375,812),(768,1024),(1440,900)]:
-            ctx=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=1,ignore_https_errors=True,reduced_motion='no-preference',bypass_csp=True)
-            page=ctx.new_page()
-            errors=[]
-            browser_console=[]
-            page.on('console',lambda msg:browser_console.append(msg.type+': '+msg.text) if msg.type in ('warning','error') else None)
-            page.on('pageerror',lambda error:errors.append(str(error)))
-            resp=page.goto(url,wait_until='domcontentloaded',timeout=55000)
-            assert resp and resp.status==200,f'HTML not available: {width}x{height}'
-            page.wait_for_function('window.TBTFlight !== undefined',timeout=30000)
-            start=page.locator('#start')
-            assert start.is_visible(),f'No intro at {width}'
-            cta=page.locator('#takeoff')
-            box=cta.bounding_box()
-            assert box and box['height']>=44,f'Insufficient takeoff target: {width}'
-            assert box['y']>=0 and box['y']+box['height']<=height+1,f'Takeoff outside initial screen: {width} {box}'
-            assert page.locator('.small-donate').is_visible(),f'Support link hidden: {width}'
-            overflow=page.evaluate('document.documentElement.scrollWidth - innerWidth')
-            assert overflow<=1,f'Horizontal overflow {width}: {overflow}'
-            page.screenshot(path=str(OUT/f'gate-{width}x{height}-intro.png'))
-            ready=page.evaluate('TBTFlight.ready')
-            assert ready,f'WebGL initialization failed at {width}x{height}; diagnostic='+json.dumps(page.evaluate("""() => ({
-                three:typeof window.THREE,webgl:!!document.createElement('canvas').getContext('webgl'),
-                status:document.getElementById('status-text')?.textContent,
-                game:window.TBTFlight,src:[...document.scripts].map(s=>s.src)
-            })"""),ensure_ascii=False)+' console='+str(browser_console)+' jsErrors='+str(errors)
-            # Photograph leads; immersive canvas replaces it only after choosing takeoff.
-            poster_opacity=page.locator('.poster').evaluate('el=>parseFloat(getComputedStyle(el).opacity)')
-            canvas_opacity=page.locator('#scene').evaluate('el=>parseFloat(getComputedStyle(el).opacity)')
-            assert poster_opacity>0.9 and canvas_opacity<0.05,f'Intro must show photograph, not 3D canvas: {width}: {poster_opacity}/{canvas_opacity}'
-            assert page.locator('#start-title').inner_text()=='次の機体は、\nあなたの支援で飛ぶ。',f'User-approved hero text missing at {width}'
-            cta.click()
-            assert page.locator('#hud').is_visible(),f'HUD unavailable at {width}'
-            page.wait_for_timeout(1100)
-            assert page.locator('#scene').evaluate('el=>parseFloat(getComputedStyle(el).opacity)')>0.9,f'3D not visible after launch: {width}'
-            assert page.evaluate('TBTFlight.mode')=='flying',f'Not flying at {width}'
-            stage=page.locator('#scene').bounding_box()
-            def steer(point):
-                x,y=point
-                page.mouse.move(stage['x']+stage['width']*x,stage['y']+stage['height']*y,steps=5)
-            # Every viewport verifies real pointer steering and an actual gate collision.
-            steer(GATES[0])
-            page.wait_for_function('TBTFlight.passed >= 1',timeout=25000)
-            assert page.locator('#chapter-title').inner_text().startswith('180.67m'),f'Gate 1 narrative missing: {width}'
-            page.screenshot(path=str(OUT/f'gate-{width}x{height}-flight.png'))
-            if width==1440:
-                # The desktop test completes all four gates by actual pointer movement.
-                for i in range(1,4):
-                    steer(GATES[i])
-                    page.wait_for_function(f'TBTFlight.passed >= {i+1}',timeout=32000)
-                page.wait_for_function('TBTFlight.mode === "complete"',timeout=12000)
-                assert page.locator('#finale').is_visible(),'Four gates did not lead to finale'
-                assert page.locator('#replay').is_visible(),'Replay absent'
-                page.screenshot(path=str(OUT/f'gate-{width}x{height}-finale.png'))
-                page.locator('#replay').click()
-                assert page.evaluate('TBTFlight.mode')=='flying','Replay did not reset'
-                assert page.evaluate('TBTFlight.passed')==0,'Replay did not reset counters'
-            else:
-                page.locator('#pause').click()
-                assert page.locator('#pause-panel').is_visible(),'Pause panel absent'
-                page.locator('#resume').click()
-                assert page.locator('#hud').is_visible(),'Pause did not resume'
-                page.locator('#skip').click()
-                assert page.locator('#finale').is_visible(),'Skip did not open finale'
-            assert page.locator('#finale .primary-btn').count()==1,'Final support CTA missing'
-            assert not errors,f'JavaScript errors at {width}: {errors}'
-            result={'viewport':f'{width}x{height}','webgl':ready,'passed':4 if width==1440 else 1,'supportVisible':True,'overflow':overflow,'pageErrors':errors}
-            print(json.dumps(result,ensure_ascii=False),flush=True)
-            results.append(result)
-            ctx.close()
-        # Reduced-motion visitors must get an actual, readable non-WebGL route.
-        ctx=browser.new_context(viewport={'width':375,'height':812},reduced_motion='reduce',bypass_csp=True)
-        page=ctx.new_page()
-        page.goto(url,wait_until='domcontentloaded',timeout=50000)
-        page.wait_for_function('window.TBTFlight !== undefined',timeout=25000)
-        assert not page.evaluate('TBTFlight.ready'),'Reduced motion should not initialize animation'
-        page.locator('#takeoff').click()
-        assert page.locator('#info').is_visible(),'Reduced-motion story fallback unavailable'
-        page.locator('#return-flight').click()
-        assert page.locator('#finale').is_visible(),'Cannot reach support with reduced motion'
-        ctx.close()
-        # CDN failure must not strand visitors with a nonworking takeoff.
-        ctx=browser.new_context(viewport={'width':375,'height':812},bypass_csp=True)
-        page=ctx.new_page()
-        page.route('**/assets/crowdfunding/vendor/three-r128.min.js',lambda route:route.abort())
-        page.goto(url,wait_until='domcontentloaded',timeout=50000)
-        page.wait_for_function('window.TBTFlight !== undefined',timeout=25000)
-        assert not page.evaluate('TBTFlight.ready'),'Forced engine asset outage unexpectedly initialized 3D'
-        page.locator('#takeoff').click()
-        assert page.locator('#info').is_visible(),'No fallback when vendored Three.js is missing'
-        assert page.locator('#info a[href*="camp-fire.jp"]').count()>=1,'Fallback lost support link'
-        ctx.close()
-        browser.close()
+ with sync_playwright() as play:
+  browser=play.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--enable-webgl','--use-angle=swiftshader','--use-gl=angle'])
+  for width,height in [(375,667),(375,812),(768,1024),(1440,900)]:
+   ctx=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=1,reduced_motion='no-preference',bypass_csp=True)
+   page=ctx.new_page();errors=[];console=[]
+   page.on('pageerror',lambda e:errors.append(str(e)))
+   page.on('console',lambda m:console.append(m.text) if m.type=='error' else None)
+   resp=page.goto(URL,wait_until='domcontentloaded',timeout=45000)
+   assert resp and resp.status==200,f'HTML unavailable: {width}'
+   assert page.locator('h1').is_visible(),f'Hero hidden: {width}'
+   assert page.locator('h1').inner_text().replace('\n','')=='次の機体は、あなたの支援で飛ぶ。',f'Wrong headline: {width}'
+   assert page.locator('.hero-photo').evaluate('img=>img.complete&&img.naturalWidth>0'),f'Hero photo failed: {width}'
+   assert page.locator('.sitebar .support-small').is_visible(),f'Immediate support access missing: {width}'
+   assert page.locator('#takeoff').count()==0,f'Click-gated takeoff remains at {width}'
+   overflow=page.evaluate('document.documentElement.scrollWidth-innerWidth')
+   assert overflow<=1,f'Horizontal overflow {width}: {overflow}'
+   page.screenshot(path=str(OUT/f'scroll-{width}x{height}-hero.png'))
+   # The aircraft stage scrolls into view and independently loads the exact festival GLB.
+   page.locator('#flight').scroll_into_view_if_needed()
+   page.wait_for_function('window.TBTScrollFlight !== undefined',timeout=10000)
+   page.wait_for_function('TBTScrollFlight.loaded || TBTScrollFlight.failed',timeout=45000)
+   state=page.evaluate('TBTScrollFlight')
+   assert state['loaded'],f'Festival GLB did not load at {width}: {state}; status='+page.locator('#model-status').inner_text()+' console='+str(console)+' errors='+str(errors)
+   assert state['model'].endswith('s320-mobile.glb' if width<760 else 's320-desktop.glb'),f'Wrong festival model selected at {width}: {state}'
+   assert page.locator('#flight-stage').evaluate('el=>el.classList.contains("is-ready")'),f'3D ready class absent at {width}'
+   story=page.locator('#flight')
+   for progress in (.09,.32,.59,.86):
+    page.evaluate("""p=>{
+      const el=document.querySelector('#flight');
+      const range=Math.max(1,el.offsetHeight-innerHeight);
+      window.scrollTo({top:el.offsetTop+range*p,behavior:'instant'});
+    }""",progress)
+    page.wait_for_timeout(350)
+    report=page.evaluate('TBTScrollFlight')
+    assert abs(report['progress']-round(progress*100))<=4,f'Scroll progress not tracked: {width} {progress} {report}'
+   assert page.locator('.chapter[data-chapter="3"]').count()==1
+   page.screenshot(path=str(OUT/f'scroll-{width}x{height}-model.png'))
+   page.locator('#rewards').scroll_into_view_if_needed()
+   assert page.locator('.reward-list article').count()==3,f'Rewards missing at {width}'
+   page.screenshot(path=str(OUT/f'scroll-{width}x{height}-rewards.png'))
+   page.locator('#support').scroll_into_view_if_needed()
+   assert page.locator('#support .action-primary').is_visible(),f'Support finale invisible: {width}'
+   assert page.locator('a[href*="camp-fire.jp"]').count()>=3
+   assert not errors,f'JavaScript errors at {width}: {errors}'
+   results.append({'viewport':f'{width}x{height}','model':state['model'],'webgl':state['loaded'],'scrollWorks':True,'overflow':overflow,'errors':errors})
+   print(json.dumps(results[-1],ensure_ascii=False),flush=True)
+   ctx.close()
+  # Reduced motion never forces animated WebGL or clicks to see the content.
+  ctx=browser.new_context(viewport={'width':375,'height':812},reduced_motion='reduce',bypass_csp=True)
+  page=ctx.new_page();page.goto(URL,wait_until='domcontentloaded',timeout=45000)
+  page.locator('#flight').scroll_into_view_if_needed()
+  page.wait_for_function('window.TBTScrollFlight !== undefined')
+  assert not page.evaluate('TBTScrollFlight.loaded'),'Reduced motion should display static model'
+  assert page.locator('.flight-poster').is_visible(),'Static S-320 rendering missing'
+  assert page.locator('.chapter').count()==4
+  ctx.close()
+  browser.close()
 finally:
-    server.shutdown()
-(OUT/'four-gates-results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
-print('FOUR GATES CHROMIUM PASS: four gates, steering, restart, touch-sized UI, skip, reduced motion and CDN fallback')
+ server.shutdown()
+(OUT/'scroll-results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
+print('S-320 SCROLL CHROMIUM PASS: real GLB, four chapters, native scroll, responsive support, reduced motion')
