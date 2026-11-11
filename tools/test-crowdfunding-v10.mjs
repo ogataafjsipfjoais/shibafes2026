@@ -5,6 +5,7 @@ const html=readFileSync('crowdfunding/index.html','utf8');
 const css=readFileSync('assets/crowdfunding/editorial-v13.css','utf8');
 const ui=readFileSync('assets/crowdfunding/clarity-v8.js','utf8');
 const model=readFileSync('assets/crowdfunding/flight-3d.js','utf8');
+const campaignUI=readFileSync('assets/crowdfunding/campaign-ux.js','utf8');
 const errors=[];
 const check=(value,message)=>{if(!value)errors.push(message)};
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]),anchors=[...html.matchAll(/href="#([^"]+)"/g)].map(m=>m[1]);
@@ -24,8 +25,15 @@ check(html.includes('2026-propeller-team.jpg')&&html.includes('2026-assembly.jpg
 check(html.includes('約29万円')&&html.includes('約7.7万円')&&html.includes('約4万円')&&html.includes('410,000円'),'Funding allocations readable');
 check(html.includes('./rewards/')&&existsSync('crowdfunding/rewards/index.html'),'Published rewards page linked');
 check(html.includes('https://camp-fire.jp/projects/990337/view'),'Live support action');
+check(html.includes('id="campaign-status"')&&html.includes('410,000円'),'Support status and verified goal near hero');
+check(html.indexOf('id="rewards"')<html.indexOf('id="record"'),'Rewards must be visible before the long story');
+check(html.includes('id="faq"')&&html.includes('金銭的なリターンはありません')&&html.includes('All-or-Nothing方式'),'Crowdfunding FAQ and no investment confusion');
+check(html.includes('Xで共有')&&html.includes('LINEで送る'),'Social share actions');
+check(html.includes('campaign-ux.js')&&campaignUI.includes('Asia/Tokyo')&&campaignUI.includes('flight-fallback'),'Correct deadline and 3D fallback');
+check(html.includes('budget-visual')&&html.includes('width:71%')&&html.includes('width:19%')&&html.includes('width:10%'),'Allocation percentages correspond to official approximate numbers');
+check(!html.includes('37,000円')&&!html.includes('9%達成'),'Never put stale funding state in public HTML');
 
-check(html.includes('500円から支援できます')&&html.includes('募集は2026年11月30日まで'),'Hero must state entry amount and deadline');
+check(html.includes('500円から支援できます')&&html.includes('11月30日まで')&&html.includes('id="days-remaining"'),'Hero must state entry amount and deadline');
 check(html.indexOf('次の機体づくりを支援する')>html.indexOf('それでも、')&&html.indexOf('次の機体づくりを支援する')<html.indexOf('id="people"'),'Support CTA immediately follows emotional peak');
 check(!html.includes('class="support-seat"'),'No repeated guilt-based copy');
 check(['お礼メール','トートバッグ','試験見学会','500円','7,000円','25,000円'].every(x=>html.includes(x)),'Three featured rewards with actual prices');
@@ -38,10 +46,10 @@ check(!html.includes('assembly-graphic')&&!html.includes('next-flight-v7.css'),'
 check(css.includes('@media(max-width:760px)')&&css.includes('@media(prefers-reduced-motion:reduce)'),'Responsive and reduced motion');
 check(!css.includes('@import'),'Standalone CSS');
 check(css.includes('V13 / THE RECORD AND THE WORK')&&!css.includes('V10 | THE WORKBENCH'),'Editorial design must not load scrapbook layer');
-check(html.includes('設計して、つくって、飛ばして。'),'Natural language is missing');
+check(html.includes('S-330「鵠」の翼づくりに、力を貸してください。'),'Natural language is missing');
 
 check(html.includes('class="chapter-index"')&&html.includes('class="chapter-afterword"'),'Verified 26th to 27th generation through-line');
-check(html.includes('class="budget-details"')&&html.includes('資金の使い道')===false,'Budget accounting should be secondary to primary material need');
+check(html.includes('class="budget-details"')&&html.includes('class="budget-visual"'),'Funding breakdown must be available and honestly labeled');
 check(html.includes('editorial-v13.css')&&!html.includes('workbench-v10.css')&&!html.includes('documentary-v12.css'),'Load one independent editorial stylesheet');
 check(!html.includes('あなたの席')&&!html.includes('次はあなたの番'),'No manufactured emotional pressure');
 check(html.includes('hand-to-hand-v9.css')===false,'Old styling accidentally linked');
@@ -54,11 +62,11 @@ for(const path of [
  'assets/crowdfunding/2026-tail-lake.jpg']){
  check(existsSync(path)&&statSync(path).size>10000,'Missing source asset '+path);
 }
-for(const [src,mode] of [[ui,'script'],[model,'module']]){
+for(const [src,mode] of [[ui,'script'],[campaignUI,'script'],[model,'module']]){
  const command=mode==='module'?['--input-type=module','--check']:['--check'];
  const r=spawnSync(process.execPath,command,{input:src,encoding:'utf8'});
  check(r.status===0,'JavaScript syntax failed '+mode+': '+r.stderr);
 }
 let n=0;for(const ch of css){if(ch==='{')n++;if(ch==='}')n--}check(n===0,'CSS brace balance');
-if(errors.length){console.error('TBT EDITORIAL V13 FAIL\n'+errors.join('\n'));process.exit(1)}
-console.log('TBT EDITORIAL V13 PASS: real voices, own visual language, human-first, 3D intact, support accessible');
+if(errors.length){console.error('TBT CAMPAIGN V14 FAIL\n'+errors.join('\n'));process.exit(1)}
+console.log('TBT CAMPAIGN V14 PASS: real voices, own visual language, human-first, 3D intact, support accessible');
