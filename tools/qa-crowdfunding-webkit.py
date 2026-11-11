@@ -60,10 +60,12 @@ try:
    raise AssertionError('WebKit flight 3D did not initialize: '+status+'; '+str(logs))
   aircraft=page.evaluate('window.TBTVenueFlight.aircraft')
   assert aircraft=='s320-mobile.glb','iPad WebKit did not use optimized festival model: '+str(aircraft)
-  assert page.locator('#pilot-begin').is_enabled(),'WebKit takeoff disabled'
-  page.locator('#pilot-begin').click()
+  assert page.locator('#pilot-begin').count()==0,'Old click-to-launch button still exists'
   page.locator('#pilot-hud').wait_for(state='visible',timeout=10000)
+  mode=page.evaluate('window.TBTVenueFlight.mode')
+  assert mode in ('takeoff','flying','holding','complete'),f'WebKit takeoff did not start automatically: {mode}'
   page.locator('#pilot-quit').click()
+  assert page.evaluate('window.TBTVenueFlight.mode')=='stopped','WebKit stop action broken'
   page.locator('#flight').scroll_into_view_if_needed()
   page.locator('#flight-stage.has-fallback').wait_for(state='attached',timeout=7000)
   assert not logs,f'WebKit JS errors: {logs}'
