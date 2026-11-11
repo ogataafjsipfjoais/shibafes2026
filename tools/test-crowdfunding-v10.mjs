@@ -20,7 +20,9 @@ check(!css.includes('2026-flight-hero.avif')&&css.includes('.hero-media img{'),'
 check(!html.includes('scroll-flight-v1.js')&&!html.includes('scroll-flight-v1.css'),'No duplicate flight scene scripts or styles');
 check(!html.includes('data-chapter=')&&!html.includes('flight-journey'),'No repeated 4-chapter scroll scene');
 check(html.includes('campaign-story-v2.css')&&html.includes('venue-flight-v1.css')&&html.includes('venue-flight-v1.js'),'Minimal page and simulator styles/scripts present');
-check(html.includes('class="record-feature"')&&html.includes('2026-lake-sky-reference.webp'),'User supplied sky photo is present in flight record feature');
+check(html.includes('class="record-feature"')&&html.includes('src="../assets/crowdfunding/2026-tail-lake.jpg"'),'Original S-320 tail lake photo is displayed in record feature');
+check(!html.includes('2026-lake-sky-reference.webp'),'Old low-resolution cropped sky photo must no longer be shown');
+check(css.includes('.record-visual img{display:block')&&css.includes('object-fit:contain'),'Tail logo and edges should not be cropped');
 check((html.match(/<section class="record-feature"/g)||[]).length===1,'One compact 2026 record feature, not duplicate 3D experience');
 check(html.includes('副代表からのお知らせを全文読む')&&!html.includes('本人の言葉を全文読む'),'Correct vice-representative CTA wording');
 check(html.includes('「今回の結果には納得のいかない部分もあります」')&&html.includes('髙草木 雄太 / 26代副代表'),'Quote and attribution retained');
