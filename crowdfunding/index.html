@@ -54,19 +54,13 @@
 <section class="pilot-section" id="pilot" aria-labelledby="pilot-title">
  <div class="container pilot-heading">
   <div><p class="kicker">TAKEOFF / LAKE BIWA</p><h2 id="pilot-title">琵琶湖から、<br>自分で飛ぶ。</h2></div>
-  <p>鳥人間コンテストの舞台、滋賀県彦根市・松原湖岸。離陸台から飛び出す風景を、芝浦祭サイトで使われているS-320 Elementの3D機体で体験できます。操縦は自由参加。下にスクロールすれば、機体と活動の物語をそのまま読めます。</p>
+  <p>鳥人間コンテストの舞台、滋賀県彦根市・松原湖岸。離陸シーンが画面に入ると、芝浦祭サイトのS-320 Elementの3D機体が自動でテイクオフします。マウス・指・矢印キー／WASDで操縦できます。操作せずに下へスクロールしても、機体と活動の物語を読めます。</p>
  </div>
  <div id="pilot-stage" class="pilot-area" aria-label="琵琶湖・松原湖岸を参考にしたS-320の操縦体験">
   <img class="pilot-poster" src="../assets/crowdfunding/2026-tail-lake.jpg" width="1600" height="1000" alt="TeamBirdmanTrialが琵琶湖で活動する様子" loading="lazy" decoding="async">
   <canvas id="pilot-canvas" class="pilot-canvas" aria-label="マウス、指、矢印キーで操縦する3D飛行体験" tabindex="0"></canvas>
   <div class="pilot-shade" aria-hidden="true"></div>
   <p id="pilot-loading" class="pilot-loading" role="status" hidden></p>
-  <div id="pilot-intro" class="pilot-intro">
-   <p class="intro-tag">HIKONE / MATSUBARA SHORE</p>
-   <h3>離陸台の上から、<br>琵琶湖の空へ。</h3>
-   <p>水面から約10mの離陸台をイメージした会場から、4つのゲートを目指して飛行します。操縦はマウス・指・矢印キー／WASD。離陸操作は一度のクリックだけです。</p>
-   <button id="pilot-begin" class="pilot-button" type="button">ここから離陸する <span aria-hidden="true">↗</span></button>
-  </div>
   <div id="pilot-hud" class="pilot-hud" hidden>
    <div class="pilot-top">
     <div class="pilot-data"><div class="pilot-data-label">S-320 / FLIGHT SIMULATION</div><strong id="pilot-metrics">RUNWAY 10m <span>演出上の数値</span></strong></div>
