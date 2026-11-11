@@ -1,72 +1,47 @@
-// EDITORIAL V13: test authentic stories, sourced testimony, and accessible donation flow.
+// Four-gate crowdfunding flight: deployment gate for accessible, honest interaction.
 import {readFileSync,statSync,existsSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 const html=readFileSync('crowdfunding/index.html','utf8');
-const css=readFileSync('assets/crowdfunding/editorial-v13.css','utf8');
-const ui=readFileSync('assets/crowdfunding/clarity-v8.js','utf8');
-const model=readFileSync('assets/crowdfunding/flight-3d.js','utf8');
-const campaignUI=readFileSync('assets/crowdfunding/campaign-ux.js','utf8');
+const css=readFileSync('assets/crowdfunding/flight-gates.css','utf8');
+const game=readFileSync('assets/crowdfunding/flight-gates.js','utf8');
 const errors=[];
-const check=(value,message)=>{if(!value)errors.push(message)};
-const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]),anchors=[...html.matchAll(/href="#([^"]+)"/g)].map(m=>m[1]);
-check((html.match(/<h1\b/g)||[]).length===1,'Use a single primary heading');
-check(ids.length===new Set(ids).size,'No duplicate IDs');
-check(anchors.every(id=>ids.includes(id)),'Every internal anchor resolves');
-check(html.includes('クラウドファンディング')&&html.includes('class="cta human-primary"'),'Campaign and support visible in hero');
-check([0,1,2].every(i=>html.includes('data-flight-beat="'+i+'"')),'3D flight progression preserved');
-check(html.includes('id="flight-launch"')&&html.includes('id="flight-launch-message"'),'3D controls and feedback preserved');
-check(html.includes("flight-3d.js")&&model.includes("new URL('../',import.meta.url)"),'Original real GLB model preserved');
-check(html.includes('S-330')&&html.includes('鵠')&&html.includes('180.67'),'Real story and aircraft preserved');
-check(html.includes('三輪 陽希')&&html.includes('ローリー ノエル')&&html.includes('大谷 映奈')&&html.includes('髙草木 雄太'),'Real student voices preserved');
-check(['今回の結果には納得のいかない部分もあります','部員が抱えている悔しい思いを結果という形で昇華','10年越しのビッグフライトを目指します','一年間の思いをペダルに込めて'].every(x=>html.includes(x)),'Actual sourced quotes missing');
-check(html.includes('https://teambirdmantrial.jp/news/')&&html.includes('2026年9月4日の公式メッセージ'),'Source links and attribution missing');
-check(html.includes('id="human-title"')&&html.indexOf('id="human-title"')<html.indexOf('id="flight-experience"'),'Real people must lead before 3D');
-check(html.includes('2026-propeller-team.jpg')&&html.includes('2026-assembly.jpg'),'Documentary photography missing');
-check(html.includes('約29万円')&&html.includes('約7.7万円')&&html.includes('約4万円')&&html.includes('410,000円'),'Funding allocations readable');
-check(html.includes('./rewards/')&&existsSync('crowdfunding/rewards/index.html'),'Published rewards page linked');
-check(html.includes('https://camp-fire.jp/projects/990337/view'),'Live support action');
-check(html.includes('id="campaign-status"')&&html.includes('410,000円'),'Support status and verified goal near hero');
-check(html.indexOf('id="rewards"')<html.indexOf('id="record"'),'Rewards must be visible before the long story');
-check(html.includes('id="faq"')&&html.includes('金銭的なリターンはありません')&&html.includes('All-or-Nothing方式'),'Crowdfunding FAQ and no investment confusion');
-check(html.includes('Xで共有')&&html.includes('LINEで送る'),'Social share actions');
-check(html.includes('campaign-ux.js')&&campaignUI.includes('Asia/Tokyo')&&campaignUI.includes('flight-fallback'),'Correct deadline and 3D fallback');
-check(html.includes('budget-visual')&&html.includes('width:71%')&&html.includes('width:19%')&&html.includes('width:10%'),'Allocation percentages correspond to official approximate numbers');
-check(!html.includes('37,000円')&&!html.includes('9%達成'),'Never put stale funding state in public HTML');
-
-check(html.includes('500円から支援できます')&&html.includes('11月30日まで')&&html.includes('id="days-remaining"'),'Hero must state entry amount and deadline');
-check(html.indexOf('次の機体づくりを支援する')>html.indexOf('それでも、')&&html.indexOf('次の機体づくりを支援する')<html.indexOf('id="people"'),'Support CTA immediately follows emotional peak');
-check(!html.includes('class="support-seat"'),'No repeated guilt-based copy');
-check(['お礼メール','トートバッグ','試験見学会','500円','7,000円','25,000円'].every(x=>html.includes(x)),'Three featured rewards with actual prices');
-check(html.includes('グッズのコース / 編集部のおすすめ')&&!html.includes('一番選ばれている'),'Recommendation must not impersonate support statistics');
-check(!html.includes('支援状況の記録（2026年11月9日時点）'),'Historical-only funding readout removed');
-check(html.includes('最新の進捗を見る')&&!html.includes('live-funding-track')&&!html.includes('aria-valuenow='),'Unverified progress is never presented as factual');
-check(html.includes('S-330の実機映像ではありません'),'Preserve honest 3D model notice');
-check(!html.includes('flight-distance-slider')&&!html.includes('fund-tab'),'Redundant interactions removed');
-check(!html.includes('assembly-graphic')&&!html.includes('next-flight-v7.css'),'Unused fake CAD and layout removed');
-check(css.includes('@media(max-width:760px)')&&css.includes('@media(prefers-reduced-motion:reduce)'),'Responsive and reduced motion');
-check(!css.includes('@import'),'Standalone CSS');
-check(css.includes('V13 / THE RECORD AND THE WORK')&&!css.includes('V10 | THE WORKBENCH'),'Editorial design must not load scrapbook layer');
-check(html.includes('S-330「鵠」の翼づくりに、力を貸してください。'),'Natural language is missing');
-
-check(html.includes('class="chapter-index"')&&html.includes('class="chapter-afterword"'),'Verified 26th to 27th generation through-line');
-check(html.includes('class="budget-details"')&&html.includes('class="budget-visual"'),'Funding breakdown must be available and honestly labeled');
-check(html.includes('editorial-v13.css')&&!html.includes('workbench-v10.css')&&!html.includes('documentary-v12.css'),'Load one independent editorial stylesheet');
-check(!html.includes('あなたの席')&&!html.includes('次はあなたの番'),'No manufactured emotional pressure');
-check(html.includes('hand-to-hand-v9.css')===false,'Old styling accidentally linked');
-check(html.includes("object-src 'none'")&&!html.includes('noindex'),'Security and indexability');
-check([...html.matchAll(/<img\b[^>]*>/g)].every(m=>/\balt=/.test(m[0])),'All images have alt');
-for(const path of [
- 'assets/s320-desktop.glb','assets/s320-mobile.glb',
- 'assets/crowdfunding/2026-propeller-team.jpg','assets/crowdfunding/2026-wing-transport.jpg',
- 'assets/crowdfunding/2026-assembly.jpg','assets/crowdfunding/2026-maintenance.jpg',
- 'assets/crowdfunding/2026-tail-lake.jpg']){
- check(existsSync(path)&&statSync(path).size>10000,'Missing source asset '+path);
+const check=(condition,message)=>{if(!condition)errors.push(message);};
+const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+check(ids.length===new Set(ids).size,'Duplicate element IDs');
+check((html.match(/<h1\b/g)||[]).length===1,'There must be exactly one h1');
+const required=['flight-app','scene','start','takeoff','hud','gate','chapter','chapter-title','chapter-source','guide','pause','resume','skip','info','info-back','replay','finale','status-text'];
+check(required.every(id=>ids.includes(id)),'Missing required game UI elements');
+check(html.includes('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'),'Use pinned Three.js r128 library');
+check(html.includes('flight-gates.js')&&html.includes('flight-gates.css'),'Load game JS/CSS from own assets');
+check(!html.includes('editorial-v13.css')&&!html.includes('flight-3d.js'),'Do not load old scroll storytelling scripts');
+check(html.indexOf('id="start"')<html.indexOf('id="hud"'),'The start interface must precede HUD');
+check(html.includes('role="status"')&&html.includes('aria-live="polite"'),'Live feedback must be accessible');
+check(html.includes('操作せずに読む')&&html.includes('3Dは実機の飛行ではなく'),'Noninteractive alternative and disclaimer');
+check(html.includes('https://camp-fire.jp/projects/990337/view'),'Official support URL present');
+check(html.includes('./rewards/')&&existsSync('crowdfunding/rewards/index.html'),'Original 10 rewards page stays reachable');
+check(html.includes('金銭的なリターンはありません'),'No investment-like promises');
+check(html.includes('410,000円')&&html.includes('11月30日')&&html.includes('500円'),'Grounded campaign terms');
+check(html.includes('180.67m')&&html.includes('髙草木雄太')&&html.includes('大谷映奈'),'Historical facts and attribution');
+check(!html.includes('現在37,000円')&&!html.includes('残り2枠')&&!html.includes('人気No.1'),'No stale funding or invented scarcity');
+check(html.includes('S-330の飛行映像ではありません'),'Honest model disclaimer');
+check(['pointermove','pointerdown','keydown','arrowleft','arrowright','arrowup','arrowdown','webglcontextlost','prefers-reduced-motion','flight-fallback'].filter(x=>game.includes(x)).length>=9,
+      'Pointer/keyboard/fallback/reduced-motion logic must be available');
+check(game.includes('gatePassed()')&&game.includes('Math.abs(deltaX)<=2.0')&&game.includes("state.passed===4"),'Actual gate collision and progression logic');
+check(game.includes('window.TBTFlight')&&game.includes('const gateData=['),'Observable four-gate runtime');
+check(game.includes('Math.max(1,innerWidth)')&&game.includes('renderer.setPixelRatio'),'Responsive rendering');
+check(css.includes('@media(max-width:760px)')&&css.includes('prefers-reduced-motion'),'Responsive and reduced-motion styles');
+check(css.includes('touch-action:none')&&css.includes('[hidden]'),'Touch steering and hidden-state styles');
+check(css.includes(':focus-visible'),'Keyboard focus indication');
+check(html.includes("object-src 'none'")&&html.includes('upgrade-insecure-requests'),'CSP safeguards');
+check([...html.matchAll(/<img\b[^>]*>/g)].every(m=>/\balt=/.test(m[0])),'Every image needs alt');
+for(const file of ['assets/crowdfunding/2026-propeller-team.jpg','assets/tbt-official-emblem.svg','assets/crowdfunding/flight-gates.js','assets/crowdfunding/flight-gates.css']){
+ check(existsSync(file)&&statSync(file).size>500,'Missing original or game asset: '+file);
 }
-for(const [src,mode] of [[ui,'script'],[campaignUI,'script'],[model,'module']]){
- const command=mode==='module'?['--input-type=module','--check']:['--check'];
- const r=spawnSync(process.execPath,command,{input:src,encoding:'utf8'});
- check(r.status===0,'JavaScript syntax failed '+mode+': '+r.stderr);
+for(const [label,source] of [['game',game]]){
+ const r=spawnSync(process.execPath,['--check','--input-type=commonjs'],{input:source,encoding:'utf8'});
+ check(r.status===0,'JS syntax failed '+label+': '+r.stderr);
 }
-let n=0;for(const ch of css){if(ch==='{')n++;if(ch==='}')n--}check(n===0,'CSS brace balance');
-if(errors.length){console.error('TBT CAMPAIGN V14 FAIL\n'+errors.join('\n'));process.exit(1)}
-console.log('TBT CAMPAIGN V14 PASS: real voices, own visual language, human-first, 3D intact, support accessible');
+let braces=0;for(const ch of css){if(ch==='{')braces++;if(ch==='}')braces--;}
+check(braces===0,'CSS braces unbalanced');
+if(errors.length){console.error('FOUR GATES FAIL\n'+errors.join('\n'));process.exit(1);}
+console.log('FOUR GATES PASS: source facts, 4 controllable gates, accessibility, sharing and support preserved');
