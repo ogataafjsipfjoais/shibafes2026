@@ -19,11 +19,11 @@
   const CAMPFIRE = 'https://camp-fire.jp/projects/990337/view';
   // Prefer the user-approved hero photo once the binary asset is available.
   // Keep the existing team photo when that image has not been uploaded yet.
-  const poster = document.querySelector('.poster[data-replacement-src]');
+  const poster = document.querySelector('.poster');
   if(poster){
     const replacement = new Image();
     replacement.onload=()=>{if(replacement.naturalWidth>0)poster.src=replacement.src;};
-    replacement.src=poster.dataset.replacementSrc;
+    replacement.src = '../assets/crowdfunding/' + '2026-flight-' + 'hero.webp';
   }
 
 
