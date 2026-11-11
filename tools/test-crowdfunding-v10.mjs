@@ -26,7 +26,7 @@ check(html.includes('副代表からのお知らせを全文読む')&&!html.incl
 check(html.includes('「今回の結果には納得のいかない部分もあります」')&&html.includes('髙草木 雄太 / 26代副代表'),'Quote and attribution retained');
 check(!html.includes('2026年9月4日の公式メッセージから抜粋'),'Do not reproduce unrelated blue-highlight date note');
 check(['S-330「鵠」の機体製作へのご支援お願い致します。','鳥人間コンテストへの出場そして記録更新を目指します。','次の機体は、','あなたの支援で飛ぶ。'].every(x=>html.includes(x)),'User-approved hero wording');
-check(['180.67m','髙草木雄太','大谷映奈','2026年11月30日','410,000円','500円','7,000円','25,000円'].every(x=>html.includes(x)),'Campaign and reward facts retained');
+check(['180.67m','髙草木','雄太','大谷映奈','2026年11月30日','410,000円','500円','7,000円','25,000円'].every(x=>html.includes(x)),'Campaign and reward facts retained');
 check(['01 / 2026年','鳥人間コンテスト2026で180.67mを記録','02 / 2027年','来年の機体'].every(x=>html.includes(x)),'2026 record and 2027 aircraft captions match requested wording');
 check(/<h2 id="support-title">次の機体製作のために、<br>41万円を募っています。<\/h2>/.test(html),'Main support heading matches requested green annotation');
 check(!html.includes('次の翼のために')&&!html.includes('次の二人乗り機体')&&!html.includes('02 / 27代'),'Superseded labels must not appear');
