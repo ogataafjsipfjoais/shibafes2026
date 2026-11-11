@@ -35,7 +35,11 @@ for(const file of ['assets/crowdfunding/venue-flight-v1.js','assets/crowdfunding
  check(existsSync(file)&&statSync(file).size>500,'Missing pilot resource '+file);
 const pilotSyntax=spawnSync(process.execPath,['--check'],{input:pilot,encoding:'utf8'});
 check(pilotSyntax.status===0,'Pilot JS syntax: '+pilotSyntax.stderr);
-check(html.includes('https://camp-fire.jp/projects/990337/view')&&html.includes('./rewards/'),'Support and rewards pages');
+check(html.includes('https://camp-fire.jp/projects/990337/view'),'CAMPFIRE support link');
+check(!html.includes('href="./rewards/"'),'All reward links must go directly to CAMPFIRE, not an outdated detail page');
+check((html.match(/href="https:\/\/camp-fire.jp\/projects\/990337\/view"/g)||[]).length>=8,'Direct CAMPFIRE links on every reward and main CTA');
+check(!html.includes('2027年2月にお届け予定。'),'Requested tote delivery-month removal');
+check(html.includes("script-src 'self' 'wasm-unsafe-eval'"),'Allow local Meshopt WASM decode with strict CSP');
 check(html.includes('S-330の実機や飛行映像ではありません'),'S-320 vs S-330 clear distinction');
 check(html.includes('https://teambirdmantrial.jp/news/')&&html.includes('https://teambirdmantrial.jp/gallery/'),'Named sources with citations');
 check((html.match(/data-chapter="\d+"/g)||[]).length===4,'Four scroll chapters');
@@ -43,6 +47,8 @@ check(css.includes('position:sticky')&&css.includes('.chapter')&&css.includes('p
 check(css.includes('scroll-behavior:smooth')&&!css.includes('touch-action:none'),'Native scroll must remain enabled');
 check(js.includes('GLTFLoader')&&js.includes('setMeshoptDecoder')&&js.includes('MeshoptDecoder.ready'),'Actual glTF Meshopt loader');
 check(js.includes('s320-')&&js.includes("mobile':'desktop")&&js.includes('.glb'),'Mobile/desktop real festival GLB selection');
+check(js.includes('limitedTouch')&&js.includes('タッチ端末では負荷を抑え'),'Avoid simultaneous WebGL contexts on iPad');
+check(pilot.includes('touchLimited')&&pilot.includes("lightModel?'mobile':'desktop'"),'Select low-memory S-320 model for iPad Safari');
 check(js.includes('addEventListener')&&js.includes("'scroll'")&&js.includes("scrollValue")&&!js.includes('gatePassed'),'Scroll, not gate collision, drives story');
 check(js.includes('matchMedia')&&js.includes('prefers-reduced-motion'),'Reduced-motion still image');
 check(js.includes('IntersectionObserver')&&js.includes("loadModel()"),'Lazy 3D load');
