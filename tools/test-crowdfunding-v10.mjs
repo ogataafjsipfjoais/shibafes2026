@@ -20,7 +20,7 @@ check(!css.includes('2026-flight-hero.avif')&&css.includes('.hero-media img{'),'
 check(!html.includes('scroll-flight-v1.js')&&!html.includes('scroll-flight-v1.css'),'No duplicate flight scene scripts or styles');
 check(!html.includes('data-chapter=')&&!html.includes('flight-journey'),'No repeated 4-chapter scroll scene');
 check(html.includes('campaign-story-v2.css')&&html.includes('venue-flight-v1.css')&&html.includes('venue-flight-v1.js'),'Minimal page and simulator styles/scripts present');
-check(html.includes('class="record-feature"')&&html.includes('src="../assets/crowdfunding/2026-tail-lake.jpg"'),'Original S-320 tail lake photo is displayed in record feature');
+check(html.includes('class="record-feature"')&&html.includes('src="../assets/crowdfunding/2026-tail-user-photo.webp"'),'Original S-320 tail lake photo is displayed in record feature');
 check(!html.includes('2026-lake-sky-reference.webp'),'Old low-resolution cropped sky photo must no longer be shown');
 check(css.includes('.record-visual img{display:block')&&css.includes('object-fit:contain'),'Tail logo and edges should not be cropped');
 check((html.match(/<section class="record-feature"/g)||[]).length===1,'One compact 2026 record feature, not duplicate 3D experience');
@@ -73,7 +73,7 @@ check(css.includes('.record-feature-inner')&&!css.includes('.flight-journey')&&!
 check(css.includes('scroll-behavior:smooth')&&css.includes('prefers-reduced-motion'),'Native scroll and motion accessibility');
 check(html.includes("script-src 'self' 'wasm-unsafe-eval'")&&html.includes("object-src 'none'"),'Strict Meshopt-compatible CSP');
 check([...html.matchAll(/<img\b[^>]*>/g)].every(m=>/\balt=/.test(m[0])),'Image alt attributes present');
-for(const path of ['assets/s320-desktop.glb','assets/s320-mobile.glb','assets/crowdfunding/vendor/three-r128.min.js','assets/crowdfunding/vendor/GLTFLoader-r128.js','assets/crowdfunding/vendor/meshopt_decoder-r128.js','assets/crowdfunding/campaign-story-v2.css','assets/crowdfunding/venue-flight-v1.js','assets/crowdfunding/venue-flight-v1.css','assets/crowdfunding/2026-tail-lake.jpg','assets/crowdfunding/2026-lake-sky-reference.webp','crowdfunding/rewards/index.html'])
+for(const path of ['assets/s320-desktop.glb','assets/s320-mobile.glb','assets/crowdfunding/vendor/three-r128.min.js','assets/crowdfunding/vendor/GLTFLoader-r128.js','assets/crowdfunding/vendor/meshopt_decoder-r128.js','assets/crowdfunding/campaign-story-v2.css','assets/crowdfunding/venue-flight-v1.js','assets/crowdfunding/venue-flight-v1.css','assets/crowdfunding/2026-tail-user-photo.webp','assets/crowdfunding/2026-lake-sky-reference.webp','crowdfunding/rewards/index.html'])
  check(existsSync(path)&&statSync(path).size>100,'Required asset missing: '+path);
 const syntax=spawnSync(process.execPath,['--check'],{input:pilot,encoding:'utf8'});
 check(syntax.status===0,'Simulation JS syntax '+syntax.stderr);
