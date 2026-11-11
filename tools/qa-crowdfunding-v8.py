@@ -32,6 +32,13 @@ try:
    page.screenshot(path=str(OUT/f'scroll-{width}x{height}-hero.png'))
    # Optional pilot experience: the real S-320 starts on a reconstructed Lake Biwa launch tower.
    if width in (375,1440):
+    # Eager loading means the actual aircraft must be ready with no click or scroll.
+    assert page.evaluate('window.scrollY') == 0,'Hero should remain in view before pilot loads'
+    page.wait_for_function('window.TBTVenueFlight && TBTVenueFlight.ready',timeout=45000)
+    preflight=page.evaluate('TBTVenueFlight')
+    assert preflight['mode']=='preview' and preflight['passed']==0,'Takeoff should not auto-start'
+    assert abs(preflight['modelYaw']-3.141592653589793)<.001,'Aircraft nose still points opposite the -Z flight direction'
+    assert page.evaluate('window.scrollY') == 0,'Automatic loading must not scroll the page'
     page.locator('#pilot-stage').scroll_into_view_if_needed()
     page.wait_for_function('window.TBTVenueFlight !== undefined',timeout=10000)
     page.wait_for_function('TBTVenueFlight.ready || TBTVenueFlight.mode === "unavailable"',timeout=45000)
