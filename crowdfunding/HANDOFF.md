@@ -180,3 +180,12 @@
 - `assets/crowdfunding/campaign-story-v2.css`: 写真と引用のPC 2カラム／スマホ縦積み表示を追加。重複する2つ目の3D表示は復活させない。
 - `tools/test-crowdfunding-v10.mjs`、`tools/qa-crowdfunding-v8.py`、`tools/qa-crowdfunding-webkit.py` の回帰テストも新構成に合わせて更新。名前の空白で誤検知する古いテストを修正。
 - 検証：GitHub Pages build/deploy 43003813230 success。Chromium＋WebKitのBrowser QA 43003813398 success。375x667、375x812、768x1024、1440x900、iPad相当のCSP有効タッチ条件で写真読み込み、公式リンク3件、縦スクロール、横はみ出し0、JS例外0、4ゲートと2周目を確認。実機iPad Safariでの写真配置検証は未実施。独立した複数AI協議は未実施。
+
+## 2026-11-11 20:36 JST 写真を尾翼の実写へ変更
+- ユーザー指示: 27代のメッセージ写真欄に表示されていた写真を、添付の青空・琵琶湖・水色の尾翼とTBTの紋章が写る画像に変更（「webのほうで」と明示）。
+- `crowdfunding/index.html`: `#record .record-visual img` の表示を低解像度のスクリーンショット切り出し `2026-lake-sky-reference.webp` から、リポジトリに存在する実写 `assets/crowdfunding/2026-tail-lake.jpg` へ変更。送られた画像に相当する既存の実写ファイルを再利用し、生成画像はサイトに使っていない。
+- `assets/crowdfunding/campaign-story-v2.css`: PC、iPad、スマホで尾翼と紋章が切れにくい `object-fit:contain` に修正。表示サイズを写真向けに調整。
+- `tools/test-crowdfunding-v10.mjs` に旧写真参照の不在、新しい実写の参照、非トリミング表示の検査を追加。
+- 副代表リンク「副代表からのお知らせを全文読む」、公式出典、支援CTA、3D無限ループは変更なし。
+- 今回も単一AIによる実装・検証。独立した複数AIの協議は未実施。
+- デプロイとブラウザテストの最終ステータスはGitHub Actionsで確認。iPad Safari実機テストは未実施。
