@@ -20,8 +20,11 @@ check(!css.includes('2026-flight-hero.avif')&&css.includes('.hero-media img{'),'
 check(!html.includes('scroll-flight-v1.js')&&!html.includes('scroll-flight-v1.css'),'No duplicate flight scene scripts or styles');
 check(!html.includes('data-chapter=')&&!html.includes('flight-journey'),'No repeated 4-chapter scroll scene');
 check(html.includes('campaign-story-v2.css')&&html.includes('venue-flight-v1.css')&&html.includes('venue-flight-v1.js'),'Minimal page and simulator styles/scripts present');
-check(html.includes('class="record-sources"')&&html.includes('機体をつくる人たちの言葉'),'Compact official links replace duplicate story');
-check((html.match(/<aside\b/g)||[]).length===1,'One compact documentary source strip');
+check(html.includes('class="record-feature"')&&html.includes('2026-lake-sky-reference.webp'),'User supplied sky photo is present in flight record feature');
+check((html.match(/<section class="record-feature"/g)||[]).length===1,'One compact 2026 record feature, not duplicate 3D experience');
+check(html.includes('副代表からのお知らせを全文読む')&&!html.includes('本人の言葉を全文読む'),'Correct vice-representative CTA wording');
+check(html.includes('「今回の結果には納得のいかない部分もあります」')&&html.includes('髙草木 雄太 / 26代副代表'),'Quote and attribution retained');
+check(!html.includes('2026年9月4日の公式メッセージから抜粋'),'Do not reproduce unrelated blue-highlight date note');
 check(['S-330「鵠」の機体製作へのご支援お願い致します。','鳥人間コンテストへの出場そして記録更新を目指します。','次の機体は、','あなたの支援で飛ぶ。'].every(x=>html.includes(x)),'User-approved hero wording');
 check(['180.67m','髙草木雄太','大谷映奈','2026年11月30日','410,000円','500円','7,000円','25,000円'].every(x=>html.includes(x)),'Campaign and reward facts retained');
 check(['01 / 2026年','鳥人間コンテスト2026で180.67mを記録','02 / 2027年','来年の機体'].every(x=>html.includes(x)),'2026 record and 2027 aircraft captions match requested wording');
@@ -64,11 +67,11 @@ check(pilot.includes('touchLimited')&&pilot.includes("lightModel?'mobile':'deskt
 check(pilot.includes('prefers-reduced-motion')&&pilot.includes('webglcontextlost'),'Reduced motion and WebGL fallback');
 check(!pilot.includes('beginBtn')&&!pilot.includes('stage.scrollIntoView'),'No launch-button dependency or forced scroll');
 check(pilotCSS.includes('touch-action:pan-y')&&pilotCSS.includes('@media(max-width:760px)'),'Mobile can scroll through pilot');
-check(css.includes('.record-sources')&&!css.includes('.flight-journey')&&!css.includes('.flight-stage'),'Remove orphan duplicated 3D styles');
+check(css.includes('.record-feature-inner')&&!css.includes('.flight-journey')&&!css.includes('.flight-stage'),'One responsive photo feature without duplicate 3D styles');
 check(css.includes('scroll-behavior:smooth')&&css.includes('prefers-reduced-motion'),'Native scroll and motion accessibility');
 check(html.includes("script-src 'self' 'wasm-unsafe-eval'")&&html.includes("object-src 'none'"),'Strict Meshopt-compatible CSP');
 check([...html.matchAll(/<img\b[^>]*>/g)].every(m=>/\balt=/.test(m[0])),'Image alt attributes present');
-for(const path of ['assets/s320-desktop.glb','assets/s320-mobile.glb','assets/crowdfunding/vendor/three-r128.min.js','assets/crowdfunding/vendor/GLTFLoader-r128.js','assets/crowdfunding/vendor/meshopt_decoder-r128.js','assets/crowdfunding/campaign-story-v2.css','assets/crowdfunding/venue-flight-v1.js','assets/crowdfunding/venue-flight-v1.css','assets/crowdfunding/2026-tail-lake.jpg','crowdfunding/rewards/index.html'])
+for(const path of ['assets/s320-desktop.glb','assets/s320-mobile.glb','assets/crowdfunding/vendor/three-r128.min.js','assets/crowdfunding/vendor/GLTFLoader-r128.js','assets/crowdfunding/vendor/meshopt_decoder-r128.js','assets/crowdfunding/campaign-story-v2.css','assets/crowdfunding/venue-flight-v1.js','assets/crowdfunding/venue-flight-v1.css','assets/crowdfunding/2026-tail-lake.jpg','assets/crowdfunding/2026-lake-sky-reference.webp','crowdfunding/rewards/index.html'])
  check(existsSync(path)&&statSync(path).size>100,'Required asset missing: '+path);
 const syntax=spawnSync(process.execPath,['--check'],{input:pilot,encoding:'utf8'});
 check(syntax.status===0,'Simulation JS syntax '+syntax.stderr);
