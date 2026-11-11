@@ -14,6 +14,9 @@ selected={p for p in allfiles if p.endswith('/index.html') or p in ('index.html'
 if args.target=='production':selected.update(p for p in allfiles if p.endswith('.php') or p=='.htaccess')
 # Scene selects the S320 model with a runtime template string.
 selected.update(('assets/s320-desktop.glb','assets/s320-mobile.glb'))
+# The approved hero asset is optional until a binary upload is available.
+if 'assets/crowdfunding/2026-flight-hero.webp' in allfiles:
+ selected.add('assets/crowdfunding/2026-flight-hero.webp')
 queue=list(selected);seen=set();byname={}
 for p in assets:byname.setdefault(Path(p).name,[]).append(p)
 while queue:
