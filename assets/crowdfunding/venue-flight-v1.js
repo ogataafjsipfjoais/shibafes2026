@@ -25,10 +25,10 @@ const input={x:0,y:0,keys:new Set(),touchId:null,lastManual:-1000000000};
 let game=null,frame=0,last=0,active=false,loading=false,failed=false,autoStarted=false,elapsed=0,holdUntil=0,loopUntil=0;
 const modelPath='../assets/'+state.aircraft;
 const gateStories=[
- {title:'180.67mを飛んだ。',text:'2026年のS-320 Elementは、琵琶湖で180.67mを記録しました。'},
- {title:'悔しさも、次の設計へ。',text:'26代の経験を27代が受け継ぎ、次の機体づくりが始まっています。'},
- {title:'つくる日々は続く。',text:'設計、組み立て、点検。飛行の一瞬を支えるのは、その積み重ねです。'},
- {title:'S-330「鵠」へ。',text:'次の二人乗り人力プロペラ機を製作するため、支援を募っています。'}
+ {label:'飛行の記録',title:'180.67mを飛んだ。',text:'2026年のS-320 Elementは、琵琶湖で180.67mを記録しました。'},
+ {label:'受け継ぐ想い',title:'悔しさも、次の設計へ。',text:'26代の経験を27代が受け継ぎ、次の機体づくりが始まっています。'},
+ {label:'機体製作の日々',title:'つくる日々は続く。',text:'設計、組み立て、点検。飛行の一瞬を支えるのは、その積み重ねです。'},
+ {label:'次の空を目指して',title:'S-330「鵠」へ。',text:'次の二人乗り人力プロペラ機を製作するため、支援を募っています。'}
 ];
 const gateSpots=[
  {x:0,y:13.1,z:-45},
@@ -232,7 +232,7 @@ function start(){
  });
  storyTitle.textContent='琵琶湖、離陸台から。';
  message.textContent='機体を湖へ送り出します。マウス・指・矢印キーで進路と高度を操作できます。';
- checkpoint.textContent='FLIGHT '+String(state.loops+1).padStart(2,'0')+' / HIKONE MATSUBARA';
+ checkpoint.textContent='琵琶湖・松原湖岸';
  guide.textContent='離陸準備';
  show(hud,true);
  stage.classList.add('is-playing');status.hidden=true;
@@ -253,9 +253,9 @@ function pass(){
  g.ring.material.color.setHex(0xa8e9c3);g.ring.material.emissive.setHex(0x316f4e);
  const s=gateStories[state.passed];state.passed++;
  storyTitle.textContent=s.title;message.textContent=s.text;
- checkpoint.textContent='GATE '+state.passed+' / 04';
+ checkpoint.textContent=s.label;
  state.mode='holding';holdUntil=performance.now()+(state.passed===4?1750:1350);
- guide.textContent=state.passed===4?'4つのゲート通過':'次のゲートへ';
+ guide.textContent=state.passed===4?'次の飛行へ':'次の光のゲートへ';
 }
 function animate(now){
  frame=0;
@@ -308,7 +308,7 @@ function animate(now){
    game.rig.rotation.x=smooth(game.rig.rotation.x,-steerY*.055,easing);
    game.rig.rotation.y=smooth(game.rig.rotation.y,steerX*.11,easing);
   }
-  if(metrics)metrics.innerHTML=(state.mode==='takeoff'?'RUNWAY 10m':'SIM '+Math.round(state.distance)+'m')+' <span>進行距離は演出上の数値</span>';
+  if(metrics)metrics.textContent=state.mode==='takeoff'?'離陸中':'琵琶湖上を飛行中';
  }
  if(playing){
   const desired=new T.Vector3(p.x+(lightModel?5:12),p.y+(lightModel?9.4:9.0),p.z+(lightModel?25:22));
