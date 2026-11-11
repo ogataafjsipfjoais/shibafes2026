@@ -12,8 +12,8 @@
 .pilot-area.is-ready .pilot-canvas{opacity:1}
 .pilot-area.is-ready .pilot-poster{opacity:0}
 .pilot-area.is-playing .pilot-canvas{touch-action:none;cursor:crosshair}
-.pilot-shade{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,#102823c2 0%,#122b246b 35%,transparent 80%),linear-gradient(0deg,#08201aa8,transparent 43%)}
-.pilot-area.is-playing .pilot-shade{background:linear-gradient(0deg,#0c242182 0%,transparent 38%),linear-gradient(90deg,#09211c80,transparent 48%)}
+.pilot-shade{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,#0c2923bf 0%,#0d2d2859 33%,transparent 76%),linear-gradient(0deg,#06261e64,transparent 39%)}
+.pilot-area.is-playing .pilot-shade{background:linear-gradient(0deg,#0c24216c 0%,transparent 35%),linear-gradient(90deg,#09211c59,transparent 42%)}
 .pilot-intro{position:absolute;z-index:6;left:var(--gutter);bottom:clamp(35px,7vw,90px);right:var(--gutter);width:min(530px,calc(100% - 2*var(--gutter)))}
 .pilot-intro .intro-tag{font:750 11px system-ui;letter-spacing:.15em;color:#f0d3a7;margin-bottom:15px}
 .pilot-intro h3{font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;font-size:clamp(28px,3.5vw,48px);font-weight:650;line-height:1.45;letter-spacing:-.055em;margin:0 0 15px}
