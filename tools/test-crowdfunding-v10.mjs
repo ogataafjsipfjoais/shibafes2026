@@ -23,7 +23,9 @@ check(html.includes('class="record-sources"')&&html.includes('機体をつくる
 check((html.match(/<aside\b/g)||[]).length===1,'One compact documentary source strip');
 check(['S-330「鵠」の機体製作へのご支援お願い致します。','鳥人間コンテストへの出場そして記録更新を目指します。','次の機体は、','あなたの支援で飛ぶ。'].every(x=>html.includes(x)),'User-approved hero wording');
 check(['180.67m','髙草木雄太','大谷映奈','2026年11月30日','410,000円','500円','7,000円','25,000円'].every(x=>html.includes(x)),'Campaign and reward facts retained');
-check(['鳥人間コンテスト2026で','02 / 2027年','来年の機体','次の機体製作のために'].every(x=>html.includes(x)),'Requested 3 summary captions retained');
+check(['01 / 2026年','鳥人間コンテスト2026で180.67mを記録','02 / 2027年','来年の機体'].every(x=>html.includes(x)),'2026 record and 2027 aircraft captions match requested wording');
+check(/<h2 id="support-title">次の機体製作のために、<br>41万円を募っています。<\/h2>/.test(html),'Main support heading matches requested green annotation');
+check(!html.includes('次の翼のために')&&!html.includes('次の二人乗り機体')&&!html.includes('02 / 27代'),'Superseded labels must not appear');
 check(!html.includes('href="#flight"')&&!html.includes('id="pilot-repeat"')&&!html.includes('id="pilot-finish"'),'No replay button or interrupting finale overlay');
 check(html.includes('id="pilot-support"')&&html.includes('href="#pilot"'),'Support is available while flying, with original flight anchor');
 check(html.includes('自動で4つのゲートを通過し')&&html.includes('繰り返しつながります'),'Automatic infinite-loop behavior is explained');
