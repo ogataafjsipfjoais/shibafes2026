@@ -1,4 +1,4 @@
-"""Chromium QA for the zero-click S-320 scroll-story, on mobile / tablet / desktop."""
+"""Chromium QA: one S-320 automatic flight scene, concise records and support on 4 viewports."""
 from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
 from playwright.sync_api import sync_playwright
 from pathlib import Path
@@ -70,26 +70,13 @@ try:
      assert page.evaluate('TBTVenueFlight.passed')==0,'Pilot did not reset'
     page.locator('#pilot-quit').click()
     assert page.evaluate('TBTVenueFlight.mode')=='stopped','Pilot did not stop without a click-gated restart'
-   # The aircraft stage scrolls into view and independently loads the exact festival GLB.
-   page.locator('#flight').scroll_into_view_if_needed()
-   page.wait_for_function('window.TBTScrollFlight !== undefined',timeout=10000)
-   page.wait_for_function('TBTScrollFlight.loaded || TBTScrollFlight.failed',timeout=45000)
-   state=page.evaluate('TBTScrollFlight')
-   assert state['loaded'],f'Festival GLB did not load at {width}: {state}; status='+page.locator('#model-status').inner_text()+' console='+str(console)+' errors='+str(errors)
-   assert state['model'].endswith('s320-mobile.glb' if width<760 else 's320-desktop.glb'),f'Wrong festival model selected at {width}: {state}'
-   assert page.locator('#flight-stage').evaluate('el=>el.classList.contains("is-ready")'),f'3D ready class absent at {width}'
-   story=page.locator('#flight')
-   for progress in (.09,.32,.59,.86):
-    page.evaluate("""p=>{
-      const el=document.querySelector('#flight');
-      const range=Math.max(1,el.offsetHeight-innerHeight);
-      window.scrollTo({top:el.offsetTop+range*p,behavior:'instant'});
-    }""",progress)
-    page.wait_for_timeout(350)
-    report=page.evaluate('TBTScrollFlight')
-    assert abs(report['progress']-round(progress*100))<=4,f'Scroll progress not tracked: {width} {progress} {report}'
-   assert page.locator('.chapter[data-chapter="3"]').count()==1
-   page.screenshot(path=str(OUT/f'scroll-{width}x{height}-model.png'))
+   # Duplicate S-320 scroll viewer and repeated chapters have been removed.
+   assert page.locator('canvas').count()==1,f'Duplicate WebGL canvas at {width}'
+   assert page.locator('#flight-stage').count()==0,f'Repeated 3D exhibit at {width}'
+   assert page.locator('script[src*="scroll-flight-v1.js"]').count()==0,f'Old viewer loaded at {width}'
+   assert page.locator('.chapter').count()==0,f'Repeated story chapters at {width}'
+   assert page.locator('.record-sources a').count()==3,f'Original named sources missing at {width}'
+   assert page.locator('#pilot-read-next').get_attribute('href')=='#rewards','Flight finale does not lead to rewards'
    page.locator('#rewards').scroll_into_view_if_needed()
    assert page.locator('.reward-list article').count()==3,f'Rewards missing at {width}'
    page.screenshot(path=str(OUT/f'scroll-{width}x{height}-rewards.png'))
@@ -97,17 +84,19 @@ try:
    assert page.locator('#support .action-primary').is_visible(),f'Support finale invisible: {width}'
    assert page.locator('a[href*="camp-fire.jp"]').count()>=3
    assert not errors,f'JavaScript errors at {width}: {errors}'
-   results.append({'viewport':f'{width}x{height}','model':state['model'],'webgl':state['loaded'],'scrollWorks':True,'overflow':overflow,'errors':errors})
+   current=page.evaluate('window.TBTVenueFlight')
+   results.append({'viewport':f'{width}x{height}','model':current['aircraft'],'pilotReady':current['ready'],'oneCanvas':True,'sources':3,'overflow':overflow,'errors':errors})
    print(json.dumps(results[-1],ensure_ascii=False),flush=True)
    ctx.close()
   # Reduced motion never forces animated WebGL or clicks to see the content.
   ctx=browser.new_context(viewport={'width':375,'height':812},reduced_motion='reduce',bypass_csp=True)
   page=ctx.new_page();page.goto(URL,wait_until='domcontentloaded',timeout=45000)
-  page.locator('#flight').scroll_into_view_if_needed()
-  page.wait_for_function('window.TBTScrollFlight !== undefined')
-  assert not page.evaluate('TBTScrollFlight.loaded'),'Reduced motion should display static model'
-  assert page.locator('.flight-poster').is_visible(),'Static S-320 rendering missing'
-  assert page.locator('.chapter').count()==4
+  page.locator('#pilot-stage').scroll_into_view_if_needed()
+  page.wait_for_function('window.TBTVenueFlight !== undefined')
+  assert page.evaluate('TBTVenueFlight.mode')=='unavailable','Reduced motion must avoid animated 3D'
+  assert page.locator('.pilot-poster').is_visible(),'Static Lake Biwa fallback image missing'
+  assert page.locator('.record-sources a').count()==3,'Official story sources lost for reduced-motion visitors'
+  assert page.locator('canvas').count()==1,'Duplicate canvas for reduced-motion visitors'
   ctx.close()
   # iPad Safari-like touch environment: enforce real production CSP (no bypass).
   # This specifically catches the Meshopt WASM CSP issue concealed by older tests.
@@ -135,9 +124,9 @@ try:
   assert aircraft=='s320-mobile.glb',f'iPad did not use low-memory festival model: {aircraft}'
   ipad_page.screenshot(path=str(OUT/'pilot-ipad-csp-enforced.png'))
   ipad_page.locator('#pilot-quit').click()
-  ipad_page.locator('#flight').scroll_into_view_if_needed()
-  ipad_page.locator('#flight-stage.has-fallback').wait_for(state='attached',timeout=6000)
-  assert 'タッチ端末では負荷を抑え' in ipad_page.locator('#model-status').inner_text(),'Touch scroll static fallback missing'
+  ipad_page.locator('#rewards').scroll_into_view_if_needed()
+  assert ipad_page.locator('canvas').count()==1,'iPad must have only one WebGL scene'
+  assert ipad_page.locator('.record-sources a').count()==3,'Official record sources unavailable on iPad'
   assert not ipad_errors,f'iPad-like uncaught JS errors: {ipad_errors} console={ipad_console}'
   print(json.dumps({'viewport':'1024x768 touch iPad-like','model':aircraft,'CSP':'enforced','pilot':'ready','scroll3d':'static to avoid dual contexts'},ensure_ascii=False),flush=True)
   ipad.close()
@@ -145,4 +134,4 @@ try:
 finally:
  server.shutdown()
 (OUT/'scroll-results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
-print('S-320 SCROLL CHROMIUM PASS: real GLB, four chapters, native scroll, responsive support, reduced motion')
+print('S-320 SINGLE SCENE CHROMIUM PASS: one flight experience, official links, rewards, native scroll and reduced motion')
