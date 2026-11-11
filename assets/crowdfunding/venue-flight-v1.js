@@ -9,8 +9,8 @@
 const $=id=>document.getElementById(id);
 const section=$('pilot'), stage=$('pilot-stage'), canvas=$('pilot-canvas');
 if(!section||!stage||!canvas)return;
-const beginBtn=$('pilot-begin'), quitBtn=$('pilot-quit'), repeatBtn=$('pilot-repeat');
-const intro=$('pilot-intro'), hud=$('pilot-hud'), finish=$('pilot-finish');
+const quitBtn=$('pilot-quit'), repeatBtn=$('pilot-repeat');
+const hud=$('pilot-hud'), finish=$('pilot-finish');
 const status=$('pilot-loading'), metrics=$('pilot-metrics');
 const guide=$('pilot-guide'), message=$('pilot-message'), checkpoint=$('pilot-checkpoint'), storyTitle=$('pilot-story-title');
 const readNext=$('pilot-read-next');
@@ -23,7 +23,7 @@ const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
 const smooth=(a,b,k)=>a+(b-a)*k;
 const state={mode:'preview',ready:false,passed:0,distance:0,aircraft:'s320-'+(lightModel?'mobile':'desktop')+'.glb'};
 const input={x:0,y:0,keys:new Set(),touchId:null};
-let game=null,frame=0,last=0,active=false,loading=false,failed=false,beginRequested=false,elapsed=0,holdUntil=0;
+let game=null,frame=0,last=0,active=false,loading=false,failed=false,autoStarted=false,elapsed=0,holdUntil=0;
 const modelPath='../assets/'+state.aircraft;
 const gateStories=[
  {title:'180.67mを飛んだ。',text:'2026年のS-320 Elementは、琵琶湖で180.67mを記録しました。'},
@@ -43,9 +43,8 @@ function show(el,on){if(el)el.hidden=!on}
 function info(text){if(status){status.textContent=text;status.hidden=!text}}
 function fail(text){
  failed=true;state.ready=false;state.mode='unavailable';
- show(intro,true);show(hud,false);show(finish,false);
+ show(hud,false);show(finish,false);
  stage.classList.remove('is-playing');stage.classList.remove('is-ready');
- beginBtn.disabled=true;beginBtn.textContent='3Dを利用できません';
  info(text||'3Dが利用できないため、会場写真をご覧ください。');
 }
 function mesh(geometry,material,parent,x=0,y=0,z=0){
@@ -192,7 +191,7 @@ async function setup(){
   game={renderer,scene,camera,rig,aircraft,gates,target:new T.Vector3()};
   state.ready=true;loading=false;stage.classList.add('is-ready');
   resize();renderPreview();info('');
-  if(beginRequested)start();
+  maybeAutoStart();
  }catch(e){console.warn('Venue flight failed:',e);fail('3D会場を読み込めませんでした。写真とスクロールの機体紹介をご覧ください。');}
 }
 function resize(){
@@ -212,9 +211,17 @@ function setInputs(e){
  input.x=clamp((e.clientX-rect.left)/rect.width*2-1,-1,1);
  input.y=clamp((e.clientY-rect.top)/rect.height*2-1,-1,1);
 }
+function maybeAutoStart(){
+ // Start once the aircraft is ready AND the visitor has actually reached the scene.
+ // Never force the browser to scroll to the takeoff section.
+ if(active && state.ready && !failed && !autoStarted && state.mode==='preview'){
+  autoStarted=true;
+  start();
+ }
+}
 function start(){
- if(!state.ready){beginRequested=true;beginBtn.disabled=true;setup();return;}
- beginRequested=false;beginBtn.disabled=false;
+ if(!state.ready||failed)return;
+ autoStarted=true;
  state.mode='takeoff';state.passed=0;state.distance=0;elapsed=0;holdUntil=0;
  input.x=0;input.y=0;input.keys.clear();
  game.rig.position.set(0,11.45,10);
@@ -227,9 +234,8 @@ function start(){
  message.textContent='機体を湖へ送り出します。マウス・指・矢印キーで進路と高度を操作できます。';
  checkpoint.textContent='TAKEOFF / HIKONE MATSUBARA';
  guide.textContent='離陸準備';
- show(intro,false);show(hud,true);show(finish,false);
+ show(hud,true);show(finish,false);
  stage.classList.add('is-playing');status.hidden=true;
- stage.scrollIntoView({behavior:'auto',block:'center'});
  last=performance.now();request();
 }
 function finishFlight(){
@@ -299,12 +305,12 @@ function animate(now){
 }
 function request(){if(!frame&&active&&!document.hidden&&game)frame=requestAnimationFrame(animate)}
 function quit(){
- state.mode='preview';show(hud,false);show(finish,false);show(intro,true);
+ state.mode='stopped';show(hud,false);show(finish,false);
  stage.classList.remove('is-playing');input.keys.clear();
+ info('飛行を停止しました。いったんスクロールで離れて戻ると、自動で再開します。');
  if(game){game.rig.position.set(0,11.45,10);game.rig.rotation.set(0,0,0);renderPreview()}
 }
 function listen(){
- beginBtn.addEventListener('click',start);
  quitBtn.addEventListener('click',quit);
  repeatBtn.addEventListener('click',start);
  canvas.addEventListener('pointerdown',e=>{
@@ -342,9 +348,26 @@ if(reduced.matches){
 setup();
 if('IntersectionObserver' in window){
  const io=new IntersectionObserver(entries=>{
-  active=entries.some(e=>e.isIntersecting);
-  if(active){last=performance.now();request()}
- },{rootMargin:'300px 0px',threshold:0});
+  const inView=entries.some(e=>e.isIntersecting && e.intersectionRatio>=.35);
+  if(!inView && active && state.mode==='stopped'){
+   // Leaving the section rearms automatic takeoff after a manual stop.
+   state.mode='preview';
+   autoStarted=false;
+  }
+  active=inView;
+  if(active){last=performance.now();maybeAutoStart();request()}
+ },{rootMargin:'0px',threshold:[0,.35]});
  io.observe(stage);
-}else{active=true;last=performance.now();request()}
+}else{
+ const watch=()=>{
+  const rect=stage.getBoundingClientRect();
+  const visible=Math.max(0,Math.min(rect.bottom,innerHeight)-Math.max(rect.top,0));
+  const inView=visible>=stage.clientHeight*.35;
+  if(!inView && active && state.mode==='stopped'){state.mode='preview';autoStarted=false}
+  active=inView;
+  if(active){last=performance.now();maybeAutoStart();request()}
+ };
+ addEventListener('scroll',watch,{passive:true});
+ watch();
+}
 })();
