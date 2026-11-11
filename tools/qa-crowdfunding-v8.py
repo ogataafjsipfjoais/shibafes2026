@@ -30,6 +30,36 @@ try:
    overflow=page.evaluate('document.documentElement.scrollWidth-innerWidth')
    assert overflow<=1,f'Horizontal overflow {width}: {overflow}'
    page.screenshot(path=str(OUT/f'scroll-{width}x{height}-hero.png'))
+   # Optional pilot experience: the real S-320 starts on a reconstructed Lake Biwa launch tower.
+   if width in (375,1440):
+    page.locator('#pilot-stage').scroll_into_view_if_needed()
+    page.wait_for_function('window.TBTVenueFlight !== undefined',timeout=10000)
+    page.wait_for_function('TBTVenueFlight.ready || TBTVenueFlight.mode === "unavailable"',timeout=45000)
+    pilot=page.evaluate('TBTVenueFlight')
+    assert pilot['ready'],f'Lake Biwa pilot could not initialize: {width} {pilot}; '+page.locator('#pilot-loading').inner_text()+' errors='+str(errors)
+    assert pilot['aircraft'].endswith('s320-mobile.glb' if width<760 else 's320-desktop.glb'),f'Wrong pilot model: {pilot}'
+    page.screenshot(path=str(OUT/f'pilot-{width}x{height}-deck.png'))
+    page.locator('#pilot-begin').click()
+    page.wait_for_function('TBTVenueFlight.mode === "takeoff" || TBTVenueFlight.mode === "flying"',timeout=5000)
+    canvas_box=page.locator('#pilot-canvas').bounding_box()
+    assert canvas_box,'Pilot canvas absent'
+    def pilot_steer(x,y):
+     page.mouse.move(canvas_box['x']+canvas_box['width']*x,canvas_box['y']+canvas_box['height']*y,steps=6)
+    pilot_steer(.50,.48)
+    page.wait_for_function('TBTVenueFlight.passed >= 1',timeout=16000)
+    assert page.locator('#pilot-story-title').inner_text().startswith('180.67m'),'First gate story did not change'
+    page.screenshot(path=str(OUT/f'pilot-{width}x{height}-flight.png'))
+    if width==1440:
+     for index,point in enumerate([(.24,.59),(.75,.37),(.39,.47)],start=2):
+      pilot_steer(*point)
+      page.wait_for_function(f'TBTVenueFlight.passed >= {index}',timeout=22000)
+     page.wait_for_function('TBTVenueFlight.mode === "complete"',timeout=12000)
+     assert page.locator('#pilot-finish').is_visible(),'Pilot finale not shown after 4 gates'
+     page.screenshot(path=str(OUT/f'pilot-{width}x{height}-finish.png'))
+     page.locator('#pilot-repeat').click()
+     assert page.evaluate('TBTVenueFlight.passed')==0,'Pilot did not reset'
+    page.locator('#pilot-quit').click()
+    assert page.evaluate('TBTVenueFlight.mode')=='preview','Pilot did not exit back to scroll mode'
    # The aircraft stage scrolls into view and independently loads the exact festival GLB.
    page.locator('#flight').scroll_into_view_if_needed()
    page.wait_for_function('window.TBTScrollFlight !== undefined',timeout=10000)
