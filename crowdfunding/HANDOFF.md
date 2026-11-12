@@ -207,4 +207,4 @@
 - 既存の写真上テキストとスマホ対応のCSSレイアウトを維持。旧画像ファイルは削除せず保持。
 - `tools/test-crowdfunding-v10.mjs` のヒーロー画像参照・画像実体・preloadの回帰チェックを更新。
 - 独立した複数AI協議は未実施。単一AIで実装、レビュー、QA観点から判断。
-- Actionsの最新デプロイとブラウザQA結果を確認すること。iPad Safari実機確認は未実施。
+- 検証結果: GitHub Pages `43186858810` **success**、Crowdfunding Browser QA `43186858758` **Chromium・iPad相当WebKitともsuccess**。実機iPad Safariは未検証。
