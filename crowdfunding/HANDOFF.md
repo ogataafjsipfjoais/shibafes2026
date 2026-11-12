@@ -199,3 +199,12 @@
 - `tools/test-crowdfunding-v10.mjs` と `tools/qa-crowdfunding-v8.py` に、正しい添付写真のパスを検証するチェックを変更済み。
 - 写真差し替え以外の3D、支援ボタン、返礼品、本文、引用リンクなどは触らない。iPad Safariの実機検証は引き続き未実施。
 - 最新のGitHub PagesおよびBrowser QAの結果を確認すること。独立した複数AIでの議論は未実施。
+
+## 2026-11-12 TOP写真差し替え（依頼画像そのもの）
+- ユーザー指定：クラウドファンディングのTOP写真を、実際のS-320と滑走路上をともに走る部員たちの横長写真へ変更。
+- `assets/crowdfunding/2026-tbt-running-hero.webp` に**添付の元写真（AI生成版ではない）**をWebP最適化して新規保存。1400×933px / 45,566バイト。Git blob SHA `4830935a10c859f55a68657a491a5037b120f1e1` は元ローカル画像から算出したGit blob SHAと一致。
+- `crowdfunding/index.html` のTOP `.hero-photo` と画像preloadを新写真へ変更。既存の見出し「次の機体は、あなたの支援で飛ぶ。」、支援CTA、返礼品、記録写真、3Dの無限ループはそのまま。
+- 既存の写真上テキストとスマホ対応のCSSレイアウトを維持。旧画像ファイルは削除せず保持。
+- `tools/test-crowdfunding-v10.mjs` のヒーロー画像参照・画像実体・preloadの回帰チェックを更新。
+- 独立した複数AI協議は未実施。単一AIで実装、レビュー、QA観点から判断。
+- Actionsの最新デプロイとブラウザQA結果を確認すること。iPad Safari実機確認は未実施。
