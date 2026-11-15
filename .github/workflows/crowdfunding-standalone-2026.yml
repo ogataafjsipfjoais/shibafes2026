@@ -1,0 +1,58 @@
+name: Build standalone crowdfunding 2026 ZIP
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/crowdfunding-standalone-2026.yml'
+      - 'tools/package-crowdfunding-standalone.py'
+      - 'crowdfunding/**'
+      - 'assets/crowdfunding/**'
+      - 'assets/s320-*.glb'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Validate original site
+        run: |
+          node tools/test-crowdfunding-v10.mjs
+          python3 tools/build-goods-hangar.py
+          python3 tools/build-release.py --target production --output dist
+          python3 tools/verify-release.py dist
+      - name: Build only crowdfunding /2026/
+        run: |
+          python3 tools/package-crowdfunding-standalone.py --source dist --output TBT-crowdfunding-2026-production.zip --commit "$GITHUB_SHA"
+          unzip -t TBT-crowdfunding-2026-production.zip | tail -2
+      - name: Upload downloadable artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: TBT-crowdfunding-2026-production
+          path: TBT-crowdfunding-2026-production.zip
+          if-no-files-found: error
+          retention-days: 60
+          compression-level: 0
+      - name: Publish official release ZIP
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="crowdfunding-2026-$(date -u +%Y%m%d)-${GITHUB_SHA:0:7}"
+          cat > release-notes.txt <<'EOF'
+          TeamBirdmanTrial クラウドファンディング独立版です。
+          公開先 https://teambirdmantrial.jp/crowdfunding/2026/
+          ZIP展開後、2026 フォルダーをサーバーの /crowdfunding/ にアップロードしてください。
+          このZIPにはクラファンサイトのHTML・画像・CSS・JS・S-320 GLBモデルのみが含まれます。
+          ZIPに同梱の「アップロード手順.txt」をご確認ください。
+          GitHub Releaseへの追加は本番サーバーの更新ではありません。
+          EOF
+          gh release create "$tag" TBT-crowdfunding-2026-production.zip --target "$GITHUB_SHA" --title "TBT クラファン2026 独立サイト更新ZIP" --notes-file release-notes.txt --latest=false
+          echo "RELEASE=https://github.com/$GITHUB_REPOSITORY/releases/tag/$tag"
