@@ -221,3 +221,14 @@
 - 検証: 14 HTMLページの公開リンク・SEO・3Dモデル・CSPチェック成功、PHP 4ファイルの構文チェック成功、ZIPの展開整合性とデータ除外チェック成功。GitHub Pages再公開Actions: https://github.com/ogataafjsipfjoais/shibafes2026/actions/runs/43723709237 (**success**)。
 - **未実施**: 実際のPHP本番サーバーへのアップロード、サーバー上PHP動作・ランキング/受付同期、実機iPad Safariの検証。
 - AI間協議は単一AIによる制作・コード安全性・運用・検証の観点から実施し、独立した複数AIでの協議は未実施。
+
+
+## 2026-11-15 /crowdfunding/2026/ 独立デプロイ
+- ユーザー指定の本番公開先： https://teambirdmantrial.jp/crowdfunding/2026/ 。アップロード対象フォルダー名は **2026**。
+- 芝浦祭サイト全体を移植せず、クラファン単体のHTMLと必要なCSS、JavaScript、写真、エンブレム、Three.js(r128)/GLTFLoader/meshopt、S-320 GLBモデル（デスクトップ・モバイル）だけをパッケージ化。
+- 再生成コマンド：\`python3 tools/build-goods-hangar.py\` → \`python3 tools/build-release.py --target production --output dist\` → \`python3 tools/verify-release.py dist\` → \`python3 tools/package-crowdfunding-standalone.py --source dist --output TBT-crowdfunding-2026-production.zip\` 。
+- 出力ZIP：\`TBT-crowdfunding-2026-production.zip\`、解凍後の\`2026/index.html\`を本番\`/crowdfunding/2026/index.html\`へ配置する。ZIPにアップロード手順とSHA256一覧を同梱。独立版ではHTMLのリンクとモデル読み込み先を\`assets/\`へ変更し、canonicalとOGを指定の正式URLへ差し替える。
+- \`.github/workflows/crowdfunding-standalone-2026.yml\` で検証・ZIP生成・GitHub Releaseを自動化。初回成功： https://github.com/ogataafjsipfjoais/shibafes2026/actions/runs/43725399758 、初回Release： https://github.com/ogataafjsipfjoais/shibafes2026/releases/tag/crowdfunding-2026-20261115-9232826 。
+- 出荷検証：14個のアップロードファイル、ZIP破損なし、相対参照先存在、旧\`/shibafes2026/\`パスなし、2種類のGLBヘッダー検証、原本サイトのHTML/SEO/3D依存検査成功。独立版のPC・iPad Safari実機ブラウザ試験は未実施（この環境ではローカルURLのChromium閲覧が管理者制限でブロックされた）。
+- これは**本番にアップロードするためのファイル生成**であり、本番サーバー上の更新や公開確認は未実施。アップロード前に本番\`/crowdfunding/2026/\`をバックアップする。既存のランキング・受付・PHPデータはパッケージに含めない。
+- 単一AIが設計・実装・テストを実施。独立した複数AI間協議は実施していない。
