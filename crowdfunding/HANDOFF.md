@@ -208,3 +208,16 @@
 - `tools/test-crowdfunding-v10.mjs` のヒーロー画像参照・画像実体・preloadの回帰チェックを更新。
 - 独立した複数AI協議は未実施。単一AIで実装、レビュー、QA観点から判断。
 - 検証結果: GitHub Pages `43186858810` **success**、Crowdfunding Browser QA `43186858758` **Chromium・iPad相当WebKitともsuccess**。実機iPad Safariは未検証。
+
+
+## 2026-11-15 本番環境アップデート用ZIP
+- 依頼: PHP/Apache本番 `https://teambirdmantrial.jp/shibafes2026/` に手動アップロードするための更新ファイルを作成。本番サーバーへのFTP/SFTP操作は実施しない。
+- 再現手順: `python3 tools/build-goods-hangar.py` → `python3 tools/build-release.py --target production --output dist` → `python3 tools/verify-release.py dist` → `python3 tools/package-production-update.py --source dist --output tbt-production-update-shibafes2026.zip`。
+- 自動生成ワークフロー: `.github/workflows/production-update.yml` （主に `workflow_dispatch`）。毎回のZIPには `本番更新手順.txt`、`ファイルSHA256一覧.txt`、`UPLOAD_TO_shibafes2026/` が入る。
+- **本番で更新される `content/simulator-status.json` と `content/simulator-ranking.json` はZIPから除外**。アップロード前に本番のバックアップを取り、削除同期をしない。これは初回インストール用ではなく更新用。
+- 生成物: `tbt-production-update-shibafes2026.zip`、14,647,840バイト、89アップロードファイル、SHA256 `11d4f77952186da6a33c8c64ede4decdbdf788158cbd1a2578832722bbcf077e`。
+- 出典コミット: `dd7c5f8bb69adb9c630b368b5ae85194db388eca`。本番ZIP作成Actions: https://github.com/ogataafjsipfjoais/shibafes2026/actions/runs/43723709236 (**success**)。
+- 公開Release（ダウンロード）: https://github.com/ogataafjsipfjoais/shibafes2026/releases/tag/production-20261115-dd7c5f8
+- 検証: 14 HTMLページの公開リンク・SEO・3Dモデル・CSPチェック成功、PHP 4ファイルの構文チェック成功、ZIPの展開整合性とデータ除外チェック成功。GitHub Pages再公開Actions: https://github.com/ogataafjsipfjoais/shibafes2026/actions/runs/43723709237 (**success**)。
+- **未実施**: 実際のPHP本番サーバーへのアップロード、サーバー上PHP動作・ランキング/受付同期、実機iPad Safariの検証。
+- AI間協議は単一AIによる制作・コード安全性・運用・検証の観点から実施し、独立した複数AIでの協議は未実施。
