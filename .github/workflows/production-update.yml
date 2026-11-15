@@ -1,0 +1,68 @@
+name: Build production update ZIP
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/production-update.yml'
+      - 'tools/package-production-update.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out exact source commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Validate current site and generated goods
+        run: |
+          node tools/test-live-ranking.mjs
+          node tools/test-crowdfunding-v10.mjs
+          node gas/visitor-record/test-gas.cjs
+          python3 tools/build-goods-hangar.py
+
+      - name: Build and verify Apache/PHP production files
+        run: |
+          python3 tools/build-release.py --target production --output dist
+          python3 tools/verify-release.py dist
+          find dist/content -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Assemble safe production update archive
+        run: |
+          python3 tools/package-production-update.py --source dist --output tbt-production-update-shibafes2026.zip --commit "$GITHUB_SHA"
+          unzip -t tbt-production-update-shibafes2026.zip | tail -2
+
+      - name: Save downloadable Actions artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: tbt-production-update
+          path: tbt-production-update-shibafes2026.zip
+          if-no-files-found: error
+          retention-days: 60
+          compression-level: 0
+
+      - name: Publish direct-download GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="production-$(date -u +%Y%m%d)-${GITHUB_SHA:0:7}"
+          cat > release-notes.txt <<'EOF'
+          TBT 芝浦祭2026 本番環境（Apache/PHP）向け更新ZIPです。
+          ZIPを展開して「本番更新手順.txt」を確認してください。
+          「UPLOAD_TO_shibafes2026」内のファイルだけを /shibafes2026/ に上書きします。
+          本番の content/simulator-status.json と content/simulator-ranking.json は更新ZIPから除外し、既存データを保護しています。
+          本番サーバーへの反映はこのRelease公開では実施されません。
+          EOF
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" tbt-production-update-shibafes2026.zip --clobber
+          else
+            gh release create "$tag" tbt-production-update-shibafes2026.zip --target "$GITHUB_SHA" --title "TBT 本番更新ZIP $tag" --notes-file release-notes.txt --latest=false
+          fi
+          echo "Release: https://github.com/$GITHUB_REPOSITORY/releases/tag/$tag"
